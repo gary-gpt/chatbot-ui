@@ -181,7 +181,6 @@ export const useChatHandler = () => {
       tags = "manual",
       category = "general"
     } = parseMemoryTrigger(messageContent)
-
     if (isMemoryTrigger && memoryContent) {
       await supabase.from("Memory").insert([
         {
@@ -210,6 +209,10 @@ export const useChatHandler = () => {
           fileItems: []
         }
       ])
+
+      // ✅ Critical UI cleanup
+      setUserInput("")
+      setIsGenerating(false)
 
       return
     }
