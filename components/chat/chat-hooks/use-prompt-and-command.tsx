@@ -33,11 +33,11 @@ export const usePromptAndCommand = () => {
     const atTextRegex = /@([^ ]*)$/
     const slashTextRegex = /\/([^ ]*)$/
     const hashtagTextRegex = /#([^ ]*)$/
-    const toolTextRegex = /!([^ ]*)$/
+    const toolTextRegex = /^!([^ ]*)$/ // Only match "!" at start of input
     const atMatch = value.match(atTextRegex)
     const slashMatch = value.match(slashTextRegex)
     const hashtagMatch = value.match(hashtagTextRegex)
-    const toolMatch = value.match(toolTextRegex)
+    const toolMatch = value.trim().match(toolTextRegex) // Trim before matching
 
     if (atMatch) {
       setIsAssistantPickerOpen(true)

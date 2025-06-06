@@ -208,9 +208,12 @@ export const handleHostedChat = async (
 
   let draftMessages = await buildFinalMessages(payload, profile, chatImages)
 
-  let formattedMessages : any[] = []
+  let formattedMessages: any[] = []
   if (provider === "google") {
-    formattedMessages = await adaptMessagesForGoogleGemini(payload, draftMessages)
+    formattedMessages = await adaptMessagesForGoogleGemini(
+      payload,
+      draftMessages
+    )
   } else {
     formattedMessages = draftMessages
   }
@@ -443,6 +446,22 @@ export const handleCreateMessages = async (
       finalUserMessage,
       finalAssistantMessage
     ])
+
+    // try {
+    // const supabase = createClient() // or however you initialize Supabase
+    // await supabase.from("Memory").insert([
+    // {
+    // project_name: "GaryGPT",
+    // category: "chat",
+    // content: generatedText,
+    // tags: "gpt,auto",
+    // created_at: new Date().toISOString(),
+    // updated_at: new Date().toISOString()
+    // }
+    // ])
+    // } catch (err) {
+    // console.error("❌ Failed to insert memory:", err)
+    // }
 
     // Upload each image (stored in newMessageImages) for the user message to message_images bucket
     const uploadPromises = newMessageImages

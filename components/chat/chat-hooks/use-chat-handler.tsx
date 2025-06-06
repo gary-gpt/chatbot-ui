@@ -1,15 +1,9 @@
 import { ChatbotUIContext } from "@/context/context"
-import { getAssistantCollectionsByAssistantId } from "@/db/assistant-collections"
-import { getAssistantFilesByAssistantId } from "@/db/assistant-files"
-import { getAssistantToolsByAssistantId } from "@/db/assistant-tools"
-import { updateChat } from "@/db/chats"
-import { getCollectionFilesByCollectionId } from "@/db/collection-files"
-import { deleteMessagesIncludingAndAfter } from "@/db/messages"
-import { buildFinalMessages } from "@/lib/build-prompt"
-import { Tables } from "@/supabase/types"
-import { ChatMessage, ChatPayload, LLMID, ModelProvider } from "@/types"
+import { supabase } from "@/lib/supabase/browser-client"
+import { parseMemoryTrigger } from "@/lib/memory/parseMemoryTrigger"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useRef } from "react"
+import { ChatMessage, ChatPayload, LLMID, ModelProvider } from "@/types"
 import { LLM_LIST } from "../../../lib/models/llm/llm-list"
 import {
   createTempMessages,
@@ -21,10 +15,17 @@ import {
   processResponse,
   validateChatSettings
 } from "../chat-helpers"
+import { updateChat } from "@/db/chats"
+import { getAssistantFilesByAssistantId } from "@/db/assistant-files"
+import { getAssistantCollectionsByAssistantId } from "@/db/assistant-collections"
+import { getCollectionFilesByCollectionId } from "@/db/collection-files"
+import { getAssistantToolsByAssistantId } from "@/db/assistant-tools"
+import { deleteMessagesIncludingAndAfter } from "@/db/messages"
+import { buildFinalMessages } from "@/lib/build-prompt"
+import { Tables } from "@/supabase/types"
 
 export const useChatHandler = () => {
   const router = useRouter()
-
   const {
     userInput,
     chatFiles,
@@ -84,10 +85,8 @@ export const useChatHandler = () => {
     setChatMessages([])
     setSelectedChat(null)
     setChatFileItems([])
-
     setIsGenerating(false)
     setFirstTokenReceived(false)
-
     setChatFiles([])
     setChatImages([])
     setNewMessageFiles([])
@@ -95,7 +94,6 @@ export const useChatHandler = () => {
     setShowFilesDisplay(false)
     setIsPromptPickerOpen(false)
     setIsFilePickerOpen(false)
-
     setSelectedTools([])
     setToolInUse("none")
 
@@ -119,6 +117,7 @@ export const useChatHandler = () => {
         await getAssistantFilesByAssistantId(selectedAssistant.id)
       ).files
       allFiles = [...assistantFiles]
+
       const assistantCollections = (
         await getAssistantCollectionsByAssistantId(selectedAssistant.id)
       ).collections
@@ -128,10 +127,10 @@ export const useChatHandler = () => {
         ).files
         allFiles = [...allFiles, ...collectionFiles]
       }
+
       const assistantTools = (
         await getAssistantToolsByAssistantId(selectedAssistant.id)
       ).tools
-
       setSelectedTools(assistantTools)
       setChatFiles(
         allFiles.map(file => ({
@@ -156,23 +155,6 @@ export const useChatHandler = () => {
           | "openai"
           | "local"
       })
-    } else if (selectedWorkspace) {
-      // setChatSettings({
-      //   model: (selectedWorkspace.default_model ||
-      //     "gpt-4-1106-preview") as LLMID,
-      //   prompt:
-      //     selectedWorkspace.default_prompt ||
-      //     "You are a friendly, helpful AI assistant.",
-      //   temperature: selectedWorkspace.default_temperature || 0.5,
-      //   contextLength: selectedWorkspace.default_context_length || 4096,
-      //   includeProfileContext:
-      //     selectedWorkspace.include_profile_context || true,
-      //   includeWorkspaceInstructions:
-      //     selectedWorkspace.include_workspace_instructions || true,
-      //   embeddingsProvider:
-      //     (selectedWorkspace.embeddings_provider as "openai" | "local") ||
-      //     "openai"
-      // })
     }
 
     return router.push(`/${selectedWorkspace.id}/chat`)
@@ -190,10 +172,47 @@ export const useChatHandler = () => {
 
   const handleSendMessage = async (
     messageContent: string,
-    chatMessages: ChatMessage[],
+    _chatMessages: ChatMessage[],
     isRegeneration: boolean
   ) => {
-    const startingInput = messageContent
+    const {
+      isMemoryTrigger,
+      memoryContent,
+      tags = "manual",
+      category = "general"
+    } = parseMemoryTrigger(messageContent)
+
+    if (isMemoryTrigger && memoryContent) {
+      await supabase.from("Memory").insert([
+        {
+          project_name: "GaryGPT",
+          content: memoryContent,
+          category,
+          tags,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        }
+      ])
+
+      setChatMessages(prev => [
+        ...prev,
+        {
+          message: {
+            role: "assistant",
+            content: "🧠 Got it. Memory saved.",
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            sequence_number: prev.length + 1,
+            id: crypto.randomUUID(),
+            chat_id: selectedChat?.id || "memory",
+            user_id: profile?.user_id || "memory"
+          } as Tables<"messages">,
+          fileItems: []
+        }
+      ])
+
+      return
+    }
 
     try {
       setUserInput("")
@@ -228,17 +247,14 @@ export const useChatHandler = () => {
       )
 
       let currentChat = selectedChat ? { ...selectedChat } : null
-
       const b64Images = newMessageImages.map(image => image.base64)
 
       let retrievedFileItems: Tables<"file_items">[] = []
-
       if (
         (newMessageFiles.length > 0 || chatFiles.length > 0) &&
         useRetrieval
       ) {
         setToolInUse("retrieval")
-
         retrievedFileItems = await handleRetrieval(
           userInput,
           newMessageFiles,
@@ -259,7 +275,7 @@ export const useChatHandler = () => {
           selectedAssistant
         )
 
-      let payload: ChatPayload = {
+      const payload: ChatPayload = {
         chatSettings: chatSettings!,
         workspaceInstructions: selectedWorkspace!.instructions || "",
         chatMessages: isRegeneration
@@ -274,68 +290,65 @@ export const useChatHandler = () => {
 
       if (selectedTools.length > 0) {
         setToolInUse("Tools")
-
         const formattedMessages = await buildFinalMessages(
           payload,
           profile!,
           chatImages
         )
-
         const response = await fetch("/api/chat/tools", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             chatSettings: payload.chatSettings,
             messages: formattedMessages,
             selectedTools
           })
         })
-
         setToolInUse("none")
+
+        const lastMsg = payload.chatMessages.at(-1)
+        if (!lastMsg) {
+          console.warn("No last message found.")
+          return
+        }
 
         generatedText = await processResponse(
           response,
-          isRegeneration
-            ? payload.chatMessages[payload.chatMessages.length - 1]
-            : tempAssistantChatMessage,
+          lastMsg,
           true,
           newAbortController,
           setFirstTokenReceived,
           setChatMessages,
           setToolInUse
         )
+      } else if (modelData!.provider === "ollama") {
+        generatedText = await handleLocalChat(
+          payload,
+          profile!,
+          chatSettings!,
+          tempAssistantChatMessage,
+          isRegeneration,
+          newAbortController,
+          setIsGenerating,
+          setFirstTokenReceived,
+          setChatMessages,
+          setToolInUse
+        )
       } else {
-        if (modelData!.provider === "ollama") {
-          generatedText = await handleLocalChat(
-            payload,
-            profile!,
-            chatSettings!,
-            tempAssistantChatMessage,
-            isRegeneration,
-            newAbortController,
-            setIsGenerating,
-            setFirstTokenReceived,
-            setChatMessages,
-            setToolInUse
-          )
-        } else {
-          generatedText = await handleHostedChat(
-            payload,
-            profile!,
-            modelData!,
-            tempAssistantChatMessage,
-            isRegeneration,
-            newAbortController,
-            newMessageImages,
-            chatImages,
-            setIsGenerating,
-            setFirstTokenReceived,
-            setChatMessages,
-            setToolInUse
-          )
-        }
+        generatedText = await handleHostedChat(
+          payload,
+          profile!,
+          modelData!,
+          tempAssistantChatMessage,
+          isRegeneration,
+          newAbortController,
+          newMessageImages,
+          chatImages,
+          setIsGenerating,
+          setFirstTokenReceived,
+          setChatMessages,
+          setToolInUse
+        )
       }
 
       if (!currentChat) {
@@ -354,14 +367,9 @@ export const useChatHandler = () => {
         const updatedChat = await updateChat(currentChat.id, {
           updated_at: new Date().toISOString()
         })
-
-        setChats(prevChats => {
-          const updatedChats = prevChats.map(prevChat =>
-            prevChat.id === updatedChat.id ? updatedChat : prevChat
-          )
-
-          return updatedChats
-        })
+        setChats(prev =>
+          prev.map(chat => (chat.id === updatedChat.id ? updatedChat : chat))
+        )
       }
 
       await handleCreateMessages(
@@ -383,9 +391,10 @@ export const useChatHandler = () => {
       setIsGenerating(false)
       setFirstTokenReceived(false)
     } catch (error) {
+      console.error("Error in handleSendMessage:", error)
       setIsGenerating(false)
       setFirstTokenReceived(false)
-      setUserInput(startingInput)
+      setUserInput(messageContent)
     }
   }
 
@@ -400,19 +409,15 @@ export const useChatHandler = () => {
       selectedChat.id,
       sequenceNumber
     )
-
     const filteredMessages = chatMessages.filter(
       chatMessage => chatMessage.message.sequence_number < sequenceNumber
     )
-
     setChatMessages(filteredMessages)
-
     handleSendMessage(editedContent, filteredMessages, false)
   }
 
   return {
     chatInputRef,
-    prompt,
     handleNewChat,
     handleSendMessage,
     handleFocusChatInput,
