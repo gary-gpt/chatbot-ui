@@ -6,16 +6,22 @@ const rootDir = "./docs/dev-notes";
 const outputJson = path.join(rootDir, "index.json");
 const globalIndexMd = path.join(rootDir, "index.md");
 
-// Optional: customize folder descriptions here
-const folderDescriptions = {
-  api: "Handles communication with external services via HTTP APIs.",
-  core: "Contains the heart of the chat logic, session state, and routing.",
-  utils: "Reusable helper utilities like logging and formatting.",
-};
+function walkFolders(dir) {
+  let folders = [];
+  const items = fs.readdirSync(dir, { withFileTypes: true });
+  for (const item of items) {
+    const fullPath = path.join(dir, item.name);
+    if (item.isDirectory()) {
+      folders.push(fullPath);
+      folders = folders.concat(walkFolders(fullPath));
+    }
+  }
+  return folders;
+}
 
 function getMarkdownFiles(dir) {
   return fs.readdirSync(dir)
-    .filter((file) => file.endsWith(".md") && file !== "index.md");
+    .filter((file) => file.endsWith(".md") && !["index.md", "index.json"].includes(file));
 }
 
 function getTitleAndDescription(content) {
@@ -35,54 +41,53 @@ function wordCount(content) {
 }
 
 function generateIndexes() {
-  const folders = fs.readdirSync(rootDir).filter((f) => {
-    const fullPath = path.join(rootDir, f);
-    return fs.statSync(fullPath).isDirectory();
-  });
-
+  const allFolders = [rootDir].concat(walkFolders(rootDir));
   const globalLines = [
     "# Project Documentation Index\n",
-    "This index provides an overview of all documented components grouped by folder.\n",
+    "This index provides an overview of all documented components grouped by folder.\n"
   ];
-
   const indexJson = [];
 
-  folders.forEach((folder) => {
-    const folderPath = path.join(rootDir, folder);
-    const files = getMarkdownFiles(folderPath);
+  for (const folder of allFolders) {
+    const relFolder = path.relative(rootDir, folder) || ".";
+    const files = getMarkdownFiles(folder);
+    if (files.length === 0) continue;
 
-    const folderSummary = folderDescriptions[folder] || "No description available.";
-    const folderLines = [`# ${folder.charAt(0).toUpperCase() + folder.slice(1)} Module\n`, folderSummary + "\n"];
+    const folderLines = [
+      `# ${relFolder.replace(/\\|\//g, " / ").replace(/^\./, "Root")} Folder\n`,
+      "No description available.\n"
+    ];
 
-    globalLines.push(`\n## ${folder.charAt(0).toUpperCase() + folder.slice(1)} Folder`);
-    globalLines.push(folderSummary + "\n");
+    globalLines.push(`\n## ${relFolder.replace(/\\|\//g, " / ")}`);
+    globalLines.push("No description available.\n");
 
-    files.forEach((file) => {
-      const filePath = path.join(folderPath, file);
-      const relPath = path.relative(rootDir, filePath);
+    for (const file of files) {
+      const filePath = path.join(folder, file);
+      const relPath = path.relative(rootDir, filePath).replace(/\\/g, "/");
       const content = fs.readFileSync(filePath, "utf8");
       const { title, desc } = getTitleAndDescription(content);
       const words = wordCount(content);
       const modified = Math.floor(fs.statSync(filePath).mtimeMs / 1000);
 
       folderLines.push(`- **[${title}](${file})** – ${desc}`);
-      globalLines.push(`- **[${title}](${path.join(folder, file).replace(/\\/g, "/")})** – ${desc}`);
+      globalLines.push(`- **[${title}](${relPath})** – ${desc}`);
 
       indexJson.push({
         file,
-        path: relPath.replace(/\\/g, "/"),
+        path: relPath,
         title,
         words,
-        modified,
+        modified
       });
-    });
+    }
 
-    fs.writeFileSync(path.join(folderPath, "index.md"), folderLines.join("\n"));
-  });
+    fs.writeFileSync(path.join(folder, "index.md"), folderLines.join("\n"));
+  }
 
-  fs.writeFileSync(outputJson, JSON.stringify(indexJson, null, 2));
   fs.writeFileSync(globalIndexMd, globalLines.join("\n"));
-  console.log("✅ Indexes generated: index.md + index.json + per-folder index.md files");
+  fs.writeFileSync(outputJson, JSON.stringify(indexJson, null, 2));
+
+  console.log("✅ Recursive indexes generated.");
 }
 
 generateIndexes();

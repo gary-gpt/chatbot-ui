@@ -1,86 +1,219 @@
 [
   {
-    "file": ".eslintrc.json.md",
-    "path": "docs/dev-notes/.eslintrc.json.md",
-    "title": ".eslintrc.json",
-    "words": 281
+    "file": "context.tsx.md",
+    "path": "context/context.tsx.md",
+    "title": "**📄 Source File:** `/context/context.tsx`",
+    "words": 484,
+    "modified": 1749305474
   },
   {
-    "file": "components.json.md",
-    "path": "docs/dev-notes/components.json.md",
-    "title": "Configuration File",
-    "words": 429
+    "file": "assistant-collections.ts.md",
+    "path": "db/assistant-collections.ts.md",
+    "title": "**📄 Source File:** `/db/assistant-collections.ts`",
+    "words": 375,
+    "modified": 1749305490
   },
   {
-    "file": "dependency-summary.md",
-    "path": "docs/dev-notes/dependency-summary.md",
-    "title": "📦 Full Dependency Summary",
-    "words": 7457
+    "file": "assistant-files.ts.md",
+    "path": "db/assistant-files.ts.md",
+    "title": "**📄 Source File:** `/db/assistant-files.ts`",
+    "words": 371,
+    "modified": 1749305507
   },
   {
-    "file": "deps.json.md",
-    "path": "docs/dev-notes/deps.json.md",
-    "title": "JavaScript/TypeScript Project Documentation",
-    "words": 353
+    "file": "assistant-tools.ts.md",
+    "path": "db/assistant-tools.ts.md",
+    "title": "**📄 Source File:** `/db/assistant-tools.ts`",
+    "words": 356,
+    "modified": 1749305523
   },
   {
-    "file": "handler-old.tsx.md",
-    "path": "docs/dev-notes/handler-old.tsx.md",
-    "title": "useChatHandler.ts",
-    "words": 351
+    "file": "assistants.ts.md",
+    "path": "db/assistants.ts.md",
+    "title": "**📄 Source File:** `/db/assistants.ts`",
+    "words": 604,
+    "modified": 1749305558
   },
   {
-    "file": "i18nConfig.js.md",
-    "path": "docs/dev-notes/i18nConfig.js.md",
-    "title": "i18nConfig.js",
-    "words": 277
+    "file": "chat-files.ts.md",
+    "path": "db/chat-files.ts.md",
+    "title": "**📄 Source File:** `/db/chat-files.ts`",
+    "words": 406,
+    "modified": 1749305576
   },
   {
-    "file": "jest.config.ts.md",
-    "path": "docs/dev-notes/jest.config.ts.md",
-    "title": "jest.config.ts",
-    "words": 321
+    "file": "chats.ts.md",
+    "path": "db/chats.ts.md",
+    "title": "**📄 Source File:** `/db/chats.ts`",
+    "words": 384,
+    "modified": 1749305591
   },
   {
-    "file": "middleware.ts.md",
-    "path": "docs/dev-notes/middleware.ts.md",
-    "title": "middleware.ts",
-    "words": 401
+    "file": "collection-files.ts.md",
+    "path": "db/collection-files.ts.md",
+    "title": "**📄 Source File:** `/db/collection-files.ts`",
+    "words": 361,
+    "modified": 1749305607
   },
   {
-    "file": "next-env.d.ts.md",
-    "path": "docs/dev-notes/next-env.d.ts.md",
-    "title": "TypeScript Definitions for Next.js",
-    "words": 295
+    "file": "collections.ts.md",
+    "path": "db/collections.ts.md",
+    "title": "**📄 Source File:** `/db/collections.ts`",
+    "words": 417,
+    "modified": 1749305627
   },
   {
-    "file": "next.config.js.md",
-    "path": "docs/dev-notes/next.config.js.md",
-    "title": "next.config.js",
-    "words": 420
+    "file": "files.ts.md",
+    "path": "db/files.ts.md",
+    "title": "**📄 Source File:** `/db/files.ts`",
+    "words": 409,
+    "modified": 1749305652
   },
   {
-    "file": "package-lock.json.md",
-    "path": "docs/dev-notes/package-lock.json.md",
-    "title": "File: `/chatbot-ui/package-lock.json`",
-    "words": 110
+    "file": "folders.ts.md",
+    "path": "db/folders.ts.md",
+    "title": "**📄 Source File:** `/db/folders.ts`",
+    "words": 381,
+    "modified": 1749305666
   },
   {
-    "file": "package.json.md",
-    "path": "docs/dev-notes/package.json.md",
-    "title": "chatbot-ui.json",
-    "words": 422
+    "file": "index.ts.md",
+    "path": "db/index.ts.md",
+    "title": "**📄 Source File:** `/db/index.ts`",
+    "words": 293,
+    "modified": 1749305677
   },
   {
-    "file": "postcss.config.js.md",
-    "path": "docs/dev-notes/postcss.config.js.md",
-    "title": "`tailwind.config.js`",
-    "words": 361
+    "file": "limits.ts.md",
+    "path": "db/limits.ts.md",
+    "title": "**📄 Source File:** `/db/limits.ts`",
+    "words": 398,
+    "modified": 1749305696
   },
   {
-    "file": "project-structure.md",
-    "path": "docs/dev-notes/project-structure.md",
-    "title": "Project Structure — Chatbot UI",
-    "words": 210
+    "file": "message-file-items.ts.md",
+    "path": "db/message-file-items.ts.md",
+    "title": "**📄 Source File:** `/db/message-file-items.ts`",
+    "words": 350,
+    "modified": 1749305717
+  },
+  {
+    "file": "messages.ts.md",
+    "path": "db/messages.ts.md",
+    "title": "**📄 Source File:** `/db/messages.ts`",
+    "words": 406,
+    "modified": 1749305740
+  },
+  {
+    "file": "models.ts.md",
+    "path": "db/models.ts.md",
+    "title": "**📄 Source File:** `/db/models.ts`",
+    "words": 401,
+    "modified": 1749305760
+  },
+  {
+    "file": "presets.ts.md",
+    "path": "db/presets.ts.md",
+    "title": "**📄 Source File:** `/db/presets.ts`",
+    "words": 464,
+    "modified": 1749305783
+  },
+  {
+    "file": "profile.ts.md",
+    "path": "db/profile.ts.md",
+    "title": "**📄 Source File:** `/db/profile.ts`",
+    "words": 367,
+    "modified": 1749305802
+  },
+  {
+    "file": "prompts.ts.md",
+    "path": "db/prompts.ts.md",
+    "title": "**📄 Source File:** `/db/prompts.ts`",
+    "words": 383,
+    "modified": 1749305824
+  },
+  {
+    "file": "tools.ts.md",
+    "path": "db/tools.ts.md",
+    "title": "**📄 Source File:** `/db/tools.ts`",
+    "words": 471,
+    "modified": 1749305931
+  },
+  {
+    "file": "workspaces.ts.md",
+    "path": "db/workspaces.ts.md",
+    "title": "**📄 Source File:** `/db/workspaces.ts`",
+    "words": 372,
+    "modified": 1749305948
+  },
+  {
+    "file": "blob-to-b64.ts.md",
+    "path": "lib/blob-to-b64.ts.md",
+    "title": "**📄 Source File:** `/lib/blob-to-b64.ts`",
+    "words": 348,
+    "modified": 1749306029
+  },
+  {
+    "file": "build-prompt.ts.md",
+    "path": "lib/build-prompt.ts.md",
+    "title": "**📄 Source File:** `/lib/build-prompt.ts`",
+    "words": 419,
+    "modified": 1749306046
+  },
+  {
+    "file": "chat-setting-limits.ts.md",
+    "path": "lib/chat-setting-limits.ts.md",
+    "title": "**📄 Source File:** `/lib/chat-setting-limits.ts`",
+    "words": 278,
+    "modified": 1749306061
+  },
+  {
+    "file": "consume-stream.ts.md",
+    "path": "lib/consume-stream.ts.md",
+    "title": "**📄 Source File:** `/lib/consume-stream.ts`",
+    "words": 364,
+    "modified": 1749306079
+  },
+  {
+    "file": "envs.ts.md",
+    "path": "lib/envs.ts.md",
+    "title": "**📄 Source File:** `/lib/envs.ts`",
+    "words": 301,
+    "modified": 1749306092
+  },
+  {
+    "file": "export-old-data.ts.md",
+    "path": "lib/export-old-data.ts.md",
+    "title": "**📄 Source File:** `/lib/export-old-data.ts`",
+    "words": 344,
+    "modified": 1749306106
+  },
+  {
+    "file": "generate-local-embedding.ts.md",
+    "path": "lib/generate-local-embedding.ts.md",
+    "title": "**📄 Source File:** `/lib/generate-local-embedding.ts`",
+    "words": 361,
+    "modified": 1749306127
+  },
+  {
+    "file": "i18n.ts.md",
+    "path": "lib/i18n.ts.md",
+    "title": "**📄 Source File:** `/lib/i18n.ts`",
+    "words": 305,
+    "modified": 1749306173
+  },
+  {
+    "file": "openapi-conversion.ts.md",
+    "path": "lib/openapi-conversion.ts.md",
+    "title": "**📄 Source File:** `/lib/openapi-conversion.ts`",
+    "words": 396,
+    "modified": 1749306361
+  },
+  {
+    "file": "utils.ts.md",
+    "path": "lib/utils.ts.md",
+    "title": "**📄 Source File:** `/lib/utils.ts`",
+    "words": 371,
+    "modified": 1749306568
   }
 ]
