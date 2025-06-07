@@ -1,0 +1,86 @@
+[
+  {
+    "file": ".eslintrc.json.md",
+    "path": "docs/dev-notes/.eslintrc.json.md",
+    "title": ".eslintrc.json",
+    "words": 281
+  },
+  {
+    "file": "components.json.md",
+    "path": "docs/dev-notes/components.json.md",
+    "title": "Configuration File",
+    "words": 429
+  },
+  {
+    "file": "dependency-summary.md",
+    "path": "docs/dev-notes/dependency-summary.md",
+    "title": "📦 Full Dependency Summary",
+    "words": 7457
+  },
+  {
+    "file": "deps.json.md",
+    "path": "docs/dev-notes/deps.json.md",
+    "title": "JavaScript/TypeScript Project Documentation",
+    "words": 353
+  },
+  {
+    "file": "handler-old.tsx.md",
+    "path": "docs/dev-notes/handler-old.tsx.md",
+    "title": "useChatHandler.ts",
+    "words": 351
+  },
+  {
+    "file": "i18nConfig.js.md",
+    "path": "docs/dev-notes/i18nConfig.js.md",
+    "title": "i18nConfig.js",
+    "words": 277
+  },
+  {
+    "file": "jest.config.ts.md",
+    "path": "docs/dev-notes/jest.config.ts.md",
+    "title": "jest.config.ts",
+    "words": 321
+  },
+  {
+    "file": "middleware.ts.md",
+    "path": "docs/dev-notes/middleware.ts.md",
+    "title": "middleware.ts",
+    "words": 401
+  },
+  {
+    "file": "next-env.d.ts.md",
+    "path": "docs/dev-notes/next-env.d.ts.md",
+    "title": "TypeScript Definitions for Next.js",
+    "words": 295
+  },
+  {
+    "file": "next.config.js.md",
+    "path": "docs/dev-notes/next.config.js.md",
+    "title": "next.config.js",
+    "words": 420
+  },
+  {
+    "file": "package-lock.json.md",
+    "path": "docs/dev-notes/package-lock.json.md",
+    "title": "File: `/chatbot-ui/package-lock.json`",
+    "words": 110
+  },
+  {
+    "file": "package.json.md",
+    "path": "docs/dev-notes/package.json.md",
+    "title": "chatbot-ui.json",
+    "words": 422
+  },
+  {
+    "file": "postcss.config.js.md",
+    "path": "docs/dev-notes/postcss.config.js.md",
+    "title": "`tailwind.config.js`",
+    "words": 361
+  },
+  {
+    "file": "project-structure.md",
+    "path": "docs/dev-notes/project-structure.md",
+    "title": "Project Structure — Chatbot UI",
+    "words": 210
+  }
+]
