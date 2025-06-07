@@ -1,123 +1,123 @@
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
-const OpenAI = require('openai');
-require('dotenv').config({ path: path.resolve(__dirname, '../.env.local') });
+// scripts/generate-docs.js
+const fs = require("fs");
+const path = require("path");
+const axios = require("axios");
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const OPENAI_API_BASE = process.env.OPENAI_API_BASE || "https://api.openai.com/v1";
+const OPENROUTER_API_BASE = process.env.OPENROUTER_API_BASE || "https://openrouter.ai/api/v1";
 
-const ROOT_DIR = path.resolve(__dirname, '../');
-const OUTPUT_ROOT = path.resolve(__dirname, '../docs/dev-notes');
-const SKIP_DIRS = ['node_modules', '.git', '.next', 'public', 'docs', 'scripts'];
-const VALID_EXTENSIONS = ['.ts', '.tsx', '.js', '.json'];
-const MODEL = 'gpt-4';
+const model = "gpt-4";
+const sourceDir = "./";
+const outputDir = "./docs/dev-notes";
+const maxTokens = 3000;
 
-function getTimestamp() {
-  return new Date().toISOString().replace('T', ' ').split('.')[0] + ' UTC';
-}
-
-function shouldSkip(filePath) {
-  return SKIP_DIRS.some(skip => filePath.includes(path.sep + skip + path.sep));
-}
-
-function walkDir(dir, callback) {
-  fs.readdirSync(dir, { withFileTypes: true }).forEach(entry => {
-    const fullPath = path.join(dir, entry.name);
-
-    const SKIP_PATTERNS = [
-      'package-lock.json',
-      'yarn.lock',
-      '.lock',
-      'pnpm-lock.yaml',
-      'turbo.json',
-    ];
-
-    if (SKIP_PATTERNS.some(pattern => fullPath.includes(pattern))) {
-      console.log(`⚠️ Skipping locked or pattern-matched file: ${fullPath}`);
-      return;
-    }
-
-    if (fs.existsSync(fullPath)) {
-      const stats = fs.statSync(fullPath);
-      if (stats.size > 100 * 1024) {
-        console.log(`⚠️ Skipping large file (>100KB): ${fullPath}`);
-        return;
-      }
-    }
-
-    if (entry.isDirectory()) {
-      if (!shouldSkip(fullPath)) {
-        walkDir(fullPath, callback);
-      }
-    } else if (VALID_EXTENSIONS.includes(path.extname(entry.name))) {
-      if (!shouldSkip(fullPath)) {
-        callback(fullPath);
-      }
+function readFileRecursive(dir, allFiles = []) {
+  const files = fs.readdirSync(dir);
+  files.forEach((file) => {
+    const fullPath = path.join(dir, file);
+    if (fs.statSync(fullPath).isDirectory() && !fullPath.includes("node_modules")) {
+      readFileRecursive(fullPath, allFiles);
+    } else if (fullPath.endsWith(".js") || fullPath.endsWith(".ts")) {
+      allFiles.push(fullPath);
     }
   });
+  return allFiles;
 }
 
-(async () => {
+function chunkText(text, maxLength = 12000) {
+  const lines = text.split("\n");
+  const chunks = [];
+  let currentChunk = [];
+
+  for (let line of lines) {
+    currentChunk.push(line);
+    if (currentChunk.join("\n").length >= maxLength) {
+      chunks.push(currentChunk.join("\n"));
+      currentChunk = [];
+    }
+  }
+
+  if (currentChunk.length) {
+    chunks.push(currentChunk.join("\n"));
+  }
+
+  return chunks;
+}
+
+async function callLLM(prompt, useOpenRouter = false) {
+  const url = useOpenRouter
+    ? `${OPENROUTER_API_BASE}/chat/completions`
+    : `${OPENAI_API_BASE}/chat/completions`;
+
+  const headers = {
+    Authorization: `Bearer ${useOpenRouter ? OPENROUTER_API_KEY : OPENAI_API_KEY}`,
+    "Content-Type": "application/json",
+  };
+
+  const body = {
+    model: useOpenRouter ? "openai/gpt-4" : "gpt-4",
+    messages: [{ role: "user", content: prompt }],
+    temperature: 0.2,
+  };
+
   try {
-    const files = [];
-    walkDir(ROOT_DIR, file => files.push(file));
+    const response = await axios.post(url, body, { headers });
+    return response.data.choices[0].message.content;
+  } catch (error) {
+    if (!useOpenRouter) {
+      console.warn("⚠️ OpenAI failed — falling back to OpenRouter...");
+      return callLLM(prompt, true);
+    } else {
+      console.error("❌ Both OpenAI and OpenRouter failed.");
+      throw error;
+    }
+  }
+}
 
-    for (const filePath of files) {
-      const relativePath = path.relative(ROOT_DIR, filePath);
-      const outputPath = path.join(OUTPUT_ROOT, `${relativePath}.md`);
-      const outputDir = path.dirname(outputPath);
+function formatPrompt(filename, content) {
+  return `You are an expert AI code documenter.
 
-      if (fs.existsSync(outputPath)) {
-        console.log(`⏭️ Skipping (already documented): ${relativePath}`);
+Document the following file in clear Markdown. Start with a one-paragraph summary, then break down functions and their roles.
+
+Filename: ${filename}
+
+\`\`\`js
+${content}
+\`\`\``;
+}
+
+async function generateDocs() {
+  const files = readFileRecursive(sourceDir);
+  if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+
+  for (let file of files) {
+    console.log(`📄 Processing ${file}...`);
+    const content = fs.readFileSync(file, "utf8");
+    const chunks = chunkText(content);
+
+    let allResponses = "";
+
+    for (let i = 0; i < chunks.length; i++) {
+      const chunk = chunks[i];
+      const prompt = formatPrompt(file, chunk);
+      try {
+        const result = await callLLM(prompt);
+        allResponses += result + "\n\n";
+      } catch (err) {
+        console.error(`❌ Failed to process chunk ${i + 1} of ${file}`);
         continue;
       }
-
-      console.log(`📄 Processing ${relativePath}`);
-      const fileContent = fs.readFileSync(filePath, 'utf-8');
-
-      const prompt = `
-You are an expert software documentarian. Read the following source file and generate a clear, structured, human-readable Markdown document that explains:
-
-- What this file does
-- What its exports, types, or functions are for
-- How it's used (if reasonably inferable)
-- Any interesting structure or nuance
-- Add a heading at the top with the original filename
-
-Here is the file:
-
-${fileContent}
-`;
-
-      const completion = await openai.chat.completions.create({
-        model: MODEL,
-        messages: [
-          { role: 'system', content: 'You are a technical writer helping document a JavaScript/TypeScript project.' },
-          { role: 'user', content: prompt }
-        ],
-        temperature: 0.2
-      });
-
-      const doc = completion.choices[0].message.content;
-      const header = `**📄 Source File:** \`/${relativePath}\`  
-**🕒 Generated:** ${getTimestamp()}  
-**🤖 Model:** ${MODEL}
-
----
-
-`;
-
-      fs.mkdirSync(outputDir, { recursive: true });
-      fs.writeFileSync(outputPath, header + doc, 'utf-8');
-
-      console.log(`✅ Wrote ${outputPath}`);
     }
 
-    console.log('🎉 All docs generated.');
-
-  } catch (err) {
-    console.error('❌ Error:', err.message || err);
+    const baseName = path.basename(file).replace(/\.(js|ts)$/, "");
+    const outputFile = path.join(outputDir, `${baseName}.md`);
+    fs.writeFileSync(outputFile, allResponses.trim());
+    console.log(`✅ Wrote ${outputFile}`);
   }
-})();
+
+  console.log("🎉 All docs generated.");
+}
+
+generateDocs();
