@@ -25,6 +25,28 @@ function shouldSkip(filePath) {
 function walkDir(dir, callback) {
   fs.readdirSync(dir, { withFileTypes: true }).forEach(entry => {
     const fullPath = path.join(dir, entry.name);
+
+    const SKIP_PATTERNS = [
+      'package-lock.json',
+      'yarn.lock',
+      '.lock',
+      'pnpm-lock.yaml',
+      'turbo.json',
+    ];
+
+    if (SKIP_PATTERNS.some(pattern => fullPath.includes(pattern))) {
+      console.log(`⚠️ Skipping locked or pattern-matched file: ${fullPath}`);
+      return;
+    }
+
+    if (fs.existsSync(fullPath)) {
+      const stats = fs.statSync(fullPath);
+      if (stats.size > 100 * 1024) {
+        console.log(`⚠️ Skipping large file (>100KB): ${fullPath}`);
+        return;
+      }
+    }
+
     if (entry.isDirectory()) {
       if (!shouldSkip(fullPath)) {
         walkDir(fullPath, callback);
@@ -46,6 +68,11 @@ function walkDir(dir, callback) {
       const relativePath = path.relative(ROOT_DIR, filePath);
       const outputPath = path.join(OUTPUT_ROOT, `${relativePath}.md`);
       const outputDir = path.dirname(outputPath);
+
+      if (fs.existsSync(outputPath)) {
+        console.log(`⏭️ Skipping (already documented): ${relativePath}`);
+        continue;
+      }
 
       console.log(`📄 Processing ${relativePath}`);
       const fileContent = fs.readFileSync(filePath, 'utf-8');
