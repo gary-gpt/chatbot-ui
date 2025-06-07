@@ -676,6 +676,33 @@ export type Database = {
         Row: {
           category: string | null
           content: string | null
+          created_at: string
+          id: number
+          project_name: string | null
+          tags: string | null
+        }
+        Insert: {
+          category?: string | null
+          content?: string | null
+          created_at?: string
+          id?: number
+          project_name?: string | null
+          tags?: string | null
+        }
+        Update: {
+          category?: string | null
+          content?: string | null
+          created_at?: string
+          id?: number
+          project_name?: string | null
+          tags?: string | null
+        }
+        Relationships: []
+      }
+      Memory_old: {
+        Row: {
+          category: string | null
+          content: string | null
           created_at: string | null
           id: string
           project_name: string

@@ -67,4 +67,48 @@ A running log of what we’ve built, broken, and maybe accidentally fixed.
 - Don’t trust the AI unless it shows you the whole damn file
 
 ---
+## 📅 [2025-06-06] – v1.1 Modularity Push + Madge Map
+
+**Tag:** `v1.1`  
+**Status:** Back in modular hell (but on purpose)
+
+### What We Did:
+- Rebuilt `use-chat-handler.tsx` and `insertMemory.ts` with modular functions
+- Created `/app/memory-test/page.tsx` for isolated memory testing
+- Insert attempts technically worked before (V1.0), now intermittent/broken
+- Memory route throws 404 or relation not found despite working Supabase API elsewhere in UI
+
+### New Hypothesis:
+- Our modular approach may not be aligning with how other parts of the project interact with Supabase
+- Other features are still connecting and storing fine — memory may be wired differently
+- Need full visibility into the codebase to trace what's **actually** calling what
+
+### New Tool: Madge
+- Installed Madge globally (with `sudo`) after `EACCES` error
+- Ran into missing Graphviz (`gvpr not found`)
+- Installing Graphviz to enable SVG graph output (`brew install graphviz`)
+- Will use `madge --image graph.svg .` to generate visual dependency map
+
+### Why Madge (vs Nx Graph):
+- Nx is great for mono-repos and workspaces
+- Madge is lighter, CLI-friendly, and ideal for mapping existing Next.js projects
+- Doesn’t require project restructuring
+
+---
+
+## 🎯 Next Moves
+- [ ] Finish Graphviz install, generate `graph.svg` from Madge
+- [ ] Analyze what’s calling `insertMemory.ts` and how memory module connects to Supabase
+- [ ] Verify table name casing (`Memory` vs `memory`) and schema visibility
+- [ ] Use Madge to find orphaned or incorrectly routed modules
+- [ ] Optional: Revert to v1.0 branch and re-compare behavior
+
+---
+
+## 🔁 Reminder
+- Supabase still works for everything *else* — which means:
+  - Our local instance is running fine
+  - Something specific to memory insert (or modular import) is failing silently
+- Do not assume. VERIFY.
+
 

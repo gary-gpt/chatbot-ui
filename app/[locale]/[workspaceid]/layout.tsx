@@ -88,6 +88,12 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
     setShowFilesDisplay(false)
   }, [workspaceId])
 
+  const isValidUUID = (value: string) => {
+    const uuidRegex =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+    return uuidRegex.test(value)
+  }
+
   const fetchWorkspaceData = async (workspaceId: string) => {
     setLoading(true)
 
