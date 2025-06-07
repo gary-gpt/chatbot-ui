@@ -1,150 +1,88 @@
-// scripts/generate-docs.js
-const fs = require("fs");
-const path = require("path");
-const axios = require("axios");
+// generate-docs.js
+// This script scans project source files, generates documentation using an LLM,
+// and saves Markdown output to the docs/dev-notes folder. It supports chunking
+// large files, retrying on LLM failure, and tracking changes via index.json.
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
-const OPENAI_API_BASE = process.env.OPENAI_API_BASE || "https://api.openai.com/v1";
-const OPENROUTER_API_BASE = process.env.OPENROUTER_API_BASE || "https://openrouter.ai/api/v1";
-const model = "gpt-4";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { generateMarkdownFromCode } from './utils/llm-utils.js';
+import { chunkText, combineChunks, retryWithBackoff } from './utils/chunk-utils.js';
 
-const sourceRoot = "./";
-const outputRoot = "./docs/dev-notes";
-const indexPath = path.join(outputRoot, "index.json");
+// File config
+const __filename = fileURLToPath(import.meta.url); // Get current file path
+const __dirname = path.dirname(__filename);        // Get current folder
 
-function walkSourceFiles(dir, all = []) {
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
-    if (entry.isDirectory() && !fullPath.includes("node_modules")) {
-      walkSourceFiles(fullPath, all);
-    } else if (entry.isFile() && /\.(js|ts|tsx)$/.test(entry.name)) {
-      all.push(fullPath);
+const SOURCE_DIR = '.';                             // Root directory to scan
+const OUTPUT_DIR = 'docs/dev-notes';                // Where to store Markdown docs
+const INDEX_FILE = path.join('docs', 'index.json'); // Index of all generated docs
+
+// Allowed file extensions
+const SUPPORTED_EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.json'];
+
+// Read existing index if available
+let index = {};
+if (fs.existsSync(INDEX_FILE)) {
+  index = JSON.parse(fs.readFileSync(INDEX_FILE, 'utf-8'));
+}
+
+// Recursively scan the source directory
+function walk(dir) {
+  let files = [];
+  for (const file of fs.readdirSync(dir)) {
+    const fullPath = path.join(dir, file);
+    const stat = fs.statSync(fullPath);
+    if (stat.isDirectory() && !['node_modules', '.next', '.git', 'public', 'docs'].includes(file)) {
+      files = files.concat(walk(fullPath));
+    } else if (stat.isFile() && SUPPORTED_EXTENSIONS.includes(path.extname(file))) {
+      files.push(fullPath);
     }
   }
-  return all;
+  return files;
 }
 
-function chunkText(text, maxLength = 12000) {
-  const lines = text.split("\n");
-  const chunks = [];
-  let current = [];
-  for (const line of lines) {
-    current.push(line);
-    if (current.join("\n").length >= maxLength) {
-      chunks.push(current.join("\n"));
-      current = [];
-    }
-  }
-  if (current.length) chunks.push(current.join("\n"));
-  return chunks;
-}
-
-function formatPrompt(filename, content) {
-  return `You are an expert AI code documenter. Create a clear and professional Markdown doc that explains the following file:
-
-Filename: ${filename}
-
-\`\`\`js
-${content}
-\`\`\``;
-}
-
-function readIndexJson() {
-  if (!fs.existsSync(indexPath)) return {};
-  const raw = fs.readFileSync(indexPath, "utf8");
-  try {
-    return JSON.parse(raw);
-  } catch {
-    return {};
-  }
-}
-
-function saveIndexJson(entries) {
-  fs.writeFileSync(indexPath, JSON.stringify(Object.values(entries), null, 2));
-}
-
-async function callLLM(prompt, useOpenRouter = false) {
-  const url = useOpenRouter
-    ? `${OPENROUTER_API_BASE}/chat/completions`
-    : `${OPENAI_API_BASE}/chat/completions`;
-
-  const headers = {
-    Authorization: `Bearer ${useOpenRouter ? OPENROUTER_API_KEY : OPENAI_API_KEY}`,
-    "Content-Type": "application/json"
-  };
-
-  const body = {
-    model: useOpenRouter ? "openai/gpt-4" : "gpt-4",
-    messages: [{ role: "user", content: prompt }],
-    temperature: 0.2
-  };
-
-  try {
-    const res = await axios.post(url, body, { headers });
-    return res.data.choices[0].message.content;
-  } catch (err) {
-    if (!useOpenRouter) {
-      console.warn("⚠️ OpenAI failed, retrying with OpenRouter...");
-      return callLLM(prompt, true);
-    } else {
-      throw new Error("❌ Both OpenAI and OpenRouter failed.");
-    }
-  }
-}
-
+// Main logic
 async function generateDocs() {
-  const files = walkSourceFiles(sourceRoot);
-  const previousIndex = readIndexJson();
-  const newIndex = {};
-
-  if (!fs.existsSync(outputRoot)) fs.mkdirSync(outputRoot, { recursive: true });
+  const files = walk(SOURCE_DIR);
 
   for (const file of files) {
     const stat = fs.statSync(file);
-    const modified = Math.floor(stat.mtimeMs / 1000);
-    const relPath = path.relative(sourceRoot, file);
-    const mdPath = path.join(outputRoot, relPath + ".md");
-    const mdDir = path.dirname(mdPath);
+    const modified = stat.mtimeMs;
 
-    if (previousIndex[relPath] && previousIndex[relPath].modified === modified) {
-      newIndex[relPath] = previousIndex[relPath];
-      continue;
-    }
+    // Skip unchanged files
+    if (index[file] && index[file].modified === modified) continue;
 
-    if (!fs.existsSync(mdDir)) fs.mkdirSync(mdDir, { recursive: true });
+    const content = fs.readFileSync(file, 'utf-8');
 
-    console.log(`📄 Generating: ${relPath}`);
-    const raw = fs.readFileSync(file, "utf8");
-    const chunks = chunkText(raw);
-    let fullDoc = "";
+    // Chunk if file is very large
+    const chunks = content.length > 9000 ? chunkText(content, 6000) : [content];
 
+    let combinedMarkdown = '';
     for (const chunk of chunks) {
-      const prompt = formatPrompt(relPath, chunk);
-      try {
-        const result = await callLLM(prompt);
-        fullDoc += result + "\n\n";
-      } catch (err) {
-        console.error(`❌ Failed for ${relPath}: ${err.message}`);
-        continue;
-      }
+      const md = await retryWithBackoff(() => generateMarkdownFromCode(chunk, file));
+      combinedMarkdown += `\n\n${md}`;
     }
 
-    fs.writeFileSync(mdPath, fullDoc.trim());
-    const words = fullDoc.trim().split(/\s+/).length;
+    // Save markdown file
+    const relPath = path.relative(SOURCE_DIR, file);
+    const mdPath = path.join(OUTPUT_DIR, relPath + '.md');
 
-    newIndex[relPath] = {
-      file: path.basename(file),
-      path: relPath,
-      title: relPath,
-      words,
-      modified
+    fs.mkdirSync(path.dirname(mdPath), { recursive: true });
+    fs.writeFileSync(mdPath, combinedMarkdown.trim());
+
+    // Update index
+    index[file] = {
+      modified,
+      markdown: mdPath,
+      updated: new Date().toISOString()
     };
+
+    console.log(`✅ Documented: ${file}`);
   }
 
-  saveIndexJson(newIndex);
-  console.log("✅ Docs regenerated and index updated.");
+  // Save index
+  fs.writeFileSync(INDEX_FILE, JSON.stringify(index, null, 2));
+  console.log(`🧠 Index updated: ${INDEX_FILE}`);
 }
 
 generateDocs();
