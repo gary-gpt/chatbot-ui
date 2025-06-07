@@ -7,43 +7,62 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const OPENAI_API_BASE = process.env.OPENAI_API_BASE || "https://api.openai.com/v1";
 const OPENROUTER_API_BASE = process.env.OPENROUTER_API_BASE || "https://openrouter.ai/api/v1";
-
 const model = "gpt-4";
-const sourceDir = "./";
-const outputDir = "./docs/dev-notes";
-const maxTokens = 3000;
 
-function readFileRecursive(dir, allFiles = []) {
-  const files = fs.readdirSync(dir);
-  files.forEach((file) => {
-    const fullPath = path.join(dir, file);
-    if (fs.statSync(fullPath).isDirectory() && !fullPath.includes("node_modules")) {
-      readFileRecursive(fullPath, allFiles);
-    } else if (fullPath.endsWith(".js") || fullPath.endsWith(".ts")) {
-      allFiles.push(fullPath);
+const sourceRoot = "./";
+const outputRoot = "./docs/dev-notes";
+const indexPath = path.join(outputRoot, "index.json");
+
+function walkSourceFiles(dir, all = []) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory() && !fullPath.includes("node_modules")) {
+      walkSourceFiles(fullPath, all);
+    } else if (entry.isFile() && /\.(js|ts|tsx)$/.test(entry.name)) {
+      all.push(fullPath);
     }
-  });
-  return allFiles;
+  }
+  return all;
 }
 
 function chunkText(text, maxLength = 12000) {
   const lines = text.split("\n");
   const chunks = [];
-  let currentChunk = [];
-
-  for (let line of lines) {
-    currentChunk.push(line);
-    if (currentChunk.join("\n").length >= maxLength) {
-      chunks.push(currentChunk.join("\n"));
-      currentChunk = [];
+  let current = [];
+  for (const line of lines) {
+    current.push(line);
+    if (current.join("\n").length >= maxLength) {
+      chunks.push(current.join("\n"));
+      current = [];
     }
   }
-
-  if (currentChunk.length) {
-    chunks.push(currentChunk.join("\n"));
-  }
-
+  if (current.length) chunks.push(current.join("\n"));
   return chunks;
+}
+
+function formatPrompt(filename, content) {
+  return `You are an expert AI code documenter. Create a clear and professional Markdown doc that explains the following file:
+
+Filename: ${filename}
+
+\`\`\`js
+${content}
+\`\`\``;
+}
+
+function readIndexJson() {
+  if (!fs.existsSync(indexPath)) return {};
+  const raw = fs.readFileSync(indexPath, "utf8");
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return {};
+  }
+}
+
+function saveIndexJson(entries) {
+  fs.writeFileSync(indexPath, JSON.stringify(Object.values(entries), null, 2));
 }
 
 async function callLLM(prompt, useOpenRouter = false) {
@@ -53,71 +72,79 @@ async function callLLM(prompt, useOpenRouter = false) {
 
   const headers = {
     Authorization: `Bearer ${useOpenRouter ? OPENROUTER_API_KEY : OPENAI_API_KEY}`,
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   };
 
   const body = {
     model: useOpenRouter ? "openai/gpt-4" : "gpt-4",
     messages: [{ role: "user", content: prompt }],
-    temperature: 0.2,
+    temperature: 0.2
   };
 
   try {
-    const response = await axios.post(url, body, { headers });
-    return response.data.choices[0].message.content;
-  } catch (error) {
+    const res = await axios.post(url, body, { headers });
+    return res.data.choices[0].message.content;
+  } catch (err) {
     if (!useOpenRouter) {
-      console.warn("⚠️ OpenAI failed — falling back to OpenRouter...");
+      console.warn("⚠️ OpenAI failed, retrying with OpenRouter...");
       return callLLM(prompt, true);
     } else {
-      console.error("❌ Both OpenAI and OpenRouter failed.");
-      throw error;
+      throw new Error("❌ Both OpenAI and OpenRouter failed.");
     }
   }
 }
 
-function formatPrompt(filename, content) {
-  return `You are an expert AI code documenter.
-
-Document the following file in clear Markdown. Start with a one-paragraph summary, then break down functions and their roles.
-
-Filename: ${filename}
-
-\`\`\`js
-${content}
-\`\`\``;
-}
-
 async function generateDocs() {
-  const files = readFileRecursive(sourceDir);
-  if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+  const files = walkSourceFiles(sourceRoot);
+  const previousIndex = readIndexJson();
+  const newIndex = {};
 
-  for (let file of files) {
-    console.log(`📄 Processing ${file}...`);
-    const content = fs.readFileSync(file, "utf8");
-    const chunks = chunkText(content);
+  if (!fs.existsSync(outputRoot)) fs.mkdirSync(outputRoot, { recursive: true });
 
-    let allResponses = "";
+  for (const file of files) {
+    const stat = fs.statSync(file);
+    const modified = Math.floor(stat.mtimeMs / 1000);
+    const relPath = path.relative(sourceRoot, file);
+    const mdPath = path.join(outputRoot, relPath + ".md");
+    const mdDir = path.dirname(mdPath);
 
-    for (let i = 0; i < chunks.length; i++) {
-      const chunk = chunks[i];
-      const prompt = formatPrompt(file, chunk);
+    if (previousIndex[relPath] && previousIndex[relPath].modified === modified) {
+      newIndex[relPath] = previousIndex[relPath];
+      continue;
+    }
+
+    if (!fs.existsSync(mdDir)) fs.mkdirSync(mdDir, { recursive: true });
+
+    console.log(`📄 Generating: ${relPath}`);
+    const raw = fs.readFileSync(file, "utf8");
+    const chunks = chunkText(raw);
+    let fullDoc = "";
+
+    for (const chunk of chunks) {
+      const prompt = formatPrompt(relPath, chunk);
       try {
         const result = await callLLM(prompt);
-        allResponses += result + "\n\n";
+        fullDoc += result + "\n\n";
       } catch (err) {
-        console.error(`❌ Failed to process chunk ${i + 1} of ${file}`);
+        console.error(`❌ Failed for ${relPath}: ${err.message}`);
         continue;
       }
     }
 
-    const baseName = path.basename(file).replace(/\.(js|ts)$/, "");
-    const outputFile = path.join(outputDir, `${baseName}.md`);
-    fs.writeFileSync(outputFile, allResponses.trim());
-    console.log(`✅ Wrote ${outputFile}`);
+    fs.writeFileSync(mdPath, fullDoc.trim());
+    const words = fullDoc.trim().split(/\s+/).length;
+
+    newIndex[relPath] = {
+      file: path.basename(file),
+      path: relPath,
+      title: relPath,
+      words,
+      modified
+    };
   }
 
-  console.log("🎉 All docs generated.");
+  saveIndexJson(newIndex);
+  console.log("✅ Docs regenerated and index updated.");
 }
 
 generateDocs();
