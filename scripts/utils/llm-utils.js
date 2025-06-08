@@ -1,54 +1,47 @@
-// llm-utils.js (ESM version)
 
-// Import with relative path for retry logic
 import { retryWithBackoff } from './chunk-utils.js';
+import fetch from 'node-fetch';
 
-/**
- * Generates Markdown documentation from source code using LLM API.
- * @param {string} code - The source code string to document.
- * @param {string} filename - The name of the source file (for context).
- * @returns {Promise<string>} - The generated Markdown documentation.
- */
-export async function generateMarkdownFromCode(code, filename) {
-  const prompt = `
-You are an expert developer assistant. Your task is to read and explain the following JavaScript/TypeScript code in markdown format. Include:
+// Uses OpenAI or OpenRouter API to generate documentation
+export async function generateMarkdownFromCode(code, filePath, model = 'gpt-4') {
+  const systemPrompt = "You are an expert code documentation tool. Generate a clean, clear, well-structured Markdown (.md) file that explains the purpose and logic of the following code. Include headers, code summaries, and comments where appropriate.";
 
-1. An overview of what the file does
-2. Explanations of key functions, constants, or classes
-3. Inline code snippets where useful
-4. The filename as the title
-5. Use friendly but clear language for junior developers
-6. Format in GitHub-flavored Markdown
+  const userPrompt = `Document the following file: \`\`\`${filePath}\`\`\`
 
-Respond ONLY with valid Markdown. Do not add frontmatter or YAML headers.
+\`\`\`ts\n${code}\n\\`\`\``;
 
-### Filename: ${filename}
+  const payload = {
+    model,
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userPrompt }
+    ],
+    temperature: 0.3,
+  };
 
-\`\`\`js
-${code}
-\`\`\`
-`;
+  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
+  const apiBase = process.env.OPENROUTER_API_KEY
+    ? 'https://openrouter.ai/api/v1/chat/completions'
+    : 'https://api.openai.com/v1/chat/completions';
 
-  const response = await retryWithBackoff(() =>
-    fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model: 'openai/gpt-4o',
-        messages: [
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        temperature: 0.7
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${apiKey}`,
+  };
+
+  try {
+    const response = await retryWithBackoff(() =>
+      fetch(apiBase, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload),
       })
-    })
-  );
+    );
 
-  const data = await response.json();
-  return data.choices?.[0]?.message?.content ?? '';
+    const result = await response.json();
+    return result.choices?.[0]?.message?.content || '';
+  } catch (error) {
+    console.error(`❌ LLM call failed for ${filePath}`, error);
+    return '';
+  }
 }
