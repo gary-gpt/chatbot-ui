@@ -1,47 +1,61 @@
-
-import { retryWithBackoff } from './chunk-utils.js';
 import fetch from 'node-fetch';
 
-// Uses OpenAI or OpenRouter API to generate documentation
-export async function generateMarkdownFromCode(code, filePath, model = 'gpt-4') {
-  const systemPrompt = "You are an expert code documentation tool. Generate a clean, clear, well-structured Markdown (.md) file that explains the purpose and logic of the following code. Include headers, code summaries, and comments where appropriate.";
+/**
+ * Calls OpenAI API to generate markdown documentation from source code.
+ * @param {string} code - The raw code to document
+ * @param {string} filePath - The file path (used for logging)
+ * @returns {Promise<string|null>} Markdown string or null on error
+ */
+export async function generateMarkdownFromCode(code, filePath) {
+  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENAI_API;
+  const apiBase = 'https://api.openai.com/v1/chat/completions';
 
-  const userPrompt = `Document the following file: \`\`\`${filePath}\`\`\`
-
-\`\`\`ts\n${code}\n\\`\`\``;
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${apiKey}`,
+  };
 
   const payload = {
-    model,
+    model: 'gpt-4',
     messages: [
-      { role: 'system', content: systemPrompt },
-      { role: 'user', content: userPrompt }
+      {
+        role: 'system',
+        content: 'You are a technical writer generating documentation for source code files.',
+      },
+      {
+        role: 'user',
+        content: `Generate high-quality documentation in Markdown for the following file:\n\n${code}`,
+      },
     ],
     temperature: 0.3,
   };
 
-  const apiKey = process.env.OPENAI_API_KEY || process.env.OPENROUTER_API_KEY;
-  const apiBase = process.env.OPENROUTER_API_KEY
-    ? 'https://openrouter.ai/api/v1/chat/completions'
-    : 'https://api.openai.com/v1/chat/completions';
-
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiKey}`,
-  };
-
   try {
-    const response = await retryWithBackoff(() =>
-      fetch(apiBase, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(payload),
-      })
-    );
+    const response = await fetch(apiBase, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(payload),
+    });
 
-    const result = await response.json();
-    return result.choices?.[0]?.message?.content || '';
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error(`❌ OpenAI error for ${filePath}:`, data);
+      return null;
+    }
+
+    const docText = data.choices?.[0]?.message?.content || '';
+    if (!docText.trim()) {
+      console.warn(`⚠️ Empty response from LLM for ${filePath}`);
+    }
+
+    // TEMP DEBUG:
+    console.log(`📦 LLM returned for ${filePath}:`, docText.slice(0, 80).replace(/\n/g, ' ') + '...');
+
+    return docText;
+
   } catch (error) {
     console.error(`❌ LLM call failed for ${filePath}`, error);
-    return '';
+    return null;
   }
 }

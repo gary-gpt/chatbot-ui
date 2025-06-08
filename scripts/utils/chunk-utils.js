@@ -1,50 +1,42 @@
-// scripts/utils/chunk-utils.js
+import path from 'path';
+
+const MAX_CHUNK_SIZE = 3000; // Adjust based on token budget
 
 /**
- * Splits a long string into chunks of a specified size.
- * Ensures that chunks split on line boundaries when possible.
+ * Splits file content into reasonably sized chunks for LLM processing.
+ * Currently uses a line-based greedy algorithm.
  */
-function chunkText(text, maxChunkSize = 6000) {
-  const lines = text.split('\n');
+export function chunkFile(content, filePath = '') {
+  if (!content || typeof content !== 'string') {
+    console.warn(`⚠️ No content to chunk for ${filePath}`);
+    return [];
+  }
+
+  const lines = content.split('\n');
   const chunks = [];
   let currentChunk = '';
 
-  for (const line of lines) {
-    if ((currentChunk + line + '\n').length > maxChunkSize) {
-      chunks.push(currentChunk);
-      currentChunk = '';
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    // Greedily accumulate lines until max size is reached
+    if ((currentChunk + line + '\n').length > MAX_CHUNK_SIZE) {
+      chunks.push(currentChunk.trim());
+      currentChunk = line + '\n';
+    } else {
+      currentChunk += line + '\n';
     }
-    currentChunk += line + '\n';
   }
 
-  if (currentChunk) {
-    chunks.push(currentChunk);
+  // Push any remaining content
+  if (currentChunk.trim()) {
+    chunks.push(currentChunk.trim());
+  }
+
+  if (chunks.length === 0) {
+    console.warn(`⚠️ No chunks created for ${filePath}`);
+  } else {
+    console.log(`📦 Chunked ${filePath} into ${chunks.length} part(s)`);
   }
 
   return chunks;
 }
-
-/**
- * Combines an array of text chunks back into a single string.
- */
-function combineChunks(chunks) {
-  return chunks.join('');
-}
-
-/**
- * Retry helper with exponential backoff.
- * Used when an LLM call fails due to transient issues.
- */
-async function retryWithBackoff(fn, retries = 3, delay = 500) {
-  for (let i = 0; i < retries; i++) {
-    try {
-      return await fn();
-    } catch (error) {
-      if (i === retries - 1) throw error;
-      await new Promise((res) => setTimeout(res, delay * Math.pow(2, i)));
-    }
-  }
-}
-
-// ✅ Export named functions for ESM compatibility
-export { chunkText, combineChunks, retryWithBackoff };
