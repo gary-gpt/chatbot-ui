@@ -1,3 +1,9 @@
+---
+source: lib/retrieval/processing/docx.ts
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: 3ecfbb8a857a3994f74f03e803189a6616c74e5df04b92da07d459c4bcd7d36f
+---
 # processDocX Function
 
 This document provides a detailed overview of the `processDocX` function in the source code.

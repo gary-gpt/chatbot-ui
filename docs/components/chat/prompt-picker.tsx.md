@@ -1,3 +1,9 @@
+---
+source: components/chat/prompt-picker.tsx
+generated: '2025-06-08T13:21:01.635Z'
+tags: []
+hash: 434019132f75e358aa84369abc6b226ff4e7ce93d649d87100d5d51d047a4f59
+---
 # PromptPicker Component
 
 This is a documentation for the `PromptPicker` component.

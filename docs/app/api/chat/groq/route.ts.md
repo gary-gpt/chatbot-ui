@@ -1,3 +1,9 @@
+---
+source: app/api/chat/groq/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: 424dbe7d91e90f34487e931577814072731e81602c03b86e2fadf34a1a956641
+---
 # Chat API Documentation
 
 This file exports a `POST` function which is used to create chat completions using the Groq API. 

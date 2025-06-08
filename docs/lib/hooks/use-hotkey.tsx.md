@@ -1,3 +1,9 @@
+---
+source: lib/hooks/use-hotkey.tsx
+generated: '2025-06-08T13:21:01.647Z'
+tags: []
+hash: f949b947160c07d2fd7f1153c53bf43103e427a1e31a8b36fc37313f85ff4b0d
+---
 # useHotkey Hook
 
 This module exports a custom React Hook called `useHotkey`.

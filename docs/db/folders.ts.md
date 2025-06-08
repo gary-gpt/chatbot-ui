@@ -1,3 +1,9 @@
+---
+source: db/folders.ts
+generated: '2025-06-08T13:21:01.629Z'
+tags: []
+hash: ac51fdd61e73da95d956d3376c9d568f9f12a8ded40e87d59a307cabf0c8228b
+---
 # Folders API
 
 This source code file provides an API for managing folders in a workspace. It includes functions for getting, creating, updating, and deleting folders.

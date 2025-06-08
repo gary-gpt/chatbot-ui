@@ -1,3 +1,9 @@
+---
+source: components/ui/sonner.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: 9df4c658ca29bf887f5e50ed3e1c44e869036535ac3c473c8f4d9dea1b7e456d
+---
 # Toaster Component
 
 This file defines a `Toaster` component that uses the `Sonner` component from the `sonner` library to display toast notifications. It also uses the `useTheme` hook from `next-themes` to get the current theme.

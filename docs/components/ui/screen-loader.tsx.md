@@ -1,3 +1,9 @@
+---
+source: components/ui/screen-loader.tsx
+generated: '2025-06-08T13:21:01.642Z'
+tags: []
+hash: c11e1712c2ae113df2aa72852b1099bc5218e56508010eb24b224e7b4963ee48
+---
 # ScreenLoader Component Documentation
 
 ## Overview

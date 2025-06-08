@@ -1,3 +1,9 @@
+---
+source: db/assistant-tools.ts
+generated: '2025-06-08T13:21:01.628Z'
+tags: []
+hash: aa6c5cab9e9b4c35c5cf89b1c2889ccb94627471dafc17ff2ad18b87684d75cf
+---
 # Assistant Tools API
 
 This module provides functions for interacting with assistant tools data in the Supabase database.

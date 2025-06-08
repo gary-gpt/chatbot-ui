@@ -1,3 +1,9 @@
+---
+source: db/storage/message-images.ts
+generated: '2025-06-08T13:21:01.646Z'
+tags: []
+hash: cc635aa372b9fca94e1cbe8d48a7b91621f359fc4fa6def20201985ad8c1fc92
+---
 # Documentation
 
 ## Functions

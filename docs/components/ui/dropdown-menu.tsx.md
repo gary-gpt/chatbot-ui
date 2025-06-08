@@ -1,3 +1,9 @@
+---
+source: components/ui/dropdown-menu.tsx
+generated: '2025-06-08T13:21:01.640Z'
+tags: []
+hash: a6949ce269b90ddfec942233292c6158682f9df164343955a703c6deed320e65
+---
 # Dropdown Menu Component
 
 This file exports a set of components used to create a dropdown menu. The dropdown menu is built using the primitives provided by the `@radix-ui/react-dropdown-menu` package.

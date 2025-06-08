@@ -1,3 +1,9 @@
+---
+source: components/ui/limit-display.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: ae728be504786a8d0e88d504c1e67e553311c43cd2de0679428e3770c6778fd4
+---
 # LimitDisplay Component Documentation
 
 ## Importing the Component

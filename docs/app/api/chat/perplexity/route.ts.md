@@ -1,3 +1,9 @@
+---
+source: app/api/chat/perplexity/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: b80faf98f0197d7198b699e7b9fdbfa8f6ca5898c72353058c457331749aa366
+---
 # POST Function Documentation
 
 The `POST` function is an asynchronous function that handles HTTP POST requests. It is responsible for creating a new chat completion using the OpenAI SDK and the Perplexity API.

@@ -1,3 +1,9 @@
+---
+source: app/api/chat/openrouter/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: 42cc48b05263613c790516209bcc58c25b3ec7f37130abd4e3bebb8d39274d7d
+---
 # Documentation
 
 ## Overview

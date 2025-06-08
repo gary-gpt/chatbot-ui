@@ -1,3 +1,9 @@
+---
+source: lib/models/llm/llm-list.ts
+generated: '2025-06-08T13:21:01.658Z'
+tags: []
+hash: e34a814177b7bf865cd199873ca637878f1402be253eb0d0426d5f186ded6e7d
+---
 # Source Code Documentation
 
 This source code file is responsible for importing and exporting lists of Language Learning Models (LLMs) from various sources.

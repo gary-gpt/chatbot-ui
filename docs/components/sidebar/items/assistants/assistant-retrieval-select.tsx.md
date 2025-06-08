@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/assistants/assistant-retrieval-select.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: 077e979fea29234a8f7525deb2e358645e12a0563859bcc19a8628e292e7f8de
+---
 # AssistantRetrievalSelect Component
 
 This component is used to select an item from a list of files or collections. The selected items are passed to the parent component through a callback function.

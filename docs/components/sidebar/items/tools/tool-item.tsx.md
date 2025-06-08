@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/tools/tool-item.tsx
+generated: '2025-06-08T13:21:01.663Z'
+tags: []
+hash: ef2d9e7be0f246181554e669d39bcde1689a5fe21682e4c754c01c66ba0e0221
+---
 # ToolItem Component
 
 The `ToolItem` component is a functional component in React that represents a single tool item. It uses the `SidebarItem` component to display the tool's details and allows the user to edit these details.

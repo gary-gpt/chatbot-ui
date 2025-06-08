@@ -1,3 +1,9 @@
+---
+source: types/collection-file.ts
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: 6579619dde1da84cd89d03591e69a7495243126db4d812392a7e450fbb831f40
+---
 # CollectionFile Interface Documentation
 
 The `CollectionFile` interface is a TypeScript interface that represents a file within a collection. This interface is defined in the source code as follows:

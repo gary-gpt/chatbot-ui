@@ -1,3 +1,9 @@
+---
+source: components/utility/theme-switcher.tsx
+generated: '2025-06-08T13:21:01.638Z'
+tags: []
+hash: e80e17a687c6ac9c0c3ea41c434b8173c4565e7db020f2ff5882197ce9c112d5
+---
 # ThemeSwitcher Component
 
 The `ThemeSwitcher` component is a functional component that allows users to switch between dark and light themes.

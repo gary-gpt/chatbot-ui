@@ -1,3 +1,9 @@
+---
+source: scripts/generate-docs.js
+generated: '2025-06-08T13:21:01.631Z'
+tags: []
+hash: a6f56e2f1d1172dfbd84668792f1e1538183323ffab13013641f69103544f705
+---
 # Documentation
 
 The script is used to generate documentation for all files in the project that match the allowed extensions. The documentation is written to markdown files in the output folder.

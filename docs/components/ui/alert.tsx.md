@@ -1,3 +1,9 @@
+---
+source: components/ui/alert.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 3e67d40d6b0ed487fe8cea2f5d212eefc6283578b59049b489aebd49bdd8726f
+---
 # Alert Component Documentation
 
 This file exports three main components: `Alert`, `AlertTitle`, and `AlertDescription`. These components are used to display alert messages to the user.

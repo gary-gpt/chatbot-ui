@@ -1,3 +1,9 @@
+---
+source: components/utility/change-password.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 68b58feb5567d2f5f997705b0754933fd92f2c69e30d01841ca5bc2a1c038314
+---
 # ChangePassword Component
 
 This is a functional component in React that provides an interface for users to change their password.

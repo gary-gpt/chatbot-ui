@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/all/sidebar-display-item.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: 0620a84e373cc25a2a9f4f4eaad509719dae4354e6d99dc27e4ffcbb8bf5d763
+---
 # SidebarItem Component
 
 This file exports the `SidebarItem` component, a functional component in React. It is used to render individual items in the sidebar of the application.

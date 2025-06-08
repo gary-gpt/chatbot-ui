@@ -1,3 +1,9 @@
+---
+source: lib/server/server-utils.ts
+generated: '2025-06-08T13:21:01.647Z'
+tags: []
+hash: 7d884f2f544ac77a0b952e09e75cec9150dad08b6e14a82a2470b863cc5fe385
+---
 # Function Documentation
 
 ## createResponse

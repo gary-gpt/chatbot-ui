@@ -1,3 +1,9 @@
+---
+source: db/messages.ts
+generated: '2025-06-08T13:21:01.629Z'
+tags: []
+hash: 630240c0a54a43716a0a8887899816789274dbd32a51d8b249acc36e2ece2d44
+---
 # Messages API
 
 This module provides functions to interact with the `messages` table in the Supabase database.

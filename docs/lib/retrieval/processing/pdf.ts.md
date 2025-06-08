@@ -1,3 +1,9 @@
+---
+source: lib/retrieval/processing/pdf.ts
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: 3aa8d38dab07b17130558dfdb3a1162e4f4bc6070508a7679a1e9f74b1f4a42c
+---
 # processPdf Function Documentation
 
 This function is used to process a PDF file and split it into chunks of text. The function is asynchronous and returns a Promise that resolves to an array of `FileItemChunk` objects.

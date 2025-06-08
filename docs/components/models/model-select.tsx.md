@@ -1,3 +1,9 @@
+---
+source: components/models/model-select.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 2673c9499d3723d7e39fe0b4cf4a328419823bba731719bcc84a2e13d95f76dd
+---
 # ModelSelect Component
 
 The `ModelSelect` component is a functional component that allows users to select a model from a dropdown menu. The dropdown menu includes a search bar for filtering models and tabs for switching between hosted and local models.

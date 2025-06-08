@@ -1,3 +1,9 @@
+---
+source: app/api/chat/tools/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: 064655280e500d99487fc583c588a96d3909a33ce859e2bf25ad5301db9d491f
+---
 # POST Function Documentation
 
 This function is an asynchronous function named `POST` that is used to handle POST requests.

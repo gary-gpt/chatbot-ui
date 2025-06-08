@@ -1,3 +1,9 @@
+---
+source: types/chat-file.tsx
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: 4737e15cf66ad30888dd6f9bdf06e8722daafff61e58a4c96fcf15fbe29cfee8
+---
 # ChatFile Interface Documentation
 
 The `ChatFile` interface is a TypeScript interface that represents a chat file within the application. This interface is used to define the structure of an object that represents a file in a chat.

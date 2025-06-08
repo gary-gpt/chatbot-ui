@@ -1,3 +1,9 @@
+---
+source: lib/export-old-data.ts
+generated: '2025-06-08T13:21:01.631Z'
+tags: []
+hash: fd630eeaf26cccbecc77a30d5d18564d4501aada25a8bb30cc80c7b240be570c
+---
 # Documentation
 
 ## Function: exportLocalStorageAsJSON

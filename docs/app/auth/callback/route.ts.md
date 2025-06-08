@@ -1,3 +1,9 @@
+---
+source: app/auth/callback/route.ts
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: 3923326ad7f678515efb79cff0d1f38863ee902977c2ad72ae8857cb023bc9ef
+---
 # Source Code Documentation
 
 ## Overview

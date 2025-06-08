@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/files/file-item.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: f6a2edc7ffb287334c9eb03c6ebf890c55584ed9a651b1b6620a1c8289b79f64
+---
 # FileItem Component
 
 This component is used to display a file item in the sidebar.

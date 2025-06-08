@@ -1,3 +1,9 @@
+---
+source: db/assistant-collections.ts
+generated: '2025-06-08T13:21:01.627Z'
+tags: []
+hash: 0c7b324dff9af5e47fefb52656ca34f9e5e93788ac02f2ee364e7c6fdf8aa1c1
+---
 # Assistant Collections Module Documentation
 
 This module provides functions to interact with the `assistants` and `assistant_collections` tables in the Supabase database. 

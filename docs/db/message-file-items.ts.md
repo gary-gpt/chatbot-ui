@@ -1,3 +1,9 @@
+---
+source: db/message-file-items.ts
+generated: '2025-06-08T13:21:01.629Z'
+tags: []
+hash: ab47fe6fbbaefabbbc94ffda0b1564b48e665f15bc2a1e8122313e32af031e9a
+---
 # Documentation
 
 ## `getMessageFileItemsByMessageId(messageId: string)`

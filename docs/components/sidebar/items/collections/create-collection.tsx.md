@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/collections/create-collection.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: 3b0ac40df41b91eb77504300f94c6dbe1bc8551dc7f0663b4eebb93ebb254286
+---
 # CreateCollection Component
 
 The `CreateCollection` component is a functional component in React that allows users to create a new collection.

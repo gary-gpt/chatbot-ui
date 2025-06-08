@@ -1,3 +1,9 @@
+---
+source: components/sidebar/sidebar-search.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 9c9f273c31cd24d5dd7fb216de72989ad4b474ca6077d1b20820bd4577986c60
+---
 # SidebarSearch Component
 
 The `SidebarSearch` component is a functional component that renders an input field used for searching content.

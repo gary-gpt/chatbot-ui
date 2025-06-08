@@ -1,3 +1,9 @@
+---
+source: db/storage/assistant-images.ts
+generated: '2025-06-08T13:21:01.646Z'
+tags: []
+hash: c0c7f66a2c9d5d8ff5b4f5406918d66279243cee400eee97e59c1abd68dd91f9
+---
 # Documentation
 
 ## Functions

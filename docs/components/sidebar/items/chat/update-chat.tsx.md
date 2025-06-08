@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/chat/update-chat.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: cd14a243628c691be3abc5bef96e4e7565144cb647b2e6ba06e95b3fecbe5c54
+---
 # UpdateChat Component
 
 This component is used to update the details of a chat. It provides a dialog box where the user can edit the name of the chat.

@@ -1,3 +1,9 @@
+---
+source: lib/chat-setting-limits.ts
+generated: '2025-06-08T13:21:01.630Z'
+tags: []
+hash: de6365efa99e4a8e92406d57e35b7d3b360ad9077b8e6bd95ce5beb3bae6cced
+---
 # Source Code Documentation
 
 This source code defines a TypeScript object `CHAT_SETTING_LIMITS` that maps `LLMID` keys to `ChatSettingLimits` objects. 

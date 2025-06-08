@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/all/sidebar-create-item.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: 637ce8d4036ccb31e77cdac27489dd033ec4ca0974867fbf1b5e6cb3656481de
+---
 # SidebarCreateItem Component
 
 This component is used to create new items in the sidebar of the application. It supports the creation of various content types such as chats, presets, prompts, files, collections, assistants, tools, and models.

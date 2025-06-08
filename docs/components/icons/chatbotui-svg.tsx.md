@@ -1,3 +1,9 @@
+---
+source: components/icons/chatbotui-svg.tsx
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: 35123c3f3991a75b260fd11f37999dc392b1f453e637ab02e11fca3f1b6f818d
+---
 # ChatbotUISVG Component
 
 `ChatbotUISVG` is a functional component that renders a SVG (Scalable Vector Graphics) for a chatbot UI. The SVG is customizable through the props passed to the component.

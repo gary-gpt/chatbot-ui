@@ -1,3 +1,9 @@
+---
+source: components/ui/separator.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: e17fd808b4d3dd353c727084a837877596a67206881d99c5ce9d0b50002235f2
+---
 # Separator Component
 
 The `Separator` component is a React component that uses the `SeparatorPrimitive.Root` from the `@radix-ui/react-separator` package. It is a forward-ref component that accepts the same props as `SeparatorPrimitive.Root`.

@@ -1,3 +1,9 @@
+---
+source: components/icons/anthropic-svg.tsx
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: fc6577cc4474f6a21a2374e30fe90de9189c501f4f9fd4585643ed82b995aa18
+---
 # AnthropicSVG Component
 
 The `AnthropicSVG` component is a functional component that renders an SVG graphic. It is built using the `react` library's `FC` (Functional Component) type.

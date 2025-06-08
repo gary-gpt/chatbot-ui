@@ -1,3 +1,9 @@
+---
+source: components/utility/workspace-switcher.tsx
+generated: '2025-06-08T13:21:01.638Z'
+tags: []
+hash: 75ded6889fe1d8f7c4f67a6f0c3447363badb77e006fc69755fb58f8641bb2c0
+---
 # WorkspaceSwitcher Component
 
 The `WorkspaceSwitcher` component is a functional component that provides the functionality to switch between different workspaces. It also provides the ability to create a new workspace.

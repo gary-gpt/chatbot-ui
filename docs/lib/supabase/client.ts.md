@@ -1,3 +1,9 @@
+---
+source: lib/supabase/client.ts
+generated: '2025-06-08T13:21:01.647Z'
+tags: []
+hash: 7dba5213a8fe8f0e9343543f86443a1b28d532adc9c74a37ff61f447d0656fff
+---
 # Source Code Documentation
 
 This file is a part of a server-side rendering (SSR) application that uses Supabase, a real-time database and backend-as-a-service provider. It exports a single function `createClient` that creates and returns a new Supabase client for the browser.

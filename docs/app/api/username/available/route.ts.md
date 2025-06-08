@@ -1,3 +1,9 @@
+---
+source: app/api/username/available/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: 43ddb8dc27a2e4ba4f0b3a66c125f30d16b7a5e65bf8a35039643b1a9623190c
+---
 # Source Code Documentation
 
 This source code file is written in TypeScript and is used to handle POST requests to check if a username is available in a Supabase database.

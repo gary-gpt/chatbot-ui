@@ -1,3 +1,9 @@
+---
+source: components/ui/card.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 893490f78fae9dbe2d12a2d653946f5d5d6b8c3b6d67dd827dd7d7d9da041938
+---
 # Card Component Documentation
 
 This file exports several React components that are used to create a Card layout. These components include `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, and `CardFooter`.

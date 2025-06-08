@@ -1,3 +1,9 @@
+---
+source: components/sidebar/sidebar-data-list.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: dfed29ad23a59886295af76eac525bcb13ac954ab32c54d39edda31604d74da1
+---
 # SidebarDataList Component
 
 This is a React functional component that renders a list of data items in the sidebar. The data items can be of different types, and they are rendered accordingly.

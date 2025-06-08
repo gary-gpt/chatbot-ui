@@ -1,3 +1,9 @@
+---
+source: components/ui/dialog.tsx
+generated: '2025-06-08T13:21:01.640Z'
+tags: []
+hash: 70071c4d270ef09ae005272d768432a64178f15b6bf9342edbaaa5fba3876939
+---
 # Dialog Component
 
 This module exports various components and primitives related to a dialog box. It uses the `@radix-ui/react-dialog` package for the base dialog primitives.

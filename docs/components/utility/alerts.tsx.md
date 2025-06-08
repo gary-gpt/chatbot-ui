@@ -1,3 +1,9 @@
+---
+source: components/utility/alerts.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 39667e7aa9790bf2b671f30ccb3cb8e827e6ae92d6fedaaf06b95dcc24abf6ac
+---
 # Alerts Component Documentation
 
 The `Alerts` component is a functional component written in React. It uses the `Popover`, `PopoverContent`, and `PopoverTrigger` components from the custom UI library, and the `IconBell` component from the `@tabler/icons-react` package.

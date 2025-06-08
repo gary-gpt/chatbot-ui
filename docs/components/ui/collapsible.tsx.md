@@ -1,3 +1,9 @@
+---
+source: components/ui/collapsible.tsx
+generated: '2025-06-08T13:21:01.640Z'
+tags: []
+hash: e0847c0e4397aaa236c5b337e4a85a0075771ca0780e8a6aaac94d8bf045f963
+---
 # Documentation for Collapsible Component
 
 This source code file is responsible for implementing a collapsible component by using the `@radix-ui/react-collapsible` package. The collapsible component is a common UI pattern used to hide and show large amounts of content within a smaller container to save space.

@@ -1,3 +1,9 @@
+---
+source: lib/retrieval/processing/txt.ts
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: dcc321d314894f2c03105347785553ceb78d686d2ea826ec555192970df2180f
+---
 # processTxt Function Documentation
 
 ## Import Statements

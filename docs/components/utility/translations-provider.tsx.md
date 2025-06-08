@@ -1,3 +1,9 @@
+---
+source: components/utility/translations-provider.tsx
+generated: '2025-06-08T13:21:01.638Z'
+tags: []
+hash: 957772e198d661442a6387da16f2d6c8852d3dca221024ae0fa869f767af07c9
+---
 # TranslationsProvider
 
 This is a React component that provides translations for its child components using the `react-i18next` library.

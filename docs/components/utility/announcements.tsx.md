@@ -1,3 +1,9 @@
+---
+source: components/utility/announcements.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 428fa284ccfc659aa759661c53dc77c26c4814b5ff76c4bc670962722c38593c
+---
 # Announcements Component
 
 This is a React Functional Component that handles the display and management of announcements. It uses local storage to persist the state of the announcements.

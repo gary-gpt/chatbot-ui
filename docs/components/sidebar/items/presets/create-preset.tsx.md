@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/presets/create-preset.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: b2c0928c0417b1b4a86d56c3a037595ee8fe1da88c0f1d87b99643e6577730c4
+---
 # CreatePreset Component
 
 The `CreatePreset` component is a Functional Component that is used to create new presets. It uses the `ChatbotUIContext` to get the profile and selected workspace details.

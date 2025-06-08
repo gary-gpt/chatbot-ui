@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/memory-test/page.tsx'
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: ca68a9fdf4b36f711c18ed229abdc0fd1a5519f6c6d4b8b8f43964245860a6a5
+---
 # MemoryTestPage Component Documentation
 
 The `MemoryTestPage` component is a React component used for testing the memory insertion functionality of the application. It uses the `useState` hook from React for state management and the `insertMemory` function from the memory library.

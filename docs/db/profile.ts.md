@@ -1,3 +1,9 @@
+---
+source: db/profile.ts
+generated: '2025-06-08T13:21:01.630Z'
+tags: []
+hash: 23b1a5d761e7695a9c3b58c844158726e2c1e1e4833e8b1822c60bbb956b6ffa
+---
 # Profile Service
 
 This service provides methods to interact with the `profiles` table in Supabase.

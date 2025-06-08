@@ -1,3 +1,9 @@
+---
+source: components/setup/profile-step.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: 0145550b70df36180d859e5ddd86b850bf8469979e94e40e879aba954ab632d6
+---
 # ProfileStep Component
 
 This is a React functional component named `ProfileStep`. It's used to handle the user profile setup, specifically the username and display name.

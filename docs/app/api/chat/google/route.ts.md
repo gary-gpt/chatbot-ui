@@ -1,3 +1,9 @@
+---
+source: app/api/chat/google/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: 5d54fe07b7f94d6f856a4b5e6aa15ab1f199830572ee6c4f6cf61a7449e9cf94
+---
 # Documentation
 
 ## Overview

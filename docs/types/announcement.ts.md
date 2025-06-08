@@ -1,3 +1,9 @@
+---
+source: types/announcement.ts
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: 56853ef8f407b08c0a5f1ee5bce2c6ce915461d999b2486f9302e8f91883125d
+---
 # Interface Documentation: Announcement
 
 The `Announcement` interface is a TypeScript interface that represents an announcement.

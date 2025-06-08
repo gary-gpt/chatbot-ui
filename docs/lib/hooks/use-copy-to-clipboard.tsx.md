@@ -1,3 +1,9 @@
+---
+source: lib/hooks/use-copy-to-clipboard.tsx
+generated: '2025-06-08T13:21:01.647Z'
+tags: []
+hash: 385305363302b4bdcf1db08698eacd9ff70751fd415f8978e5ce4aa68c02e14c
+---
 # useCopyToClipboard Hook
 
 The `useCopyToClipboard` hook is a custom React hook that allows you to copy a string to the clipboard and manage the state of whether the copy operation was successful.

@@ -1,3 +1,9 @@
+---
+source: components/setup/step-container.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: ada7667b95cdfe2ea6c49623e1dde205f0d8a2c39108d4611a1885de43c0c231
+---
 # StepContainer Component
 
 The `StepContainer` component is a functional component that renders a card UI with a step-by-step interface. This component is designed to be used in a multi-step setup or configuration process.

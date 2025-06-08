@@ -1,3 +1,9 @@
+---
+source: app/api/username/get/route.ts
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: 095dd828656e1816d37886d3efc1913b7ce270a8d32ac8d75aa06e22e3348224
+---
 # Source Code Documentation
 
 This source code file is a part of a serverless function that handles HTTP POST requests. It is designed to interact with a Supabase database.

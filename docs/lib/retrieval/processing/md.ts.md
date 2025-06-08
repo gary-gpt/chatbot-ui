@@ -1,3 +1,9 @@
+---
+source: lib/retrieval/processing/md.ts
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: 015776b04f76544aee0a5b16ce8e00b03943535b93a84c3adc7b1f81a886a702
+---
 # processMarkdown Function Documentation
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/all/sidebar-update-item.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: cd5ace8787df4fbddc83f2367b8516a5e00c02803d106773a976d0bfbcb6b485
+---
 # SidebarUpdateItem Component
 
 This is a React functional component that allows users to update a specific item in the sidebar. It provides functionality to update various types of items including chats, presets, prompts, files, collections, assistants, tools, and models.

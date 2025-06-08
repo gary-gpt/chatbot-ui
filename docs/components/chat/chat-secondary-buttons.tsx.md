@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-secondary-buttons.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: 3a639338a6da2b542d95a8e279a88ae0e57c900aaf23defbcd6033143fe43160
+---
 # ChatSecondaryButtons Component Documentation
 
 ## Overview

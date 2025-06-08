@@ -1,3 +1,9 @@
+---
+source: components/ui/use-toast.ts
+generated: '2025-06-08T13:21:01.644Z'
+tags: []
+hash: f5eaa3bbc7bf918e1ca8fe4461a671becb24d69bcb9281fdcb37b108ba22dce5
+---
 # Toast Component Documentation
 
 This file contains the implementation of a toast notification system, inspired by the `react-hot-toast` library. It exports two main functions: `useToast` and `toast`.

@@ -1,3 +1,9 @@
+---
+source: db/models.ts
+generated: '2025-06-08T13:21:01.629Z'
+tags: []
+hash: a0ff9962c8d389c097867d408a71319d0e44bf31407b868da3fd4cdbc31b1e30
+---
 # Source Code Documentation
 
 This file contains several functions that interact with the `models` and `model_workspaces` tables in the Supabase database. 

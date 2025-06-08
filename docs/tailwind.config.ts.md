@@ -1,3 +1,9 @@
+---
+source: tailwind.config.ts
+generated: '2025-06-08T13:21:01.627Z'
+tags: []
+hash: 31291dae8aa23fdaa8583db9c39df31e03d45ea33f1a0cb1618859fc2ffebb4b
+---
 # Tailwind CSS Configuration
 
 This document describes the configuration for Tailwind CSS in the project.

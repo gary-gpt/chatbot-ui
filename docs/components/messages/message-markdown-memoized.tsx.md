@@ -1,3 +1,9 @@
+---
+source: components/messages/message-markdown-memoized.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: 501db7ea9b3f2fd00789a09e7dd3b536d1d22e6d915b4a3ac99783ed747565e7
+---
 # MessageMarkdownMemoized Component
 
 This is a React functional component that uses the `memo` method from React to optimize rendering. It's a memoized version of the `ReactMarkdown` component.

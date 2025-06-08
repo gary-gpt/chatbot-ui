@@ -1,3 +1,9 @@
+---
+source: components/messages/message-markdown.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: bf5626aa818c90f7d8335861406f5ee549e2f24faf1d495185899c87c208d79a
+---
 # MessageMarkdown Component Documentation
 
 ## Overview

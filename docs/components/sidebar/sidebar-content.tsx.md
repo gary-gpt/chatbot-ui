@@ -1,3 +1,9 @@
+---
+source: components/sidebar/sidebar-content.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 63daa2e966e511f56c9380e1271515bb48c554410375a36a90e846532d750f2c
+---
 # SidebarContent Component
 
 The `SidebarContent` component is a functional component that renders the content of the sidebar. This includes create buttons, a search bar, and a data list.

@@ -1,3 +1,9 @@
+---
+source: components/messages/message-codeblock.tsx
+generated: '2025-06-08T13:21:01.635Z'
+tags: []
+hash: 352b69d4610ff75993d5f7306d45a341038e735f16a498eed27428a8a14b2767
+---
 # MessageCodeBlock Component
 
 This is a React component that displays a block of code with syntax highlighting and provides options to copy the code to clipboard or download it as a file.

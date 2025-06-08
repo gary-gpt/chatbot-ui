@@ -1,3 +1,9 @@
+---
+source: components/icons/google-svg.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: d89017258f59c6c77381dc8dcedb94baa5eadad0b11969782231561d9346343e
+---
 # GoogleSVG Component
 
 The `GoogleSVG` is a functional component from the `react` library. This component renders a Google logo SVG.

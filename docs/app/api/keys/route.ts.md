@@ -1,3 +1,9 @@
+---
+source: app/api/keys/route.ts
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: 29a70d2e3fa5982279d63e85225df75fd60e53115fa057646106c169c75f63b1
+---
 # Source Code Documentation
 
 This file is responsible for handling GET requests and returning a response indicating whether certain environment keys are being used. The environment keys are associated with various API providers such as Azure, OpenAI, Google, etc.

@@ -1,3 +1,9 @@
+---
+source: db/chat-files.ts
+generated: '2025-06-08T13:21:01.628Z'
+tags: []
+hash: ecff46e1b0a87f89d290138f3a977beb98b72be9535375474892dd920d5d07f0
+---
 # Chat Files API
 
 This module provides API functions to interact with chat files in the database using the Supabase client.

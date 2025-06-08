@@ -1,3 +1,9 @@
+---
+source: components/ui/label.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: 270216121bebee107efd5bbf60e3bb12025fbe5117241d78d95dd7e5351758e1
+---
 # Label Component Documentation
 
 ## Overview

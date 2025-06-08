@@ -1,3 +1,9 @@
+---
+source: components/ui/checkbox.tsx
+generated: '2025-06-08T13:21:01.640Z'
+tags: []
+hash: 9e23b72eecd3f83d572dc2ae3437f7e8f3243bc4df6fbdea58782398de830883
+---
 # Checkbox Component Documentation
 
 This document provides an overview of the `Checkbox` component in the source code.

@@ -1,3 +1,9 @@
+---
+source: components/ui/accordion.tsx
+generated: '2025-06-08T13:21:01.638Z'
+tags: []
+hash: 05ade7eea41935406358a31e56affbbd46e3082ba3c6d84ca3c8aa8070d26498
+---
 # Accordion Component Documentation
 
 This file exports four components that together create an Accordion component. These components are built using the `@radix-ui/react-accordion` package. 

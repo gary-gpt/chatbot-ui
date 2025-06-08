@@ -1,3 +1,9 @@
+---
+source: types/models.ts
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: 8fcc674b3a3786de5870448c703c72b21ee69e8a6855c5ad996f924527c3f396
+---
 # ModelProvider Type Documentation
 
 The `ModelProvider` type is a TypeScript export that is used to define the source of the AI model. This type is a union type, meaning it can be any one of the listed string literals.

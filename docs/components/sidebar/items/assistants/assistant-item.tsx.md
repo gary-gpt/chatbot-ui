@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/assistants/assistant-item.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: 4b0d53446a1e654c9195bc6ba26a6825782680cd69d50bf26afc2cc9d9dafcf8
+---
 # AssistantItem Component Documentation
 
 The `AssistantItem` is a functional component in React that represents an individual assistant item in the chatbot UI. It provides the interface for interacting with the assistant's settings and properties.

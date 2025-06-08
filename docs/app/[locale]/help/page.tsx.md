@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/help/page.tsx'
+generated: '2025-06-08T13:21:01.648Z'
+tags: []
+hash: 3467124fb8b6c9bf4654cf980c6c546694f78d233ed3fcc2d56630bb2e49ea65
+---
 # HelpPage Function Documentation
 
 ## Overview

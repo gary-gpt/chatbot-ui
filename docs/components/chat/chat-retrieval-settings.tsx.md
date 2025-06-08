@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-retrieval-settings.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: 29993c971d1f8c718ed6a32187f55c9a0e178b3054f3fdac1c6d0a21f65addf8
+---
 # Chat Retrieval Settings Component
 
 This is a functional component in React that provides an interface for adjusting the chat retrieval settings in a chatbot UI.

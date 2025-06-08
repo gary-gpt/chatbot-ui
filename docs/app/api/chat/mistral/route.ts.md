@@ -1,3 +1,9 @@
+---
+source: app/api/chat/mistral/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: 01265c8b920749417a6f6d843a4857719d0d049233f69a8d1f7a794011a4e60f
+---
 # Chat Server
 
 This module is responsible for handling chat requests and responses using the Mistral AI service.

@@ -1,3 +1,9 @@
+---
+source: components/ui/image-picker.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: 72c6441ce86a22c199aa2d9a19552bfc9514ea7a0881ff39eb3514373bb1bd84
+---
 # ImagePicker Component
 
 The `ImagePicker` component is a functional component that allows users to select an image file, which is then displayed as a preview. The selected image is also processed to create a square image, which is then used for the preview and passed to the parent component through callback functions.

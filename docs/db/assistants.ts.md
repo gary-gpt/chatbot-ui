@@ -1,3 +1,9 @@
+---
+source: db/assistants.ts
+generated: '2025-06-08T13:21:01.628Z'
+tags: []
+hash: f0197d8b302bda9d3a8605273228fe22b5026311c7bf8278dad5f71ee0704627
+---
 # Assistant Module
 
 This module provides functions to interact with `assistants` and `assistant_workspaces` tables in the database using Supabase client.

@@ -1,3 +1,9 @@
+---
+source: lib/retrieval/processing/json.ts
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: 10e46ce62ad4a2722b5467e088ceb7ccad7ed02d317909dc3f1a295cdf31ef0b
+---
 # processJSON Function Documentation
 
 ## Overview

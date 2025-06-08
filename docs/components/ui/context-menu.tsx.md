@@ -1,3 +1,9 @@
+---
+source: components/ui/context-menu.tsx
+generated: '2025-06-08T13:21:01.640Z'
+tags: []
+hash: 20fd99a96d288edbd02f7aba5661ee7c6f4351a95e6dcdc9228a621b52f545dd
+---
 # ContextMenu Component Documentation
 
 This file defines a set of components for creating context menus using the `@radix-ui/react-context-menu` library. The components are designed to be flexible and customizable, with properties for controlling appearance and behavior.

@@ -1,3 +1,9 @@
+---
+source: types/images/assistant-image.ts
+generated: '2025-06-08T13:21:01.648Z'
+tags: []
+hash: 621e3c23016adb6760d24c83841ca99b6615f9e739651f7890f0dc34f92c462c
+---
 # AssistantImage Interface Documentation
 
 The `AssistantImage` interface is a TypeScript interface used to define the structure of an image associated with a specific assistant.

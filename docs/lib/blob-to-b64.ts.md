@@ -1,3 +1,9 @@
+---
+source: lib/blob-to-b64.ts
+generated: '2025-06-08T13:21:01.630Z'
+tags: []
+hash: 1a6f06ed7f1a31db7c60ff02a9699df1f99b61df40a642084cb4d14bceae9f94
+---
 # Documentation
 
 ## Function: convertBlobToBase64

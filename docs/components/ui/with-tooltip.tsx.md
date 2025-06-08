@@ -1,3 +1,9 @@
+---
+source: components/ui/with-tooltip.tsx
+generated: '2025-06-08T13:21:01.644Z'
+tags: []
+hash: f7acdf9681fa455c1d6d3151ba672fd2531581ee9d518f9e0bd87ce6c8d3c643
+---
 # WithTooltip Component Documentation
 
 The `WithTooltip` component is a functional component that uses the Tooltip functionality to provide additional information when a user interacts with an element.

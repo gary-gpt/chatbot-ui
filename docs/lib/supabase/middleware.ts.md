@@ -1,3 +1,9 @@
+---
+source: lib/supabase/middleware.ts
+generated: '2025-06-08T13:21:01.647Z'
+tags: []
+hash: 4c6f40f5929f826c79f0052d4f9435249c483fa9df79f8fdc89b160ed2e601c5
+---
 # Documentation
 
 ## createClient function

@@ -1,3 +1,9 @@
+---
+source: postcss.config.js
+generated: '2025-06-08T13:21:01.627Z'
+tags: []
+hash: c52ccab7fe307a1e3d5faa2335d1a00c59645f0933240d33a99cd4cef777513b
+---
 # Source Code Documentation
 
 This documentation is for the `module.exports` object in the source code file.

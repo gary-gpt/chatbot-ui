@@ -1,3 +1,9 @@
+---
+source: db/storage/profile-images.ts
+generated: '2025-06-08T13:21:01.646Z'
+tags: []
+hash: fe4b0f59d0ee375d5f2cf6e421e36b017f32f2e039f8d17485217fd2fe2c1757
+---
 # Function Documentation
 
 ## uploadProfileImage

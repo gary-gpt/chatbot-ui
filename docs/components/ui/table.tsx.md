@@ -1,3 +1,9 @@
+---
+source: components/ui/table.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: 45711f3fee40439a9c124a1b37e780bbdb273a372150db40ed806e8216356287
+---
 # Table Component Documentation
 
 This file exports a set of React components that can be used to construct a table. Each component is a part of the table and can be used independently. The components are:

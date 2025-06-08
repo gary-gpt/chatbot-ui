@@ -1,3 +1,9 @@
+---
+source: components/ui/alert-dialog.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 3edec38503aaaf41dd1b349b5cafef47ebe73347e4b00a4987d3d5b2c4fa180b
+---
 # AlertDialog Component
 
 This module exports a set of components to create an alert dialog. The components are built using the primitives provided by the `@radix-ui/react-alert-dialog` package.

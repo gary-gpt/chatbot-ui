@@ -1,3 +1,9 @@
+---
+source: db/assistant-files.ts
+generated: '2025-06-08T13:21:01.628Z'
+tags: []
+hash: 16196a53de890b7ec7b8dce99072943656f5afb1dcdbfc8cf365c16220be610f
+---
 # Assistant Files Module
 
 This module provides functions to interact with the `assistant_files` and `assistants` tables in the Supabase database.

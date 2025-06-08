@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/loading.tsx'
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: 612f7553374cbabcf55a4ca5bf9971a7de8cf066b1e1fb4cae462ce623f0b9c6
+---
 # Loading Component Documentation
 
 ## Overview

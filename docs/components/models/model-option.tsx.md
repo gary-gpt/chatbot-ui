@@ -1,3 +1,9 @@
+---
+source: components/models/model-option.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: 893ae615cc009ead4ba71b58f7ecac7f1a89c4a55a622e6976beb167e13c1de5
+---
 # ModelOption Component
 
 The `ModelOption` component is a functional component that displays model information and provides an option to select a model.

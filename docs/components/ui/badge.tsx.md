@@ -1,3 +1,9 @@
+---
+source: components/ui/badge.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 6de7c52091f2e167f0fea728bfd4e559c9a71fad3fd88f9b19d14fd640daf491
+---
 # Badge Component Documentation
 
 This documentation provides an overview of the `Badge` component in the source code.

@@ -1,3 +1,9 @@
+---
+source: components/ui/advanced-settings.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 5fd1b08d7b5efc5ee8b0ca2f52c48843a6ac623ecf4c561cded17aa19df01a3d
+---
 # AdvancedSettings Component
 
 This is a React functional component named `AdvancedSettings`. It is used to toggle the visibility of advanced settings in the application.

@@ -1,3 +1,9 @@
+---
+source: next-env.d.ts
+generated: '2025-06-08T13:21:01.626Z'
+tags: []
+hash: 6992bbcffd4768a13ff5b09e4c9b2d1ac4169b55955943b0f86397962664777c
+---
 # TypeScript Configuration File
 
 This file is a TypeScript configuration file for a Next.js project. It includes references to Next.js and Next.js image types.

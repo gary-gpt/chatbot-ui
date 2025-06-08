@@ -1,3 +1,9 @@
+---
+source: components/messages/message.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: da3210bd39ac465b3a414e62e9a665dcd4f5bacc9ec33786f7ce1bfc7e4bfb1b
+---
 # Message Component
 
 The `Message` component is a functional component that displays a single message in a chat interface. It provides features such as editing, copying, and regenerating messages. It also displays message sources and associated images.

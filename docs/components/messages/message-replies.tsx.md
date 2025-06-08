@@ -1,3 +1,9 @@
+---
+source: components/messages/message-replies.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: 8e5fcbcf45f198e6315e779a0ea526ba0b26cccc128801893e17bf9914cf992e
+---
 # MessageReplies Component Documentation
 
 This document provides a detailed explanation of the `MessageReplies` component in the source code.

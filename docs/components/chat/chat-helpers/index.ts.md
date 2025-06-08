@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-helpers/index.ts
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: 54c16430bfd33e6f89e5855f00ed2972c8a682ed74451067c1b845f9b4376b84
+---
 # Documentation
 
 This file contains a collection of functions related to handling chat interactions in the application. The functions are used for validating chat settings, retrieving chat data, creating temporary messages, handling local and hosted chats, fetching chat responses, processing responses, creating chats, and creating messages.

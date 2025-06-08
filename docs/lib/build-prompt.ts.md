@@ -1,3 +1,9 @@
+---
+source: lib/build-prompt.ts
+generated: '2025-06-08T13:21:01.630Z'
+tags: []
+hash: fb57fc354fcbc5bdcd4ddae19b760ef9538082514adb7181b3f30dd52edb451d
+---
 # Source Code Documentation
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+source: app/api/chat/openai/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: e17f21fa1fa98e3088de38be356dd6cf0bf61f05bd82ba73bb82b6a7a408e970
+---
 # Server Chat API
 
 This file exports a `POST` function which handles a POST request to create a chat completion with OpenAI's API.

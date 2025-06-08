@@ -1,3 +1,9 @@
+---
+source: context/context.tsx
+generated: '2025-06-08T13:21:01.627Z'
+tags: []
+hash: 0b384685dec68caab65abf85f2e562485242d36a00134a427c7b38e2965842b4
+---
 # Chatbot UI Context
 
 This file defines the `ChatbotUIContext` which is used to manage the state of the chatbot UI.

@@ -1,3 +1,9 @@
+---
+source: db/collections.ts
+generated: '2025-06-08T13:21:01.629Z'
+tags: []
+hash: b10a6144f18190c924cc18e3446ad6631f2dfd33c32ce0fd38ebf36455086c75
+---
 # Collection Module
 
 This module provides functions to interact with the `collections` and `collection_workspaces` tables in the database using the Supabase client.

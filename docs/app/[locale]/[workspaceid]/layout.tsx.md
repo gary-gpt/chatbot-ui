@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/[workspaceid]/layout.tsx'
+generated: '2025-06-08T13:21:01.648Z'
+tags: []
+hash: 4f3788f14de317b2457d3f06d7dc882949f09861d0a1229e10c3a4d09ba16478
+---
 # WorkspaceLayout Component Documentation
 
 ## Overview

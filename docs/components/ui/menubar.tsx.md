@@ -1,3 +1,9 @@
+---
+source: components/ui/menubar.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: a5dbeed05d5488ca001d89d2d115c1cf4df9effc270ad501e766db177917f822
+---
 # Menubar Component
 
 This is a set of React components that provide a customizable menubar interface. The components are built using the `@radix-ui/react-menubar` library.

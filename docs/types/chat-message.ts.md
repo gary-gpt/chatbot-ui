@@ -1,3 +1,9 @@
+---
+source: types/chat-message.ts
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: 03badd25d900e5cdf360cceb993ff6e53892f9c1491320083ecfb5f00badb6fe
+---
 # ChatMessage Interface Documentation
 
 This document provides a detailed explanation of the `ChatMessage` interface in the source code.

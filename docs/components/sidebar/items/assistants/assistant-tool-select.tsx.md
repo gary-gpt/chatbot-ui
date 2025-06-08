@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/assistants/assistant-tool-select.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: 4d0e8f52ef2058e9e45e221549f81f8c22cf1a82eae1d4a6cceb93b90ad8ed9d
+---
 # AssistantToolSelect Component
 
 The `AssistantToolSelect` component is a functional component that allows users to select tools for an assistant. It uses a dropdown menu to display the available tools and allows users to search for specific tools.

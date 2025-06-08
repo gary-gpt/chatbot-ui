@@ -1,3 +1,9 @@
+---
+source: lib/openapi-conversion.ts
+generated: '2025-06-08T13:21:01.631Z'
+tags: []
+hash: 0a727be34d5bebfaf44b1da9670ebe3fd10622d06812601c8174e17da7faee81
+---
 # OpenAPI Validator and Converter
 
 This module provides functionality to validate OpenAPI specifications and convert them into a more usable format.

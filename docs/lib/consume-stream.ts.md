@@ -1,3 +1,9 @@
+---
+source: lib/consume-stream.ts
+generated: '2025-06-08T13:21:01.630Z'
+tags: []
+hash: 362bb0e706d49c80926cd0a0c25f5514f7b7e3073d0269408555dbe6249d406e
+---
 # Documentation
 
 ## Function: consumeReadableStream

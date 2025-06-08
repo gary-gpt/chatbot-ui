@@ -1,3 +1,9 @@
+---
+source: lib/supabase/browser-client.ts
+generated: '2025-06-08T13:21:01.647Z'
+tags: []
+hash: 1ca49cd77dd97cafa9b1a71f68d2dbc3f7510198bb47c399c4e683a6a18d70fd
+---
 # Supabase Client Creation
 
 This module exports a Supabase client instance for use throughout your application. 

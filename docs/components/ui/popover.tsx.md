@@ -1,3 +1,9 @@
+---
+source: components/ui/popover.tsx
+generated: '2025-06-08T13:21:01.642Z'
+tags: []
+hash: d6c6640fe602e9f72b898ebb8eb403af2376a0584505a20d868bdb50c78a38bb
+---
 # Popover Component
 
 This file exports three components: `Popover`, `PopoverTrigger`, and `PopoverContent`. These components are built using the `@radix-ui/react-popover` library.

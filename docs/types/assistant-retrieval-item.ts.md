@@ -1,3 +1,9 @@
+---
+source: types/assistant-retrieval-item.ts
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: f3cd3bffba534b4e39a1c7f24c03fbe2b9c34a434ea2b88c89a8a6884f447384
+---
 # AssistantRetrievalItem Interface
 
 The `AssistantRetrievalItem` interface is a TypeScript interface that defines the structure of an object that is used to retrieve assistant-related data.

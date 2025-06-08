@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-scroll-buttons.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: 022cfde3a17f78c3ed1b7e8d88b4b5ee7318e580e791f85a0bfe5beaef97478d
+---
 # ChatScrollButtons Component
 
 This is a React functional component that displays two icons for scrolling up and down in a chat interface. The icons are only visible if the chat content is overflowing and not at the top or bottom respectively.

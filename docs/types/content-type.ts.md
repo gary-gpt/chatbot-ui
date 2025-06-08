@@ -1,3 +1,9 @@
+---
+source: types/content-type.ts
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: 952ae4ed4a268bbe9c2cdcd25c0965ec1699d225c16bc669e82e96d881343b2e
+---
 # Source Code Documentation
 
 This source code file defines an `export type` named `ContentType`. This is a TypeScript type that is used to specify the type of content that can be handled by the application. 

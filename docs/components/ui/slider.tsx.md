@@ -1,3 +1,9 @@
+---
+source: components/ui/slider.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: 504904b778d1518ba040d385b47d0061db09fe2167e87b2f94b4fd78e75c5a11
+---
 # Slider Component
 
 This document provides information about the `Slider` component in the source code.

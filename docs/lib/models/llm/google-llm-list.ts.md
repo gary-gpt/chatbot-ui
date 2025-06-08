@@ -1,3 +1,9 @@
+---
+source: lib/models/llm/google-llm-list.ts
+generated: '2025-06-08T13:21:01.658Z'
+tags: []
+hash: 97d4bfdff576efff1fb3abecf4fadedc4842bc54a4c9fc14f0c90cb0ef92c508
+---
 # Google Models Documentation
 
 This file contains the definitions of several Google models. Each model is an object of type `LLM`, which is imported from "@/types". The models are stored as constants and are exported as part of the `GOOGLE_LLM_LIST` array.

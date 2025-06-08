@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/page.tsx'
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: a87ad62b94ea37dcf1c40261e617b9a3a7c4981d3e5f5ad09787aef0c21338ef
+---
 # HomePage Component Documentation
 
 ## Overview

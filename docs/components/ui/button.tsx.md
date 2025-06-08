@@ -1,3 +1,9 @@
+---
+source: components/ui/button.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 32d4afd01422663fec76fe62c67805509efa978229792b9e6cdb57d86e10205d
+---
 # Button Component
 
 This is a React component for a button with multiple variants and sizes. It uses the `@radix-ui/react-slot` and `class-variance-authority` libraries for managing variants and the `@/lib/utils` for utility functions.

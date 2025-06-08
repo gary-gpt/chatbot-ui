@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-ui.tsx
+generated: '2025-06-08T13:21:01.635Z'
+tags: []
+hash: c38e0f9309779ac61157bc9a5e09c0de602ce35a3048f0b3ccd3381f7dafe2c5
+---
 # ChatUI Component
 
 This is the main component for the chat user interface.

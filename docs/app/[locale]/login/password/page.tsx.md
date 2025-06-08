@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/login/password/page.tsx'
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: 733864387924a0b4c7322a0dd9135b4aa9e4b67367ffe94375c11725d9d484b6
+---
 # ChangePasswordPage Component
 
 This document provides an overview of the `ChangePasswordPage` component in the source code.

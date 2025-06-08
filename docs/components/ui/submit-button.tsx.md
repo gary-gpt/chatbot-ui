@@ -1,3 +1,9 @@
+---
+source: components/ui/submit-button.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: 25ef4b8e77b4bd3a230f61e81155228fd2926f7df4e797013118a5a58c71eb3b
+---
 # SubmitButton Component
 
 This file exports a `SubmitButton` component that is used to submit forms in the application. This component is built using React and takes advantage of the `useFormStatus` hook from `react-dom` to handle form submission status.

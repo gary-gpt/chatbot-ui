@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/login/page.tsx'
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: 439c291469d102893259d03e84096964110712bd3735890c1d196e830cb7c396
+---
 # Login Component
 
 This file exports a default `Login` component which is an asynchronous function that accepts an object with a `searchParams` property. This property is an object that contains a `message` string.

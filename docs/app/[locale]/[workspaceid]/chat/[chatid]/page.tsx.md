@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/[workspaceid]/chat/[chatid]/page.tsx'
+generated: '2025-06-08T13:21:01.664Z'
+tags: []
+hash: 969619372d442a41c2de2720291119cb4cd8364a09ec2aa755d4fc74c315192d
+---
 # ChatIDPage Component Documentation
 
 ## Overview

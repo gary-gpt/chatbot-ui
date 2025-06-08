@@ -1,3 +1,9 @@
+---
+source: components/chat/file-picker.tsx
+generated: '2025-06-08T13:21:01.635Z'
+tags: []
+hash: 70a26b0775b9a212f7ae7228f2233de4bc2f6a9b9f5d1cc4652230170213c6a5
+---
 # FilePicker Component
 
 This is a documentation for the `FilePicker` component in React.

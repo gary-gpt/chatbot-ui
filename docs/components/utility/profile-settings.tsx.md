@@ -1,3 +1,9 @@
+---
+source: components/utility/profile-settings.tsx
+generated: '2025-06-08T13:21:01.638Z'
+tags: []
+hash: 65f94628762ca6cac4e730e2f87ce2285027697e14e8ce0152acf8524acff492
+---
 # ProfileSettings Component
 
 This component is used to manage the user's profile settings.

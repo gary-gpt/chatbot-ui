@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-settings.tsx
+generated: '2025-06-08T13:21:01.635Z'
+tags: []
+hash: 420e95a211e1cd25e966021e39571f42c46920a2bd3d9dec5116f4030eb6f777
+---
 # ChatSettings Component
 
 This is a React functional component that provides a user interface for adjusting chat settings in a chatbot application. The component uses a popover to display a form that allows users to modify various chat settings.

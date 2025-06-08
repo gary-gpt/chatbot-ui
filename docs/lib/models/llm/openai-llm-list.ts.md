@@ -1,3 +1,9 @@
+---
+source: lib/models/llm/openai-llm-list.ts
+generated: '2025-06-08T13:21:01.658Z'
+tags: []
+hash: 94c9de05d8e17654b88fcd327afa42373f7724bdfe5306514cf66bd27f34290d
+---
 # OpenAI Models Documentation
 
 This file contains the definitions of several OpenAI models, including their IDs, names, providers, hosted IDs, platform links, image input capabilities, and pricing information.

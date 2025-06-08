@@ -1,3 +1,9 @@
+---
+source: app/api/retrieval/retrieve/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: 1711fb876702529e5639b9eda4a641da155c89d7fdb24a6d80741b5e64d1486b
+---
 # POST Function Documentation
 
 This function is an asynchronous function named `POST` that takes a `request` object as an argument and returns a `Response` object.

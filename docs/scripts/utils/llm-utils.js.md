@@ -1,3 +1,9 @@
+---
+source: scripts/utils/llm-utils.js
+generated: '2025-06-08T13:21:01.648Z'
+tags: []
+hash: 47d0a93d4e4c4ee19a9a70baa25fd34c337cb9ded02e06877b2f78091fe15f2e
+---
 # Documentation
 
 ## Function: generateMarkdownFromCode

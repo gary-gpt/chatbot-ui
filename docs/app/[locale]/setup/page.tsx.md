@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/setup/page.tsx'
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: 331b41f6490c84a6f2f82492417a017347167a3728b23ad57c879f18c0890b8e
+---
 # SetupPage Component
 
 This is a React component for the setup page of the application.

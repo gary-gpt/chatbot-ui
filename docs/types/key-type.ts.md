@@ -1,3 +1,9 @@
+---
+source: types/key-type.ts
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: 31ed83df2269bd6c8c583cd8b4170ca4659ada16d380f3415b216f87c06195ea
+---
 # Source Code Documentation
 
 This documentation provides details about the `EnvKey` type in the source code.

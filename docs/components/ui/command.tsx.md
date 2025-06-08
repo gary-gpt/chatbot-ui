@@ -1,3 +1,9 @@
+---
+source: components/ui/command.tsx
+generated: '2025-06-08T13:21:01.640Z'
+tags: []
+hash: 0069e18328fe1c848a02b9d54abbc2953f239835298855f8d8a26c4394f22e84
+---
 # Command Component
 
 This file exports a set of components that are used to create a command interface. 

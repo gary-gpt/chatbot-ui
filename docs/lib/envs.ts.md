@@ -1,3 +1,9 @@
+---
+source: lib/envs.ts
+generated: '2025-06-08T13:21:01.631Z'
+tags: []
+hash: abffa43f0aaf09229bceadbca549d8e1c844ae5b707348adb5483425e623c8c4
+---
 # Documentation for `isUsingEnvironmentKey` Function
 
 ## Overview

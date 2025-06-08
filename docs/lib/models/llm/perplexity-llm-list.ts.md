@@ -1,3 +1,9 @@
+---
+source: lib/models/llm/perplexity-llm-list.ts
+generated: '2025-06-08T13:21:01.658Z'
+tags: []
+hash: 0d07537b9f7edc77e1ab1abbc1e1dc40ef9aaf244419f5bf4493476cb3be4e02
+---
 # Source Code Documentation
 
 This source code file is primarily concerned with defining and exporting a list of language models provided by Perplexity. Each model is defined as an object of type `LLM` and contains information such as the model's ID, name, provider, hosted ID, a link to the platform, and a boolean indicating whether the model accepts image input.

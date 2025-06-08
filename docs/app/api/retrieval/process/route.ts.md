@@ -1,3 +1,9 @@
+---
+source: app/api/retrieval/process/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: 8b124001cc32446cbfaa2b9f9dcf417d33843a4db7dd2b852f226a0f997e40ce
+---
 # POST Function
 
 The `POST` function is an asynchronous function that handles the POST request.

@@ -1,3 +1,9 @@
+---
+source: app/api/chat/anthropic/route.ts
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: 731486f4db953d44782c72198c3e729a256cb1c152cc36f75b4783315674a4a5
+---
 # POST Function Documentation
 
 This function is an asynchronous function named `POST` which is designed to handle POST requests. It takes a `request` object of type `NextRequest` as an argument.

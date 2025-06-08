@@ -1,3 +1,9 @@
+---
+source: components/utility/global-state.tsx
+generated: '2025-06-08T13:21:01.638Z'
+tags: []
+hash: 9decb1736e7cc9d76c8cbba0ff3422a6b225e554ba41d975d55c0d8421f36ffe
+---
 # GlobalState Component
 
 The `GlobalState` component is a functional component that serves as a global state provider for the application. It uses React's Context API to provide state to its children components. 

@@ -1,3 +1,9 @@
+---
+source: lib/retrieval/processing/csv.ts
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: 6ef002ff50d01a9007759d341440daba128fe39c7be399642f24ba2f8691ebf8
+---
 # processCSV Function Documentation
 
 This function is responsible for processing a CSV file and returning an array of `FileItemChunk` objects.

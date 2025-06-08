@@ -1,3 +1,9 @@
+---
+source: components/utility/command-k.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 0d16a147fe447ce631b4a3e4b2587b251790d05f64027ac49c02aa4270f554dd
+---
 # CommandK Component
 
 This is a documentation for the `CommandK` component in React.

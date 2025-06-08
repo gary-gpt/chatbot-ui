@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/prompts/prompt-item.tsx
+generated: '2025-06-08T13:21:01.663Z'
+tags: []
+hash: f8b4a1852a4d9f1fdd39b206a0f47950d0473c4d816bce7e9b6136a881695ac6
+---
 # PromptItem Component
 
 The `PromptItem` component is a functional component that displays a single prompt item in a sidebar. This component is part of the sidebar display items.

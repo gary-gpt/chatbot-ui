@@ -1,3 +1,9 @@
+---
+source: db/presets.ts
+generated: '2025-06-08T13:21:01.630Z'
+tags: []
+hash: 89e3ff62e7747fa776a01c4238813ca6afec894253f914990c1ac714596df2ee
+---
 # Source Code Documentation
 
 This file contains functions for interacting with the `presets` and `preset_workspaces` tables in the Supabase database.

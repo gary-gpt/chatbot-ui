@@ -1,3 +1,9 @@
+---
+source: components/workspace/assign-workspaces.tsx
+generated: '2025-06-08T13:21:01.644Z'
+tags: []
+hash: 4d702c90f70f0352b5790a521996396b58edea4209467e0bd6c3f9e42d13d933
+---
 # AssignWorkspaces Component
 
 This component allows users to assign workspaces. It uses a dropdown menu to display available workspaces and allows users to select one or more workspaces.

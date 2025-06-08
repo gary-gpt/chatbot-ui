@@ -1,3 +1,9 @@
+---
+source: db/files.ts
+generated: '2025-06-08T13:21:01.629Z'
+tags: []
+hash: 77730a422b29aafb4fe714942ef8052f19970ef6927c7c1c262c8d034545897b
+---
 # File Operations
 
 This module provides a set of functions for performing operations on files, such as creating, updating, and deleting files. It also includes functions for retrieving files by their ID and workspace ID.

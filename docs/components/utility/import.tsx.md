@@ -1,3 +1,9 @@
+---
+source: components/utility/import.tsx
+generated: '2025-06-08T13:21:01.638Z'
+tags: []
+hash: 6f50ece2348c4febca19a3a139a485798a4c999ba97f14c4cc9826b010873e84
+---
 # Import Component
 
 This component is responsible for importing data from JSON files into the chatbot application. The imported data can be of various types such as chats, presets, prompts, files, collections, assistants, and tools.

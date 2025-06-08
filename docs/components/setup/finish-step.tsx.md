@@ -1,3 +1,9 @@
+---
+source: components/setup/finish-step.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: 6b294c7a4876e8ec2162864ea2ac7101c3d9e879cb82e74fdf2be86da0e91517
+---
 # FinishStep Component
 
 The `FinishStep` component is a functional component that displays a welcome message to the Chatbot UI. It optionally includes the first name of the user if a `displayName` is provided.

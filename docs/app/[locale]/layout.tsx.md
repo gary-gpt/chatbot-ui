@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/layout.tsx'
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: 076ee024e5d6ccacabbbcfe5272d909292e5530f2b19687aaf31accdb661d346
+---
 # RootLayout Component
 
 This file exports the `RootLayout` function, which is a React component that sets up the root layout for the application. This includes setting up the internationalization (i18n) and Supabase client, as well as the global state and toaster notifications.

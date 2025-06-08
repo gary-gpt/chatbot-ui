@@ -1,3 +1,9 @@
+---
+source: components/ui/file-icon.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: f72fc94951c554fbd36fcd73a60641635fe2603eb2727b0a9bce256985f5b7c8
+---
 # FileIcon Component
 
 The `FileIcon` component is a functional component that returns an icon based on the file type passed as a prop. It uses the `@tabler/icons-react` library to display the relevant icon.

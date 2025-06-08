@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-hooks/use-select-file-handler.tsx
+generated: '2025-06-08T13:21:01.650Z'
+tags: []
+hash: 9228352b54724e1aee9a7e8f6fe86ee087a140b6808ef3c72c866b1625ad8a00
+---
 # Documentation
 
 This file contains the `useSelectFileHandler` hook which is used for handling file selection in the chatbot UI.

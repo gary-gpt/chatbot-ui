@@ -1,3 +1,9 @@
+---
+source: components/ui/aspect-ratio.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 39cef96038a76aa8de124b8f70ce23a6b16e1f871f2888331f1c0649ce1b136d
+---
 # Aspect Ratio Module Documentation
 
 This module is responsible for managing the aspect ratio of elements in the application. It uses the `@radix-ui/react-aspect-ratio` package to provide this functionality.

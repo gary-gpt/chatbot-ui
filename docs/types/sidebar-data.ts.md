@@ -1,3 +1,9 @@
+---
+source: types/sidebar-data.ts
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: e14ec904afb32b721bc32dd25b035a88b72aca583e7ce19916a07023a05add38
+---
 # Documentation
 
 ## Overview

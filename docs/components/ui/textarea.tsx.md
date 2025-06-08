@@ -1,3 +1,9 @@
+---
+source: components/ui/textarea.tsx
+generated: '2025-06-08T13:21:01.644Z'
+tags: []
+hash: 1fa960d417149434eff1864d8404b962acdae068a9db8db47703d17c77e6cc37
+---
 # Textarea Component
 
 This document provides information about the `Textarea` component in the source code file.

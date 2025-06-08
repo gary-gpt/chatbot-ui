@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/[workspaceid]/chat/page.tsx'
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: 6e9896ea8021f5d2019fd26cb3e95a16e7f9c55b709c59ae613236ccbeac709a
+---
 # ChatPage Component
 
 This is the main component for the chat page of the application. It handles the rendering of the chat UI, chat input, chat settings, quick settings, and chat help components. It also handles the logic for initiating a new chat and focusing on the chat input field.

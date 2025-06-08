@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/all/sidebar-delete-item.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: 9598b60210bcca7d9d95fd0088e0cb841e6c500fca1aa6668f9e436f244c013e
+---
 # SidebarDeleteItem Component
 
 This file exports a single React functional component called `SidebarDeleteItem`.

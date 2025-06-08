@@ -1,3 +1,9 @@
+---
+source: app/api/assistants/openai/route.ts
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: 4fa1563925d59d539f817f983d6581a37e7a358d7f1bff3fa9bd794124074ee6
+---
 # Source Code Documentation
 
 ## Import Statements

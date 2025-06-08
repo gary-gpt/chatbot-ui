@@ -1,3 +1,9 @@
+---
+source: handler-old.tsx
+generated: '2025-06-08T13:21:01.622Z'
+tags: []
+hash: d9f38cfd8f454a4e98bb5cc47d423d0a5cdfbecf6109e3fc78ec47c427692da5
+---
 # useChatHandler Hook
 
 This hook provides a set of functions and references for managing chat interactions in the application.

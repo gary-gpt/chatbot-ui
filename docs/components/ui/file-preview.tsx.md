@@ -1,3 +1,9 @@
+---
+source: components/ui/file-preview.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: 85ba08193f6c8e3c107a761de64f198232bfe517faddc9bab881dbf6ce0e6079
+---
 # FilePreview Component
 
 This is a React functional component named `FilePreview`. It is used to preview files of different types.

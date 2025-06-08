@@ -1,3 +1,9 @@
+---
+source: db/prompts.ts
+generated: '2025-06-08T13:21:01.630Z'
+tags: []
+hash: f752a55819c46a88afcb77cfdd6c21e8e781a7038a50f1ea5219a5e099aee01e
+---
 # Documentation
 
 This file provides a set of functions for interacting with `prompts` and `workspaces` tables in a Supabase database.

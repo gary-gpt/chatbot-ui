@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/folders/delete-folder.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: e07ac761f818deb83da183d42093a4c606e5a48bccc14109afabb057e3c5cc6b
+---
 # DeleteFolder Component
 
 The `DeleteFolder` component is a React Functional Component that provides functionality for deleting a folder and its associated items.

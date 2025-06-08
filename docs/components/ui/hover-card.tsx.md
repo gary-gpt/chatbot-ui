@@ -1,3 +1,9 @@
+---
+source: components/ui/hover-card.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: f4ffdeefe81ff0043c31cbfd61be468fa59eb6c9f740c76c1f225ea2f4c1f494
+---
 # HoverCard Component Documentation
 
 This file exports three components: `HoverCard`, `HoverCardTrigger`, and `HoverCardContent`. These components are built using the `@radix-ui/react-hover-card` library.

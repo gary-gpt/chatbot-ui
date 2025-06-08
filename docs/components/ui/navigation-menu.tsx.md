@@ -1,3 +1,9 @@
+---
+source: components/ui/navigation-menu.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: 1e251bf95a05546bdc7eb436db695d827ffff3973aadfb23bbb77f536b10f88d
+---
 # Navigation Menu Component
 
 This module exports a set of components that together form a navigation menu. The components are built using the `@radix-ui/react-navigation-menu` primitives.

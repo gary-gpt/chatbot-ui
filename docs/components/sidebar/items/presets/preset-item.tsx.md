@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/presets/preset-item.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: 6ec9a07382ca87a1c31f149b24d822b13584ce9f2ffab7334ac30575d4d223bb
+---
 # PresetItem Component Documentation
 
 The `PresetItem` is a React functional component that represents a single preset item in the sidebar. This component is responsible for managing the state of the preset item and rendering the necessary UI components.

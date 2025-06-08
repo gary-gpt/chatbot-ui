@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-messages.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: 0930bc181b27a09a1e25d4bd779ff048fdd6d7a55202fea74d58f21381781af3
+---
 # ChatMessages Component
 
 This is a React functional component that handles the display of chat messages. It uses the `ChatbotUIContext` to get the chat messages and chat file items. It also uses a custom hook `useChatHandler` to handle the editing of messages.

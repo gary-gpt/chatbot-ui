@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/files/create-file.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: b1ac858c6b4f544f98f9389059692eca486ed4be2452e7dbe5a811f3c53b114d
+---
 # CreateFile Component
 
 The `CreateFile` component is a React functional component that provides an interface for creating a new file. It is used within the context of a chatbot UI.

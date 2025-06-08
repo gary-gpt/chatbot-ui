@@ -1,3 +1,9 @@
+---
+source: types/llms.ts
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: 65a98a9766f7d056d911430243d49c4d26c076b9f1ff4fa0d8c500bd64c71268
+---
 # Source Code Documentation
 
 This source code file defines the types and interfaces for various language learning models (LLMs) from different providers.

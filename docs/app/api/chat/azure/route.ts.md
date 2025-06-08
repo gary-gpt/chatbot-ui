@@ -1,3 +1,9 @@
+---
+source: app/api/chat/azure/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: 64305e19c327ced96b42e29f035e6c1e4d0008894b482850d21c8b4245a0bb7f
+---
 # Azure OpenAI Chat API Handler
 
 This module exports a single function `POST` that handles POST requests to the Azure OpenAI Chat API.

@@ -1,3 +1,9 @@
+---
+source: db/workspaces.ts
+generated: '2025-06-08T13:21:01.630Z'
+tags: []
+hash: 7a83141a75b8d526d979148407442b5b1de185a9e46fe1cb8ddbda9bef98d413
+---
 # Workspaces Module
 
 This module provides a set of functions to interact with the `workspaces` table in the database using the Supabase client.

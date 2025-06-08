@@ -1,3 +1,9 @@
+---
+source: types/file-item-chunk.ts
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: 539b3c74624166a826ea79d139febc7edb1372b65b767687a8dc3bbb28f58c97
+---
 # FileItemChunk Type Documentation
 
 The `FileItemChunk` type is an exported type from this source code file. This type is an object that is used to represent a chunk of a file item. It is composed of two properties: `content` and `tokens`.

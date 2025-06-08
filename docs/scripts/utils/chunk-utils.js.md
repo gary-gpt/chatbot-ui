@@ -1,3 +1,9 @@
+---
+source: scripts/utils/chunk-utils.js
+generated: '2025-06-08T13:21:01.648Z'
+tags: []
+hash: a53c0207f70b5917643cfbd17a0b636ba0bc493523eeaad03f7e783fcf5b9761
+---
 # Documentation
 
 ## Module: File Chunker

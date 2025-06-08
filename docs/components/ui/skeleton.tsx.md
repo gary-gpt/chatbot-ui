@@ -1,3 +1,9 @@
+---
+source: components/ui/skeleton.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: af9c32c5d9b6a94c244b31c67f3cc2c490db9a812fdc365351012d23f9fe2122
+---
 # Skeleton Component
 
 The `Skeleton` component is a functional component in React. It is designed to provide a placeholder or a loading effect while the actual content is still loading. This component uses the `cn` function from the utility library to handle class names.

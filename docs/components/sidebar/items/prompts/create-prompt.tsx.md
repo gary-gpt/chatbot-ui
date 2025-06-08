@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/prompts/create-prompt.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: 4376211ad640d02d2ad086d50a5e8ca21d98b64139e994b0e3c8aa4a82d9a208
+---
 # CreatePrompt Component
 
 The `CreatePrompt` component is a functional component in React that takes in `isOpen` and `onOpenChange` as props. 

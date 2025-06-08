@@ -1,3 +1,9 @@
+---
+source: components/sidebar/sidebar-switcher.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 1fb84d3805335cedb7040505ee240cd21481ce71fa37e282881aa2134a051193
+---
 # SidebarSwitcher Component
 
 This is a documentation for the `SidebarSwitcher` component.

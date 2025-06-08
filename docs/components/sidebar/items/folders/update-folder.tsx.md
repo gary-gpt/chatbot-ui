@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/folders/update-folder.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: 6fb3209022f7be8191f93128c6c9b36deb76fdee7b563eb0319a7750c8364b66
+---
 # UpdateFolder Component
 
 The `UpdateFolder` component is a functional component that allows users to update the name of a folder. It uses a dialog box to accept user input and updates the folder name in the database upon user confirmation.

@@ -1,3 +1,9 @@
+---
+source: components/ui/toast.tsx
+generated: '2025-06-08T13:21:01.644Z'
+tags: []
+hash: 62825f40db8496ca793cf5b11bea315ae668b08c4eb479a6cc2f9cedef4589c0
+---
 # Toast Component Documentation
 
 This file contains the implementation for the Toast component and related sub-components. The Toast component is a notification element that provides feedback about an operation's status or updates.

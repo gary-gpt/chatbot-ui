@@ -1,3 +1,9 @@
+---
+source: worker/index.js
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: 66b222a9779b247c4376c34a4205ad58aa1d9581fdb747f125be0bae013be26d
+---
 # Source Code Documentation
 
 ## Configuration Parameter: `__WB_DISABLE_DEV_LOGS`

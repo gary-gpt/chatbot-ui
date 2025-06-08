@@ -1,3 +1,9 @@
+---
+source: components/workspace/delete-workspace.tsx
+generated: '2025-06-08T13:21:01.645Z'
+tags: []
+hash: 789009bafb10ebd36629c5e712c488ee51c8b19a15ae8f5c73e25be53e17fb35
+---
 # DeleteWorkspace Component
 
 This is a React component that provides a user interface for deleting a workspace. It is a part of a chatbot application.

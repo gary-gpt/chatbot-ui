@@ -1,3 +1,9 @@
+---
+source: components/ui/progress.tsx
+generated: '2025-06-08T13:21:01.642Z'
+tags: []
+hash: 84c465932ee14ee930f5277533cdb9fcc21bba58f1863d2929dec1cdde5cefd3
+---
 # Progress Component
 
 This file exports a `Progress` component. This component is a wrapper around the `ProgressPrimitive.Root` component from the `@radix-ui/react-progress` package. It is used to display a progress bar.

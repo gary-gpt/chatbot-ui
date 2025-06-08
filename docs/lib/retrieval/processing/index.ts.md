@@ -1,3 +1,9 @@
+---
+source: lib/retrieval/processing/index.ts
+generated: '2025-06-08T13:21:01.659Z'
+tags: []
+hash: d2add7af0943b076200b776eafa959b8a65028e4cdef586960aa3007368bf185
+---
 # Source Code Documentation
 
 This source code file exports modules from various file formats and defines constants related to chunk sizes.

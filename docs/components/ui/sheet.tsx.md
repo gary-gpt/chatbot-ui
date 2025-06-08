@@ -1,3 +1,9 @@
+---
+source: components/ui/sheet.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: 74f222c4a05b2ed6ed22ff4a387a3c0bfea429e207968151782e48817e15f09c
+---
 # Sheet Component Documentation
 
 This source code file defines several components using the `@radix-ui/react-dialog` library. These components are designed to create a customizable, animated sheet interface.

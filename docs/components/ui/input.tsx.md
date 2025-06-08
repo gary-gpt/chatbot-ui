@@ -1,3 +1,9 @@
+---
+source: components/ui/input.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: 8369c3d41f042982a794b0e2f0531dbac2a73974a8b0e9a1c8f92fc7afdb60eb
+---
 # Input Component
 
 This is a reusable `Input` component that extends the standard HTML input element's attributes. It is built using React.

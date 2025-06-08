@@ -1,3 +1,9 @@
+---
+source: components/sidebar/sidebar-create-buttons.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 350a5d9f9699f92a48bdb5b39c2ba968f9f7b68d1ad2f1627c045dbb965af9b6
+---
 # SidebarCreateButtons Component
 
 This component is used to render a set of buttons in the sidebar that allow users to create new items based on the content type.

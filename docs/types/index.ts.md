@@ -1,3 +1,9 @@
+---
+source: types/index.ts
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: 01d465cf38538060afece91acca766149a31566b14e45f9f720371e4df724e85
+---
 # Source Code Documentation
 
 This documentation covers the exported modules from various files in the project.

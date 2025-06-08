@@ -1,3 +1,9 @@
+---
+source: components/ui/radio-group.tsx
+generated: '2025-06-08T13:21:01.642Z'
+tags: []
+hash: 187c090d8c4271c7471658a40c396a9508513e94f5a1beb57b86253670729734
+---
 # RadioGroup Component
 
 This file exports two components: `RadioGroup` and `RadioGroupItem`.

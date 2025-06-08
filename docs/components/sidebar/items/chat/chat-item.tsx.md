@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/chat/chat-item.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: fed5e69edbc87296f54679f5b65d24b38ac791a3f5e8fcbec3406becd96f0f1b
+---
 # ChatItem Component
 
 This is a functional component in React, named `ChatItem`. It is used to display a single chat item in the chat interface.

@@ -1,3 +1,9 @@
+---
+source: db/storage/workspace-images.ts
+generated: '2025-06-08T13:21:01.646Z'
+tags: []
+hash: 8e16443eac08a4c186864ca73bc8ac81be41cee5d0874e3a06a1e1f1777af17c
+---
 # Documentation
 
 ## Functions

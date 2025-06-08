@@ -1,3 +1,9 @@
+---
+source: app/api/chat/custom/route.ts
+generated: '2025-06-08T13:21:01.660Z'
+tags: []
+hash: a89d405cb9a479d417cf60098ee9e868c5af78a3ba9e9284d2ce1070c0bdfd9c
+---
 # Source Code Documentation
 
 ## Imports

@@ -1,3 +1,9 @@
+---
+source: components/ui/dashboard.tsx
+generated: '2025-06-08T13:21:01.640Z'
+tags: []
+hash: 0abb71fff7a84aa6906ad1ae0db97798e3057b69a2ab1af48a0e02e677ae77d1
+---
 # Dashboard Component
 
 This file exports a `Dashboard` component which is a functional component in React. It provides a layout for the application with a sidebar and main content area. The sidebar can be toggled on and off.

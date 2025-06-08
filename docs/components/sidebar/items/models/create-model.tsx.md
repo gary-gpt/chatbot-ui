@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/models/create-model.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: 5fb9282c83d1d69c31bde61590f18768c6766df73e7774eb2472cfb01a3904ac
+---
 # CreateModel Component
 
 The `CreateModel` component is a functional component that provides an interface for creating a custom model. It uses the `ChatbotUIContext` to access the user's profile and selected workspace. If either of these are not available, the component will not render.

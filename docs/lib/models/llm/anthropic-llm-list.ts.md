@@ -1,3 +1,9 @@
+---
+source: lib/models/llm/anthropic-llm-list.ts
+generated: '2025-06-08T13:21:01.658Z'
+tags: []
+hash: c88159b2a05dca0e84be4b989562b75fa49043e1d7b4c06634d7619e884e1ccf
+---
 # Anthropic Models Documentation
 
 This file contains a list of Anthropic models, each with their respective details. The models are defined as constants and are then exported as part of an array `ANTHROPIC_LLM_LIST`.

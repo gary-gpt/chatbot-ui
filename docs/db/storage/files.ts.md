@@ -1,3 +1,9 @@
+---
+source: db/storage/files.ts
+generated: '2025-06-08T13:21:01.646Z'
+tags: []
+hash: 77af3f5b02771e38bafaf022c30f7655406002a82213c52168ba63794e217279
+---
 # File Operations Documentation
 
 This documentation covers the file operations module which includes functions for uploading, deleting, and retrieving files from storage.

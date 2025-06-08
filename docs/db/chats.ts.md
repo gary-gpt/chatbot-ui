@@ -1,3 +1,9 @@
+---
+source: db/chats.ts
+generated: '2025-06-08T13:21:01.628Z'
+tags: []
+hash: 9c3ad1438f3603257e61bf18d13ba2565f98834937abf25fc8f49ad42b90ed95
+---
 # Chat Service Documentation
 
 This module provides a set of functions to interact with the `chats` table in the Supabase database.

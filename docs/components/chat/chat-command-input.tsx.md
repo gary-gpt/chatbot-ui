@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-command-input.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: 2fe74ccba8ae828db6449785eb6fa223904e6cd033964cc52e0f4d3d204889fb
+---
 # ChatCommandInput Component Documentation
 
 This documentation provides an overview of the `ChatCommandInput` component in the source code.

@@ -1,3 +1,9 @@
+---
+source: components/ui/calendar.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: bf50c80406e9c616a19fad76d64c8fc1f4b33ccf1c0fe50f0eecbaf5b197a05e
+---
 # Calendar Component
 
 The `Calendar` component is a wrapper around the `DayPicker` component from the `react-day-picker` library. It provides a styled calendar interface with navigation buttons.

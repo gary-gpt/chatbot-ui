@@ -1,3 +1,9 @@
+---
+source: components/sidebar/sidebar.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: fe924c35d85f2ce77929b92da855d55bcaaf829a20e30590d02fd427c099da29
+---
 # Sidebar Component
 
 This file defines a `Sidebar` component for the application. The sidebar is a functional component that takes in two props: `contentType` and `showSidebar`.

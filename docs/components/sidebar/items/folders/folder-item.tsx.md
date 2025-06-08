@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/folders/folder-item.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: 8208ceb1cbabe2b636017ecc00673f3c2f6c57ab90626ac9a26a95c039454227
+---
 # Folder Component
 
 This documentation provides details about the `Folder` component in the source code.

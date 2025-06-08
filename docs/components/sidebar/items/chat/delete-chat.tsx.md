@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/chat/delete-chat.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: 1e5f8dbd6b02a9b550c0c907369f9570818b32a24f0c37b587c500fa267ed7ae
+---
 # DeleteChat Component
 
 The `DeleteChat` component is a functional component that provides the functionality to delete a chat. It uses a dialog box to confirm the deletion of the chat.

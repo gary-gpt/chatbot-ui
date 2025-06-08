@@ -1,3 +1,9 @@
+---
+source: types/error-response.ts
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: 13413d27ab500255ab5e0fd2899363b0f9da8f6deae0e97ee002f049a9de930b
+---
 # ErrorResponse and ErrorResponseSchema
 
 This documentation provides an overview of the `ErrorResponse` type and the `ErrorResponseSchema` object.

@@ -1,3 +1,9 @@
+---
+source: lib/models/llm/mistral-llm-list.ts
+generated: '2025-06-08T13:21:01.658Z'
+tags: []
+hash: b97bd7fc20e037d9cc7a1f9260ec77a4c88b69c2576061d1d579fab078d6d4e2
+---
 # Source Code Documentation
 
 This source code file defines and exports a list of Mistral models. Each model is defined as an object of type `LLM` and includes various properties related to the model.

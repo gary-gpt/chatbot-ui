@@ -1,3 +1,9 @@
+---
+source: components/chat/assistant-picker.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: f8beabc858e0d5d5236f7a072356aca1de2f0bd03505ddfb5773d27df6fa615f
+---
 # AssistantPicker Component
 
 This file exports the `AssistantPicker` component which is a functional component (FC) with no props.

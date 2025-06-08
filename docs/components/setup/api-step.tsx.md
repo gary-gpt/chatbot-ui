@@ -1,3 +1,9 @@
+---
+source: components/setup/api-step.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: 98e5967717860e801ede066c610f8f8346315e2c3dd50a9b153f53bbe321e16d
+---
 # APIStep Component Documentation
 
 ## Overview

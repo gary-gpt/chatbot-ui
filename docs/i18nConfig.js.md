@@ -1,3 +1,9 @@
+---
+source: i18nConfig.js
+generated: '2025-06-08T13:21:01.626Z'
+tags: []
+hash: eae2483cbeb28ce4a700357b08f92757ca37be34d609b13d66f5ee6c244695d9
+---
 # i18nConfig.js
 
 This module exports a configuration object for internationalization (i18n) settings.

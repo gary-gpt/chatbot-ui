@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-input.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: 2319963aee8218b2f2a9d1182b4a887ac21375f403a9e24ec97908390e7e2988
+---
 # ChatInput Component
 
 The `ChatInput` component is a functional component that provides an interface for user input in a chatbot application. It includes features such as hotkey support, chat history navigation, file selection, and input handling.

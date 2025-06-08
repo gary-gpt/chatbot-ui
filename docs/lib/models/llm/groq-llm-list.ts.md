@@ -1,3 +1,9 @@
+---
+source: lib/models/llm/groq-llm-list.ts
+generated: '2025-06-08T13:21:01.658Z'
+tags: []
+hash: 93bb8a91df08bd09f2de927820ee18a4521aac938b65df4f824f4dd2d9a9d522
+---
 # Source Code Documentation
 
 This file defines and exports a list of models provided by Groq. Each model is an object that conforms to the `LLM` type, which is imported from "@/types".

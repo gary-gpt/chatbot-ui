@@ -1,3 +1,9 @@
+---
+source: lib/server/server-chat-helpers.ts
+generated: '2025-06-08T13:21:01.647Z'
+tags: []
+hash: e4f4390265b68b010bfee668fc3377bbb760abc0b9f6d05a1d95b48fa92737d7
+---
 # Source Code Documentation
 
 ## Overview

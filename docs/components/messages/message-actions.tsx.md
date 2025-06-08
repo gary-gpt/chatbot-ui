@@ -1,3 +1,9 @@
+---
+source: components/messages/message-actions.tsx
+generated: '2025-06-08T13:21:01.635Z'
+tags: []
+hash: 141d556fa9228821602c6aad89ba47b7c8ade87eb9b1504145142bc3b3e93046
+---
 # MessageActions Component
 
 This component is responsible for rendering the actions that can be performed on a message in the chatbot UI.

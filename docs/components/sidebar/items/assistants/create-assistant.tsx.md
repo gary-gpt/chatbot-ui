@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/assistants/create-assistant.tsx
+generated: '2025-06-08T13:21:01.661Z'
+tags: []
+hash: 7792770809566d17c8dfae3ec061cebad5f5479a244317af5f37c16e6391160a
+---
 # CreateAssistant Component
 
 This is a React component for creating a new assistant.

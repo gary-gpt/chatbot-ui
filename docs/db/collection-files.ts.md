@@ -1,3 +1,9 @@
+---
+source: db/collection-files.ts
+generated: '2025-06-08T13:21:01.628Z'
+tags: []
+hash: 80c23dd76bd62e219abb3228b5bb2e8ac7d4dcad712d76e57067dbc25b1f8518
+---
 # Documentation
 
 ## Overview

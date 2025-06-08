@@ -1,3 +1,9 @@
+---
+source: types/sharing.ts
+generated: '2025-06-08T13:21:01.633Z'
+tags: []
+hash: ba4bbb6a929a83ec4908183b0853a60048a148dcff6a8ec65debda966dd3a20c
+---
 # Sharing Type Definition
 
 This document provides a brief overview of the `Sharing` type definition in the source code.

@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/tools/create-tool.tsx
+generated: '2025-06-08T13:21:01.663Z'
+tags: []
+hash: 2f65da09627d873217d90a343eb225f4b5dcdffe1b00572a014141452f5e9e08
+---
 # CreateTool Component Documentation
 
 `CreateTool` is a functional component in React that provides an interface for creating a new tool.

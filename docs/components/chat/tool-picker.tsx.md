@@ -1,3 +1,9 @@
+---
+source: components/chat/tool-picker.tsx
+generated: '2025-06-08T13:21:01.635Z'
+tags: []
+hash: 09fe3b65453dd91a7f8022c98b4db2c1757c194ab730429b0c0a2b632763177d
+---
 # ToolPicker Component Documentation
 
 ## Overview

@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-help.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: 5cb3be4981436cdad68cbf1a6e5c74bc1819705c5020d3241229975d88c854a2
+---
 # ChatHelp Component
 
 This is a documentation for the `ChatHelp` component in React.

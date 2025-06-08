@@ -1,3 +1,9 @@
+---
+source: lib/generate-local-embedding.ts
+generated: '2025-06-08T13:21:01.631Z'
+tags: []
+hash: 6295ab3fdd9253c42f07a2049a772375697328de3b40e21883246486b780b184
+---
 # Documentation
 
 ## Module: generateLocalEmbedding

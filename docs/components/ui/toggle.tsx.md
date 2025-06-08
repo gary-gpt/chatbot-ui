@@ -1,3 +1,9 @@
+---
+source: components/ui/toggle.tsx
+generated: '2025-06-08T13:21:01.644Z'
+tags: []
+hash: 1e1b9ad6c7c9135a2c0adc9d990824e7715b417bd7d45058f28a05d0323ca30e
+---
 # Toggle Component Documentation
 
 This document provides a detailed explanation of the `Toggle` component found in the source code.

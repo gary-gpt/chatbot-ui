@@ -1,3 +1,9 @@
+---
+source: components/sidebar/sidebar-switch-item.tsx
+generated: '2025-06-08T13:21:01.637Z'
+tags: []
+hash: 9bde646dceaad316d3deb145f5b097ef97a326cf9c8d6f284fa5dc651739649d
+---
 # SidebarSwitchItem Component
 
 This document provides an overview of the `SidebarSwitchItem` component in the source code.

@@ -1,3 +1,9 @@
+---
+source: components/ui/select.tsx
+generated: '2025-06-08T13:21:01.642Z'
+tags: []
+hash: 9e6b60f29488a3e679d7d2bec19e87194ab6bd8687258bdd4def41354ab62499
+---
 # Select Component Documentation
 
 This file exports several components that are used to create a customizable select dropdown menu. The components are built using the `@radix-ui/react-select` library.

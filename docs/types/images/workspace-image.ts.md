@@ -1,3 +1,9 @@
+---
+source: types/images/workspace-image.ts
+generated: '2025-06-08T13:21:01.648Z'
+tags: []
+hash: d549fb87810ada7864d482f2fe6e20bd378293cb1cda936e8252a45bce467b04
+---
 # WorkspaceImage Interface Documentation
 
 The `WorkspaceImage` interface is a TypeScript interface that represents the structure of an image associated with a specific workspace.

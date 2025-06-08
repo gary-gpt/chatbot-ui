@@ -1,3 +1,9 @@
+---
+source: components/ui/switch.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: c1b79319ca3d55e8bd2ce4787aaf05c31674f3a207aaf9b5e549fa2b77fb4701
+---
 # Switch Component
 
 This is a React component that uses the `@radix-ui/react-switch` package to create a customizable switch UI element.

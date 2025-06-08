@@ -1,3 +1,9 @@
+---
+source: app/api/retrieval/process/docx/route.ts
+generated: '2025-06-08T13:21:01.664Z'
+tags: []
+hash: 5f8984bacbe2439c95e7fbbfee879725f8d1c85c15ffed705d9272c54c84ea8b
+---
 # Documentation for `POST` function
 
 The `POST` function is an asynchronous function that processes a request, generates embeddings for the text content of a file, and updates the database with the processed data.

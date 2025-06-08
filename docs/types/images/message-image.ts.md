@@ -1,3 +1,9 @@
+---
+source: types/images/message-image.ts
+generated: '2025-06-08T13:21:01.648Z'
+tags: []
+hash: f7ded8164dbb641020ab2175dfc170ae536071d8f6977dbf14398f9a4a7610c2
+---
 # MessageImage Interface Documentation
 
 The `MessageImage` interface is a TypeScript interface that defines the structure of an image related to a message. 

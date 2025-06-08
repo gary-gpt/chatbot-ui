@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-files-display.tsx
+generated: '2025-06-08T13:21:01.634Z'
+tags: []
+hash: ab75506128df612b391512546a99eb3e298d859495d52da5c3ac0e88d0ac16d7
+---
 # ChatFilesDisplay Component
 
 This is a React functional component that displays chat files and images. It allows users to view and manage files associated with chat messages.

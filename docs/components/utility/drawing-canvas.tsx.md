@@ -1,3 +1,9 @@
+---
+source: components/utility/drawing-canvas.tsx
+generated: '2025-06-08T13:21:01.638Z'
+tags: []
+hash: 38018800663a9c380828ed8aa9a2b2843894fd4eda126ed430c8c1ef914b4604
+---
 # DrawingCanvas Component Documentation
 
 The `DrawingCanvas` component is a React functional component that provides a drawing canvas interface for images. It allows users to draw on images with a red line and save the edited image.

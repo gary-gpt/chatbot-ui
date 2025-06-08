@@ -1,3 +1,9 @@
+---
+source: 'app/[locale]/[workspaceid]/page.tsx'
+generated: '2025-06-08T13:21:01.648Z'
+tags: []
+hash: fd2a83cbb74d959b9e9b60454d04742c1b12224d8c28576ea0ace3a0a7339fd3
+---
 # WorkspacePage Component Documentation
 
 ## Overview

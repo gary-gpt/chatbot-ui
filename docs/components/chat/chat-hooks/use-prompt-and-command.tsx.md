@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-hooks/use-prompt-and-command.tsx
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: b14249201d0e60667dfac4726e3b58857d24c891fa27bb1c7a00f0f36192be94
+---
 # Documentation
 
 ## usePromptAndCommand Hook

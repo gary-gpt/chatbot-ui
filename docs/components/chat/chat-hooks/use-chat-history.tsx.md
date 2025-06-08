@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-hooks/use-chat-history.tsx
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: ee3e8e20d3fddd0f16c87847f064b269ff2883d7662863c3bfb8be07a52935e7
+---
 # useChatHistoryHandler Hook
 
 This is a custom hook that handles chat history in the chat component. It provides functions to set the new message content to the previous or next user message in the chat history.

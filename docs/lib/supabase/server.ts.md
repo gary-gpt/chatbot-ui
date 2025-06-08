@@ -1,3 +1,9 @@
+---
+source: lib/supabase/server.ts
+generated: '2025-06-08T13:21:01.647Z'
+tags: []
+hash: ffa82e822a86fa49e7812a88af092df2020aa0aa0d63b34682c86ad30e1b50aa
+---
 # createClient Function Documentation
 
 ## Overview

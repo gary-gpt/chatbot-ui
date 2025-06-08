@@ -1,3 +1,9 @@
+---
+source: components/ui/form.tsx
+generated: '2025-06-08T13:21:01.641Z'
+tags: []
+hash: 602c2746423027b70ccd4900781012c664f0b29fa5af4cbbd75bae6e02322db8
+---
 # Form Component
 
 This file exports several components and hooks related to form handling, including `Form`, `FormItem`, `FormLabel`, `FormControl`, `FormDescription`, `FormMessage`, `FormField`, and `useFormField`.

@@ -1,3 +1,9 @@
+---
+source: components/ui/tooltip.tsx
+generated: '2025-06-08T13:21:01.644Z'
+tags: []
+hash: 0524959957ca1af8c68a94dda9de81bcfe2314560db92a93b06438e2be696296
+---
 # Tooltip Component
 
 This file exports a Tooltip component, along with its associated Trigger, Content, and Provider components. The Tooltip component is built using the `@radix-ui/react-tooltip` library.

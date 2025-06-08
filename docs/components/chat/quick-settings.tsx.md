@@ -1,3 +1,9 @@
+---
+source: components/chat/quick-settings.tsx
+generated: '2025-06-08T13:21:01.635Z'
+tags: []
+hash: ab61dd3cf6b479b3e5bae2a56cfa93acbbb2872d03a46c48c69875fa839ed02a
+---
 # QuickSettings Component
 
 This is a React functional component named `QuickSettings`. It is used to manage and display quick settings for a chatbot UI. 

@@ -1,3 +1,9 @@
+---
+source: components/chat/quick-setting-option.tsx
+generated: '2025-06-08T13:21:01.635Z'
+tags: []
+hash: 661d503b127991b5cdaf8e3b3aefdc17bee0a1d71282bf278e975466edd53cb8
+---
 # QuickSettingOption Component
 
 This is a React functional component that renders a dropdown menu item for quick setting options. The options can be either presets or assistants.

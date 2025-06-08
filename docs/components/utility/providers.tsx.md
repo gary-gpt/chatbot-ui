@@ -1,3 +1,9 @@
+---
+source: components/utility/providers.tsx
+generated: '2025-06-08T13:21:01.638Z'
+tags: []
+hash: bd5a8dc50dec299c54552b1f7df77721a6f2b499b7df02714febf281c5e6ee3e
+---
 # Providers Component
 
 This file exports a `Providers` component which is a functional component (FC) that accepts `ThemeProviderProps` as props.

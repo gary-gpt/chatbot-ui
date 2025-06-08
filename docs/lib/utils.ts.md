@@ -1,3 +1,9 @@
+---
+source: lib/utils.ts
+generated: '2025-06-08T13:21:01.631Z'
+tags: []
+hash: 0c3a832aa9c0ded641240a45db8a955c8f862c92b353d65f0e2ac2fc39eaaa3d
+---
 # Source Code Documentation
 
 This documentation provides a detailed explanation of the source code file.

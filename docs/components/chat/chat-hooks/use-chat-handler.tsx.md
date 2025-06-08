@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-hooks/use-chat-handler.tsx
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: 115cc4a397b608f097b3a7f5bdeea98c8ad842d3cb507574bea83ab015c07a45
+---
 # useChatHandler Hook
 
 This hook is responsible for managing the chat interactions in the application.

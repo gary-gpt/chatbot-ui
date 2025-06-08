@@ -1,24 +1,20 @@
+// Load environment variables from .env.local
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env.local' });
+
+
+import fs from 'fs';
 import path from 'path';
 
-const MAX_CHUNK_SIZE = 3000; // Adjust based on token budget
+const MAX_CHUNK_SIZE = 6000;
 
-/**
- * Splits file content into reasonably sized chunks for LLM processing.
- * Currently uses a line-based greedy algorithm.
- */
-export function chunkFile(content, filePath = '') {
-  if (!content || typeof content !== 'string') {
-    console.warn(`⚠️ No content to chunk for ${filePath}`);
-    return [];
-  }
-
+export async function chunkFile(filePath) {
+  const content = fs.readFileSync(filePath, 'utf-8');
   const lines = content.split('\n');
   const chunks = [];
   let currentChunk = '';
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    // Greedily accumulate lines until max size is reached
+  for (const line of lines) {
     if ((currentChunk + line + '\n').length > MAX_CHUNK_SIZE) {
       chunks.push(currentChunk.trim());
       currentChunk = line + '\n';
@@ -37,6 +33,23 @@ export function chunkFile(content, filePath = '') {
   } else {
     console.log(`📦 Chunked ${filePath} into ${chunks.length} part(s)`);
   }
+  console.log(`🧩 Chunked ${filePath} into ${chunks.length} part(s):`, chunks.map(c => c.slice(0, 30) + '...'));
+
 
   return chunks;
 }
+
+async function retryWithBackoff(fn, retries = 3, delay = 1000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (i === retries - 1) throw err;
+      await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
+    }
+  }
+}
+
+export {
+  retryWithBackoff
+};

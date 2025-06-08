@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/collections/collection-file-select.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: 3891acf4c256b31c19bcae2a87d5de65f56f2cbf57c32fc0ea178f4bf2c4ffd3
+---
 # CollectionFileSelect Component
 
 This component is a dropdown menu for selecting files from a collection. It's used in the context of a chatbot UI.

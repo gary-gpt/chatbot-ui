@@ -1,3 +1,9 @@
+---
+source: db/tools.ts
+generated: '2025-06-08T13:21:01.630Z'
+tags: []
+hash: 7d86f4030e9b688a20c27193f8c681318e3fd31b55a85774b7304fe7bf543335
+---
 # Tool Management Module
 
 This module provides functions for managing tools and their associated workspaces in a Supabase database.

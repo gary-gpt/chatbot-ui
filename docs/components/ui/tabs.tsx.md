@@ -1,3 +1,9 @@
+---
+source: components/ui/tabs.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: 5a62fddeae39150b8f4ef3c8666833b4a17b9b943321a0c98e6a370b5de37f4e
+---
 # Tabs Component
 
 This file exports a set of components for creating a tabs interface. It uses the `@radix-ui/react-tabs` library for the base components and customizes them.

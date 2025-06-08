@@ -1,3 +1,9 @@
+---
+source: types/chat.ts
+generated: '2025-06-08T13:21:01.632Z'
+tags: []
+hash: 6583ce3a88969adefb2ad4aa0b02abcb500a6e5b7907b5a168d7efd40c66632c
+---
 # Source Code Documentation
 
 ## Interfaces

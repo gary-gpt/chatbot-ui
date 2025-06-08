@@ -1,3 +1,9 @@
+---
+source: lib/models/fetch-models.ts
+generated: '2025-06-08T13:21:01.647Z'
+tags: []
+hash: bebb4f98799f25a5574f210dfb72f7cc24ca103cdddb9ece01d377a225744e0a
+---
 # Documentation
 
 ## Overview

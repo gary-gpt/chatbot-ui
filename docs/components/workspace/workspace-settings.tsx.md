@@ -1,3 +1,9 @@
+---
+source: components/workspace/workspace-settings.tsx
+generated: '2025-06-08T13:21:01.645Z'
+tags: []
+hash: 8266c2e830a21b9cc18afd5996d01c2ba83cf3c5bfffd69026d540e9d90c34d0
+---
 # WorkspaceSettings Component
 
 The `WorkspaceSettings` component is a functional component that provides a user interface for managing workspace settings. It allows users to update the name, image, instructions, and default chat settings of a workspace.

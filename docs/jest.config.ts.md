@@ -1,3 +1,9 @@
+---
+source: jest.config.ts
+generated: '2025-06-08T13:21:01.626Z'
+tags: []
+hash: eda515a9417466576c806d9a6d629f98cdd97e1097e4fc952046d3f001d0363b
+---
 # Jest Configuration
 
 This file is responsible for configuring Jest, a JavaScript testing framework, for a Next.js application.

@@ -1,3 +1,9 @@
+---
+source: components/ui/scroll-area.tsx
+generated: '2025-06-08T13:21:01.642Z'
+tags: []
+hash: 61a424794469cde3f32769500dbf70b63c0d8bc1f6a5263ea6f6ae1183a09d57
+---
 # ScrollArea and ScrollBar Component Documentation
 
 This file exports two React components: `ScrollArea` and `ScrollBar`.

@@ -1,3 +1,9 @@
+---
+source: components/ui/chat-settings-form.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 3d0bc449c22e96791fc1a5c433551d7f30e7fb4c33198b056f87cac283099175
+---
 # ChatSettingsForm Component
 
 This is a React functional component that renders a form for chat settings. The form includes fields for selecting a model, entering a prompt, and configuring advanced settings.

@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/models/model-item.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: 5f0f0aaabb68edf3de9bc18cd0db227a9e859de4b053f670a0763d7ade8d6b4c
+---
 # ModelItem Component
 
 The `ModelItem` component is a functional component that renders a sidebar item with various input fields for managing model details.

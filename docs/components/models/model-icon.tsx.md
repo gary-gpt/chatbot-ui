@@ -1,3 +1,9 @@
+---
+source: components/models/model-icon.tsx
+generated: '2025-06-08T13:21:01.636Z'
+tags: []
+hash: 9469a87f412b46747e883b7beb1d02d5304b62cbecd572c36442e4a35a11cbd2
+---
 # ModelIcon Component
 
 The `ModelIcon` component is a functional component in React that displays an icon based on the provider of a model. It uses the `useTheme` hook from `next-themes` to adapt the appearance based on the current theme.

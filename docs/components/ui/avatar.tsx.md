@@ -1,3 +1,9 @@
+---
+source: components/ui/avatar.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 62e1d1931e9ab355b87d6574472034deb8761102c08e4979f9e5b93b051f3bbe
+---
 # Avatar Component Documentation
 
 This file exports three components: `Avatar`, `AvatarImage`, and `AvatarFallback`. These components are built using the `@radix-ui/react-avatar` primitives.

@@ -1,3 +1,9 @@
+---
+source: components/chat/chat-hooks/use-scroll.tsx
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: 4c6337aaf018a28486d694ec7e1013bfb347e8f3dcdfc94193b3e8dc48c70c4f
+---
 # useScroll Hook Documentation
 
 The `useScroll` hook is a custom React hook that provides functionality for handling scrolling events within a chat interface. It maintains several pieces of state related to the scroll position of the chat window and provides methods for programmatically scrolling to the top or bottom of the chat.

@@ -1,3 +1,9 @@
+---
+source: db/limits.ts
+generated: '2025-06-08T13:21:01.629Z'
+tags: []
+hash: 883812018a7fbd7704cf5776944c06588549f17ce12f162691ad2f0f8824020f
+---
 # Documentation
 
 This document provides a detailed explanation of the constants used in the source code.

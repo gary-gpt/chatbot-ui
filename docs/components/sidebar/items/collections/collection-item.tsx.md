@@ -1,3 +1,9 @@
+---
+source: components/sidebar/items/collections/collection-item.tsx
+generated: '2025-06-08T13:21:01.662Z'
+tags: []
+hash: b30b359c04209e33f270b29929a1d37ca45d83dfee20dba2a144f2d210b6280a
+---
 # CollectionItem Component
 
 The `CollectionItem` component is a functional component that displays a collection item in a sidebar. It allows users to select files to be included in the collection, and to edit the collection's name and description.

@@ -1,3 +1,9 @@
+---
+source: components/ui/toaster.tsx
+generated: '2025-06-08T13:21:01.644Z'
+tags: []
+hash: 18fddb907082698393718136c520d7d9121d18e6f5b65a6d5003e37399a76261
+---
 # Toaster Component
 
 The `Toaster` component is a part of the UI that handles the display of toast notifications in the application. It uses the `ToastProvider` to wrap all the toast notifications and the `ToastViewport` to display them.

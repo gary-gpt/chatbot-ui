@@ -1,3 +1,9 @@
+---
+source: app/api/command/route.ts
+generated: '2025-06-08T13:21:01.649Z'
+tags: []
+hash: 220e70f227416ba072cd8908944b92f712bfc23abc524398e7d4f89178c252db
+---
 # Documentation
 
 ## Overview

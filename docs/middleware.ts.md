@@ -1,3 +1,9 @@
+---
+source: middleware.ts
+generated: '2025-06-08T13:21:01.626Z'
+tags: []
+hash: 79b92ae41cb4f32a57cc3e40eec378ef642a591fafa9db38c05096ede97a2087
+---
 # Middleware.js Documentation
 
 This file contains a middleware function for handling requests and a configuration object for matching routes.

@@ -1,3 +1,9 @@
+---
+source: components/ui/brand.tsx
+generated: '2025-06-08T13:21:01.639Z'
+tags: []
+hash: 9cda4048cd0cbcb5f2ba4b7ded0c960e42940780c7713e25177e5c70cba477ea
+---
 # Brand Component Documentation
 
 The `Brand` component is a functional component that is used to create a clickable brand logo and name, which redirects to the specified URL when clicked.

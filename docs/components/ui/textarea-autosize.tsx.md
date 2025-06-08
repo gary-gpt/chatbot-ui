@@ -1,3 +1,9 @@
+---
+source: components/ui/textarea-autosize.tsx
+generated: '2025-06-08T13:21:01.643Z'
+tags: []
+hash: afed391daf77b2687c2eb5add92f5a010477fb2046c71241d64f05c8d99f73b6
+---
 # TextareaAutosize Component
 
 This is a React functional component that uses the `react-textarea-autosize` library to create a textarea input field that automatically adjusts its height based on the content.
