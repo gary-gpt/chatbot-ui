@@ -1,78 +1,72 @@
 ---
 source: components/ui/alert-dialog.tsx
-generated: '2025-06-08T13:21:01.639Z'
+generated: 2025-06-08T21:55:08.743Z
 tags: []
-hash: 3edec38503aaaf41dd1b349b5cafef47ebe73347e4b00a4987d3d5b2c4fa180b
+hash: 895965528d43d9bf26c5fc1c99ccd6954bdf750dd2d813e401eb88c068e179c0
 ---
-# AlertDialog Component
 
-This module exports a set of components to create an alert dialog. The components are built using the primitives provided by the `@radix-ui/react-alert-dialog` package.
+# AlertDialog Component Documentation
 
-## Imports
+This document provides an overview of the `AlertDialog` component in the `chatbot-ui` project. The component is located in the file `/Users/garymason/chatbot-ui/components/ui/alert-dialog.tsx`.
 
-- `React` from the "react" package.
-- All components from "@radix-ui/react-alert-dialog" package.
-- `cn` function from "@/lib/utils".
-- `buttonVariants` from "@/components/ui/button".
+## Overview
 
-## Components
+The `AlertDialog` component is a custom alert dialog box built using the `@radix-ui/react-alert-dialog` library. It consists of several sub-components that together form the complete alert dialog box. These sub-components include `AlertDialogTrigger`, `AlertDialogPortal`, `AlertDialogOverlay`, `AlertDialogContent`, `AlertDialogHeader`, `AlertDialogFooter`, `AlertDialogTitle`, `AlertDialogDescription`, `AlertDialogAction`, and `AlertDialogCancel`.
+
+## Code Summary
+
+### Imports
+
+The component begins by importing necessary dependencies, including React and the `@radix-ui/react-alert-dialog` library. It also imports a utility function `cn` and `buttonVariants` from the project's own codebase.
 
 ### AlertDialog
 
-The root component of the alert dialog.
+`AlertDialog` is the root component of the alert dialog box. It is directly derived from `AlertDialogPrimitive.Root`.
 
 ### AlertDialogTrigger
 
-The trigger component of the alert dialog. This component is used to trigger the display of the alert dialog.
+`AlertDialogTrigger` is the component that triggers the alert dialog box. It is directly derived from `AlertDialogPrimitive.Trigger`.
 
 ### AlertDialogPortal
 
-The portal component of the alert dialog. This component is used to render the alert dialog into a React portal.
+`AlertDialogPortal` is the component that provides a React Portal for the alert dialog box. It is directly derived from `AlertDialogPrimitive.Portal`.
 
 ### AlertDialogOverlay
 
-The overlay component of the alert dialog. This component is used to display an overlay behind the alert dialog when it is open.
+`AlertDialogOverlay` is the component that provides an overlay for the alert dialog box. It is a forward ref component that wraps `AlertDialogPrimitive.Overlay` and adds custom styles.
 
 ### AlertDialogContent
 
-The content component of the alert dialog. This component is used to display the content of the alert dialog.
+`AlertDialogContent` is the component that provides the content for the alert dialog box. It is a forward ref component that wraps `AlertDialogPrimitive.Content` and adds custom styles.
 
 ### AlertDialogHeader
 
-The header component of the alert dialog. This component is used to display the header of the alert dialog.
+`AlertDialogHeader` is a functional component that provides the header for the alert dialog box. It accepts `className` and `props` and returns a `div` with custom styles.
 
 ### AlertDialogFooter
 
-The footer component of the alert dialog. This component is used to display the footer of the alert dialog.
+`AlertDialogFooter` is a functional component that provides the footer for the alert dialog box. It accepts `className` and `props` and returns a `div` with custom styles.
 
 ### AlertDialogTitle
 
-The title component of the alert dialog. This component is used to display the title of the alert dialog.
+`AlertDialogTitle` is a forward ref component that provides the title for the alert dialog box. It wraps `AlertDialogPrimitive.Title` and adds custom styles.
 
 ### AlertDialogDescription
 
-The description component of the alert dialog. This component is used to display the description of the alert dialog.
+`AlertDialogDescription` is a forward ref component that provides the description for the alert dialog box. It wraps `AlertDialogPrimitive.Description` and adds custom styles.
 
 ### AlertDialogAction
 
-The action component of the alert dialog. This component is used to display the action button of the alert dialog.
+`AlertDialogAction` is a forward ref component that provides the action button for the alert dialog box. It wraps `AlertDialogPrimitive.Action` and adds custom styles.
 
 ### AlertDialogCancel
 
-The cancel component of the alert dialog. This component is used to display the cancel button of the alert dialog.
+`AlertDialogCancel` is a forward ref component that provides the cancel button for the alert dialog box. It wraps `AlertDialogPrimitive.Cancel` and adds custom styles.
 
-## Exports
+### Exports
 
-The module exports the following components:
+Finally, all the components are exported for use in other parts of the application.
 
-- `AlertDialog`
-- `AlertDialogPortal`
-- `AlertDialogOverlay`
-- `AlertDialogTrigger`
-- `AlertDialogContent`
-- `AlertDialogHeader`
-- `AlertDialogFooter`
-- `AlertDialogTitle`
-- `AlertDialogDescription`
-- `AlertDialogAction`
-- `AlertDialogCancel`
+## Usage
+
+To use the `AlertDialog` component, import the necessary sub-components from the `alert-dialog.tsx` file and use them to construct the alert dialog box. The `AlertDialogTrigger` component can be used to trigger the dialog box, and the `AlertDialogContent` component can be used to provide the content of the dialog box. The other sub-components can be used to customize the appearance and behavior of the dialog box.

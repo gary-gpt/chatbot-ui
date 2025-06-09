@@ -1,41 +1,71 @@
 ---
 source: components/ui/switch.tsx
-generated: '2025-06-08T13:21:01.643Z'
+generated: 2025-06-08T22:09:07.818Z
 tags: []
-hash: c1b79319ca3d55e8bd2ce4787aaf05c31674f3a207aaf9b5e549fa2b77fb4701
+hash: ca86dce3e30e3033847abdb3283bf4e4268815d874d25ce3e8e18db7c8171663
 ---
-# Switch Component
 
-This is a React component that uses the `@radix-ui/react-switch` package to create a customizable switch UI element.
+# Switch Component Documentation
 
-## Importing
+This document describes the `Switch` component located at `/Users/garymason/chatbot-ui/components/ui/switch.tsx`. This component is a custom switch UI element built using the Radix UI library.
 
-```javascript
-import { Switch } from 'path-to-this-file';
+## Overview
+
+The `Switch` component is a React component that wraps the `SwitchPrimitives.Root` component from the `@radix-ui/react-switch` package. It uses the `React.forwardRef` function to forward a `ref` to the `SwitchPrimitives.Root` component. This allows the parent component to interact directly with the `SwitchPrimitives.Root` component, if necessary.
+
+## Code Summary
+
+```ts
+"use client"
+
+import * as React from "react"
+import * as SwitchPrimitives from "@radix-ui/react-switch"
+
+import { cn } from "@/lib/utils"
+
+const Switch = React.forwardRef<
+  React.ElementRef<typeof SwitchPrimitives.Root>,
+  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
+>(({ className, ...props }, ref) => (
+  // SwitchPrimitives.Root component with custom styles
+  // and forwarded ref
+))
+
+Switch.displayName = SwitchPrimitives.Root.displayName
+
+export { Switch }
 ```
 
-## Props
+## Detailed Breakdown
 
-This component accepts all props that can be passed to the `SwitchPrimitives.Root` component from the `@radix-ui/react-switch` package. In addition, it accepts the following prop:
+### Imports
 
-- `className` (string): This is used to add additional CSS classes to the root element of the switch.
+The component imports the necessary modules:
 
-## Usage
+- `React` from the `react` package.
+- `SwitchPrimitives` from the `@radix-ui/react-switch` package.
+- `cn` from the local utility library.
 
-```javascript
-<Switch className="my-custom-class" />
-```
+### Component Definition
 
-This will render a switch with the additional CSS class `my-custom-class`.
+The `Switch` component is defined using `React.forwardRef`. This allows the component to accept a `ref` from its parent and pass it on to the `SwitchPrimitives.Root` component.
+
+The component accepts all props that the `SwitchPrimitives.Root` component accepts, along with an additional `className` prop. The `className` prop is used to apply additional styles to the `SwitchPrimitives.Root` component.
+
+### Rendering
+
+The `Switch` component renders the `SwitchPrimitives.Root` component with some custom styles. It also forwards the `ref` and all other props to the `SwitchPrimitives.Root` component.
+
+Inside the `SwitchPrimitives.Root` component, it renders the `SwitchPrimitives.Thumb` component, which represents the switch's thumb.
+
+### Export
+
+Finally, the `Switch` component is exported for use in other parts of the application.
 
 ## Styling
 
-The switch is styled using Tailwind CSS. The root element of the switch has a number of classes applied to it by default, including classes for focus, checked and unchecked states, and disabled state. The thumb of the switch also has a number of classes applied to it by default.
+The `Switch` component uses Tailwind CSS for styling. The `cn` function is used to concatenate class names. The `className` prop allows additional styles to be passed to the component.
 
-## Refs
+The `SwitchPrimitives.Root` component has styles for focus, checked and unchecked states, disabled state, and transition effects.
 
-This component uses the `React.forwardRef` API, which means that a ref can be passed to it. This ref will be forwarded to the `SwitchPrimitives.Root` component.
-
-## Display Name
-
-The display name of this component is the same as the display name of the `SwitchPrimitives.Root` component.
+The `SwitchPrimitives.Thumb` component has styles for its size, shape, shadow, and transition effects. It also has styles for checked and unchecked states.

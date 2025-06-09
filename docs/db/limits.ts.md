@@ -1,64 +1,130 @@
 ---
 source: db/limits.ts
-generated: '2025-06-08T13:21:01.629Z'
+generated: 2025-06-08T22:23:35.217Z
 tags: []
-hash: 883812018a7fbd7704cf5776944c06588549f17ce12f162691ad2f0f8824020f
+hash: 2facf98717f4cf91b0c953eccdcd09a2babdbd9cdbc94eb81a35a5cf98d6a9bd
 ---
-# Documentation
 
-This document provides a detailed explanation of the constants used in the source code.
+# Code Documentation for `limits.ts`
 
-## Profiles
+This file, `limits.ts`, is located in the `db` directory of the `chatbot-ui` project. It defines a series of constants that represent the maximum and minimum limits for various fields in different entities of the chatbot application. These entities include profiles, workspaces, presets, prompts, files, collections, assistants, tools, and models.
 
-- `PROFILE_BIO_MAX`: Maximum length of the profile biography. It is set to 500 characters.
-- `PROFILE_DISPLAY_NAME_MAX`: Maximum length of the profile display name. It is set to 100 characters.
-- `PROFILE_CONTEXT_MAX`: Maximum length of the profile context. It is set to 1500 characters.
-- `PROFILE_USERNAME_MIN`: Minimum length of the profile username. It is set to 3 characters.
-- `PROFILE_USERNAME_MAX`: Maximum length of the profile username. It is set to 25 characters.
+## Code Summary
 
-## Workspaces
+```ts
+// Profiles
+export const PROFILE_BIO_MAX = 500
+export const PROFILE_DISPLAY_NAME_MAX = 100
+export const PROFILE_CONTEXT_MAX = 1500
+export const PROFILE_USERNAME_MIN = 3
+export const PROFILE_USERNAME_MAX = 25
 
-- `WORKSPACE_NAME_MAX`: Maximum length of the workspace name. It is set to 100 characters.
-- `WORKSPACE_DESCRIPTION_MAX`: Maximum length of the workspace description. It is set to 500 characters.
-- `WORKSPACE_INSTRUCTIONS_MAX`: Maximum length of the workspace instructions. It is set to 1500 characters.
+// Workspaces
+export const WORKSPACE_NAME_MAX = 100
+export const WORKSPACE_DESCRIPTION_MAX = 500
+export const WORKSPACE_INSTRUCTIONS_MAX = 1500
 
-## Chats
+// Chats
 
-No constants defined for chats.
+// Presets
+export const PRESET_NAME_MAX = 100
+export const PRESET_DESCRIPTION_MAX = 500
+export const PRESET_PROMPT_MAX = 100000
 
-## Presets
+// Prompts
+export const PROMPT_NAME_MAX = 100
+export const PROMPT_CONTENT_MAX = 100000
 
-- `PRESET_NAME_MAX`: Maximum length of the preset name. It is set to 100 characters.
-- `PRESET_DESCRIPTION_MAX`: Maximum length of the preset description. It is set to 500 characters.
-- `PRESET_PROMPT_MAX`: Maximum length of the preset prompt. It is set to 100000 characters.
+// Files
+export const FILE_NAME_MAX = 100
+export const FILE_DESCRIPTION_MAX = 500
 
-## Prompts
+// Collections
+export const COLLECTION_NAME_MAX = 100
+export const COLLECTION_DESCRIPTION_MAX = 500
 
-- `PROMPT_NAME_MAX`: Maximum length of the prompt name. It is set to 100 characters.
-- `PROMPT_CONTENT_MAX`: Maximum length of the prompt content. It is set to 100000 characters.
+// Assistant
+export const ASSISTANT_NAME_MAX = 100
+export const ASSISTANT_DESCRIPTION_MAX = 500
+export const ASSISTANT_PROMPT_MAX = 100000
 
-## Files
+// Tools
+export const TOOL_NAME_MAX = 100
+export const TOOL_DESCRIPTION_MAX = 500
 
-- `FILE_NAME_MAX`: Maximum length of the file name. It is set to 100 characters.
-- `FILE_DESCRIPTION_MAX`: Maximum length of the file description. It is set to 500 characters.
+// Models
+export const MODEL_NAME_MAX = 100
+export const MODEL_DESCRIPTION_MAX = 500
 
-## Collections
+```
 
-- `COLLECTION_NAME_MAX`: Maximum length of the collection name. It is set to 100 characters.
-- `COLLECTION_DESCRIPTION_MAX`: Maximum length of the collection description. It is set to 500 characters.
+## Code Explanation
 
-## Assistant
+### Profiles
 
-- `ASSISTANT_NAME_MAX`: Maximum length of the assistant name. It is set to 100 characters.
-- `ASSISTANT_DESCRIPTION_MAX`: Maximum length of the assistant description. It is set to 500 characters.
-- `ASSISTANT_PROMPT_MAX`: Maximum length of the assistant prompt. It is set to 100000 characters.
+These constants define the limits for the profile entity.
 
-## Tools
+- `PROFILE_BIO_MAX`: Maximum characters allowed for the profile bio.
+- `PROFILE_DISPLAY_NAME_MAX`: Maximum characters allowed for the profile display name.
+- `PROFILE_CONTEXT_MAX`: Maximum characters allowed for the profile context.
+- `PROFILE_USERNAME_MIN`: Minimum characters required for the profile username.
+- `PROFILE_USERNAME_MAX`: Maximum characters allowed for the profile username.
 
-- `TOOL_NAME_MAX`: Maximum length of the tool name. It is set to 100 characters.
-- `TOOL_DESCRIPTION_MAX`: Maximum length of the tool description. It is set to 500 characters.
+### Workspaces
 
-## Models
+These constants define the limits for the workspace entity.
 
-- `MODEL_NAME_MAX`: Maximum length of the model name. It is set to 100 characters.
-- `MODEL_DESCRIPTION_MAX`: Maximum length of the model description. It is set to 500 characters.
+- `WORKSPACE_NAME_MAX`: Maximum characters allowed for the workspace name.
+- `WORKSPACE_DESCRIPTION_MAX`: Maximum characters allowed for the workspace description.
+- `WORKSPACE_INSTRUCTIONS_MAX`: Maximum characters allowed for the workspace instructions.
+
+### Presets
+
+These constants define the limits for the preset entity.
+
+- `PRESET_NAME_MAX`: Maximum characters allowed for the preset name.
+- `PRESET_DESCRIPTION_MAX`: Maximum characters allowed for the preset description.
+- `PRESET_PROMPT_MAX`: Maximum characters allowed for the preset prompt.
+
+### Prompts
+
+These constants define the limits for the prompt entity.
+
+- `PROMPT_NAME_MAX`: Maximum characters allowed for the prompt name.
+- `PROMPT_CONTENT_MAX`: Maximum characters allowed for the prompt content.
+
+### Files
+
+These constants define the limits for the file entity.
+
+- `FILE_NAME_MAX`: Maximum characters allowed for the file name.
+- `FILE_DESCRIPTION_MAX`: Maximum characters allowed for the file description.
+
+### Collections
+
+These constants define the limits for the collection entity.
+
+- `COLLECTION_NAME_MAX`: Maximum characters allowed for the collection name.
+- `COLLECTION_DESCRIPTION_MAX`: Maximum characters allowed for the collection description.
+
+### Assistant
+
+These constants define the limits for the assistant entity.
+
+- `ASSISTANT_NAME_MAX`: Maximum characters allowed for the assistant name.
+- `ASSISTANT_DESCRIPTION_MAX`: Maximum characters allowed for the assistant description.
+- `ASSISTANT_PROMPT_MAX`: Maximum characters allowed for the assistant prompt.
+
+### Tools
+
+These constants define the limits for the tool entity.
+
+- `TOOL_NAME_MAX`: Maximum characters allowed for the tool name.
+- `TOOL_DESCRIPTION_MAX`: Maximum characters allowed for the tool description.
+
+### Models
+
+These constants define the limits for the model entity.
+
+- `MODEL_NAME_MAX`: Maximum characters allowed for the model name.
+- `MODEL_DESCRIPTION_MAX`: Maximum characters allowed for the model description.

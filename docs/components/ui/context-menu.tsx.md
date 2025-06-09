@@ -1,104 +1,49 @@
 ---
 source: components/ui/context-menu.tsx
-generated: '2025-06-08T13:21:01.640Z'
+generated: 2025-06-08T21:59:34.266Z
 tags: []
-hash: 20fd99a96d288edbd02f7aba5661ee7c6f4351a95e6dcdc9228a621b52f545dd
+hash: e70068b637dff6698f031f3538b0a4baeec57f9ba97e86a86e1e4eaf17da197f
 ---
-# ContextMenu Component Documentation
 
-This file defines a set of components for creating context menus using the `@radix-ui/react-context-menu` library. The components are designed to be flexible and customizable, with properties for controlling appearance and behavior.
+# Context Menu Component
+
+This file, located at `/Users/garymason/chatbot-ui/components/ui/context-menu.tsx`, contains a TypeScript (TSX) component for a context menu. The context menu is a type of user interface that provides a list of options or actions available to the user, typically appearing when the user right-clicks on a specific element or area.
+
+## Imports
+
+The code begins by importing necessary modules and components:
+
+- `React` from the `react` library, which is used to define the components.
+- Various components from the `@radix-ui/react-context-menu` library, which provides pre-built components for creating a context menu.
+- `Check`, `ChevronRight`, and `Circle` from `lucide-react`, which are icons used in the menu.
+- `cn` from `@/lib/utils`, which is a utility function for class name manipulation.
 
 ## Components
 
-### `ContextMenu`
+The file exports several components that are used to build a context menu:
 
-The root component for a context menu.
+- `ContextMenu`: The root component of the context menu.
+- `ContextMenuTrigger`: The component that triggers the context menu.
+- `ContextMenuContent`: The component that contains the content of the context menu.
+- `ContextMenuItem`: A single item within the context menu.
+- `ContextMenuCheckboxItem`: A context menu item with a checkbox.
+- `ContextMenuRadioItem`: A context menu item with a radio button.
+- `ContextMenuLabel`: A label for a group of context menu items.
+- `ContextMenuSeparator`: A separator line between groups of context menu items.
+- `ContextMenuShortcut`: A component for displaying keyboard shortcuts.
+- `ContextMenuGroup`: A group of related context menu items.
+- `ContextMenuPortal`: A portal for rendering the context menu in a different part of the DOM.
+- `ContextMenuSub`: A sub-menu within the context menu.
+- `ContextMenuSubContent`: The content of a sub-menu.
+- `ContextMenuSubTrigger`: The trigger for a sub-menu.
+- `ContextMenuRadioGroup`: A group of radio items within the context menu.
 
-### `ContextMenuTrigger`
+Each component is defined using the `React.forwardRef` function, which allows the parent component to access the properties and methods of the child component via a `ref`. The components also use the `cn` function to dynamically generate class names based on the component's props.
 
-A component that triggers the display of the context menu.
+## Styling
 
-### `ContextMenuContent`
+The components are styled using Tailwind CSS, a utility-first CSS framework. The class names are generated dynamically based on the component's props. For example, the `ContextMenuSubTrigger` component has a `pl-8` class added if the `inset` prop is `true`, which adds padding to the left of the component.
 
-The container for the content of the context menu.
+## Export
 
-### `ContextMenuItem`
-
-A selectable item within the context menu.
-
-### `ContextMenuCheckboxItem`
-
-A selectable item within the context menu that displays a checkbox.
-
-### `ContextMenuRadioItem`
-
-A selectable item within the context menu that displays a radio button.
-
-### `ContextMenuLabel`
-
-A non-selectable label within the context menu.
-
-### `ContextMenuSeparator`
-
-A separator line to divide groups of items within the context menu.
-
-### `ContextMenuShortcut`
-
-A component to display keyboard shortcut hints within the context menu.
-
-### `ContextMenuGroup`
-
-A component to group related items within the context menu.
-
-### `ContextMenuPortal`
-
-A component that renders the context menu into a React portal.
-
-### `ContextMenuSub`
-
-A component that creates a sub-menu within the context menu.
-
-### `ContextMenuSubContent`
-
-The container for the content of a sub-menu.
-
-### `ContextMenuSubTrigger`
-
-A component that triggers the display of a sub-menu.
-
-### `ContextMenuRadioGroup`
-
-A group of `ContextMenuRadioItem` components.
-
-## Usage
-
-Each component is exported individually and can be imported as needed. The components are designed to be composed together to create a complete context menu. For example:
-
-```jsx
-import {
-  ContextMenu,
-  ContextMenuTrigger,
-  ContextMenuContent,
-  ContextMenuItem
-} from './ContextMenu';
-
-function MyComponent() {
-  return (
-    <ContextMenu>
-      <ContextMenuTrigger>
-        <button>Open Menu</button>
-      </ContextMenuTrigger>
-      <ContextMenuContent>
-        <ContextMenuItem onSelect={() => console.log('Item 1 selected')}>
-          Item 1
-        </ContextMenuItem>
-        <ContextMenuItem onSelect={() => console.log('Item 2 selected')}>
-          Item 2
-        </ContextMenuItem>
-      </ContextMenuContent>
-    </ContextMenu>
-  );
-}
-```
-
-In this example, clicking the "Open Menu" button will display a context menu with two items. When an item is selected, it will log a message to the console.
+Finally, all the components are exported for use in other parts of the application.

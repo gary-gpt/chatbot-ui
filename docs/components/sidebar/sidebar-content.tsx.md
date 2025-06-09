@@ -1,41 +1,78 @@
 ---
 source: components/sidebar/sidebar-content.tsx
-generated: '2025-06-08T13:21:01.637Z'
+generated: 2025-06-08T21:52:01.760Z
 tags: []
-hash: 63daa2e966e511f56c9380e1271515bb48c554410375a36a90e846532d750f2c
+hash: 3312c8b5bbcddd2599bd3df81439ef6d612a522a9ba817977d2921eabbe53143
 ---
-# SidebarContent Component
 
-The `SidebarContent` component is a functional component that renders the content of the sidebar. This includes create buttons, a search bar, and a data list.
+# SidebarContent Component Documentation
+
+This document provides an overview of the `SidebarContent` component located at `/Users/garymason/chatbot-ui/components/sidebar/sidebar-content.tsx`. This component is used to render the content of the sidebar in the chatbot UI, including create buttons, a search bar, and a list of data.
+
+## Imports
+
+The component imports several modules and components:
+
+- `Tables` from "@/supabase/types": This is a type used for the `folders` prop.
+- `ContentType` and `DataListType` from "@/types": These are types used for the `contentType` and `data` props respectively.
+- `FC` and `useState` from "react": `FC` (Function Component) is a type used for defining functional components in TypeScript. `useState` is a React Hook that lets you add state to your functional components.
+- `SidebarCreateButtons`, `SidebarDataList`, and `SidebarSearch` from the current directory: These are components used within the `SidebarContent` component.
 
 ## Props
 
-The component receives the following props:
+The `SidebarContent` component accepts the following props:
 
-- `contentType`: A `ContentType` object that represents the type of the content.
-- `data`: A `DataListType` object that represents the list of data items.
-- `folders`: An array of `folders` objects from the `Tables` type.
+- `contentType`: This prop is of type `ContentType` and represents the type of content being displayed in the sidebar.
+- `data`: This prop is of type `DataListType` and represents the list of data to be displayed in the sidebar.
+- `folders`: This prop is of type `Tables<"folders">[]` and represents the list of folders to be displayed in the sidebar.
 
-## State
+## Component Logic
 
-The component maintains a single piece of state:
+The component uses the `useState` hook to manage a `searchTerm` state, which is used to filter the data displayed in the sidebar.
 
-- `searchTerm`: A string that represents the current search term. It is initially set to an empty string.
+The `filteredData` constant is computed by filtering the `data` prop based on whether each item's name includes the `searchTerm`.
 
-## Rendered Components
+The component's return statement renders a div containing the `SidebarCreateButtons`, `SidebarSearch`, and `SidebarDataList` components. The `SidebarCreateButtons` and `SidebarSearch` components are wrapped in divs for styling purposes.
 
-The `SidebarContent` component renders the following child components:
+## Code
 
-- `SidebarCreateButtons`: This component is responsible for rendering the create buttons. It receives the `contentType` and a boolean `hasData` that indicates whether there is any data.
+```ts
+export const SidebarContent: FC<SidebarContentProps> = ({
+  contentType,
+  data,
+  folders
+}) => {
+  const [searchTerm, setSearchTerm] = useState("")
 
-- `SidebarSearch`: This component is responsible for rendering the search bar. It receives the `contentType`, the `searchTerm`, and a setter function `setSearchTerm` to update the `searchTerm`.
+  const filteredData: any = data.filter(item =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
-- `SidebarDataList`: This component is responsible for rendering the data list. It receives the `contentType`, the `filteredData`, and the `folders`.
+  return (
+    <div className="flex max-h-[calc(100%-50px)] grow flex-col">
+      <div className="mt-2 flex items-center">
+        <SidebarCreateButtons
+          contentType={contentType}
+          hasData={data.length > 0}
+        />
+      </div>
 
-## Filtered Data
+      <div className="mt-2">
+        <SidebarSearch
+          contentType={contentType}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
+      </div>
 
-The `filteredData` is derived from the `data` prop by filtering out items that do not include the `searchTerm` in their name (case-insensitive).
+      <SidebarDataList
+        contentType={contentType}
+        data={filteredData}
+        folders={folders}
+      />
+    </div>
+  )
+}
+```
 
-## Styling
-
-The component uses Tailwind CSS for styling. The outermost `div` has a maximum height of 100% minus 50px, and uses flexbox for layout with a column direction. The create buttons and search bar are each wrapped in a `div` with a top margin of 2 units.
+This component is exported as a functional component that takes `SidebarContentProps` as its props. The component maintains a state for the search term and filters the data based on this term. It then renders the sidebar content, including create buttons, a search bar, and a data list.

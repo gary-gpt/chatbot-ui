@@ -1,59 +1,68 @@
 ---
 source: lib/utils.ts
-generated: '2025-06-08T13:21:01.631Z'
+generated: 2025-06-08T22:40:37.032Z
 tags: []
-hash: 0c3a832aa9c0ded641240a45db8a955c8f862c92b353d65f0e2ac2fc39eaaa3d
+hash: 4fcfeb677189c07cd93be66f8ea73e49202fc3c6dc076ab0ba6d211b862dc71d
 ---
-# Source Code Documentation
 
-This documentation provides a detailed explanation of the source code file.
+# Documentation for `utils.ts`
 
-## Functions
+This file contains utility functions that are used throughout the application. These functions provide common functionality that is used in multiple places, helping to keep the codebase DRY (Don't Repeat Yourself).
 
-### `cn(...inputs: ClassValue[])`
+## Import Statements
 
-This function takes in any number of arguments of `ClassValue` type. It merges the class names using the `clsx` function and the `twMerge` function from the `tailwind-merge` package.
+```ts
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+```
 
-**Parameters:**
+The `clsx` function is a utility for constructing `className` strings conditionally. It is used in the `cn` function in this file. `ClassValue` is a type from `clsx` that represents the possible inputs to the `clsx` function.
 
-- `...inputs` (ClassValue[]): An array of class values.
+`twMerge` is a utility function from `tailwind-merge` that merges multiple Tailwind CSS classes into one.
 
-**Returns:**
+## `cn` Function
 
-- A string of merged class names.
+```ts
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
 
-### `formatDate(input: string | number | Date): string`
+The `cn` function is a utility function for merging multiple class names into one. It uses the `clsx` function to concatenate the class names and the `twMerge` function to merge them into one class.
 
-This function takes in a date input and returns a string representation of the date in the format of `month day, year` (e.g., `January 1, 2022`). The input can be a string, a number, or a Date object.
+## `formatDate` Function
 
-**Parameters:**
+```ts
+export function formatDate(input: string | number | Date): string {
+  const date = new Date(input)
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  })
+}
+```
 
-- `input` (string | number | Date): The date input.
+The `formatDate` function is a utility function for formatting dates. It takes a date input, which can be a string, a number, or a Date object, and returns a string representation of the date in the format "Month Day, Year".
 
-**Returns:**
+## `getMediaTypeFromDataURL` Function
 
-- A string representing the date in the format of `month day, year`.
+```ts
+export function getMediaTypeFromDataURL(dataURL: string): string | null {
+  const matches = dataURL.match(/^data:([A-Za-z-+\/]+);base64/)
+  return matches ? matches[1] : null
+}
+```
 
-### `getMediaTypeFromDataURL(dataURL: string): string | null`
+The `getMediaTypeFromDataURL` function is a utility function for extracting the media type from a data URL. It uses a regular expression to match the media type in the data URL. If a match is found, it returns the media type; otherwise, it returns null.
 
-This function takes in a data URL and returns the media type from the data URL. If the media type cannot be found, it returns null.
+## `getBase64FromDataURL` Function
 
-**Parameters:**
+```ts
+export function getBase64FromDataURL(dataURL: string): string | null {
+  const matches = dataURL.match(/^data:[A-Za-z-+\/]+;base64,(.*)$/)
+  return matches ? matches[1] : null
+}
+```
 
-- `dataURL` (string): The data URL.
-
-**Returns:**
-
-- A string representing the media type or null if the media type cannot be found.
-
-### `getBase64FromDataURL(dataURL: string): string | null`
-
-This function takes in a data URL and returns the base64 string from the data URL. If the base64 string cannot be found, it returns null.
-
-**Parameters:**
-
-- `dataURL` (string): The data URL.
-
-**Returns:**
-
-- A string representing the base64 string or null if the base64 string cannot be found.
+The `getBase64FromDataURL` function is a utility function for extracting the base64 data from a data URL. It uses a regular expression to match the base64 data in the data URL. If a match is found, it returns the base64 data; otherwise, it returns null.

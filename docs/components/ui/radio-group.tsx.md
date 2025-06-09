@@ -1,47 +1,80 @@
 ---
 source: components/ui/radio-group.tsx
-generated: '2025-06-08T13:21:01.642Z'
+generated: 2025-06-08T22:06:04.417Z
 tags: []
-hash: 187c090d8c4271c7471658a40c396a9508513e94f5a1beb57b86253670729734
+hash: d19ffc7eb749e039776ca6c4fdbd0d1611074ab2c051d433f726d2d5e77db47f
 ---
-# RadioGroup Component
 
-This file exports two components: `RadioGroup` and `RadioGroupItem`.
+# Radio Group Component Documentation
 
-## RadioGroup
+This file contains the implementation of two React components: `RadioGroup` and `RadioGroupItem`. These components are used to create a group of radio buttons in the user interface. The file is located at `/Users/garymason/chatbot-ui/components/ui/radio-group.tsx`.
 
-The `RadioGroup` component is a wrapper for the `RadioGroupPrimitive.Root` component from `@radix-ui/react-radio-group`. It uses the `forwardRef` function from React to forward refs to the `RadioGroupPrimitive.Root` component.
+## Imports
 
-### Props
+The code begins by importing necessary modules and components:
 
-The `RadioGroup` component accepts all props that can be passed to the `RadioGroupPrimitive.Root` component. It also accepts a `className` prop which is used to add additional CSS classes to the component.
+- `React` from the "react" library.
+- `RadioGroupPrimitive` from the "@radix-ui/react-radio-group" library, which provides primitive components for creating a radio group.
+- `Circle` from the "lucide-react" library, which is used to create the circular indicator inside each radio button.
+- `cn` from "@/lib/utils", a utility function for class name manipulation.
 
-### Usage
+## RadioGroup Component
 
-```jsx
-<RadioGroup className="custom-class" {...props} />
+The `RadioGroup` component is a wrapper around the `RadioGroupPrimitive.Root` component from the Radix UI library. It uses the `React.forwardRef` function to create a ref-forwarding component, which allows the ref to be passed to the `RadioGroupPrimitive.Root` component.
+
+The component takes a `className` prop and other props (`...props`), and passes them to the `RadioGroupPrimitive.Root` component. The `className` prop is used to add additional CSS classes to the component.
+
+```ts
+const RadioGroup = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
+>(({ className, ...props }, ref) => {
+  return (
+    <RadioGroupPrimitive.Root
+      className={cn("grid gap-2", className)}
+      {...props}
+      ref={ref}
+    />
+  )
+})
+RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
 ```
 
-## RadioGroupItem
+## RadioGroupItem Component
 
-The `RadioGroupItem` component is a wrapper for the `RadioGroupPrimitive.Item` component from `@radix-ui/react-radio-group`. It uses the `forwardRef` function from React to forward refs to the `RadioGroupPrimitive.Item` component.
+The `RadioGroupItem` component is a wrapper around the `RadioGroupPrimitive.Item` component from the Radix UI library. Similar to the `RadioGroup` component, it uses the `React.forwardRef` function to create a ref-forwarding component.
 
-Inside the `RadioGroupPrimitive.Item` component, it renders a `RadioGroupPrimitive.Indicator` component which contains a `Circle` component from `lucide-react`.
+The component takes a `className` prop and other props (`...props`), and passes them to the `RadioGroupPrimitive.Item` component. The `className` prop is used to add additional CSS classes to the component.
 
-### Props
+Inside the `RadioGroupPrimitive.Item` component, a `RadioGroupPrimitive.Indicator` component is used to create the circular indicator inside each radio button.
 
-The `RadioGroupItem` component accepts all props that can be passed to the `RadioGroupPrimitive.Item` component. It also accepts a `className` prop which is used to add additional CSS classes to the component.
-
-### Usage
-
-```jsx
-<RadioGroupItem className="custom-class" {...props} />
+```ts
+const RadioGroupItem = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
+>(({ className, ...props }, ref) => {
+  return (
+    <RadioGroupPrimitive.Item
+      ref={ref}
+      className={cn(
+        "border-primary text-primary ring-offset-background focus-visible:ring-ring aspect-square size-4 rounded-full border focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        className
+      )}
+      {...props}
+    >
+      <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
+        <Circle className="size-2.5 fill-current text-current" />
+      </RadioGroupPrimitive.Indicator>
+    </RadioGroupPrimitive.Item>
+  )
+})
+RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
 ```
 
-## Importing
+## Exports
 
-To import these components, use the following syntax:
+The `RadioGroup` and `RadioGroupItem` components are exported for use in other parts of the application.
 
-```jsx
-import { RadioGroup, RadioGroupItem } from './path-to-file'
+```ts
+export { RadioGroup, RadioGroupItem }
 ```

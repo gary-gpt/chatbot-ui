@@ -1,56 +1,92 @@
 ---
 source: db/storage/profile-images.ts
-generated: '2025-06-08T13:21:01.646Z'
+generated: 2025-06-08T22:27:32.130Z
 tags: []
-hash: fe4b0f59d0ee375d5f2cf6e421e36b017f32f2e039f8d17485217fd2fe2c1757
+hash: cef3b8e7acf440ecb111583e617f9946240868543cd9de1169db462b12bbfdeb
 ---
-# Function Documentation
 
-## uploadProfileImage
+# Profile Image Upload Functionality
 
-This function is used to upload a profile image to the Supabase storage. The image is stored in a bucket named "profile_images". 
+This TypeScript file, located at `/Users/garymason/chatbot-ui/db/storage/profile-images.ts`, provides a function to handle the upload of profile images in a chatbot application. 
 
-### Parameters
+## Code Summary
 
-The function takes two parameters:
+The function `uploadProfileImage` accepts two arguments: a `profile` object and an `image` file. It checks the size of the image, deletes any existing profile image, uploads the new image to a specified storage bucket, and returns the path and URL of the uploaded image.
 
-- `profile`: This is an object of type `Tables<"profiles">`. It represents the profile of the user whose image is being uploaded.
-- `image`: This is a `File` object. It represents the image file to be uploaded.
+## Detailed Breakdown
 
-### Functionality
-
-The function first checks if the size of the image file is less than 2MB. If the size exceeds the limit, an error is thrown.
-
-The function then checks if there is an existing image for the profile. If there is, the function deletes the old image from the storage.
-
-The function then uploads the new image to the storage. If there is an error during the upload, an error is thrown.
-
-After the upload, the function retrieves the public URL of the uploaded image.
-
-### Return Value
-
-The function returns an object with two properties:
-
-- `path`: This is a string representing the path of the uploaded image in the storage.
-- `url`: This is a string representing the public URL of the uploaded image.
-
-### Errors
-
-The function can throw the following errors:
-
-- "Image must be less than 2MB": This error is thrown if the size of the image file exceeds 2MB.
-- "Error deleting old image": This error is thrown if there is an error while deleting the old image from the storage.
-- "Error uploading image": This error is thrown if there is an error while uploading the new image to the storage.
-
-### Example
-
-```javascript
-const profile = { user_id: "123", image_path: "old_image_path" };
-const image = new File([""], "filename", { type: "image/png", size: 1000000 });
-
-uploadProfileImage(profile, image)
-  .then(({ path, url }) => console.log(`Image uploaded at path: ${path}. Public URL: ${url}`))
-  .catch(error => console.error(`Error: ${error.message}`));
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { Tables } from "@/supabase/types"
 ```
+The above lines import the necessary modules. `supabase` is a hosted backend service that provides user authentication, database management, and storage functionality. `Tables` is a type from the Supabase module.
 
-In this example, the function is called with a `profile` object and an `image` file. If the upload is successful, the path and public URL of the uploaded image are logged to the console. If there is an error, the error message is logged to the console.
+```ts
+export const uploadProfileImage = async (
+  profile: Tables<"profiles">,
+  image: File
+) => {
+```
+This line declares an asynchronous function `uploadProfileImage` that takes two parameters: `profile` and `image`.
+
+```ts
+  const bucket = "profile_images"
+```
+This line sets the name of the storage bucket where the profile images will be stored.
+
+```ts
+  const imageSizeLimit = 2000000 // 2MB
+```
+This line sets the maximum size limit for the image file to 2MB.
+
+```ts
+  if (image.size > imageSizeLimit) {
+    throw new Error(`Image must be less than ${imageSizeLimit / 1000000}MB`)
+  }
+```
+This block checks if the size of the image is greater than the limit. If it is, an error is thrown.
+
+```ts
+  const currentPath = profile.image_path
+  let filePath = `${profile.user_id}/${Date.now()}`
+```
+These lines get the current image path from the profile and generate a new file path for the new image.
+
+```ts
+  if (currentPath.length > 0) {
+    const { error: deleteError } = await supabase.storage
+      .from(bucket)
+      .remove([currentPath])
+
+    if (deleteError) {
+      throw new Error("Error deleting old image")
+    }
+  }
+```
+This block checks if there is an existing image. If there is, it deletes the image from the storage bucket. If there's an error during deletion, it throws an error.
+
+```ts
+  const { error } = await supabase.storage
+    .from(bucket)
+    .upload(filePath, image, {
+      upsert: true
+    })
+
+  if (error) {
+    throw new Error("Error uploading image")
+  }
+```
+This block uploads the new image to the storage bucket. If there's an error during upload, it throws an error.
+
+```ts
+  const { data: getPublicUrlData } = supabase.storage
+    .from(bucket)
+    .getPublicUrl(filePath)
+
+  return {
+    path: filePath,
+    url: getPublicUrlData.publicUrl
+  }
+}
+```
+This block gets the public URL of the uploaded image and returns an object containing the file path and the URL of the image.

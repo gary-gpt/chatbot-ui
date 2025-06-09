@@ -1,50 +1,69 @@
 ---
 source: app/api/retrieval/process/docx/route.ts
-generated: '2025-06-08T13:21:01.664Z'
+generated: 2025-06-08T21:23:36.673Z
 tags: []
-hash: 5f8984bacbe2439c95e7fbbfee879725f8d1c85c15ffed705d9272c54c84ea8b
+hash: 0bb58f2bd28f13da388a5f51ed487e3f01a897e2d5ccfdd1e7d3e233a4c7f358
 ---
-# Documentation for `POST` function
 
-The `POST` function is an asynchronous function that processes a request, generates embeddings for the text content of a file, and updates the database with the processed data.
+# Documenting the `route.ts` File
 
-## Import Statements
+This file is located at `/Users/garymason/chatbot-ui/app/api/retrieval/process/docx/route.ts`. It is written in TypeScript and is part of a chatbot user interface application. The main purpose of this file is to handle POST requests for processing and embedding .docx files.
 
-The function uses several import statements to bring in necessary modules and functions:
+## Code Summary
 
-- `generateLocalEmbedding` from "@/lib/generate-local-embedding"
-- `processDocX` from "@/lib/retrieval/processing"
-- `checkApiKey`, `getServerProfile` from "@/lib/server/server-chat-helpers"
-- `Database` from "@/supabase/types"
-- `FileItemChunk` from "@/types"
-- `createClient` from "@supabase/supabase-js"
-- `NextResponse` from "next/server"
-- `OpenAI` from "openai"
+The `POST` function is an asynchronous function that processes a POST request. It extracts the text, fileId, embeddingsProvider, and fileExtension from the request body. It then uses these details to process the document, generate embeddings, and update the database.
 
-## Function Parameters
+## Code Breakdown
 
-The `POST` function accepts a single parameter:
+### Importing Libraries and Modules
 
-- `req`: The request object.
+The file begins by importing necessary libraries and modules. These include:
 
-## Function Flow
+- `generateLocalEmbedding` for generating local embeddings
+- `processDocX` for processing .docx files
+- `checkApiKey` and `getServerProfile` for server operations
+- `Database` for type checking database operations
+- `FileItemChunk` for type checking file chunks
+- `createClient` from Supabase for creating a database client
+- `NextResponse` for creating server responses
+- `OpenAI` for interacting with the OpenAI API
 
-1. The function begins by extracting the `text`, `fileId`, `embeddingsProvider`, and `fileExtension` from the request's JSON body.
+### POST Function
 
-2. It then creates a Supabase client using the Supabase URL and service role key from the environment variables.
+The `POST` function is exported as an async function. It expects a `Request` object as an argument.
 
-3. The function retrieves the server profile. If the `embeddingsProvider` is set to "openai", it checks whether the server profile uses Azure OpenAI or OpenAI and validates the corresponding API key.
+#### Request Body Parsing
 
-4. Depending on the `fileExtension`, the function processes the text content of the file. Currently, only "docx" files are supported. If an unsupported file type is provided, the function returns a 400 response with the message "Unsupported file type".
+The function begins by parsing the request body into a JSON object and destructuring the `text`, `fileId`, `embeddingsProvider`, and `fileExtension` properties.
 
-5. The function then generates embeddings for the text content of the file. If the `embeddingsProvider` is "openai", it uses the OpenAI API to generate the embeddings. If the `embeddingsProvider` is "local", it uses the `generateLocalEmbedding` function.
+#### Supabase Client Creation
 
-6. The function creates an array of file items, each containing the file ID, user ID, content, tokens, and the generated embedding.
+A Supabase client is created using the `createClient` function. The URL and service role key are retrieved from environment variables.
 
-7. The function updates the "file_items" table in the Supabase database with the new file items.
+#### Profile Retrieval
 
-8. It calculates the total number of tokens and updates the "files" table in the Supabase database with the new total.
+The server profile is retrieved using the `getServerProfile` function.
 
-9. Finally, the function returns a 200 response with the message "Embed Successful".
+#### API Key Checking
 
-If an error occurs at any point during the execution of the function, it is caught and logged, and a response is returned with the error message and status code. If no specific error message or status code is available, the function defaults to "An unexpected error occurred" and 500, respectively.
+If the `embeddingsProvider` is 'openai', the function checks if the server profile uses Azure OpenAI. If it does, it checks the Azure OpenAI API key. If it doesn't, it checks the OpenAI API key.
+
+#### Document Processing
+
+The function then processes the document based on its file extension. Currently, only .docx files are supported. The processed chunks are stored in the `chunks` array.
+
+#### Embeddings Generation
+
+The function then generates embeddings based on the `embeddingsProvider`. If it's 'openai', it uses the OpenAI API. If it's 'local', it uses the `generateLocalEmbedding` function.
+
+#### Database Updating
+
+The function then updates the 'file_items' and 'files' tables in the database using the Supabase client.
+
+#### Response Creation
+
+If everything is successful, the function returns a `NextResponse` with a status of 200 and a message of 'Embed Successful'.
+
+#### Error Handling
+
+If an error occurs at any point in the function, it is caught and logged. An error message and status code are then returned in a `Response` object.

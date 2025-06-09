@@ -1,16 +1,33 @@
 ---
 source: types/models.ts
-generated: '2025-06-08T13:21:01.633Z'
+generated: 2025-06-08T22:45:50.062Z
 tags: []
-hash: 8fcc674b3a3786de5870448c703c72b21ee69e8a6855c5ad996f924527c3f396
+hash: e9a356fcd680f2ebaf7b27f8886ca30c8863d8ef7af615d6db204b52ba711dfa
 ---
-# ModelProvider Type Documentation
 
-The `ModelProvider` type is a TypeScript export that is used to define the source of the AI model. This type is a union type, meaning it can be any one of the listed string literals.
+# Documentation for `models.ts`
 
-## Type Definition
+This file is located at `/Users/garymason/chatbot-ui/types/models.ts`. It is a TypeScript (`.ts`) file that defines a type named `ModelProvider`.
 
-```typescript
+## ModelProvider
+
+`ModelProvider` is a TypeScript type that represents the different AI model providers that can be used in the chatbot UI. This type is used to ensure that only valid model providers are used in the code, reducing the risk of errors.
+
+The `ModelProvider` type is defined as a union of string literals. Each string literal represents a different AI model provider. The available model providers are:
+
+- `"openai"`
+- `"google"`
+- `"anthropic"`
+- `"mistral"`
+- `"groq"`
+- `"perplexity"`
+- `"ollama"`
+- `"openrouter"`
+- `"custom"`
+
+Here is the code:
+
+```ts
 export type ModelProvider =
   | "openai"
   | "google"
@@ -20,28 +37,22 @@ export type ModelProvider =
   | "perplexity"
   | "ollama"
   | "openrouter"
-  | "custom";
+  | "custom"
 ```
 
-## Options
+When using the `ModelProvider` type, TypeScript will enforce that only one of these string literals is used. If a string that is not in this list is used, TypeScript will throw an error. This helps to ensure that only valid model providers are used in the code.
 
-- `"openai"`: This value is used when the AI model is provided by OpenAI.
-- `"google"`: This value is used when the AI model is provided by Google.
-- `"anthropic"`: This value is used when the AI model is provided by Anthropic.
-- `"mistral"`: This value is used when the AI model is provided by Mistral.
-- `"groq"`: This value is used when the AI model is provided by Groq.
-- `"perplexity"`: This value is used when the AI model is provided by Perplexity.
-- `"ollama"`: This value is used when the AI model is provided by Ollama.
-- `"openrouter"`: This value is used when the AI model is provided by OpenRouter.
-- `"custom"`: This value is used when the AI model is provided by a custom source.
+### Example Usage
 
-## Usage
+Here is an example of how to use the `ModelProvider` type:
 
-The `ModelProvider` type is typically used in function parameters or variable declarations where the source of the AI model needs to be specified. For example:
+```ts
+let provider: ModelProvider;
 
-```typescript
-let modelSource: ModelProvider;
-modelSource = "openai"; // This is valid
-modelSource = "google"; // This is also valid
-modelSource = "other"; // This would throw an error
+provider = "openai"; // This is valid
+provider = "google"; // This is also valid
+
+provider = "not-a-real-provider"; // This will cause a TypeScript error
 ```
+
+In this example, `provider` is a variable of type `ModelProvider`. It can be assigned any of the valid model providers. If it is assigned a string that is not a valid model provider, TypeScript will throw an error.

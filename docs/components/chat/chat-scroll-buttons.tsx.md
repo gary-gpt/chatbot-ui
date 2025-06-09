@@ -1,41 +1,85 @@
 ---
 source: components/chat/chat-scroll-buttons.tsx
-generated: '2025-06-08T13:21:01.634Z'
+generated: 2025-06-08T21:30:19.825Z
 tags: []
-hash: 022cfde3a17f78c3ed1b7e8d88b4b5ee7318e580e791f85a0bfe5beaef97478d
+hash: e8af6cdfcd8e809c40685cdca801bff0c068caca933fecadf233e78943751338
 ---
-# ChatScrollButtons Component
 
-This is a React functional component that displays two icons for scrolling up and down in a chat interface. The icons are only visible if the chat content is overflowing and not at the top or bottom respectively.
+# Chat Scroll Buttons Component Documentation
 
-## Import
+This document provides an overview of the `ChatScrollButtons` component in the file `/Users/garymason/chatbot-ui/components/chat/chat-scroll-buttons.tsx`.
 
-```jsx
-import { ChatScrollButtons } from './ChatScrollButtons';
+## Overview
+
+The `ChatScrollButtons` component is a functional component in React that displays up and down arrow icons. These icons are used to scroll to the top or bottom of a chat interface when clicked. The visibility of these icons is dependent on the chat's current scroll position and whether the chat content is overflowing its container.
+
+## Imports
+
+```ts
+import {
+  IconCircleArrowDownFilled,
+  IconCircleArrowUpFilled
+} from "@tabler/icons-react"
+import { FC } from "react"
 ```
+
+The component imports two icons from `@tabler/icons-react`, which are used as the up and down scroll buttons. It also imports `FC` (Functional Component) from `react` to define the component type.
 
 ## Props
 
-The `ChatScrollButtons` component accepts the following props:
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `isAtTop` | `boolean` | Indicates whether the chat content is at the top. If true, the up arrow icon will not be displayed. |
-| `isAtBottom` | `boolean` | Indicates whether the chat content is at the bottom. If true, the down arrow icon will not be displayed. |
-| `isOverflowing` | `boolean` | Indicates whether the chat content is overflowing. The icons will only be displayed if the content is overflowing. |
-| `scrollToTop` | `() => void` | Function to be called when the up arrow icon is clicked. |
-| `scrollToBottom` | `() => void` | Function to be called when the down arrow icon is clicked. |
-
-## Usage
-
-```jsx
-<ChatScrollButtons
-  isAtTop={false}
-  isAtBottom={false}
-  isOverflowing={true}
-  scrollToTop={() => console.log('Scroll to top')}
-  scrollToBottom={() => console.log('Scroll to bottom')}
-/>
+```ts
+interface ChatScrollButtonsProps {
+  isAtTop: boolean
+  isAtBottom: boolean
+  isOverflowing: boolean
+  scrollToTop: () => void
+  scrollToBottom: () => void
+}
 ```
 
-In this example, the up and down arrow icons will be displayed because `isOverflowing` is true, `isAtTop` is false, and `isAtBottom` is false. When the icons are clicked, they will log 'Scroll to top' and 'Scroll to bottom' respectively.
+The `ChatScrollButtons` component accepts the following props:
+
+- `isAtTop`: A boolean indicating whether the chat is currently scrolled to the top.
+- `isAtBottom`: A boolean indicating whether the chat is currently scrolled to the bottom.
+- `isOverflowing`: A boolean indicating whether the chat content is overflowing its container.
+- `scrollToTop`: A function to be executed when the up arrow icon is clicked, typically to scroll the chat to the top.
+- `scrollToBottom`: A function to be executed when the down arrow icon is clicked, typically to scroll the chat to the bottom.
+
+## Component
+
+```ts
+export const ChatScrollButtons: FC<ChatScrollButtonsProps> = ({
+  isAtTop,
+  isAtBottom,
+  isOverflowing,
+  scrollToTop,
+  scrollToBottom
+}) => {
+  return (
+    <>
+      {!isAtTop && isOverflowing && (
+        <IconCircleArrowUpFilled
+          className="cursor-pointer opacity-50 hover:opacity-100"
+          size={32}
+          onClick={scrollToTop}
+        />
+      )}
+
+      {!isAtBottom && isOverflowing && (
+        <IconCircleArrowDownFilled
+          className="cursor-pointer opacity-50 hover:opacity-100"
+          size={32}
+          onClick={scrollToBottom}
+        />
+      )}
+    </>
+  )
+}
+```
+
+The `ChatScrollButtons` component returns two icons: `IconCircleArrowUpFilled` and `IconCircleArrowDownFilled`. 
+
+- The up arrow icon is only visible when the chat is not at the top and the content is overflowing. When clicked, it executes the `scrollToTop` function.
+- The down arrow icon is only visible when the chat is not at the bottom and the content is overflowing. When clicked, it executes the `scrollToBottom` function.
+
+Both icons have a base opacity of 50% that increases to 100% when hovered over, indicating they are clickable. They have a size of 32 pixels.

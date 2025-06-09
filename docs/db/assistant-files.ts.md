@@ -1,76 +1,119 @@
 ---
 source: db/assistant-files.ts
-generated: '2025-06-08T13:21:01.628Z'
+generated: 2025-06-08T22:19:29.464Z
 tags: []
-hash: 16196a53de890b7ec7b8dce99072943656f5afb1dcdbfc8cf365c16220be610f
+hash: ba4b051a4c044388e3b736d3ddab8136026133f0518c46ce93824c04d731833a
 ---
-# Assistant Files Module
 
-This module provides functions to interact with the `assistant_files` and `assistants` tables in the Supabase database.
+# Assistant Files Database Operations
 
-## Functions
+This document explains the purpose and logic of the TypeScript file located at `/Users/garymason/chatbot-ui/db/assistant-files.ts`. This file contains functions for performing CRUD (Create, Read, Update, Delete) operations on the `assistant_files` table in the database using the Supabase client.
 
-### getAssistantFilesByAssistantId
+## Code Summary
 
-This function fetches the assistant files by the assistant's ID.
+The file exports four functions:
 
-**Parameters:**
+1. `getAssistantFilesByAssistantId`: Fetches assistant files based on the assistant's ID.
+2. `createAssistantFile`: Creates a new assistant file record.
+3. `createAssistantFiles`: Creates multiple assistant file records.
+4. `deleteAssistantFile`: Deletes an assistant file record.
 
-- `assistantId` (string): The ID of the assistant.
+## Code Details
 
-**Returns:**
+### Import Statements
 
-- A promise that resolves to the assistant's files.
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert } from "@/supabase/types"
+```
 
-**Throws:**
+These lines import the Supabase client and the `TablesInsert` type from the respective modules.
 
-- An error if the assistant's files could not be fetched.
+### Get Assistant Files by Assistant ID
 
-### createAssistantFile
+```ts
+export const getAssistantFilesByAssistantId = async (assistantId: string) => {
+  const { data: assistantFiles, error } = await supabase
+    .from("assistants")
+    .select(
+      `
+        id, 
+        name, 
+        files (*)
+      `
+    )
+    .eq("id", assistantId)
+    .single()
 
-This function creates a new assistant file.
+  if (!assistantFiles) {
+    throw new Error(error.message)
+  }
 
-**Parameters:**
+  return assistantFiles
+}
+```
 
-- `assistantFile` (TablesInsert<"assistant_files">): The assistant file to be created.
+This function fetches assistant files based on the assistant's ID. It queries the `assistants` table, selects the `id`, `name`, and `files` fields, and filters the results where the `id` equals the provided `assistantId`. If no data is returned or an error occurs, it throws an error.
 
-**Returns:**
+### Create Assistant File
 
-- A promise that resolves to the created assistant file.
+```ts
+export const createAssistantFile = async (
+  assistantFile: TablesInsert<"assistant_files">
+) => {
+  const { data: createdAssistantFile, error } = await supabase
+    .from("assistant_files")
+    .insert(assistantFile)
+    .select("*")
 
-**Throws:**
+  if (!createdAssistantFile) {
+    throw new Error(error.message)
+  }
 
-- An error if the assistant file could not be created.
+  return createdAssistantFile
+}
+```
 
-### createAssistantFiles
+This function creates a new assistant file record in the `assistant_files` table. It inserts the provided `assistantFile` object and selects all fields of the newly created record. If no data is returned or an error occurs, it throws an error.
 
-This function creates multiple new assistant files.
+### Create Assistant Files
 
-**Parameters:**
+```ts
+export const createAssistantFiles = async (
+  assistantFiles: TablesInsert<"assistant_files">[]
+) => {
+  const { data: createdAssistantFiles, error } = await supabase
+    .from("assistant_files")
+    .insert(assistantFiles)
+    .select("*")
 
-- `assistantFiles` (TablesInsert<"assistant_files">[]): An array of assistant files to be created.
+  if (!createdAssistantFiles) {
+    throw new Error(error.message)
+  }
 
-**Returns:**
+  return createdAssistantFiles
+}
+```
 
-- A promise that resolves to the created assistant files.
+This function creates multiple assistant file records in the `assistant_files` table. It inserts the provided `assistantFiles` array and selects all fields of the newly created records. If no data is returned or an error occurs, it throws an error.
 
-**Throws:**
+### Delete Assistant File
 
-- An error if the assistant files could not be created.
+```ts
+export const deleteAssistantFile = async (
+  assistantId: string,
+  fileId: string
+) => {
+  const { error } = await supabase
+    .from("assistant_files")
+    .delete()
+    .eq("assistant_id", assistantId)
+    .eq("file_id", fileId)
 
-### deleteAssistantFile
+  if (error) throw new Error(error.message)
 
-This function deletes an assistant file.
+  return true
+}
+```
 
-**Parameters:**
-
-- `assistantId` (string): The ID of the assistant.
-- `fileId` (string): The ID of the file to be deleted.
-
-**Returns:**
-
-- A promise that resolves to `true` if the file was successfully deleted.
-
-**Throws:**
-
-- An error if the file could not be deleted.
+This function deletes an assistant file record from the `assistant_files` table. It deletes the record where the `assistant_id` equals the provided `assistantId` and the `file_id` equals the provided `fileId`. If an error occurs, it throws an error.

@@ -1,51 +1,54 @@
 ---
 source: components/ui/command.tsx
-generated: '2025-06-08T13:21:01.640Z'
+generated: 2025-06-08T21:59:16.757Z
 tags: []
-hash: 0069e18328fe1c848a02b9d54abbc2953f239835298855f8d8a26c4394f22e84
+hash: 295967b12b9afc9b8188f45523f628e940c3a1218a3ddc797e35c13fed994bb6
 ---
-# Command Component
 
-This file exports a set of components that are used to create a command interface. 
+# Command.tsx Documentation
 
-## Components
+The `Command.tsx` file is a TypeScript React component file that defines several components related to a chatbot command interface. These components include `Command`, `CommandDialog`, `CommandInput`, `CommandList`, `CommandEmpty`, `CommandGroup`, `CommandItem`, `CommandShortcut`, and `CommandSeparator`.
 
-### `Command`
+## Import Statements
 
-This is a primitive command component that is a wrapper around the `CommandPrimitive` component from the `cmdk` library. It takes a `className` and `props` as arguments and returns a `CommandPrimitive` component with the provided `className` and `props`. 
+The file begins with import statements for necessary libraries and components. It uses the `React` library, `DialogProps` from `@radix-ui/react-dialog`, `CommandPrimitive` from `cmdk`, `Search` from `lucide-react`, and `Dialog`, `DialogContent` from the local `ui/dialog` component. It also imports a utility function `cn` from the local `lib/utils`.
 
-### `CommandDialog`
+## Command Component
 
-This component wraps the `Command` component in a `Dialog` and `DialogContent` component. It takes `children` and `props` as arguments and returns a `Dialog` component with the provided `props` and `children` as the content of the `Command` component.
+The `Command` component is a wrapper around the `CommandPrimitive` component from the `cmdk` library. It uses the `React.forwardRef` function to create a ref and passes it to the `CommandPrimitive` component. The `className` prop is used to apply CSS classes to the component.
 
-### `CommandInput`
+## CommandDialog Component
 
-This component is a wrapper around the `CommandPrimitive.Input` component from the `cmdk` library. It takes a `className` and `props` as arguments and returns a `CommandPrimitive.Input` component with the provided `className` and `props`.
+The `CommandDialog` component wraps the `Command` component inside a `Dialog` and `DialogContent` component. It takes a `children` prop and passes it to the `Command` component.
 
-### `CommandList`
+## CommandInput Component
 
-This component is a wrapper around the `CommandPrimitive.List` component from the `cmdk` library. It takes a `className` and `props` as arguments and returns a `CommandPrimitive.List` component with the provided `className` and `props`.
+The `CommandInput` component is a wrapper around the `CommandPrimitive.Input` component. It includes a `Search` icon and an input field. The `className` prop is used to apply CSS classes to the component.
 
-### `CommandEmpty`
+## CommandList Component
 
-This component is a wrapper around the `CommandPrimitive.Empty` component from the `cmdk` library. It takes `props` as arguments and returns a `CommandPrimitive.Empty` component with the provided `props`.
+The `CommandList` component is a wrapper around the `CommandPrimitive.List` component. It uses the `React.forwardRef` function to create a ref and passes it to the `CommandPrimitive.List` component. The `className` prop is used to apply CSS classes to the component.
 
-### `CommandGroup`
+## CommandEmpty Component
 
-This component is a wrapper around the `CommandPrimitive.Group` component from the `cmdk` library. It takes a `className` and `props` as arguments and returns a `CommandPrimitive.Group` component with the provided `className` and `props`.
+The `CommandEmpty` component is a wrapper around the `CommandPrimitive.Empty` component. It uses the `React.forwardRef` function to create a ref and passes it to the `CommandPrimitive.Empty` component. The `className` prop is used to apply CSS classes to the component.
 
-### `CommandSeparator`
+## CommandGroup Component
 
-This component is a wrapper around the `CommandPrimitive.Separator` component from the `cmdk` library. It takes a `className` and `props` as arguments and returns a `CommandPrimitive.Separator` component with the provided `className` and `props`.
+The `CommandGroup` component is a wrapper around the `CommandPrimitive.Group` component. It uses the `React.forwardRef` function to create a ref and passes it to the `CommandPrimitive.Group` component. The `className` prop is used to apply CSS classes to the component.
 
-### `CommandItem`
+## CommandItem Component
 
-This component is a wrapper around the `CommandPrimitive.Item` component from the `cmdk` library. It takes a `className` and `props` as arguments and returns a `CommandPrimitive.Item` component with the provided `className` and `props`.
+The `CommandItem` component is a wrapper around the `CommandPrimitive.Item` component. It uses the `React.forwardRef` function to create a ref and passes it to the `CommandPrimitive.Item` component. The `className` prop is used to apply CSS classes to the component.
 
-### `CommandShortcut`
+## CommandShortcut Component
 
-This component is a simple `span` element that is used to display a shortcut. It takes a `className` and `props` as arguments and returns a `span` element with the provided `className` and `props`.
+The `CommandShortcut` component is a simple `span` element that accepts a `className` prop to apply CSS classes.
 
-## Exports
+## CommandSeparator Component
 
-The file exports the following components: `Command`, `CommandDialog`, `CommandInput`, `CommandList`, `CommandEmpty`, `CommandGroup`, `CommandItem`, `CommandShortcut`, `CommandSeparator`.
+The `CommandSeparator` component is a wrapper around the `CommandPrimitive.Separator` component. It uses the `React.forwardRef` function to create a ref and passes it to the `CommandPrimitive.Separator` component. The `className` prop is used to apply CSS classes to the component.
+
+## Export Statements
+
+Finally, all the components are exported for use in other parts of the application.

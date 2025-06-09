@@ -1,40 +1,53 @@
 ---
 source: middleware.ts
-generated: '2025-06-08T13:21:01.626Z'
+generated: 2025-06-08T22:40:54.347Z
 tags: []
-hash: 79b92ae41cb4f32a57cc3e40eec378ef642a591fafa9db38c05096ede97a2087
+hash: 5a4dab934c1679668c8ff0382a1e50a1b1dac144fbff228f5ddac1a18f6de896
 ---
-# Middleware.js Documentation
 
-This file contains a middleware function for handling requests and a configuration object for matching routes.
+# Middleware.ts Documentation
+
+This file, `middleware.ts`, is a middleware for a chatbot application. It is responsible for handling incoming requests, managing user sessions, and redirecting users to their home workspace if they are already authenticated.
 
 ## Imports
 
-- `createClient` from "@/lib/supabase/middleware"
-- `i18nRouter` from "next-i18n-router"
-- `NextResponse` and `NextRequest` types from "next/server"
-- `i18nConfig` from the current directory
+The file imports several modules:
 
-## Functions
+- `createClient` from the `supabase` library, which is used to create a new Supabase client.
+- `i18nRouter` from the `next-i18n-router` library, which is used for internationalization and routing.
+- `NextResponse` and `NextRequest` from the `next/server` library, which are used to handle HTTP requests and responses.
+- `i18nConfig` from the local `i18nConfig` file, which contains the configuration for internationalization.
 
-### middleware(request: NextRequest)
+## Middleware Function
 
-This function is an asynchronous function that takes a `NextRequest` object as an argument.
+The `middleware` function is an asynchronous function that takes a `request` object as an argument. This function is responsible for handling incoming requests and performing several operations.
 
-The function first tries to handle the request with the `i18nRouter` function. If the `i18nRouter` function returns a result, the middleware function immediately returns this result.
+### Internationalization
 
-If the `i18nRouter` function does not return a result, the middleware function creates a Supabase client and retrieves the current session.
+The function first uses the `i18nRouter` function with the `request` and `i18nConfig` as arguments. If the `i18nRouter` function returns a result, the middleware function immediately returns this result.
 
-If the session exists and the requested URL is the root ("/"), the function queries the Supabase database for the workspace associated with the current user that is marked as "home". If such a workspace does not exist, the function throws an error.
+### Session Management
 
-If the "home" workspace exists, the function redirects the user to the chat page of this workspace.
+If the `i18nRouter` function does not return a result, the middleware function creates a new Supabase client and retrieves the current user session. If a session exists and the requested URL is the root URL ("/"), the function redirects the user to their home workspace.
 
-If the session does not exist or the requested URL is not the root, the function returns the response from the Supabase client.
+### Workspace Redirection
 
-If any error occurs during the execution of the function, the function returns a `NextResponse` object with the request headers.
+To redirect the user, the function queries the `workspaces` table in the Supabase database for a workspace that matches the user's ID and is marked as the home workspace. If such a workspace is found, the function redirects the user to the chat page of this workspace.
 
-## Objects
+If no matching workspace is found, the function throws an error with the message returned by the Supabase client.
 
-### config
+### Error Handling
 
-This object contains a `matcher` property, which is a regular expression string that matches any URL that does not contain "api", "static", any file extension, "_next", or "auth".
+If any error occurs during the execution of the middleware function, the function catches the error and returns a `NextResponse.next` object with the original request headers.
+
+## Config Object
+
+The `config` object contains a `matcher` property, which is a regular expression that matches any URL that does not contain "api", "static", any file extension, "_next", or "auth". This regular expression is used to determine which URLs the middleware function should handle.
+
+```ts
+export const config = {
+  matcher: "/((?!api|static|.*\\..*|_next|auth).*)"
+}
+```
+
+This middleware function is an essential part of the chatbot application, as it handles user sessions and redirects, ensuring that users are always directed to the correct page.

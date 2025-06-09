@@ -1,56 +1,96 @@
 ---
 source: components/chat/chat-hooks/use-prompt-and-command.tsx
-generated: '2025-06-08T13:21:01.649Z'
+generated: 2025-06-08T21:28:19.400Z
 tags: []
-hash: b14249201d0e60667dfac4726e3b58857d24c891fa27bb1c7a00f0f36192be94
+hash: 5143d83c8831d14b6455c9469c28c97a0c4c9fb92e9d58a3df76945a2a4cac28
 ---
-# Documentation
 
-## usePromptAndCommand Hook
+# use-prompt-and-command.tsx Documentation
 
-This hook provides a set of methods to handle user input and selection of prompts, files, collections, tools, and assistants in a chatbot UI context.
+This TypeScript file exports a custom React hook named `usePromptAndCommand` which is used to handle user input and selections in a chatbot user interface. The hook provides a set of functions to handle different types of user inputs and selections, such as prompts, files, collections, tools, and assistants.
 
-### Importing
+## Code Summary
 
-```javascript
-import { usePromptAndCommand } from "<path-to-hook>";
+The `usePromptAndCommand` hook uses the `ChatbotUIContext` to access and manipulate the state of the chatbot user interface. It defines several handlers for different types of user input and selections:
+
+- `handleInputChange`: Handles changes in the user's text input. It uses regular expressions to detect special commands starting with `@`, `/`, `#`, and `!`. Depending on the detected command, it opens the appropriate picker and sets the command value.
+- `handleSelectPrompt`: Handles the user's selection of a prompt. It closes the prompt picker and appends the selected prompt to the user's input.
+- `handleSelectUserFile`: Handles the user's selection of a file. It displays the selected files, closes the file picker, and adds the selected file to the new message files if it hasn't been selected before.
+- `handleSelectUserCollection`: Handles the user's selection of a collection. It displays the selected files, closes the file picker, and adds the files in the selected collection to the new message files if they haven't been selected before.
+- `handleSelectTool`: Handles the user's selection of a tool. It closes the tool picker and adds the selected tool to the selected tools.
+- `handleSelectAssistant`: Handles the user's selection of an assistant. It closes the assistant picker, sets the selected assistant, updates the chat settings based on the assistant's properties, and adds the assistant's files and tools to the chat files and selected tools.
+
+The hook returns these handlers so they can be used by the components that use this hook.
+
+## Code Comments
+
+```ts
+// Import necessary dependencies and types
+import { ChatbotUIContext } from "@/context/context"
+import { getAssistantCollectionsByAssistantId } from "@/db/assistant-collections"
+import { getAssistantFilesByAssistantId } from "@/db/assistant-files"
+import { getAssistantToolsByAssistantId } from "@/db/assistant-tools"
+import { getCollectionFilesByCollectionId } from "@/db/collection-files"
+import { Tables } from "@/supabase/types"
+import { LLMID } from "@/types"
+import { useContext } from "react"
+
+// Define the custom hook
+export const usePromptAndCommand = () => {
+  // Destructure the necessary state variables and setters from the context
+  const {
+    chatFiles,
+    setNewMessageFiles,
+    userInput,
+    setUserInput,
+    setShowFilesDisplay,
+    setIsPromptPickerOpen,
+    setIsFilePickerOpen,
+    setSlashCommand,
+    setHashtagCommand,
+    setUseRetrieval,
+    setToolCommand,
+    setIsToolPickerOpen,
+    setSelectedTools,
+    setAtCommand,
+    setIsAssistantPickerOpen,
+    setSelectedAssistant,
+    setChatSettings,
+    setChatFiles
+  } = useContext(ChatbotUIContext)
+
+  // Define the handlers for different types of user input and selections
+  // ...
+
+  // Return the handlers
+  return {
+    handleInputChange,
+    handleSelectPrompt,
+    handleSelectUserFile,
+    handleSelectUserCollection,
+    handleSelectTool,
+    handleSelectAssistant
+  }
+}
 ```
 
-### Usage
+## Usage
 
-```javascript
-const {
-  handleInputChange,
-  handleSelectPrompt,
-  handleSelectUserFile,
-  handleSelectUserCollection,
-  handleSelectTool,
-  handleSelectAssistant
-} = usePromptAndCommand();
+To use this hook, import it in a React component and call it:
+
+```ts
+import { usePromptAndCommand } from "./use-prompt-and-command"
+
+const MyComponent = () => {
+  const {
+    handleInputChange,
+    handleSelectPrompt,
+    handleSelectUserFile,
+    handleSelectUserCollection,
+    handleSelectTool,
+    handleSelectAssistant
+  } = usePromptAndCommand()
+
+  // Use the handlers...
+}
 ```
-
-### Methods
-
-#### `handleInputChange(value: string)`
-
-Handles user input changes. It checks if the input matches certain patterns (e.g., starting with '@', '/', '#', '!') and opens the corresponding picker (assistant, prompt, file, tool). If no pattern is matched, it closes all pickers.
-
-#### `handleSelectPrompt(prompt: Tables<"prompts">)`
-
-Handles the selection of a prompt. It closes the prompt picker and appends the selected prompt content to the user input.
-
-#### `handleSelectUserFile(file: Tables<"files">)`
-
-Handles the selection of a file. It displays the selected file, closes the file picker, and removes the hashtag command from the user input. If the selected file is not already in the chat files or new message files, it is added to the new message files.
-
-#### `handleSelectUserCollection(collection: Tables<"collections">)`
-
-Handles the selection of a collection. It displays the selected collection, closes the file picker, and removes the hashtag command from the user input. It adds all files from the selected collection that are not already in the chat files or new message files to the new message files.
-
-#### `handleSelectTool(tool: Tables<"tools">)`
-
-Handles the selection of a tool. It closes the tool picker, removes the tool command from the user input, and adds the selected tool to the selected tools.
-
-#### `handleSelectAssistant(assistant: Tables<"assistants">)`
-
-Handles the selection of an assistant. It closes the assistant picker, removes the assistant command from the user input, sets the selected assistant, and updates the chat settings based on the assistant's properties. It also retrieves all files, collections, and tools associated with the selected assistant, adds them to the chat files or selected tools, and displays the files if any were added.

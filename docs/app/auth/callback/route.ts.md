@@ -1,39 +1,60 @@
 ---
 source: app/auth/callback/route.ts
-generated: '2025-06-08T13:21:01.649Z'
+generated: 2025-06-08T21:25:46.823Z
 tags: []
-hash: 3923326ad7f678515efb79cff0d1f38863ee902977c2ad72ae8857cb023bc9ef
+hash: 938f76892c569af9ca0025fbb81862396083c9dcb5479777b8591e0824242e78
 ---
-# Source Code Documentation
 
-## Overview
+# Code Documentation for `route.ts`
 
-This file contains a single asynchronous function `GET` which is used to handle GET requests. The function uses the `supabase` library to authenticate users and the `next` library to handle responses and redirections.
+This file is located at `/Users/garymason/chatbot-ui/app/auth/callback/route.ts`. It is responsible for handling the authentication callback in a chatbot user interface application. 
 
-## Dependencies
+The file is written in TypeScript, a statically typed superset of JavaScript that adds types to the language.
 
-- `@/lib/supabase/server`: A library used to create a Supabase client.
-- `next/headers`: A library used to handle HTTP headers, in this case, cookies.
-- `next/server`: A library used to handle server-side operations in Next.js applications.
+## Imports
 
-## Function: GET
+```ts
+import { createClient } from "@/lib/supabase/server"
+import { cookies } from "next/headers"
+import { NextResponse } from "next/server"
+```
 
-### Description
+- `createClient`: This function is imported from the `supabase` library, which is a Firebase-like development platform. It is used to create a new Supabase client.
+- `cookies`: This function is imported from the `next/headers` library, which is used to manipulate cookies in Next.js applications.
+- `NextResponse`: This class is imported from the `next/server` library, which is used to create HTTP responses in Next.js server-side functions.
 
-This function takes a `Request` object as an argument, extracts the `code` and `next` parameters from the request URL, and performs different operations based on the presence of these parameters.
+## Function `GET`
 
-### Parameters
+```ts
+export async function GET(request: Request) {
+  const requestUrl = new URL(request.url)
+  const code = requestUrl.searchParams.get("code")
+  const next = requestUrl.searchParams.get("next")
 
-- `request`: A `Request` object that represents the HTTP request.
+  if (code) {
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+    await supabase.auth.exchangeCodeForSession(code)
+  }
 
-### Operations
+  if (next) {
+    return NextResponse.redirect(requestUrl.origin + next)
+  } else {
+    return NextResponse.redirect(requestUrl.origin)
+  }
+}
+```
 
-1. The function first creates a `URL` object from the request URL.
-2. It then extracts the `code` and `next` parameters from the URL's search parameters.
-3. If a `code` parameter is present, the function creates a `cookieStore` using the `cookies` function from the `next/headers` library. It then creates a `supabase` client using the `createClient` function from the `@/lib/supabase/server` library, passing the `cookieStore` as an argument. Finally, it exchanges the `code` for a session using the `exchangeCodeForSession` method of the `supabase` client.
-4. If a `next` parameter is present, the function redirects to the URL specified by the `next` parameter using the `NextResponse.redirect` method from the `next/server` library.
-5. If a `next` parameter is not present, the function redirects to the origin of the request URL.
+This function is an asynchronous function that handles GET requests. It takes a `request` object as a parameter.
 
-### Return Value
+- `requestUrl`: This constant holds the URL of the incoming request.
+- `code`: This constant holds the value of the `code` query parameter in the URL. This is typically the authorization code returned by the OAuth2 server.
+- `next`: This constant holds the value of the `next` query parameter in the URL. This is typically the URL to which the user should be redirected after successful authentication.
 
-The function returns a `NextResponse` object that represents the HTTP response. This response will either redirect to the URL specified by the `next` parameter or to the origin of the request URL.
+If a `code` is present in the URL, the function creates a new Supabase client and exchanges the authorization code for a session.
+
+If a `next` parameter is present in the URL, the function redirects the user to that URL. If not, it redirects the user to the origin of the request URL.
+
+## Summary
+
+This file is responsible for handling the authentication callback in a chatbot user interface application. It uses the Supabase library to exchange an authorization code for a session and redirects the user to the appropriate URL.

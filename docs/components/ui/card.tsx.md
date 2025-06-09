@@ -1,61 +1,141 @@
 ---
 source: components/ui/card.tsx
-generated: '2025-06-08T13:21:01.639Z'
+generated: 2025-06-08T21:58:07.267Z
 tags: []
-hash: 893490f78fae9dbe2d12a2d653946f5d5d6b8c3b6d67dd827dd7d7d9da041938
+hash: 80c4aeb21a2adc4853610018d0ebb9d9d9062c8c3a9e2e90849a5e3d59c995a1
 ---
+
 # Card Component Documentation
 
-This file exports several React components that are used to create a Card layout. These components include `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, and `CardFooter`.
+This documentation covers the `Card` component and its sub-components located in the file `/Users/garymason/chatbot-ui/components/ui/card.tsx`.
 
-## Card
+## Overview
 
-The `Card` component is the main container for the card layout. It includes a background, text color, border, and shadow styles.
+The `Card` component is a reusable component that is used to display content in a card-like format. It consists of several sub-components, each serving a specific purpose within the card. The sub-components include `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, and `CardFooter`.
 
-### Props
+## Import Statements
 
-The `Card` component accepts all standard HTMLDivElement attributes as props.
+```ts
+import * as React from "react"
+import { cn } from "@/lib/utils"
+```
 
-## CardHeader
+The component imports the `React` library for creating the component and the `cn` function from a utility library. The `cn` function is used to concatenate CSS class names.
 
-The `CardHeader` component is used to create a header for the card. It includes flex and spacing styles.
+## Card Component
 
-### Props
+```ts
+const Card = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "bg-card text-card-foreground rounded-lg border shadow-sm",
+      className
+    )}
+    {...props}
+  />
+))
+Card.displayName = "Card"
+```
 
-The `CardHeader` component accepts all standard HTMLDivElement attributes as props.
+The `Card` component is a `div` element with a set of predefined CSS classes for styling. It uses the `forwardRef` function from React to pass a `ref` to the `div` element. This `ref` can be used to access the DOM element directly. The component also accepts additional props and CSS classes.
 
-## CardTitle
+## CardHeader Component
 
-The `CardTitle` component is used to create a title for the card. It includes text size, font weight, line height, and letter spacing styles.
+```ts
+const CardHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col space-y-1.5 p-6", className)}
+    {...props}
+  />
+))
+CardHeader.displayName = "CardHeader"
+```
 
-### Props
+The `CardHeader` component is similar to the `Card` component but is intended to be used as the header of the card. It has a different set of default CSS classes.
 
-The `CardTitle` component accepts all standard HTMLHeadingElement attributes as props.
+## CardTitle Component
 
-## CardDescription
+```ts
+const CardTitle = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h3
+    ref={ref}
+    className={cn(
+      "text-2xl font-semibold leading-none tracking-tight",
+      className
+    )}
+    {...props}
+  />
+))
+CardTitle.displayName = "CardTitle"
+```
 
-The `CardDescription` component is used to create a description for the card. It includes text color and size styles.
+The `CardTitle` component is a `h3` element intended to display the title of the card. It has a set of default CSS classes for styling the title.
 
-### Props
+## CardDescription Component
 
-The `CardDescription` component accepts all standard HTMLParagraphElement attributes as props.
+```ts
+const CardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn("text-muted-foreground text-sm", className)}
+    {...props}
+  />
+))
+CardDescription.displayName = "CardDescription"
+```
 
-## CardContent
+The `CardDescription` component is a `p` element intended to display a description or additional information in the card. It has a set of default CSS classes for styling the description.
 
-The `CardContent` component is used to create the main content area for the card. It includes padding styles.
+## CardContent Component
 
-### Props
+```ts
+const CardContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
+))
+CardContent.displayName = "CardContent"
+```
 
-The `CardContent` component accepts all standard HTMLDivElement attributes as props.
+The `CardContent` component is a `div` element intended to hold the main content of the card. It has a set of default CSS classes for styling the content area.
 
-## CardFooter
+## CardFooter Component
 
-The `CardFooter` component is used to create a footer for the card. It includes flex, alignment, and padding styles.
+```ts
+const CardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex items-center p-6 pt-0", className)}
+    {...props}
+  />
+))
+CardFooter.displayName = "CardFooter"
+```
 
-### Props
+The `CardFooter` component is a `div` element intended to be used as the footer of the card. It has a set of default CSS classes for styling.
 
-The `CardFooter` component accepts all standard HTMLDivElement attributes as props.
+## Export Statement
 
-## Export
+```ts
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+```
 
-The `Card`, `CardHeader`, `CardFooter`, `CardTitle`, `CardDescription`, and `CardContent` components are exported for use in other files.
+The `Card` component and all its sub-components are exported for use in other parts of the application.

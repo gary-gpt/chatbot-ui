@@ -1,48 +1,79 @@
 ---
 source: components/sidebar/items/tools/create-tool.tsx
-generated: '2025-06-08T13:21:01.663Z'
+generated: 2025-06-08T21:51:28.477Z
 tags: []
-hash: 2f65da09627d873217d90a343eb225f4b5dcdffe1b00572a014141452f5e9e08
+hash: 4723f6710aaf0dadffd7c9be44f81cf9fcc889707908b9a53d04a835395b630e
 ---
+
 # CreateTool Component Documentation
 
-`CreateTool` is a functional component in React that provides an interface for creating a new tool.
+This document describes the CreateTool component located in the file `/Users/garymason/chatbot-ui/components/sidebar/items/tools/create-tool.tsx`.
 
-## Props
+## Overview
 
-- `isOpen` (boolean): Determines whether the component is open or not.
-- `onOpenChange` (function): Callback function that is called when the open state of the component changes. It takes a boolean argument indicating the new open state.
+The CreateTool component is a functional component in React that provides an interface for creating a new tool in a chatbot UI. It uses various hooks and context to manage its state and behavior.
 
-## State Variables
+## Code Summary
 
-- `name` (string): The name of the tool being created.
-- `isTyping` (boolean): A flag indicating whether the user is currently typing.
-- `description` (string): The description of the tool being created.
-- `url` (string): The URL of the tool being created.
-- `customHeaders` (string): The custom headers for the tool being created.
-- `schema` (string): The schema of the tool being created.
-- `schemaError` (string): Any error that occurs while validating the schema.
+### Imports
 
-## Context
+The component imports various other components and utilities from different modules. These include UI components like `Input`, `Label`, and `TextareaAutosize`, context like `ChatbotUIContext`, constants like `TOOL_DESCRIPTION_MAX` and `TOOL_NAME_MAX`, and utilities like `validateOpenAPI`.
 
-This component uses the `ChatbotUIContext` to access the user's profile and the selected workspace.
+### Props
 
-## Functionality
+The component accepts the following props:
 
-The component renders a `SidebarCreateItem` component with the content type set to "tools". The create state of the `SidebarCreateItem` is an object containing the user's id, the name, description, URL, custom headers, and schema of the tool being created.
+- `isOpen`: A boolean indicating whether the component is currently open.
+- `onOpenChange`: A function that is called when the open state of the component changes.
 
-The `renderInputs` function of the `SidebarCreateItem` renders several `Input` and `TextareaAutosize` components for the user to input the tool's name, description, URL, custom headers, and schema. The schema input includes validation using the `validateOpenAPI` function, and any errors are displayed to the user.
+### State Variables
 
-## Importing
+The component uses the `useState` hook to manage several pieces of state:
 
-```javascript
-import { CreateTool } from "@/components/sidebar/items/all/sidebar-create-item"
+- `name`: The name of the tool being created.
+- `isTyping`: A boolean indicating whether the user is currently typing.
+- `description`: The description of the tool being created.
+- `url`: The URL of the tool being created.
+- `customHeaders`: Any custom headers for the tool being created.
+- `schema`: The schema for the tool being created.
+- `schemaError`: Any error that occurred while validating the schema.
+
+### Rendered JSX
+
+The component returns a `SidebarCreateItem` component with various props and children. The `contentType` prop is set to "tools", and the `createState` prop is a state object that includes the user ID from the profile context, as well as the current values of the name, description, url, customHeaders, and schema state variables.
+
+The `renderInputs` prop is a function that returns a fragment of JSX. This fragment includes several `div` elements, each containing a `Label` and an `Input` or `TextareaAutosize` for one of the state variables. The `onChange` or `onValueChange` prop of each input component is set to a function that updates the corresponding state variable.
+
+The `onOpenChange` prop is set to the `onOpenChange` prop passed to the CreateTool component.
+
+## Code Comments
+
+```ts
+// Define the props for the CreateTool component
+interface CreateToolProps {
+  isOpen: boolean
+  onOpenChange: (isOpen: boolean) => void
+}
+
+// Define the CreateTool component
+export const CreateTool: FC<CreateToolProps> = ({ isOpen, onOpenChange }) => {
+  // Use context to get the profile and selected workspace
+  const { profile, selectedWorkspace } = useContext(ChatbotUIContext)
+
+  // Define state variables for the tool name, typing status, description, url, custom headers, schema, and schema error
+  const [name, setName] = useState("")
+  // ...
+
+  // Return null if there is no profile or selected workspace
+  if (!profile || !selectedWorkspace) return null
+
+  // Render a SidebarCreateItem component with various props and children
+  return (
+    <SidebarCreateItem
+      // ...
+    />
+  )
+}
 ```
 
-## Usage
-
-```javascript
-<CreateTool isOpen={isOpen} onOpenChange={handleOpenChange} />
-```
-
-Where `isOpen` is a boolean indicating whether the component is open, and `handleOpenChange` is a function that handles changes to the open state.
+Note: Some parts of the code are commented out and are not included in the documentation.

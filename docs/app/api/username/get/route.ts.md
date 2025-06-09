@@ -1,38 +1,86 @@
 ---
 source: app/api/username/get/route.ts
-generated: '2025-06-08T13:21:01.661Z'
+generated: 2025-06-08T21:25:27.882Z
 tags: []
-hash: 095dd828656e1816d37886d3efc1913b7ce270a8d32ac8d75aa06e22e3348224
+hash: 9bc20aeb4d41da4af37acc5fce300832fbc4328ed96ac012a9ce266e59ac52e7
 ---
-# Source Code Documentation
 
-This source code file is a part of a serverless function that handles HTTP POST requests. It is designed to interact with a Supabase database.
+# Chatbot UI - Username API
 
-## Imports
+This document provides a detailed explanation of the `route.ts` file located at `/Users/garymason/chatbot-ui/app/api/username/get/`. This file is a part of the Chatbot UI application and is responsible for fetching a user's username from the database.
 
-The file begins by importing the necessary modules:
+## Code Overview
 
-- `Database` from "@/supabase/types" - This is a type definition for the Supabase database.
-- `createClient` from "@supabase/supabase-js" - This is a function that creates a new Supabase client.
+The `route.ts` file is a TypeScript file that exports an asynchronous function `POST`. This function is designed to handle HTTP POST requests. The function retrieves the user's ID from the request body, connects to the Supabase database, and fetches the username associated with the provided user ID.
 
-## Constants
+## Code Breakdown
 
-The `runtime` constant is set to "edge", indicating that this function is intended to run at the edge of the network, close to the user.
+```ts
+import { Database } from "@/supabase/types"
+import { createClient } from "@supabase/supabase-js"
+```
 
-## POST Function
+The file begins by importing the necessary modules. `Database` is a type from the local `supabase/types` module, and `createClient` is a function from the `supabase-js` library.
 
-The `POST` function is an asynchronous function that handles HTTP POST requests. It takes one argument, `request`, which is an object of type `Request`.
+```ts
+export const runtime = "edge"
+```
 
-The function begins by extracting the `userId` from the JSON body of the request.
+The `runtime` constant is exported with the value of "edge". This specifies the environment in which the code will be run.
 
-Then, it creates a new Supabase client using the `createClient` function. The URL and service role key for the Supabase client are retrieved from the environment variables.
+```ts
+export async function POST(request: Request) {
+  const json = await request.json()
+  const { userId } = json as {
+    userId: string
+  }
+```
 
-Next, the function attempts to select the `username` from the `profiles` table in the database where the `user_id` matches the `userId` from the request. It expects to retrieve a single record.
+The `POST` function is exported. It is an asynchronous function that takes a `request` object as its argument. The function begins by parsing the request body into JSON format and extracting the `userId` property.
 
-If no data is retrieved, the function throws an error with the message from the Supabase error. If data is retrieved, the function returns a response with a status of 200 and the `username` in the body of the response.
+```ts
+const supabaseAdmin = createClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+```
 
-If any other error occurs during the execution of the function, it catches the error and returns a response with a status of 500 and the error message in the body of the response.
+A Supabase client is created using the `createClient` function. The URL and service role key for the Supabase database are retrieved from the environment variables.
 
-## Error Handling
+```ts
+const { data, error } = await supabaseAdmin
+  .from("profiles")
+  .select("username")
+  .eq("user_id", userId)
+  .single()
+```
 
-The error handling in this function is robust. It checks for both the presence of data and the absence of errors when interacting with the Supabase database. If an error occurs, it is caught and handled gracefully, with an appropriate HTTP status code and error message returned in the response.
+The function then queries the `profiles` table in the database, selecting the `username` field for the record where the `user_id` matches the provided `userId`. The `.single()` method is used to return only one record.
+
+```ts
+if (!data) {
+  throw new Error(error.message)
+}
+```
+
+If no data is returned (i.e., there is no user with the provided ID), an error is thrown.
+
+```ts
+return new Response(JSON.stringify({ username: data.username }), {
+  status: 200
+})
+```
+
+If the query is successful, the function returns a response with a status of 200 and the username in the body.
+
+```ts
+catch (error: any) {
+  const errorMessage = error.error?.message || "An unexpected error occurred"
+  const errorCode = error.status || 500
+  return new Response(JSON.stringify({ message: errorMessage }), {
+    status: errorCode
+  })
+}
+```
+
+If any error occurs during the execution of the function, a response with a status of 500 (or the status associated with the error) and a message detailing the error is returned.

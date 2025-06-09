@@ -1,49 +1,97 @@
 ---
 source: components/sidebar/items/prompts/prompt-item.tsx
-generated: '2025-06-08T13:21:01.663Z'
+generated: 2025-06-08T21:51:06.616Z
 tags: []
-hash: f8b4a1852a4d9f1fdd39b206a0f47950d0473c4d816bce7e9b6136a881695ac6
+hash: 10d587cc46d81ad86342b0a40712039cb30451391cbf361ef3bb823e3c215371
 ---
-# PromptItem Component
 
-The `PromptItem` component is a functional component that displays a single prompt item in a sidebar. This component is part of the sidebar display items.
+# Chatbot UI - Prompt Item Component
 
-## Imports
+This document describes the `PromptItem` component located at `/Users/garymason/chatbot-ui/components/sidebar/items/prompts/prompt-item.tsx`. This component is part of the chatbot's user interface (UI) and is used to display and edit prompts in the sidebar.
 
-This component imports several utilities and components:
+## Code Overview
 
-- `Input`, `Label`, and `TextareaAutosize` components from the UI components.
-- `PROMPT_NAME_MAX` constant from the database limits.
-- `Tables` type from the Supabase types.
-- `IconPencil` from the Tabler Icons React library.
-- `FC` (Functional Component) and `useState` from React.
-- `SidebarItem` from the sidebar display items.
+The `PromptItem` component is a functional component written in TypeScript. It uses several hooks from React, including `useState`. It also imports several components and constants from other parts of the application.
 
-## Props
+### Imports
 
-The `PromptItem` component accepts the following props:
+```ts
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { TextareaAutosize } from "@/components/ui/textarea-autosize"
+import { PROMPT_NAME_MAX } from "@/db/limits"
+import { Tables } from "@/supabase/types"
+import { IconPencil } from "@tabler/icons-react"
+import { FC, useState } from "react"
+import { SidebarItem } from "../all/sidebar-display-item"
+```
 
-- `prompt`: An object of type `Tables<"prompts">`. This object represents the prompt item to be displayed.
+### Component Props
 
-## State
+The `PromptItem` component accepts a single prop: `prompt`. This prop is an object that represents a prompt from the database.
 
-The component maintains the following state variables:
+```ts
+interface PromptItemProps {
+  prompt: Tables<"prompts">
+}
+```
 
-- `name`: The name of the prompt. Initialized with `prompt.name`.
-- `content`: The content of the prompt. Initialized with `prompt.content`.
-- `isTyping`: A boolean to track if the user is currently typing. Initialized as `false`.
+### Component Functionality
 
-## Render
+The `PromptItem` component maintains its own state for the name and content of the prompt, as well as whether the user is currently typing. This state is initialized with the values of the `prompt` prop.
 
-The component renders a `SidebarItem` with the following props:
+```ts
+const [name, setName] = useState(prompt.name)
+const [content, setContent] = useState(prompt.content)
+const [isTyping, setIsTyping] = useState(false)
+```
 
-- `item`: The prompt object.
-- `isTyping`: The state variable `isTyping`.
-- `contentType`: A string "prompts".
-- `icon`: An `IconPencil` component with a size of 30.
-- `updateState`: An object with `name` and `content` state variables.
-- `renderInputs`: A function that renders two input fields (for name and content of the prompt) with associated labels.
+The component returns a `SidebarItem` component with several props. The `item` prop is the original `prompt` object. The `isTyping` prop is the current state of whether the user is typing. The `contentType` prop is set to `"prompts"`. The `icon` prop is an `IconPencil` component. The `updateState` prop is an object with the current `name` and `content` state.
 
-The `name` input field has a placeholder "Prompt name...", and its value is controlled by the `name` state variable. It also has a maximum length defined by `PROMPT_NAME_MAX`. The `onCompositionStart` and `onCompositionEnd` events are used to update the `isTyping` state.
+The `renderInputs` prop is a function that returns a JSX fragment. This fragment contains two divs, each with a `Label` and an `Input` or `TextareaAutosize` component. The `Input` and `TextareaAutosize` components are controlled components, with their values set to the current `name` and `content` state and their `onChange` or `onValueChange` handlers set to update this state.
 
-The `content` input field is a `TextareaAutosize` component with a placeholder "Prompt...". Its value is controlled by the `content` state variable. It has a minimum of 6 rows and a maximum of 20 rows. The `onCompositionStart` and `onCompositionEnd` events are used to update the `isTyping` state.
+```ts
+return (
+  <SidebarItem
+    item={prompt}
+    isTyping={isTyping}
+    contentType="prompts"
+    icon={<IconPencil size={30} />}
+    updateState={{ name, content }}
+    renderInputs={() => (
+      <>
+        <div className="space-y-1">
+          <Label>Name</Label>
+
+          <Input
+            placeholder="Prompt name..."
+            value={name}
+            onChange={e => setName(e.target.value)}
+            maxLength={PROMPT_NAME_MAX}
+            onCompositionStart={() => setIsTyping(true)}
+            onCompositionEnd={() => setIsTyping(false)}
+          />
+        </div>
+
+        <div className="space-y-1">
+          <Label>Prompt</Label>
+
+          <TextareaAutosize
+            placeholder="Prompt..."
+            value={content}
+            onValueChange={setContent}
+            minRows={6}
+            maxRows={20}
+            onCompositionStart={() => setIsTyping(true)}
+            onCompositionEnd={() => setIsTyping(false)}
+          />
+        </div>
+      </>
+    )}
+  />
+)
+```
+
+## Summary
+
+The `PromptItem` component is a sidebar item that displays and allows editing of chatbot prompts. It maintains its own state for the prompt's name and content, as well as whether the user is currently typing. It uses the `SidebarItem`, `Input`, `Label`, and `TextareaAutosize` components to render the UI.

@@ -1,47 +1,86 @@
 ---
 source: components/sidebar/items/assistants/assistant-tool-select.tsx
-generated: '2025-06-08T13:21:01.661Z'
+generated: 2025-06-08T21:44:39.880Z
 tags: []
-hash: 4d0e8f52ef2058e9e45e221549f81f8c22cf1a82eae1d4a6cceb93b90ad8ed9d
+hash: a095e96d6ae014c772f1cf0236e5308b7917e78217bc0f2351e5634233034b56
 ---
-# AssistantToolSelect Component
 
-The `AssistantToolSelect` component is a functional component that allows users to select tools for an assistant. It uses a dropdown menu to display the available tools and allows users to search for specific tools.
+# Assistant Tool Select Component Documentation
 
-## Props
+This document provides an overview of the `AssistantToolSelect` component in the file `/Users/garymason/chatbot-ui/components/sidebar/items/assistants/assistant-tool-select.tsx`. This component is used to select tools for a chatbot assistant in a dropdown menu.
 
-The `AssistantToolSelect` component accepts the following props:
+## Code Overview
 
-- `selectedAssistantTools`: An array of tools that have already been selected. Each tool is an object of type `Tables<"tools">`.
-- `onAssistantToolsSelect`: A function that is called when a tool is selected. It accepts a single argument, the selected tool which is of type `Tables<"tools">`.
+```ts
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
+import { Input } from "@/components/ui/input"
+import { ChatbotUIContext } from "@/context/context"
+import { Tables } from "@/supabase/types"
+import {
+  IconBolt,
+  IconChevronDown,
+  IconCircleCheckFilled
+} from "@tabler/icons-react"
+import { FC, useContext, useEffect, useRef, useState } from "react"
+```
 
-## State
+The above section imports the necessary dependencies for the component. This includes UI components like `Button`, `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuTrigger`, and `Input`, as well as context, types, and icons.
 
-The `AssistantToolSelect` component maintains the following state:
+### AssistantToolSelectProps Interface
 
-- `isOpen`: A boolean value that indicates whether the dropdown menu is open.
-- `search`: A string value that holds the current search query.
+```ts
+interface AssistantToolSelectProps {
+  selectedAssistantTools: Tables<"tools">[]
+  onAssistantToolsSelect: (tool: Tables<"tools">) => void
+}
+```
 
-## Methods
+This interface defines the props for the `AssistantToolSelect` component. It expects an array of selected assistant tools and a function to handle the selection of an assistant tool.
 
-The `AssistantToolSelect` component defines the following methods:
+### AssistantToolSelect Component
 
-- `handleToolSelect`: A method that is called when a tool is selected. It calls the `onAssistantToolsSelect` prop with the selected tool as an argument.
+```ts
+export const AssistantToolSelect: FC<AssistantToolSelectProps> = ({
+  selectedAssistantTools,
+  onAssistantToolsSelect
+}) => {
+  // Component logic and return statement...
+}
+```
 
-# AssistantToolItem Component
+The `AssistantToolSelect` component uses the `AssistantToolSelectProps` interface for its props. It uses the `ChatbotUIContext` to get the available tools and maintains local state for the dropdown open status and search input.
 
-The `AssistantToolItem` component is a functional component that represents a single tool in the dropdown menu. It displays the tool's name and an icon indicating whether the tool has been selected.
+The `useEffect` hook is used to focus the input when the dropdown is opened. The `handleToolSelect` function calls the `onAssistantToolsSelect` prop function with the selected tool.
 
-## Props
+The component returns a `DropdownMenu` with a trigger button that shows the number of selected tools and a content section that includes a search input and a list of selectable tools.
 
-The `AssistantToolItem` component accepts the following props:
+### AssistantToolItemProps Interface
 
-- `tool`: An object representing the tool. It is of type `Tables<"tools">`.
-- `selected`: A boolean value indicating whether the tool has been selected.
-- `onSelect`: A function that is called when the tool is selected. It accepts a single argument, the selected tool which is of type `Tables<"tools">`.
+```ts
+interface AssistantToolItemProps {
+  tool: Tables<"tools">
+  selected: boolean
+  onSelect: (tool: Tables<"tools">) => void
+}
+```
 
-## Methods
+This interface defines the props for the `AssistantToolItem` component. It expects a tool, a boolean indicating whether the tool is selected, and a function to handle the selection of the tool.
 
-The `AssistantToolItem` component defines the following methods:
+### AssistantToolItem Component
 
-- `handleSelect`: A method that is called when the tool is selected. It calls the `onSelect` prop with the tool as an argument.
+```ts
+const AssistantToolItem: FC<AssistantToolItemProps> = ({
+  tool,
+  selected,
+  onSelect
+}) => {
+  // Component logic and return statement...
+}
+```
+
+The `AssistantToolItem` component uses the `AssistantToolItemProps` interface for its props. It handles the selection of a tool and returns a div that displays the tool name and a check icon if the tool is selected.

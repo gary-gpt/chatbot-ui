@@ -1,53 +1,80 @@
 ---
 source: components/utility/command-k.tsx
-generated: '2025-06-08T13:21:01.637Z'
+generated: 2025-06-08T22:14:40.732Z
 tags: []
-hash: 0d16a147fe447ce631b4a3e4b2587b251790d05f64027ac49c02aa4270f554dd
+hash: 7567d354fe16f6c6d15bdcd140b2daa2ed877ecadd19e1f3982b919712ab774a
 ---
-# CommandK Component
 
-This is a documentation for the `CommandK` component in React.
+# CommandK Component Documentation
 
-## Import Statements
+This file is located at `/Users/garymason/chatbot-ui/components/utility/command-k.tsx`. It is a TypeScript (`.tsx`) file, which means it is a React component written in TypeScript.
 
-```jsx
-import { ChatbotUIContext } from "@/context/context"
-import useHotkey from "@/lib/hooks/use-hotkey"
-import { IconLoader2, IconSend } from "@tabler/icons-react"
-import { FC, useContext, useState } from "react"
-import { Dialog, DialogContent } from "../ui/dialog"
-import { TextareaAutosize } from "../ui/textarea-autosize"
-```
+## Overview
+
+The `CommandK` component is a dialog box that opens when the user presses the 'k' key. It allows the user to input commands and send them to an API endpoint for processing. The dialog box also displays the results of the command execution.
+
+## Imports
+
+The component imports several hooks and components from different libraries and local files. These include:
+
+- `ChatbotUIContext` from "@/context/context"
+- `useHotkey` from "@/lib/hooks/use-hotkey"
+- `IconLoader2` and `IconSend` from "@tabler/icons-react"
+- `FC`, `useContext`, and `useState` from "react"
+- `Dialog` and `DialogContent` from "../ui/dialog"
+- `TextareaAutosize` from "../ui/textarea-autosize"
 
 ## Props
 
-The `CommandK` component does not accept any props:
+The `CommandK` component does not take any props.
 
-```jsx
-interface CommandKProps {}
+## State Variables
+
+The component uses several state variables:
+
+- `isOpen`: A boolean that determines whether the dialog box is open or not.
+- `value`: The current value of the text input field in the dialog box.
+- `loading`: A boolean that indicates whether the component is currently waiting for a response from the API.
+- `content`: The content returned from the API.
+
+## Functions
+
+### `handleCommandK`
+
+This asynchronous function is triggered when the user hits the 'Enter' key in the text input field. It sends a POST request to the "/api/command" endpoint with the current value of the text input field. The response from the API is then stored in the `content` state variable.
+
+### `handleKeyDown`
+
+This function is triggered when a key is pressed in the text input field. If the 'Enter' key is pressed without the 'Shift' key, it prevents the default action and calls the `handleCommandK` function.
+
+## Render
+
+The component returns null if there is no profile in the `ChatbotUIContext`. Otherwise, it returns a `Dialog` component that contains a `DialogContent` component. The `DialogContent` component contains a `TextareaAutosize` component for user input and either an `IconLoader2` or `IconSend` component depending on the state of the `loading` variable.
+
+If the profile has an `openai_api_key`, the component displays a list of commands and a text input field. If not, it displays a message instructing the user to add their OpenAI API key in the settings.
+
+```ts
+if (!profile) return null
+
+return (
+  isOpen && (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent onKeyDown={handleKeyDown}>
+        {profile.openai_api_key ? (
+          // Display list of commands and text input field
+        ) : (
+          <div>Add your OpenAI API key in the settings to unlock CMD+K.</div>
+        )}
+      </DialogContent>
+    </Dialog>
+  )
+)
 ```
 
-## Component Functionality
+## Hotkey
 
-The `CommandK` component is a functional component that uses the `ChatbotUIContext` to get the user's profile. It also defines several state variables:
+The `useHotkey` hook is used to toggle the `isOpen` state variable when the 'k' key is pressed. This opens and closes the dialog box.
 
-- `isOpen`: Boolean state to control the visibility of the dialog.
-- `value`: State to hold the value of the input.
-- `loading`: Boolean state to control the loading state.
-- `content`: State to hold the content received from the API.
-
-The component also defines a hotkey "k" to toggle the visibility of the dialog.
-
-The `handleCommandK` function is an async function that makes a POST request to the "/api/command" endpoint with the current value of the input as the body. It then sets the content state with the received data, resets the value state and sets the loading state to false.
-
-The `handleKeyDown` function is used to trigger the `handleCommandK` function when the Enter key is pressed without the Shift key.
-
-The component returns a `Dialog` component that contains a `DialogContent` and a `TextareaAutosize` for user input. If the `loading` state is true, it displays a loading icon, otherwise, it displays a send icon. If the user's profile does not have an OpenAI API key, it prompts the user to add it in the settings.
-
-## Usage
-
-```jsx
-<CommandK />
+```ts
+useHotkey("k", () => setIsOpen(prevState => !prevState))
 ```
-
-This component does not accept any props.

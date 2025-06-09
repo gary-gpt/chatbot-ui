@@ -1,37 +1,100 @@
 ---
 source: components/setup/api-step.tsx
-generated: '2025-06-08T13:21:01.636Z'
+generated: 2025-06-08T21:38:06.266Z
 tags: []
-hash: 98e5967717860e801ede066c610f8f8346315e2c3dd50a9b153f53bbe321e16d
+hash: 4f6aa0366176abb2daa81f006169cbce317a6f1b8f00386194126ae2118d1edf
 ---
-# APIStep Component Documentation
+
+# API Step Component Documentation
+
+This document provides an overview of the `APIStep` component in the file `/Users/garymason/chatbot-ui/components/setup/api-step.tsx`.
 
 ## Overview
 
-The `APIStep` component is a functional component that renders a form for inputting various API keys and configuration details. It supports both Azure OpenAI and Standard OpenAI, with additional support for other APIs such as Anthropic, Google Gemini, Mistral, Groq, Perplexity, and OpenRouter.
+The `APIStep` component is a functional component that renders a form for the user to input various API keys and settings. These keys are used to configure the chatbot's integration with various AI services such as OpenAI, Azure OpenAI, Anthropic, Google Gemini, Mistral, Groq, Perplexity, and OpenRouter.
 
-## Props
+## Interface: APIStepProps
 
-The `APIStep` component accepts the following props:
+The `APIStep` component accepts a set of properties defined by the `APIStepProps` interface. These properties include the current values of various API keys and settings, as well as callback functions to handle changes to these values.
 
-- `openaiAPIKey`: A string representing the OpenAI API Key.
-- `openaiOrgID`: A string representing the OpenAI Organization ID.
-- `azureOpenaiAPIKey`: A string representing the Azure OpenAI API Key.
-- `azureOpenaiEndpoint`: A string representing the Azure OpenAI Endpoint.
-- `azureOpenai35TurboID`: A string representing the Azure OpenAI GPT-3.5 Turbo ID.
-- `azureOpenai45TurboID`: A string representing the Azure OpenAI GPT-4.5 Turbo ID.
-- `azureOpenai45VisionID`: A string representing the Azure OpenAI GPT-4.5 Vision ID.
-- `azureOpenaiEmbeddingsID`: A string representing the Azure OpenAI Embeddings ID.
-- `anthropicAPIKey`: A string representing the Anthropic API Key.
-- `googleGeminiAPIKey`: A string representing the Google Gemini API Key.
-- `mistralAPIKey`: A string representing the Mistral API Key.
-- `groqAPIKey`: A string representing the Groq API Key.
-- `perplexityAPIKey`: A string representing the Perplexity API Key.
-- `useAzureOpenai`: A boolean indicating whether to use Azure OpenAI or Standard OpenAI.
-- `openrouterAPIKey`: A string representing the OpenRouter API Key.
+```ts
+interface APIStepProps {
+  // API keys and settings
+  openaiAPIKey: string
+  openaiOrgID: string
+  azureOpenaiAPIKey: string
+  azureOpenaiEndpoint: string
+  azureOpenai35TurboID: string
+  azureOpenai45TurboID: string
+  azureOpenai45VisionID: string
+  azureOpenaiEmbeddingsID: string
+  anthropicAPIKey: string
+  googleGeminiAPIKey: string
+  mistralAPIKey: string
+  groqAPIKey: string
+  perplexityAPIKey: string
+  useAzureOpenai: boolean
+  openrouterAPIKey: string
 
-The component also accepts a series of callback functions for handling changes to each of the above props. Each callback function accepts a single parameter, which is the new value for the corresponding prop.
+  // Callback functions to handle changes to the above values
+  onOpenrouterAPIKeyChange: (value: string) => void
+  onOpenaiAPIKeyChange: (value: string) => void
+  onOpenaiOrgIDChange: (value: string) => void
+  onAzureOpenaiAPIKeyChange: (value: string) => void
+  onAzureOpenaiEndpointChange: (value: string) => void
+  onAzureOpenai35TurboIDChange: (value: string) => void
+  onAzureOpenai45TurboIDChange: (value: string) => void
+  onAzureOpenai45VisionIDChange: (value: string) => void
+  onAzureOpenaiEmbeddingsIDChange: (value: string) => void
+  onAnthropicAPIKeyChange: (value: string) => void
+  onGoogleGeminiAPIKeyChange: (value: string) => void
+  onMistralAPIKeyChange: (value: string) => void
+  onGroqAPIKeyChange: (value: string) => void
+  onPerplexityAPIKeyChange: (value: string) => void
+  onUseAzureOpenaiChange: (value: boolean) => void
+}
+```
 
-## Usage
+## Component Structure
 
-The `APIStep` component is used to render a form for inputting various API keys and configuration details. The user can switch between Azure OpenAI and Standard OpenAI using a button. Depending on the selected option, the form will display different fields for inputting the corresponding configuration details. The component also provides fields for inputting API keys for other APIs. Each field is accompanied by a label and a placeholder. The value of each field is controlled by the corresponding prop, and changes to the field values are handled by the corresponding callback functions.
+The `APIStep` component renders a series of input fields for the user to enter their API keys and settings. Each input field is accompanied by a label and is pre-filled with the current value of the corresponding setting.
+
+The component also includes a button that allows the user to switch between using the standard OpenAI and Azure OpenAI. The labels and placeholders of the input fields update dynamically based on the current choice.
+
+## Example Usage
+
+```ts
+<APIStep
+  openaiAPIKey={openaiAPIKey}
+  openaiOrgID={openaiOrgID}
+  azureOpenaiAPIKey={azureOpenaiAPIKey}
+  azureOpenaiEndpoint={azureOpenaiEndpoint}
+  azureOpenai35TurboID={azureOpenai35TurboID}
+  azureOpenai45TurboID={azureOpenai45TurboID}
+  azureOpenai45VisionID={azureOpenai45VisionID}
+  azureOpenaiEmbeddingsID={azureOpenaiEmbeddingsID}
+  anthropicAPIKey={anthropicAPIKey}
+  googleGeminiAPIKey={googleGeminiAPIKey}
+  mistralAPIKey={mistralAPIKey}
+  groqAPIKey={groqAPIKey}
+  perplexityAPIKey={perplexityAPIKey}
+  useAzureOpenai={useAzureOpenai}
+  openrouterAPIKey={openrouterAPIKey}
+  onOpenrouterAPIKeyChange={handleOpenrouterAPIKeyChange}
+  onOpenaiAPIKeyChange={handleOpenaiAPIKeyChange}
+  onOpenaiOrgIDChange={handleOpenaiOrgIDChange}
+  onAzureOpenaiAPIKeyChange={handleAzureOpenaiAPIKeyChange}
+  onAzureOpenaiEndpointChange={handleAzureOpenaiEndpointChange}
+  onAzureOpenai35TurboIDChange={handleAzureOpenai35TurboIDChange}
+  onAzureOpenai45TurboIDChange={handleAzureOpenai45TurboIDChange}
+  onAzureOpenai45VisionIDChange={handleAzureOpenai45VisionIDChange}
+  onAzureOpenaiEmbeddingsIDChange={handleAzureOpenaiEmbeddingsIDChange}
+  onAnthropicAPIKeyChange={handleAnthropicAPIKeyChange}
+  onGoogleGeminiAPIKeyChange={handleGoogleGeminiAPIKeyChange}
+  onMistralAPIKeyChange={handleMistralAPIKeyChange}
+  onGroqAPIKeyChange={handleGroqAPIKeyChange}
+  onPerplexityAPIKeyChange={handlePerplexityAPIKeyChange}
+  onUseAzureOpenaiChange={handleUseAzureOpenaiChange}
+/>
+```
+In the above example, `handleOpenaiAPIKeyChange`, `handleOpenaiOrgIDChange`, etc. are functions defined in the parent component that update the state of the parent component when the user changes the value of an input field.

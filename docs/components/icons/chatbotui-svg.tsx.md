@@ -1,46 +1,50 @@
 ---
 source: components/icons/chatbotui-svg.tsx
-generated: '2025-06-08T13:21:01.633Z'
+generated: 2025-06-08T21:33:34.142Z
 tags: []
-hash: 35123c3f3991a75b260fd11f37999dc392b1f453e637ab02e11fca3f1b6f818d
+hash: 5bee0a1eaf6738964fb195e49fe66989b6e577c3d32b1559097a4ec1be9496ea
 ---
-# ChatbotUISVG Component
 
-`ChatbotUISVG` is a functional component that renders a SVG (Scalable Vector Graphics) for a chatbot UI. The SVG is customizable through the props passed to the component.
+# Chatbot User Interface SVG Component
 
-## Props
+This document explains the purpose and logic of the `ChatbotUISVG` component in the file `/Users/garymason/chatbot-ui/components/icons/chatbotui-svg.tsx`.
 
-The component accepts the following props:
+## Overview
 
-### `theme`
+The `ChatbotUISVG` component is a React Functional Component (FC) that renders an SVG (Scalable Vector Graphics) image. This SVG image is used as an icon for a chatbot user interface. The component allows for theming (dark or light) and scaling.
 
-This prop is used to set the color theme of the SVG. It accepts either `"dark"` or `"light"` as values.
+## Code Explanation
 
-- Type: `"dark" | "light"`
-- Required: Yes
+### Importing Dependencies
 
-### `scale`
-
-This prop is used to set the scale of the SVG. It multiplies the default width and height (189 x 194) of the SVG.
-
-- Type: `number`
-- Required: No
-- Default: `1`
-
-## Example
-
-```jsx
-<ChatbotUISVG theme="dark" scale={2} />
+```ts
+import { FC } from "react"
 ```
+The `FC` (Functional Component) type from the `react` library is imported. This type is used to type-check our component and its props.
 
-This will render a dark themed SVG with double the default size.
+### Defining the Props Interface
 
-## SVG Details
+```ts
+interface ChatbotUISVGProps {
+  theme: "dark" | "light"
+  scale?: number
+}
+```
+An interface `ChatbotUISVGProps` is defined to type-check the props that the `ChatbotUISVG` component will accept. The `theme` prop is a string that can either be "dark" or "light", and the `scale` prop is an optional number.
 
-The SVG consists of three main elements:
+### The ChatbotUISVG Component
 
-1. A rectangle that serves as the main body of the chatbot UI. The fill and stroke color depends on the `theme` prop.
+```ts
+export const ChatbotUISVG: FC<ChatbotUISVGProps> = ({ theme, scale = 1 }) => {
+  ...
+}
+```
+The `ChatbotUISVG` component is declared as a functional component that accepts props of type `ChatbotUISVGProps`. The `theme` and `scale` props are destructured from the props object. If `scale` is not provided, it defaults to 1.
 
-2. A path that represents a message bubble. The fill color depends on the `theme` prop.
+### The SVG Element
 
-3. Another path that represents the chatbot's UI buttons. The fill color depends on the `theme` prop.
+The SVG element is rendered with its width and height scaled according to the `scale` prop. The `viewBox` attribute is set to "0 0 189 194" to specify the aspect ratio and coordinate system of the SVG. The `fill` attribute is set to "none", and the `xmlns` attribute is set to "http://www.w3.org/2000/svg", which is the XML namespace for SVG elements.
+
+### The SVG Paths
+
+The SVG contains three paths: a rectangle and two custom paths. The `fill` and `stroke` colors of these paths are determined by the `theme` prop. If `theme` is "dark", the `fill` color is black ("#000") and the `stroke` color is white ("#fff"). If `theme` is "light", the `fill` color is white ("#fff") and the `stroke` color is black ("#000"). The `strokeWidth` of the rectangle is set to 25. The `d` attributes of the custom paths define their shapes.

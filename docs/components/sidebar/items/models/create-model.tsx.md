@@ -1,39 +1,84 @@
 ---
 source: components/sidebar/items/models/create-model.tsx
-generated: '2025-06-08T13:21:01.662Z'
+generated: 2025-06-08T21:49:17.309Z
 tags: []
-hash: 5fb9282c83d1d69c31bde61590f18768c6766df73e7774eb2472cfb01a3904ac
+hash: 7ccb13cdcbfcb0d37203e434c7b01e880b3ea0928d35d1faaf7a0fb001f0f25b
 ---
-# CreateModel Component
 
-The `CreateModel` component is a functional component that provides an interface for creating a custom model. It uses the `ChatbotUIContext` to access the user's profile and selected workspace. If either of these are not available, the component will not render.
+# Documentation for create-model.tsx
 
-## Props
+This file is a React component that provides an interface for creating a new model in the sidebar of the Chatbot UI. The model is created with a set of properties including name, model ID, base URL, API key, and max context length.
 
-The component accepts the following props:
+## Import Statements
 
-- `isOpen`: A boolean indicating whether the component is open.
-- `onOpenChange`: A function that is called when the open state of the component changes. It accepts a boolean argument representing the new open state.
+```ts
+import { SidebarCreateItem } from "@/components/sidebar/items/all/sidebar-create-item"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { ChatbotUIContext } from "@/context/context"
+import { MODEL_NAME_MAX } from "@/db/limits"
+import { TablesInsert } from "@/supabase/types"
+import { FC, useContext, useState } from "react"
+```
 
-## State
+The import statements include necessary components, context, constants, types, and hooks used in the file.
 
-The component maintains the following state variables:
+## Interface
 
-- `isTyping`: A boolean indicating whether the user is currently typing.
-- `apiKey`: A string representing the API key.
-- `baseUrl`: A string representing the base URL.
-- `description`: A string representing the description.
-- `modelId`: A string representing the model ID.
-- `name`: A string representing the name.
-- `contextLength`: A number representing the context length. It defaults to 4096.
+```ts
+interface CreateModelProps {
+  isOpen: boolean
+  onOpenChange: (isOpen: boolean) => void
+}
+```
 
-## Render
+The `CreateModelProps` interface defines the props that the `CreateModel` component expects. It includes a boolean `isOpen` and a function `onOpenChange` that takes a boolean as an argument.
 
-The component renders a `SidebarCreateItem` with the following props:
+## Component
 
-- `contentType`: Set to "models".
-- `isOpen`: The current open state of the component.
-- `isTyping`: The current typing state of the user.
-- `onOpenChange`: The function to call when the open state changes.
-- `createState`: An object representing the state of the new model to be created. It includes the user ID, API key, base URL, description, context length, model ID, and name.
-- `renderInputs`: A function that returns a JSX element containing the input fields for the new model. This includes fields for the name, model ID, base URL, API key, and max context length.
+```ts
+export const CreateModel: FC<CreateModelProps> = ({ isOpen, onOpenChange }) => {
+  ...
+}
+```
+
+The `CreateModel` component is a functional component that takes `CreateModelProps` as its props. It uses the `ChatbotUIContext` to access the user's profile and selected workspace.
+
+## State Variables
+
+```ts
+const [isTyping, setIsTyping] = useState(false)
+const [apiKey, setApiKey] = useState("")
+const [baseUrl, setBaseUrl] = useState("")
+const [description, setDescription] = useState("")
+const [modelId, setModelId] = useState("")
+const [name, setName] = useState("")
+const [contextLength, setContextLength] = useState(4096)
+```
+
+The component uses several state variables to manage the current typing status and the values of the model properties.
+
+## Return Statement
+
+```ts
+return (
+  <SidebarCreateItem
+    ...
+  />
+)
+```
+
+The component returns a `SidebarCreateItem` component with several props including the current state of the model properties and a function to render the inputs for those properties.
+
+## Input Fields
+
+```ts
+<Input
+  placeholder="Model name..."
+  value={name}
+  onChange={e => setName(e.target.value)}
+  maxLength={MODEL_NAME_MAX}
+/>
+```
+
+Each input field is associated with a state variable and has an `onChange` event handler that updates the corresponding state variable when the input value changes. The `maxLength` prop for the name input field is set to `MODEL_NAME_MAX` imported from "@/db/limits".

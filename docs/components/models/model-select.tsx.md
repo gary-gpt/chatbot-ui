@@ -1,46 +1,53 @@
 ---
 source: components/models/model-select.tsx
-generated: '2025-06-08T13:21:01.637Z'
+generated: 2025-06-08T21:37:28.068Z
 tags: []
-hash: 2673c9499d3723d7e39fe0b4cf4a328419823bba731719bcc84a2e13d95f76dd
+hash: 2953c503bd384b40918f3ad0f108f1f9a0f95131631da2bbd25e2d2d6735f41b
 ---
-# ModelSelect Component
 
-The `ModelSelect` component is a functional component that allows users to select a model from a dropdown menu. The dropdown menu includes a search bar for filtering models and tabs for switching between hosted and local models.
+# Model Select Component Documentation
 
-## Props
+This document explains the purpose and logic of the `ModelSelect` component in the `model-select.tsx` file located at `/Users/garymason/chatbot-ui/components/models/`.
 
-The component accepts the following props:
+## Overview
 
-- `selectedModelId`: A string representing the ID of the currently selected model.
-- `onSelectModel`: A function that is called when a model is selected. It takes the ID of the selected model as its argument.
+The `ModelSelect` component is a functional component that provides an interface for selecting a model from a list of available models. The models can be filtered by provider and searched by name.
 
-## Context
+## Imports
 
-The component uses the `ChatbotUIContext` to access the following data:
+The component imports several hooks and components from React and other libraries. It also imports several types and context from the application's own modules.
 
-- `profile`: The user's profile information.
-- `models`: An array of the user's models.
-- `availableHostedModels`: An array of available hosted models.
-- `availableLocalModels`: An array of available local models.
-- `availableOpenRouterModels`: An array of available open router models.
+## Component Props
 
-## State
+The `ModelSelect` component accepts two props:
 
-The component maintains the following state variables:
+- `selectedModelId`: The ID of the currently selected model.
+- `onSelectModel`: A callback function that is called when a model is selected.
 
-- `isOpen`: A boolean indicating whether the dropdown menu is open.
-- `search`: A string representing the current search term.
-- `tab`: A string representing the current tab ("hosted" or "local").
+## Component State
 
-## Functionality
+The component maintains several pieces of state:
 
-When the dropdown menu is opened, the search input is automatically focused. When a model is selected, the `onSelectModel` function is called with the ID of the selected model, and the dropdown menu is closed.
+- `isOpen`: A boolean indicating whether the dropdown is open.
+- `search`: A string for the current search query.
+- `tab`: A string indicating the currently selected tab ("hosted" or "local").
 
-The component groups all models by their provider and filters them based on the current tab and search term. If no models match the filter, the dropdown menu displays a message instructing the user to enter API keys in their profile settings.
+## Component Logic
 
-Each model option in the dropdown menu displays the model's name and an icon representing its provider. The currently selected model is indicated with a check icon.
+The component retrieves the current profile and available models from the `ChatbotUIContext`. It then groups the models by provider and finds the currently selected model.
 
-## Styling
+When the dropdown is open, the input field is automatically focused. This is achieved using the `useEffect` hook and a `ref` to the input field.
 
-The component uses Tailwind CSS for styling. The dropdown menu trigger is a button with a "ghost" variant, and the dropdown menu content includes space between elements, an overflow scroll, and a width matching the trigger's width. The search input is full width, and the model options are displayed in a flex container with space between items.
+When a model is selected, the `onSelectModel` callback is passed the selected model's ID, and the dropdown is closed.
+
+## Component Rendering
+
+The component returns a `DropdownMenu` component, which includes a trigger and content. The trigger is a button that displays the currently selected model, or a prompt to select a model if none is selected. The content includes tabs to switch between hosted and local models, an input field for searching models, and a list of models grouped by provider.
+
+Each model in the list is wrapped in a `ModelOption` component. If a model is the currently selected model, a check icon is displayed next to it.
+
+If no models are available, a message is displayed prompting the user to unlock models by entering API keys in their profile settings.
+
+## Code Structure
+
+The code is structured in a standard way for a React functional component. It begins with the import statements, followed by the component's prop types, the component function itself, and then the component's logic and rendering.

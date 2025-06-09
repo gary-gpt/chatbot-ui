@@ -1,50 +1,27 @@
 ---
 source: types/file-item-chunk.ts
-generated: '2025-06-08T13:21:01.632Z'
+generated: 2025-06-08T22:44:00.082Z
 tags: []
-hash: 539b3c74624166a826ea79d139febc7edb1372b65b767687a8dc3bbb28f58c97
+hash: 4b452c2e98bfada2065d264eb1b51002d62ddd4c1e9631d20481693c34239862
 ---
-# FileItemChunk Type Documentation
 
-The `FileItemChunk` type is an exported type from this source code file. This type is an object that is used to represent a chunk of a file item. It is composed of two properties: `content` and `tokens`.
+# File: /Users/garymason/chatbot-ui/types/file-item-chunk.ts
 
-## Properties
+This file defines the TypeScript type `FileItemChunk`. This type is used to represent a chunk of a file item in the chatbot UI. Each chunk contains the actual content of the chunk and the number of tokens in that chunk.
 
-### `content`
+## Type: FileItemChunk
 
-The `content` property is of type `string`. This property is used to store the actual content of the file item chunk. 
-
-Example:
-
-```typescript
-{
-  content: "This is a sample content of a file item chunk."
+```ts
+export type FileItemChunk = {
+  content: string
+  tokens: number
 }
 ```
 
-### `tokens`
+### Properties
 
-The `tokens` property is of type `number`. This property is used to store the number of tokens in the file item chunk. Tokens are typically individual words or symbols in the content that are used for processing or parsing the content.
+- `content: string`: This property represents the actual content of the file item chunk. It is a string type.
 
-Example:
+- `tokens: number`: This property represents the number of tokens in the file item chunk. It is a number type.
 
-```typescript
-{
-  tokens: 10
-}
-```
-
-## Usage
-
-The `FileItemChunk` type can be used to create objects that represent chunks of a file item. These objects can then be used in various parts of the application where file item chunks need to be processed or manipulated.
-
-Example:
-
-```typescript
-let fileItemChunk: FileItemChunk = {
-  content: "This is a sample content of a file item chunk.",
-  tokens: 10
-};
-```
-
-This creates a `FileItemChunk` object with a `content` of "This is a sample content of a file item chunk." and `tokens` of 10.
+This type is exported so it can be imported and used in other parts of the application where it's needed. The `FileItemChunk` type is typically used when the application needs to process or manipulate chunks of a file item.

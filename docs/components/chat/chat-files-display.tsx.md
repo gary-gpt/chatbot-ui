@@ -1,72 +1,63 @@
 ---
 source: components/chat/chat-files-display.tsx
-generated: '2025-06-08T13:21:01.634Z'
+generated: 2025-06-08T21:26:37.318Z
 tags: []
-hash: ab75506128df612b391512546a99eb3e298d859495d52da5c3ac0e88d0ac16d7
+hash: 5a0fd5af018b0a2f06ebdafeb2a135e9ede130e92318686128e4fba38e411e51
 ---
-# ChatFilesDisplay Component
 
-This is a React functional component that displays chat files and images. It allows users to view and manage files associated with chat messages.
+# Chat Files Display Component
 
-## Props
+This document provides an overview of the `ChatFilesDisplay` component in the `chatbot-ui` project. This component is responsible for displaying files and images associated with chat messages in the chatbot user interface.
 
-This component does not accept any props.
+## File Location
 
-## State
+`/Users/garymason/chatbot-ui/components/chat/chat-files-display.tsx`
 
-This component maintains the following state:
+## Imports
 
-- `selectedFile`: The currently selected file.
-- `selectedImage`: The currently selected image.
-- `showPreview`: A boolean indicating whether the file or image preview is shown.
+The component imports several dependencies, including:
 
-## Context
+- Context and utility functions from the project's own modules
+- Icons from `@tabler/icons-react`
+- `Image` from `next/image`
+- React hooks and components
+- Other UI components from the project
 
-This component uses the `ChatbotUIContext` to access and manage the following context values:
+## Component Props
 
-- `files`: All the files in the current context.
-- `newMessageImages`: New images associated with the current message.
-- `setNewMessageImages`: A function to set new images associated with the current message.
-- `newMessageFiles`: New files associated with the current message.
-- `setNewMessageFiles`: A function to set new files associated with the current message.
-- `setShowFilesDisplay`: A function to toggle the display of files.
-- `showFilesDisplay`: A boolean indicating whether the files display is shown.
-- `chatFiles`: All the files associated with the chat.
-- `chatImages`: All the images associated with the chat.
-- `setChatImages`: A function to set the images associated with the chat.
-- `setChatFiles`: A function to set the files associated with the chat.
-- `setUseRetrieval`: A function to toggle the use of retrieval.
+The `ChatFilesDisplay` component does not accept any props.
 
-## Functions
+## Component Logic
 
-### getLinkAndView
+The `ChatFilesDisplay` component uses the `ChatbotUIContext` to access the chatbot's state and actions. It also maintains its own state for the selected file and image, and whether to show a file preview.
 
-This asynchronous function takes a `ChatFile` as an argument. It finds the file in the `files` context value and opens it in a new browser tab.
+The component uses two hotkeys: 'f' to toggle the file display, and 'e' to toggle the use of file retrieval.
 
-## Rendered Components
+The component combines new message images and files with existing chat images and files, excluding any duplicates.
 
-This component renders the following child components:
+The `getLinkAndView` function retrieves a file link from storage and opens it in a new browser tab.
 
-- `FilePreview`: A component to preview a file or image.
-- `Button`: A UI component for a button.
-- `ChatRetrievalSettings`: A component to manage chat retrieval settings.
-- `RetrievalToggle`: A component to toggle the use of retrieval.
+## Component Rendering
 
-## Icons
+The component renders differently based on the `showFilesDisplay` state and whether there are any files or images to display.
 
-This component uses the following icons from the `@tabler/icons-react` package:
+If `showFilesDisplay` is true and there are files or images, the component renders file previews for the selected file or image, a button to hide the files, and a list of all images and files.
 
-- `IconCircleFilled`
-- `IconFileFilled`
-- `IconFileTypeCsv`
-- `IconFileTypeDocx`
-- `IconFileTypePdf`
-- `IconFileTypeTxt`
-- `IconJson`
-- `IconLoader2`
-- `IconMarkdown`
-- `IconX`
+If `showFilesDisplay` is false but there are files or images, the component renders a button to view the files.
 
-## Styling
+## Child Components
 
-This component uses Tailwind CSS for styling. It uses utility classes for spacing, flex layout, text styling, cursor styling, border styling, opacity, and hover effects.
+The `ChatFilesDisplay` component uses several child components, including:
+
+- `FilePreview`: Displays a preview of a selected file or image.
+- `Button`: A reusable button component.
+- `ChatRetrievalSettings`: A component for adjusting file retrieval settings.
+- `RetrievalToggle`: A component for toggling file retrieval on and off.
+
+## Example Code
+
+```ts
+<ChatFilesDisplay />
+```
+
+This will render the `ChatFilesDisplay` component with its default state and behavior.

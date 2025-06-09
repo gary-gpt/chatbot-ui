@@ -1,51 +1,149 @@
 ---
 source: db/collections.ts
-generated: '2025-06-08T13:21:01.629Z'
+generated: 2025-06-08T22:21:59.694Z
 tags: []
-hash: b10a6144f18190c924cc18e3446ad6631f2dfd33c32ce0fd38ebf36455086c75
+hash: 02d2a98d5c6524141997b4989eae2d851a5ad8bab40bd121f9984d54c37e667f
 ---
-# Collection Module
 
-This module provides functions to interact with the `collections` and `collection_workspaces` tables in the database using the Supabase client.
+# Collections.ts Documentation
 
-## Functions
+This TypeScript file, `collections.ts`, provides a set of functions for interacting with the `collections` and `workspaces` tables in a Supabase database. The functions include operations for fetching, creating, updating, and deleting collections and workspaces.
 
-### `getCollectionById(collectionId: string)`
+## Import Statements
 
-Fetches a single collection by its `id` from the `collections` table. If the collection is not found, it throws an error.
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert, TablesUpdate } from "@/supabase/types"
+```
 
-### `getCollectionWorkspacesByWorkspaceId(workspaceId: string)`
+The file begins by importing the `supabase` client from a local file, which is used to interact with the Supabase database. It also imports two types, `TablesInsert` and `TablesUpdate`, which are used in the function signatures to denote the shape of the data being inserted or updated in the database.
 
-Fetches a single workspace by its `id` from the `workspaces` table along with its associated collections. If the workspace is not found, it throws an error.
+## Fetching Functions
 
-### `getCollectionWorkspacesByCollectionId(collectionId: string)`
+### getCollectionById
 
-Fetches a single collection by its `id` from the `collections` table along with its associated workspaces. If the collection is not found, it throws an error.
+```ts
+export const getCollectionById = async (collectionId: string) => {
+  //...
+}
+```
 
-### `createCollection(collection: TablesInsert<"collections">, workspace_id: string)`
+This function fetches a single collection from the `collections` table by its `id`.
 
-Creates a new collection in the `collections` table and associates it with a workspace in the `collection_workspaces` table. If there's an error during the creation, it throws an error.
+### getCollectionWorkspacesByWorkspaceId
 
-### `createCollections(collections: TablesInsert<"collections">[], workspace_id: string)`
+```ts
+export const getCollectionWorkspacesByWorkspaceId = async (
+  workspaceId: string
+) => {
+  //...
+}
+```
 
-Creates multiple new collections in the `collections` table and associates them with a workspace in the `collection_workspaces` table. If there's an error during the creation, it throws an error.
+This function fetches a single workspace from the `workspaces` table by its `id`, including all associated collections.
 
-### `createCollectionWorkspace(item: { user_id: string, collection_id: string, workspace_id: string })`
+### getCollectionWorkspacesByCollectionId
 
-Creates a new association between a collection and a workspace in the `collection_workspaces` table. If there's an error during the creation, it throws an error.
+```ts
+export const getCollectionWorkspacesByCollectionId = async (
+  collectionId: string
+) => {
+  //...
+}
+```
 
-### `createCollectionWorkspaces(items: { user_id: string; collection_id: string; workspace_id: string }[])`
+This function fetches a single collection from the `collections` table by its `id`, including all associated workspaces.
 
-Creates multiple new associations between collections and a workspace in the `collection_workspaces` table. If there's an error during the creation, it throws an error.
+## Creation Functions
 
-### `updateCollection(collectionId: string, collection: TablesUpdate<"collections">)`
+### createCollection
 
-Updates a collection in the `collections` table by its `id`. If there's an error during the update, it throws an error.
+```ts
+export const createCollection = async (
+  collection: TablesInsert<"collections">,
+  workspace_id: string
+) => {
+  //...
+}
+```
 
-### `deleteCollection(collectionId: string)`
+This function creates a new collection in the `collections` table and associates it with a workspace.
 
-Deletes a collection from the `collections` table by its `id`. If there's an error during the deletion, it throws an error.
+### createCollections
 
-### `deleteCollectionWorkspace(collectionId: string, workspaceId: string)`
+```ts
+export const createCollections = async (
+  collections: TablesInsert<"collections">[],
+  workspace_id: string
+) => {
+  //...
+}
+```
 
-Deletes an association between a collection and a workspace from the `collection_workspaces` table by their `id`s. If there's an error during the deletion, it throws an error.
+This function creates multiple new collections in the `collections` table and associates them with a workspace.
+
+### createCollectionWorkspace
+
+```ts
+export const createCollectionWorkspace = async (item: {
+  user_id: string
+  collection_id: string
+  workspace_id: string
+}) => {
+  //...
+}
+```
+
+This function creates a new association between a collection and a workspace in the `collection_workspaces` table.
+
+### createCollectionWorkspaces
+
+```ts
+export const createCollectionWorkspaces = async (
+  items: { user_id: string; collection_id: string; workspace_id: string }[]
+) => {
+  //...
+}
+```
+
+This function creates multiple new associations between collections and workspaces in the `collection_workspaces` table.
+
+## Update Function
+
+### updateCollection
+
+```ts
+export const updateCollection = async (
+  collectionId: string,
+  collection: TablesUpdate<"collections">
+) => {
+  //...
+}
+```
+
+This function updates a collection in the `collections` table by its `id`.
+
+## Deletion Functions
+
+### deleteCollection
+
+```ts
+export const deleteCollection = async (collectionId: string) => {
+  //...
+}
+```
+
+This function deletes a collection from the `collections` table by its `id`.
+
+### deleteCollectionWorkspace
+
+```ts
+export const deleteCollectionWorkspace = async (
+  collectionId: string,
+  workspaceId: string
+) => {
+  //...
+}
+```
+
+This function deletes an association between a collection and a workspace from the `collection_workspaces` table by their `id`s.

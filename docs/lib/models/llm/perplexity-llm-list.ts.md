@@ -1,36 +1,68 @@
 ---
 source: lib/models/llm/perplexity-llm-list.ts
-generated: '2025-06-08T13:21:01.658Z'
+generated: 2025-06-08T22:36:27.372Z
 tags: []
-hash: 0d07537b9f7edc77e1ab1abbc1e1dc40ef9aaf244419f5bf4493476cb3be4e02
+hash: 8d7682371152a7dfe9974122c1ef3a233a7319ee8201e77c370bf2dac15ec094
 ---
-# Source Code Documentation
 
-This source code file is primarily concerned with defining and exporting a list of language models provided by Perplexity. Each model is defined as an object of type `LLM` and contains information such as the model's ID, name, provider, hosted ID, a link to the platform, and a boolean indicating whether the model accepts image input.
+# Documentation for `perplexity-llm-list.ts`
+
+This file is located at `/Users/garymason/chatbot-ui/lib/models/llm/perplexity-llm-list.ts`. It contains the definitions of several Language Learning Models (LLMs) provided by Perplexity. Each model is defined as a constant object of type `LLM`.
+
+## Import Statements
+
+```ts
+import { LLM } from "@/types"
+```
+
+This line imports the `LLM` type from the `@/types` module. `LLM` is a type that defines the structure of a language learning model.
 
 ## Constants
 
-### `PERPLEXITY_PLATORM_LINK`
+```ts
+const PERPLEXITY_PLATORM_LINK =
+  "https://docs.perplexity.ai/docs/getting-started"
+```
 
-This constant holds the URL to the Perplexity getting started documentation.
+This constant stores the link to the Perplexity platform's getting started page.
 
-### `MIXTRAL_8X7B_INSTRUCT`, `MISTRAL_7B_INSTRUCT`, `CODELLAMA_70B_INSTRUCT`, `PERPLEXITY_SONAR_SMALL_CHAT_7B`, `PERPLEXITY_SONAR_SMALL_ONLINE_7B`, `PERPLEXITY_SONAR_MEDIUM_CHAT_8x7B`, `PERPLEXITY_SONAR_MEDIUM_ONLINE_8x7B`
+## Language Learning Models (LLMs)
 
-These constants are objects of type `LLM` that represent different language models provided by Perplexity. Each object contains the following properties:
+Each LLM is defined as a constant object of type `LLM`. The properties of the `LLM` type are:
 
-- `modelId`: A string representing the unique identifier of the model.
-- `modelName`: A string representing the name of the model.
-- `provider`: A string representing the provider of the model. In this case, all models are provided by Perplexity.
-- `hostedId`: A string representing the hosted identifier of the model.
-- `platformLink`: A string representing the URL to the platform where the model is hosted.
-- `imageInput`: A boolean indicating whether the model accepts image input. In this case, all models do not accept image input.
+- `modelId`: A unique identifier for the model.
+- `modelName`: The name of the model.
+- `provider`: The provider of the model.
+- `hostedId`: The identifier for the hosted version of the model.
+- `platformLink`: A link to the platform where the model is hosted.
+- `imageInput`: A boolean indicating whether the model accepts image input.
+
+Here is an example of an LLM definition:
+
+```ts
+// Mixtral 8x7B Instruct (UPDATED 1/31/24)
+const MIXTRAL_8X7B_INSTRUCT: LLM = {
+  modelId: "mixtral-8x7b-instruct",
+  modelName: "Mixtral 8x7B Instruct",
+  provider: "perplexity",
+  hostedId: "mixtral-8x7b-instruct",
+  platformLink: PERPLEXITY_PLATORM_LINK,
+  imageInput: false
+}
+```
 
 ## Exported Constants
 
-### `PERPLEXITY_LLM_LIST`
+```ts
+export const PERPLEXITY_LLM_LIST: LLM[] = [
+  MIXTRAL_8X7B_INSTRUCT,
+  MISTRAL_7B_INSTRUCT,
+  CODELLAMA_70B_INSTRUCT,
+  PERPLEXITY_SONAR_SMALL_CHAT_7B,
+  PERPLEXITY_SONAR_SMALL_ONLINE_7B,
+  PERPLEXITY_SONAR_MEDIUM_CHAT_8x7B,
+  PERPLEXITY_SONAR_MEDIUM_ONLINE_8x7B
+]
+```
 
-This constant is an array of `LLM` objects representing all the Perplexity language models defined in this file. This list is exported and can be imported by other modules.
-
-## Deprecation Notice
-
-Please note that on March 15, the `pplx-70b-chat`, `pplx-70b-online`, `llama-2-70b-chat`, and `codellama-34b-instruct` models will no longer be available through the Perplexity API.
+This line exports a constant array `PERPLEXITY_LLM_LIST` that contains all the defined LLMs. This array can be imported by other modules to access the list of Perplexity LLMs.

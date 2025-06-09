@@ -1,51 +1,130 @@
 ---
 source: components/sidebar/items/folders/folder-item.tsx
-generated: '2025-06-08T13:21:01.662Z'
+generated: 2025-06-08T21:48:38.279Z
 tags: []
-hash: 8208ceb1cbabe2b636017ecc00673f3c2f6c57ab90626ac9a26a95c039454227
+hash: e8d1b7433e0cdec20ca067e99f7b59a75834a2f38b9e4ed70401b74b8e683406
 ---
-# Folder Component
 
-This documentation provides details about the `Folder` component in the source code.
+# Folder Component Documentation
 
-## Import Statements
+This document provides a detailed explanation of the `Folder` component in the file `/Users/garymason/chatbot-ui/components/sidebar/items/folders/folder-item.tsx`.
 
-The component imports various utilities, types, icons, and other components from different modules. This includes:
+## Overview
 
-- Utility function `cn` from "@/lib/utils"
-- Type `Tables` from "@/supabase/types"
-- Type `ContentType` from "@/types"
-- Icons `IconChevronDown`, `IconChevronRight` from "@tabler/icons-react"
-- React hooks `FC`, `useRef`, `useState` from "react"
-- Components `DeleteFolder`, `UpdateFolder` from the same directory
+The `Folder` component is a functional component that represents a folder in a sidebar. It has features such as drag and drop, keyboard accessibility, and hover effects. The component also includes the ability to update or delete a folder.
 
-## Interface
+## Code Breakdown
 
-The `FolderProps` interface is declared to type the props that the `Folder` component expects:
+### Imports
 
-- `folder`: An object of type `Tables<"folders">`
-- `contentType`: A `ContentType` object
-- `children`: Any valid React node
-- `onUpdateFolder`: A function that takes an `itemId` and `folderId` as arguments and returns `void`
+The component imports several utility functions, types, and components that are used throughout.
 
-## Component
+```ts
+import { cn } from "@/lib/utils"
+import { Tables } from "@/supabase/types"
+import { ContentType } from "@/types"
+import { IconChevronDown, IconChevronRight } from "@tabler/icons-react"
+import { FC, useRef, useState } from "react"
+import { DeleteFolder } from "./delete-folder"
+import { UpdateFolder } from "./update-folder"
+```
 
-The `Folder` component is a functional component that uses the `FolderProps` interface for its props. It maintains three pieces of state:
+### Component Props
 
-- `isDragOver`: A boolean indicating whether a drag operation is currently over the component
-- `isExpanded`: A boolean indicating whether the folder is expanded or not
-- `isHovering`: A boolean indicating whether the mouse is hovering over the component
+The `Folder` component accepts the following props:
 
-The component also defines several event handlers for drag and drop operations, keyboard events, and mouse events.
+- `folder`: An object representing the folder, with a type defined in the `Tables` utility.
+- `contentType`: A type representing the content within the folder.
+- `children`: Any React nodes that are passed as children to the `Folder` component.
+- `onUpdateFolder`: A function that is called when a folder needs to be updated.
 
-## Rendered JSX
+```ts
+interface FolderProps {
+  folder: Tables<"folders">
+  contentType: ContentType
+  children: React.ReactNode
+  onUpdateFolder: (itemId: string, folderId: string | null) => void
+}
+```
 
-The component renders a `div` that acts as a container for the folder. This `div` has several event handlers attached to it for handling drag and drop operations, keyboard events, and mouse events.
+### Component State
 
-Within this `div`, another `div` is rendered which displays the folder's name and icons for expanding/collapsing the folder. If the mouse is hovering over this `div`, additional icons for updating and deleting the folder are displayed.
+The component maintains several pieces of state:
 
-If the folder is expanded, the children of the folder are rendered within another `div`.
+- `isDragOver`: A boolean indicating whether a drag event is currently happening over the component.
+- `isExpanded`: A boolean indicating whether the folder is expanded or not.
+- `isHovering`: A boolean indicating whether the mouse is currently hovering over the component.
 
-## Usage
+```ts
+const [isDragOver, setIsDragOver] = useState(false)
+const [isExpanded, setIsExpanded] = useState(false)
+const [isHovering, setIsHovering] = useState(false)
+```
 
-This component can be used in any part of the application where a folder-like structure is needed, with the ability to handle drag and drop operations, and update or delete folders. The `onUpdateFolder` prop should be passed a function that handles the updating of folders.
+### Event Handlers
+
+The component defines several event handlers for drag and drop, keyboard, and mouse events.
+
+```ts
+const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+  e.preventDefault()
+  setIsDragOver(true)
+}
+
+const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+  e.preventDefault()
+  setIsDragOver(false)
+}
+
+const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  e.preventDefault()
+  setIsDragOver(true)
+}
+
+const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  e.preventDefault()
+
+  setIsDragOver(false)
+  const itemId = e.dataTransfer.getData("text/plain")
+  onUpdateFolder(itemId, folder.id)
+}
+
+const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  if (e.key === "Enter") {
+    e.stopPropagation()
+    itemRef.current?.click()
+  }
+}
+
+const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  setIsExpanded(!isExpanded)
+}
+```
+
+### Rendered JSX
+
+The component returns a `div` that includes the folder name, an icon indicating whether the folder is expanded or not, and buttons for updating and deleting the folder. It also renders any children passed to it when the folder is expanded.
+
+```ts
+return (
+  <div
+    ref={itemRef}
+    id="folder"
+    className={cn("rounded focus:outline-none", isDragOver && "bg-accent")}
+    onDragEnter={handleDragEnter}
+    onDragLeave={handleDragLeave}
+    onDragOver={handleDragOver}
+    onDrop={handleDrop}
+    onKeyDown={handleKeyDown}
+    onMouseEnter={() => setIsHovering(true)}
+    onMouseLeave={() => setIsHovering(false)}
+  >
+    {/* Folder details and actions */}
+    {/* Folder content */}
+  </div>
+)
+```
+
+## Conclusion
+
+The `Folder` component is a versatile and interactive component that provides a user-friendly interface for managing folders in a sidebar. It uses React's built-in hooks to manage state and handle events, and it leverages TypeScript for type safety.

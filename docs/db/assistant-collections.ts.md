@@ -1,60 +1,116 @@
 ---
 source: db/assistant-collections.ts
-generated: '2025-06-08T13:21:01.627Z'
+generated: 2025-06-08T22:19:01.027Z
 tags: []
-hash: 0c7b324dff9af5e47fefb52656ca34f9e5e93788ac02f2ee364e7c6fdf8aa1c1
+hash: ab6942d401c3995f2ee5ef212b549e2b6e3fde7f15a263f0ad36f35dc18a581b
 ---
+
 # Assistant Collections Module Documentation
 
-This module provides functions to interact with the `assistants` and `assistant_collections` tables in the Supabase database. 
+This document describes the functionality and logic of the `assistant-collections.ts` module located at `/Users/garymason/chatbot-ui/db/`.
+
+This module provides functions for interacting with the `assistants` and `assistant_collections` tables in a Supabase database. The functions allow for fetching, creating, and deleting assistant collections.
+
+## Imports
+
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert } from "@/supabase/types"
+```
+
+The module imports the `supabase` client from the `browser-client` file in the `lib/supabase` directory. This client is used to interact with the Supabase database.
+
+The `TablesInsert` type from the `types` file in the `supabase` directory is also imported. This type is used for type checking the assistant collections that are inserted into the database.
 
 ## Functions
 
-### `getAssistantCollectionsByAssistantId(assistantId: string)`
+### `getAssistantCollectionsByAssistantId`
 
-This function retrieves the collections associated with a specific assistant from the `assistants` table. 
+```ts
+export const getAssistantCollectionsByAssistantId = async (
+  assistantId: string
+) => {
+  const { data: assistantCollections, error } = await supabase
+    .from("assistants")
+    .select(
+      `
+        id, 
+        name, 
+        collections (*)
+      `
+    )
+    .eq("id", assistantId)
+    .single()
 
-**Parameters:**
+  if (!assistantCollections) {
+    throw new Error(error.message)
+  }
 
-- `assistantId` (string): The ID of the assistant.
+  return assistantCollections
+}
+```
 
-**Returns:**
+This function fetches the assistant collections for a specific assistant from the `assistants` table. It takes an `assistantId` as a parameter and returns the assistant collections that match this `assistantId`. If no collections are found, it throws an error.
 
-- An object containing the assistant's collections. If no collections are found, an error is thrown.
+### `createAssistantCollection`
 
-### `createAssistantCollection(assistantCollection: TablesInsert<"assistant_collections">)`
+```ts
+export const createAssistantCollection = async (
+  assistantCollection: TablesInsert<"assistant_collections">
+) => {
+  const { data: createdAssistantCollection, error } = await supabase
+    .from("assistant_collections")
+    .insert(assistantCollection)
+    .select("*")
 
-This function creates a new assistant collection in the `assistant_collections` table.
+  if (!createdAssistantCollection) {
+    throw new Error(error.message)
+  }
 
-**Parameters:**
+  return createdAssistantCollection
+}
+```
 
-- `assistantCollection` (TablesInsert<"assistant_collections">): The assistant collection object to be inserted.
+This function inserts a new assistant collection into the `assistant_collections` table. It takes an `assistantCollection` object as a parameter and returns the created assistant collection. If the insertion fails, it throws an error.
 
-**Returns:**
+### `createAssistantCollections`
 
-- An object containing the created assistant collection. If the creation fails, an error is thrown.
+```ts
+export const createAssistantCollections = async (
+  assistantCollections: TablesInsert<"assistant_collections">[]
+) => {
+  const { data: createdAssistantCollections, error } = await supabase
+    .from("assistant_collections")
+    .insert(assistantCollections)
+    .select("*")
 
-### `createAssistantCollections(assistantCollections: TablesInsert<"assistant_collections">[])`
+  if (!createdAssistantCollections) {
+    throw new Error(error.message)
+  }
 
-This function creates multiple new assistant collections in the `assistant_collections` table.
+  return createdAssistantCollections
+}
+```
 
-**Parameters:**
+This function inserts multiple assistant collections into the `assistant_collections` table. It takes an array of `assistantCollections` objects as a parameter and returns the created assistant collections. If the insertion fails, it throws an error.
 
-- `assistantCollections` (TablesInsert<"assistant_collections">[]): An array of assistant collection objects to be inserted.
+### `deleteAssistantCollection`
 
-**Returns:**
+```ts
+export const deleteAssistantCollection = async (
+  assistantId: string,
+  collectionId: string
+) => {
+  const { error } = await supabase
+    .from("assistant_collections")
+    .delete()
+    .eq("assistant_id", assistantId)
+    .eq("collection_id", collectionId)
 
-- An array containing the created assistant collections. If the creation fails, an error is thrown.
+  if (error) throw new Error(error.message)
 
-### `deleteAssistantCollection(assistantId: string, collectionId: string)`
+  return true
+}
+```
 
-This function deletes a specific assistant collection from the `assistant_collections` table.
-
-**Parameters:**
-
-- `assistantId` (string): The ID of the assistant.
-- `collectionId` (string): The ID of the collection.
-
-**Returns:**
-
-- `true` if the deletion is successful. If the deletion fails, an error is thrown.
+This function deletes an assistant collection from the `assistant_collections` table. It takes an `assistantId` and a `collectionId` as parameters. If the deletion is successful, it returns `true`. If the deletion fails, it throws an error.

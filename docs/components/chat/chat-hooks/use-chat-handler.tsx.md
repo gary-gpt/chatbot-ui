@@ -1,80 +1,63 @@
 ---
 source: components/chat/chat-hooks/use-chat-handler.tsx
-generated: '2025-06-08T13:21:01.649Z'
+generated: 2025-06-08T21:27:32.910Z
 tags: []
-hash: 115cc4a397b608f097b3a7f5bdeea98c8ad842d3cb507574bea83ab015c07a45
+hash: ad55607fae440acbf2f97bab3f63df36f8dd31aa81fd6211175bf59465602a91
 ---
-# useChatHandler Hook
 
-This hook is responsible for managing the chat interactions in the application.
+# Documentation for useChatHandler.tsx
+
+The `useChatHandler.tsx` file is a React Hook that provides functionality for handling chat interactions in a chatbot UI. It exports a function `useChatHandler` that provides several methods to handle chat interactions such as sending a new message, stopping a message, focusing on the chat input, and more.
 
 ## Import Statements
 
-```jsx
-import { ChatbotUIContext } from "@/context/context"
-import { supabase } from "@/lib/supabase/browser-client"
-import { parseMemoryTrigger } from "@/lib/memory/parseMemoryTrigger"
-import { useRouter } from "next/navigation"
-import { useContext, useEffect, useRef } from "react"
-import { ChatMessage, ChatPayload, LLMID, ModelProvider } from "@/types"
-import { LLM_LIST } from "../../../lib/models/llm/llm-list"
-import {
-  createTempMessages,
-  handleCreateChat,
-  handleCreateMessages,
-  handleHostedChat,
-  handleLocalChat,
-  handleRetrieval,
-  processResponse,
-  validateChatSettings
-} from "../chat-helpers"
-import { updateChat } from "@/db/chats"
-import { getAssistantFilesByAssistantId } from "@/db/assistant-files"
-import { getAssistantCollectionsByAssistantId } from "@/db/assistant-collections"
-import { getCollectionFilesByCollectionId } from "@/db/collection-files"
-import { getAssistantToolsByAssistantId } from "@/db/assistant-tools"
-import { deleteMessagesIncludingAndAfter } from "@/db/messages"
-import { buildFinalMessages } from "@/lib/build-prompt"
-import { Tables } from "@/supabase/types"
-```
+The file begins by importing necessary dependencies, context, types, and helper functions from various modules.
 
-## Hook Definition
+## useChatHandler Function
 
-```jsx
-export const useChatHandler = () => {
-  // Hook body...
-}
-```
+The `useChatHandler` function is the main export of this file. It uses the `ChatbotUIContext` to access various states and methods related to the chatbot UI. It also defines a `chatInputRef` which is a reference to the HTML textarea element where the user inputs their chat messages.
 
-## Hook Body
+### useEffect Hook
 
-The hook body contains several variables and functions that are used to manage the chat interactions.
+A `useEffect` hook is used to focus on the chat input whenever the prompt picker, file picker, or tool picker is not open.
 
-### Variables
+### handleNewChat Function
 
-The hook uses several variables from the `ChatbotUIContext` to manage the state of the chat.
+The `handleNewChat` function is used to handle the creation of a new chat. It resets various states to their initial values and sets the chat settings based on the selected assistant or preset. It also fetches assistant files, collections, and tools if an assistant is selected.
 
-### Functions
+### handleFocusChatInput Function
 
-The hook defines several functions to handle different chat interactions:
+The `handleFocusChatInput` function is used to focus on the chat input.
 
-- `handleNewChat`: This function is used to handle the creation of a new chat.
-- `handleFocusChatInput`: This function is used to focus the chat input.
-- `handleStopMessage`: This function is used to stop the current message.
-- `handleSendMessage`: This function is used to send a message.
-- `handleSendEdit`: This function is used to edit a sent message.
+### handleStopMessage Function
+
+The `handleStopMessage` function is used to stop the current message using the `abortController`.
+
+### handleSendMessage Function
+
+The `handleSendMessage` function is used to handle sending a new message. It validates the chat settings, creates temporary messages, and handles the chat based on the selected tools or model provider. It also handles the creation of a new chat or updates the existing chat. If an error occurs during this process, it logs the error and resets some states.
+
+### handleSendEdit Function
+
+The `handleSendEdit` function is used to handle editing a sent message. It deletes all messages including and after the edited message and sends the edited message.
 
 ## Return Statement
 
-The hook returns an object containing the `chatInputRef` and the functions defined in the hook body.
+The `useChatHandler` function returns an object containing the `chatInputRef` and all the handler functions.
+
+## Usage
+
+The `useChatHandler` hook can be used in a React component as follows:
 
 ```jsx
-return {
-    chatInputRef,
-    handleNewChat,
-    handleSendMessage,
-    handleFocusChatInput,
-    handleStopMessage,
-    handleSendEdit
-  }
+const {
+  chatInputRef,
+  handleNewChat,
+  handleSendMessage,
+  handleFocusChatInput,
+  handleStopMessage,
+  handleSendEdit
+} = useChatHandler()
 ```
+
+These returned methods can then be used to handle chat interactions in the chatbot UI.

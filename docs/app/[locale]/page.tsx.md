@@ -1,36 +1,65 @@
 ---
-source: 'app/[locale]/page.tsx'
-generated: '2025-06-08T13:21:01.633Z'
+source: app/[locale]/page.tsx
+generated: 2025-06-08T21:17:43.540Z
 tags: []
-hash: a87ad62b94ea37dcf1c40261e617b9a3a7c4981d3e5f5ad09787aef0c21338ef
+hash: c77efa8e6cf92ccc67bc1f0f82a8104fec8a91148ea05219cda98115bb429d6e
 ---
-# HomePage Component Documentation
 
-## Overview
+# Chatbot UI Home Page Documentation
 
-The `HomePage` component is the main landing page of the application. It displays a chatbot UI icon, a title, and a button to navigate to the login page.
+This document provides a detailed explanation of the `HomePage` function in the `page.tsx` file located in `/Users/garymason/chatbot-ui/app/[locale]/`. The function is responsible for rendering the home page of the Chatbot UI application.
 
-## Import Statements
+## Code Summary
 
-This component imports several modules:
+The `HomePage` function is a functional component in React that uses the Next.js framework. It renders the home page of the Chatbot UI application. The home page consists of a Chatbot UI logo, a title, and a button that redirects the user to the login page.
 
-- `ChatbotUISVG` from "@/components/icons/chatbotui-svg": This is a custom SVG icon for the chatbot UI.
-- `IconArrowRight` from "@tabler/icons-react": This is an arrow icon from the Tabler Icons library.
-- `useTheme` from "next-themes": This is a hook for accessing the current theme of the application.
-- `Link` from "next/link": This is a component for creating navigational links.
+## Detailed Code Explanation
 
-## Function Definition
+```ts
+"use client"
+```
 
-`HomePage` is a functional component that uses the `useTheme` hook to access the current theme of the application.
+This directive indicates that the code runs on the client side.
 
-## Return Statement
+```ts
+import { ChatbotUISVG } from "@/components/icons/chatbotui-svg"
+import { IconArrowRight } from "@tabler/icons-react"
+import { useTheme } from "next-themes"
+import Link from "next/link"
+```
 
-The component returns a `div` element with several child elements:
+These lines import the necessary components and hooks from their respective modules. `ChatbotUISVG` is a component that renders the Chatbot UI logo. `IconArrowRight` is an icon component from the `@tabler/icons-react` library. `useTheme` is a hook from the `next-themes` library that enables the application to support dark and light themes. `Link` is a component from Next.js that enables client-side transitions between routes.
 
-- A `div` that contains the `ChatbotUISVG` component. The `theme` prop of `ChatbotUISVG` is set to "dark" if the current theme is "dark", and "light" otherwise. The `scale` prop is set to 0.3.
-- A `div` that displays the text "Chatbot UI" in a large, bold font.
-- A `Link` component that navigates to the "/login" page when clicked. This component contains the text "Start Chatting" and the `IconArrowRight` component.
+```ts
+export default function HomePage() {
+  const { theme } = useTheme()
+```
 
-## Styling
+This line defines and exports the `HomePage` functional component. Inside the component, the `useTheme` hook is called to get the current theme.
 
-The component uses Tailwind CSS for styling. The main `div` is a flex container that centers its children both horizontally and vertically. The `Link` component has a blue background, rounded corners, and centered text. The `IconArrowRight` component is slightly offset to the right of the "Start Chatting" text.
+```ts
+  return (
+    <div className="flex size-full flex-col items-center justify-center">
+      <div>
+        <ChatbotUISVG theme={theme === "dark" ? "dark" : "light"} scale={0.3} />
+      </div>
+
+      <div className="mt-2 text-4xl font-bold">Chatbot UI</div>
+
+      <Link
+        className="mt-4 flex w-[200px] items-center justify-center rounded-md bg-blue-500 p-2 font-semibold"
+        href="/login"
+      >
+        Start Chatting
+        <IconArrowRight className="ml-1" size={20} />
+      </Link>
+    </div>
+  )
+}
+```
+
+This part of the code returns the JSX to be rendered by the `HomePage` component. It includes a container `div` that uses Tailwind CSS classes for styling. Inside the container, there are three child `div` elements:
+
+- The first `div` contains the `ChatbotUISVG` component, which renders the Chatbot UI logo. The `theme` prop is set based on the current theme, and the `scale` prop is set to `0.3` to adjust the size of the logo.
+- The second `div` displays the title "Chatbot UI".
+- The third `div` contains a `Link` component that redirects the user to the login page when clicked. The `Link` component contains the text "Start Chatting" and an `IconArrowRight` component that renders a right arrow icon.

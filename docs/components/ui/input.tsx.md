@@ -1,39 +1,69 @@
 ---
 source: components/ui/input.tsx
-generated: '2025-06-08T13:21:01.641Z'
+generated: 2025-06-08T22:02:56.208Z
 tags: []
-hash: 8369c3d41f042982a794b0e2f0531dbac2a73974a8b0e9a1c8f92fc7afdb60eb
+hash: 667de3330ea2cbe0f8284cf890e3169b3c679250114d629a5ad4d4007bd7c3cf
 ---
-# Input Component
 
-This is a reusable `Input` component that extends the standard HTML input element's attributes. It is built using React.
+# Input Component Documentation
 
-## Importing
+This file is located at `/Users/garymason/chatbot-ui/components/ui/input.tsx`. It exports a reusable Input component for use in a React application.
 
-```javascript
-import { Input } from 'path-to-component';
+## Import Statements
+
+```ts
+import * as React from "react"
+import { cn } from "@/lib/utils"
 ```
 
-## Props
+The file begins by importing the necessary dependencies. It imports the entire React library and a utility function `cn` from a local file.
 
-This component accepts all standard HTML input attributes (`React.InputHTMLAttributes<HTMLInputElement>`). Here are some of the main props you might use:
+## InputProps Interface
 
-- `className`: This is used to add custom classes to the input component.
-- `type`: This is used to specify the type of the input field. For example, `text`, `password`, `email`, etc.
-- `...props`: Any other standard input attribute can be passed to this component.
-
-## Usage
-
-```javascript
-<Input className="custom-class" type="text" placeholder="Enter text" />
+```ts
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 ```
 
-In the above example, a text input field is rendered with a placeholder of "Enter text". The `className` prop is used to add a custom class to the input field.
+The `InputProps` interface is defined to type check the props that the Input component will receive. It extends the `InputHTMLAttributes` interface from React, which includes all the standard attributes that an input HTML element can have.
 
-## Styling
+## Input Component
 
-This component uses Tailwind CSS for styling. The default styles include a border, background color, placeholder text color, focus styles, and disabled styles. These can be overridden by passing a `className` prop.
+```ts
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:none flex h-10 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+```
 
-## Forward Ref
+The `Input` component is a functional component that uses the `forwardRef` function from React to pass a `ref` through. This is useful when you need to access the DOM node directly in a parent component. 
 
-This component uses `React.forwardRef` to create a ref that can be attached to the input element. This allows parent components to directly interact with the input element if necessary.
+The component destructures `className`, `type`, and `props` from the props it receives. The `className` and `type` are used directly on the input element, while the rest of the props (`...props`) are spread onto the input element.
+
+The `className` prop is combined with a string of predefined classes using the `cn` utility function. This allows the component to have a consistent base styling while also accepting additional classes from its parent component.
+
+## Display Name
+
+```ts
+Input.displayName = "Input"
+```
+
+The `displayName` string is used in debugging messages. Here, it's set to `"Input"`.
+
+## Export Statement
+
+```ts
+export { Input }
+```
+
+Finally, the `Input` component is exported for use in other parts of the application.

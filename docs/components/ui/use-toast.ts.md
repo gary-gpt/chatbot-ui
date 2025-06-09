@@ -1,72 +1,69 @@
 ---
 source: components/ui/use-toast.ts
-generated: '2025-06-08T13:21:01.644Z'
+generated: 2025-06-08T22:12:54.015Z
 tags: []
-hash: f5eaa3bbc7bf918e1ca8fe4461a671becb24d69bcb9281fdcb37b108ba22dce5
+hash: 604be2f659994b62825a54b918f2fd5be996fcc6f55b55bc99071cc6b82aac47
 ---
-# Toast Component Documentation
 
-This file contains the implementation of a toast notification system, inspired by the `react-hot-toast` library. It exports two main functions: `useToast` and `toast`.
+# useToast.ts Documentation
 
-## Constants
+This file contains the implementation of a custom React hook named `useToast`. This hook is used to manage toast notifications in a React application. The toast notifications are managed in a queue, with a limit of one toast at a time and a delay for automatic removal.
 
-- `TOAST_LIMIT`: The maximum number of toasts that can be displayed at a time.
-- `TOAST_REMOVE_DELAY`: The delay (in milliseconds) before a toast is automatically removed.
+## Table of Contents
 
-## Types
+- [Type Definitions](#type-definitions)
+- [Constants and Variables](#constants-and-variables)
+- [Functions](#functions)
+- [Exported Functions](#exported-functions)
 
-- `ToasterToast`: An object representing a toast notification. It extends the `ToastProps` type and includes an `id`, `title`, `description`, and `action`.
+## Type Definitions
 
-- `ActionType`: An object representing the different types of actions that can be performed on a toast. These include `ADD_TOAST`, `UPDATE_TOAST`, `DISMISS_TOAST`, and `REMOVE_TOAST`.
+- `ToasterToast`: This type extends the `ToastProps` type and adds additional properties like `id`, `title`, `description`, and `action`.
 
-- `Action`: A union type representing the different actions that can be dispatched to the reducer. Each action includes a `type` and may include a `toast` or `toastId`.
+- `ActionType`: This type is derived from the `actionTypes` object.
 
-- `State`: An object representing the state of the toast system. It includes an array of `ToasterToast` objects.
+- `Action`: This type is a union of different possible action objects.
+
+- `State`: This interface represents the state of the toast system, which is an array of `ToasterToast` objects.
+
+## Constants and Variables
+
+- `TOAST_LIMIT`: This constant sets the maximum number of toasts that can be displayed at once.
+
+- `TOAST_REMOVE_DELAY`: This constant sets the delay (in milliseconds) before a toast is automatically removed.
+
+- `actionTypes`: This object defines the types of actions that can be dispatched to the toast system.
+
+- `toastTimeouts`: This `Map` object stores the timeout IDs for each toast, keyed by the toast's ID.
 
 ## Functions
 
-- `genId`: Generates a unique ID for each toast.
+- `genId()`: This function generates a unique ID for each toast.
 
-- `addToRemoveQueue`: Adds a toast to the removal queue, which will remove the toast after a delay.
+- `addToRemoveQueue(toastId: string)`: This function adds a toast to the removal queue.
 
-- `reducer`: A reducer function that updates the state based on the dispatched action.
+- `reducer(state: State, action: Action)`: This function is the reducer for the toast system. It handles the different types of actions that can be dispatched.
 
-- `dispatch`: Dispatches an action to the reducer and updates the state.
+- `dispatch(action: Action)`: This function dispatches an action to the toast system.
 
-- `toast`: Creates a new toast notification and returns an object with the `id`, `dismiss`, and `update` functions.
+- `toast({ ...props }: Toast)`: This function creates a new toast and dispatches an `ADD_TOAST` action.
 
-- `useToast`: A custom React hook that provides the current state of the toast system and functions to create and dismiss toasts.
+## Exported Functions
 
-## Usage
+- `useToast()`: This is the main function exported from this file. It's a custom React hook that provides the state and functions needed to manage toast notifications.
 
-To use the `useToast` hook in a component:
+- `toast`: This function is also exported for direct use in components.
 
-```jsx
-import { useToast } from './toast';
+## Code Summaries
 
-function MyComponent() {
-  const { toast, dismiss } = useToast();
+- The `useToast` hook maintains a state of toasts and provides a function to add new toasts. It uses a reducer pattern to manage the state updates.
 
-  // To create a toast
-  const newToast = toast({ title: 'Hello, world!' });
+- The `reducer` function handles four types of actions: `ADD_TOAST`, `UPDATE_TOAST`, `DISMISS_TOAST`, and `REMOVE_TOAST`.
 
-  // To dismiss a toast
-  dismiss(newToast.id);
-}
-```
+- The `toast` function creates a new toast with a unique ID and dispatches an `ADD_TOAST` action.
 
-To use the `toast` function directly:
+- The `addToRemoveQueue` function sets a timeout to automatically remove a toast after a certain delay.
 
-```jsx
-import { toast } from './toast';
+- The `dispatch` function applies the reducer to the current state and the dispatched action, then updates the state and notifies all listeners.
 
-// To create a toast
-const newToast = toast({ title: 'Hello, world!' });
-
-// To dismiss a toast
-newToast.dismiss();
-```
-
-## Note
-
-This toast system uses a memory state and listeners to update the state. When the state changes, all listeners are notified and update their state accordingly. This allows multiple components to use the `useToast` hook and stay in sync with the global toast state.
+- The `genId` function generates a unique ID for each new toast.

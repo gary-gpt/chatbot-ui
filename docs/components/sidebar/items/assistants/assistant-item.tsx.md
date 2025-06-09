@@ -1,52 +1,156 @@
 ---
 source: components/sidebar/items/assistants/assistant-item.tsx
-generated: '2025-06-08T13:21:01.661Z'
+generated: 2025-06-08T21:44:00.980Z
 tags: []
-hash: 4b0d53446a1e654c9195bc6ba26a6825782680cd69d50bf26afc2cc9d9dafcf8
+hash: 6952ad0f808f7dc6c1155a25495ac17bee7d86436db2243c724dd59e4593cd53
 ---
+
 # AssistantItem Component Documentation
 
-The `AssistantItem` is a functional component in React that represents an individual assistant item in the chatbot UI. It provides the interface for interacting with the assistant's settings and properties.
+This document provides an overview of the `AssistantItem` component in the `assistant-item.tsx` file. This component is used to display and manage individual assistant items in the chatbot UI.
 
-## Props
+## Import Statements
 
-The component accepts the following props:
+The component imports several UI components, constants, types, and contexts that are used within the component.
 
-- `assistant`: An object representing the assistant. It should conform to the `Tables<"assistants">` type.
+```ts
+import { ChatSettingsForm } from "@/components/ui/chat-settings-form"
+import ImagePicker from "@/components/ui/image-picker"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { ChatbotUIContext } from "@/context/context"
+import { ASSISTANT_DESCRIPTION_MAX, ASSISTANT_NAME_MAX } from "@/db/limits"
+import { Tables } from "@/supabase/types"
+import { IconRobotFace } from "@tabler/icons-react"
+import Image from "next/image"
+import { FC, useContext, useEffect, useState } from "react"
+import profile from "react-syntax-highlighter/dist/esm/languages/hljs/profile"
+import { SidebarItem } from "../all/sidebar-display-item"
+import { AssistantRetrievalSelect } from "./assistant-retrieval-select"
+import { AssistantToolSelect } from "./assistant-tool-select"
+```
 
-## State
+## Component Props
 
-The component maintains the following state variables:
+The `AssistantItem` component accepts a single prop, `assistant`, which is an object of type `Tables<"assistants">`.
 
-- `name`: The name of the assistant.
-- `isTyping`: A boolean indicating whether the assistant is currently typing.
-- `description`: The description of the assistant.
-- `assistantChatSettings`: An object representing the chat settings of the assistant.
-- `selectedImage`: The selected image file for the assistant.
-- `imageLink`: The link to the assistant's image.
+```ts
+interface AssistantItemProps {
+  assistant: Tables<"assistants">
+}
+```
 
-## Functions
+## Component Function
 
-The component defines the following functions:
+The `AssistantItem` component function uses the `ChatbotUIContext` to get the `selectedWorkspace` and `assistantImages`. It also initializes several state variables to manage the assistant's properties and settings.
 
-- `handleFileSelect`: Handles the selection of files for the assistant.
-- `handleCollectionSelect`: Handles the selection of collections for the assistant.
-- `handleToolSelect`: Handles the selection of tools for the assistant.
+```ts
+export const AssistantItem: FC<AssistantItemProps> = ({ assistant }) => {
+  const { selectedWorkspace, assistantImages } = useContext(ChatbotUIContext)
+  ...
+}
+```
 
-## Rendering
+## Helper Functions
 
-The component renders a `SidebarItem` that includes the assistant's image, name, and description, as well as inputs for editing these properties. It also includes a `ChatSettingsForm` for adjusting the assistant's chat settings, and `AssistantRetrievalSelect` and `AssistantToolSelect` components for selecting files, collections, and tools for the assistant.
+The component includes several helper functions to handle the selection of files, collections, and tools associated with the assistant.
 
-## Dependencies
+```ts
+const handleFileSelect = (
+  file: Tables<"files">,
+  setSelectedAssistantFiles: React.Dispatch<
+    React.SetStateAction<Tables<"files">[]>
+  >
+) => {...}
 
-The component depends on several other components and contexts:
+const handleCollectionSelect = (
+  collection: Tables<"collections">,
+  setSelectedAssistantCollections: React.Dispatch<
+    React.SetStateAction<Tables<"collections">[]>
+  >
+) => {...}
 
-- `ChatSettingsForm`, `ImagePicker`, `Input`, `Label` from "@/components/ui"
-- `ChatbotUIContext` from "@/context/context"
-- `ASSISTANT_DESCRIPTION_MAX`, `ASSISTANT_NAME_MAX` from "@/db/limits"
-- `Tables` from "@/supabase/types"
-- `IconRobotFace` from "@tabler/icons-react"
-- `Image` from "next/image"
-- `profile` from "react-syntax-highlighter/dist/esm/languages/hljs/profile"
-- `SidebarItem` from "../all/sidebar-display-item"
-- `AssistantRetrievalSelect`, `AssistantToolSelect` from "./"
+const handleToolSelect = (
+  tool: Tables<"tools">,
+  setSelectedAssistantTools: React.Dispatch<
+    React.SetStateAction<Tables<"tools">[]>
+  >
+) => {...}
+```
+
+## Render
+
+The component returns a `SidebarItem` component with the assistant item's properties and settings. It also includes several input fields for updating the assistant's name, description, image, chat settings, files, collections, and tools.
+
+```ts
+return (
+  <SidebarItem
+    item={assistant}
+    contentType="assistants"
+    isTyping={isTyping}
+    icon={
+      imageLink ? (
+        <Image
+          style={{ width: "30px", height: "30px" }}
+          className="rounded"
+          src={imageLink}
+          alt={assistant.name}
+          width={30}
+          height={30}
+        />
+      ) : (
+        <IconRobotFace
+          className="bg-primary text-secondary border-primary rounded border-DEFAULT p-1"
+          size={30}
+        />
+      )
+    }
+    updateState={{
+      image: selectedImage,
+      user_id: assistant.user_id,
+      name,
+      description,
+      include_profile_context: assistantChatSettings.includeProfileContext,
+      include_workspace_instructions:
+        assistantChatSettings.includeWorkspaceInstructions,
+      context_length: assistantChatSettings.contextLength,
+      model: assistantChatSettings.model,
+      image_path: assistant.image_path,
+      prompt: assistantChatSettings.prompt,
+      temperature: assistantChatSettings.temperature
+    }}
+    renderInputs={(renderState: {
+      startingAssistantFiles: Tables<"files">[]
+      setStartingAssistantFiles: React.Dispatch<
+        React.SetStateAction<Tables<"files">[]>
+      >
+      selectedAssistantFiles: Tables<"files">[]
+      setSelectedAssistantFiles: React.Dispatch<
+        React.SetStateAction<Tables<"files">[]>
+      >
+      startingAssistantCollections: Tables<"collections">[]
+      setStartingAssistantCollections: React.Dispatch<
+        React.SetStateAction<Tables<"collections">[]>
+      >
+      selectedAssistantCollections: Tables<"collections">[]
+      setSelectedAssistantCollections: React.Dispatch<
+        React.SetStateAction<Tables<"collections">[]>
+      >
+      startingAssistantTools: Tables<"tools">[]
+      setStartingAssistantTools: React.Dispatch<
+        React.SetStateAction<Tables<"tools">[]>
+      >
+      selectedAssistantTools: Tables<"tools">[]
+      setSelectedAssistantTools: React.Dispatch<
+        React.SetStateAction<Tables<"tools">[]>
+      >
+    }) => (
+      <>
+        ...
+      </>
+    )}
+  />
+)
+```
+
+The `renderInputs` prop is a function that returns a set of input fields for updating the assistant's properties and settings.

@@ -1,46 +1,116 @@
 ---
 source: app/api/chat/openrouter/route.ts
-generated: '2025-06-08T13:21:01.660Z'
+generated: 2025-06-08T21:21:47.907Z
 tags: []
-hash: 42cc48b05263613c790516209bcc58c25b3ec7f37130abd4e3bebb8d39274d7d
+hash: cb40d19cd00f07894de101a0b80e75aa76b2c852243c604b9188790148ea6f3d
 ---
-# Documentation
 
-## Overview
+# Chatbot UI API - OpenRouter Route
 
-This file contains the implementation of a POST request handler for a chat application. It uses the OpenAI API to generate chat completions based on the provided chat settings and messages. 
+This file is located at `/Users/garymason/chatbot-ui/app/api/chat/openrouter/route.ts`. It is a TypeScript file that handles the chat functionality of a chatbot UI using the OpenAI API. It exports a `POST` function that accepts a request, processes it, and returns a response.
 
 ## Imports
 
-The file imports helper functions, types, and classes from various modules:
+```ts
+import { checkApiKey, getServerProfile } from "@/lib/server/server-chat-helpers"
+import { ChatSettings } from "@/types"
+import { OpenAIStream, StreamingTextResponse } from "ai"
+import { ServerRuntime } from "next"
+import OpenAI from "openai"
+import { ChatCompletionCreateParamsBase } from "openai/resources/chat/completions.mjs"
+```
 
-- `checkApiKey` and `getServerProfile` helper functions from the `server-chat-helpers` module.
+The file imports several modules and types:
+
+- `checkApiKey` and `getServerProfile` functions from the `server-chat-helpers` module.
 - `ChatSettings` type from the `types` module.
-- `OpenAIStream` and `StreamingTextResponse` classes from the `ai` module.
+- `OpenAIStream` and `StreamingTextResponse` from the `ai` module.
 - `ServerRuntime` type from the `next` module.
-- `OpenAI` class and `ChatCompletionCreateParamsBase` type from the `openai` module.
+- `OpenAI` from the `openai` module.
+- `ChatCompletionCreateParamsBase` type from the `openai/resources/chat/completions.mjs` module.
 
-## Constants
+## Runtime
 
-The file declares a constant `runtime` of type `ServerRuntime` and assigns it the value `"edge"`.
+```ts
+export const runtime: ServerRuntime = "edge"
+```
 
-## Functions
+The `runtime` constant is exported and set to "edge", which indicates the server runtime environment.
 
-### POST
+## POST Function
 
-This is an asynchronous function that takes a `request` of type `Request` as a parameter. It performs the following steps:
+```ts
+export async function POST(request: Request) {
+  ...
+}
+```
 
-1. Parses the JSON body of the request into a `json` object.
-2. Extracts `chatSettings` and `messages` from the `json` object.
-3. Tries to retrieve the server profile using the `getServerProfile` helper function.
-4. Checks the validity of the API key using the `checkApiKey` helper function.
-5. Initializes a new instance of the `OpenAI` class with the API key and base URL.
-6. Sends a chat completion creation request to the OpenAI API with the specified chat settings and messages.
-7. Streams the response from the OpenAI API using the `OpenAIStream` class.
-8. Returns a new `StreamingTextResponse` with the streamed response.
+The `POST` function is exported for handling HTTP POST requests. It is an asynchronous function that takes a `Request` object as its argument.
 
-If any error occurs during these steps, the function catches the error, sets a default error message and status code, checks if the error message includes "api key not found", and if so, changes the error message. Finally, it returns a new `Response` with the error message and status code.
+### Request Processing
 
-## Exports
+```ts
+const json = await request.json()
+const { chatSettings, messages } = json as {
+  chatSettings: ChatSettings
+  messages: any[]
+}
+```
 
-The file exports the `runtime` constant and the `POST` function.
+The function begins by parsing the JSON body of the request. It then destructures `chatSettings` and `messages` from the parsed JSON.
+
+### API Key Check and OpenAI Initialization
+
+```ts
+const profile = await getServerProfile()
+checkApiKey(profile.openrouter_api_key, "OpenRouter")
+const openai = new OpenAI({
+  apiKey: profile.openrouter_api_key || "",
+  baseURL: "https://openrouter.ai/api/v1"
+})
+```
+
+The server profile is retrieved, and the OpenRouter API key from the profile is checked. If the API key is valid, an instance of `OpenAI` is initialized with the API key and the base URL of the OpenRouter API.
+
+### Chat Completion Creation
+
+```ts
+const response = await openai.chat.completions.create({
+  model: chatSettings.model as ChatCompletionCreateParamsBase["model"],
+  messages: messages as ChatCompletionCreateParamsBase["messages"],
+  temperature: chatSettings.temperature,
+  max_tokens: undefined,
+  stream: true
+})
+```
+
+A chat completion is created with the `model`, `messages`, `temperature`, `max_tokens`, and `stream` parameters. The `model` and `messages` are cast to their respective types from `ChatCompletionCreateParamsBase`.
+
+### Streaming Text Response
+
+```ts
+const stream = OpenAIStream(response)
+return new StreamingTextResponse(stream)
+```
+
+The response from the chat completion creation is streamed using `OpenAIStream`, and a new `StreamingTextResponse` is returned with the stream.
+
+### Error Handling
+
+```ts
+catch (error: any) {
+  let errorMessage = error.message || "An unexpected error occurred"
+  const errorCode = error.status || 500
+
+  if (errorMessage.toLowerCase().includes("api key not found")) {
+    errorMessage =
+      "OpenRouter API Key not found. Please set it in your profile settings."
+  }
+
+  return new Response(JSON.stringify({ message: errorMessage }), {
+    status: errorCode
+  })
+}
+```
+
+If an error occurs during the execution of the function, it is caught and handled. The error message and status code are retrieved from the error object. If the error message includes "api key not found", the error message is updated. A new `Response` is returned with the error message and status code.

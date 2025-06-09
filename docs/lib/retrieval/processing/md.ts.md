@@ -1,42 +1,61 @@
 ---
 source: lib/retrieval/processing/md.ts
-generated: '2025-06-08T13:21:01.659Z'
+generated: 2025-06-08T22:38:15.400Z
 tags: []
-hash: 015776b04f76544aee0a5b16ce8e00b03943535b93a84c3adc7b1f81a886a702
+hash: 8911777d461a5545bd503696284621556a6f2cc67ce9ff9739c78e9a18bcd926
 ---
-# processMarkdown Function Documentation
+
+# Markdown Processing Module Documentation
+
+This document provides a detailed explanation of the Markdown Processing Module located at `/Users/garymason/chatbot-ui/lib/retrieval/processing/md.ts`.
 
 ## Overview
 
-The `processMarkdown` function is an asynchronous function that processes a Markdown file and returns an array of `FileItemChunk` objects.
+The Markdown Processing Module is a TypeScript file that contains a single function, `processMarkdown`. This function takes a markdown file as input and processes it into chunks of text content and tokens.
 
-## Import Statements
+## Dependencies
 
-The function is part of a module that imports several dependencies:
+The module imports several dependencies:
 
-- `FileItemChunk` from "@/types": This is a custom type that defines the structure of the chunks that the function will return.
-- `encode` from "gpt-tokenizer": A function used to encode the content of each chunk.
-- `RecursiveCharacterTextSplitter` from "langchain/text_splitter": A utility class for splitting text into chunks.
-- `CHUNK_OVERLAP` and `CHUNK_SIZE` from ".": Constants that define the size of the chunks and the overlap between them.
+- `FileItemChunk` from "@/types": This is a type definition for the chunk object.
+- `encode` from "gpt-tokenizer": This is a function used to tokenize the text content.
+- `RecursiveCharacterTextSplitter` from "langchain/text_splitter": This is a class used to split the text content into chunks.
+- `CHUNK_OVERLAP`, `CHUNK_SIZE` from ".": These are constants that define the size and overlap of the chunks.
 
-## Parameters
+## Function: processMarkdown
 
-The function takes one parameter:
+```ts
+export const processMarkdown = async (
+  markdown: Blob
+): Promise<FileItemChunk[]> => {
+  ...
+}
+```
 
-- `markdown`: A Blob object representing the Markdown file to be processed.
+This function takes a markdown file as input and returns a promise that resolves to an array of `FileItemChunk` objects. Each `FileItemChunk` object contains the chunk content and the number of tokens in the chunk.
 
-## Return Value
+### Input
+
+The function takes a single argument:
+
+- `markdown`: A Blob object representing the markdown file to be processed.
+
+### Output
 
 The function returns a Promise that resolves to an array of `FileItemChunk` objects. Each `FileItemChunk` object has two properties:
 
-- `content`: A string representing the content of the chunk.
-- `tokens`: The number of tokens in the chunk, obtained by encoding the content.
+- `content`: A string representing the chunk content.
+- `tokens`: A number representing the number of tokens in the chunk.
 
-## Function Flow
+### Logic
 
-1. The function starts by converting the `markdown` Blob into a Buffer object.
-2. It then creates a `TextDecoder` object to decode the Buffer into a UTF-8 string.
-3. The function creates a `RecursiveCharacterTextSplitter` object, specifying "markdown" as the language and using `CHUNK_SIZE` and `CHUNK_OVERLAP` as the chunk size and overlap.
-4. The function uses the splitter to split the text content into documents.
-5. It then iterates over the documents, pushing a new `FileItemChunk` object for each document into the `chunks` array. The content of each chunk is the page content of the document, and the number of tokens is obtained by encoding the page content.
-6. Finally, the function returns the `chunks` array.
+The function follows these steps:
+
+1. It converts the markdown Blob into a Buffer and then decodes it into a string using the `TextDecoder` object.
+2. It creates a `RecursiveCharacterTextSplitter` object and uses it to split the text content into chunks.
+3. It iterates over the chunks and for each chunk, it creates a `FileItemChunk` object with the chunk content and the number of tokens in the chunk.
+4. It returns the array of `FileItemChunk` objects.
+
+## Code Summary
+
+This module provides a function for processing markdown files into chunks of text content and tokens. It can be used in applications that need to process large markdown files in a way that is manageable and efficient.

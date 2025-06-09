@@ -1,54 +1,44 @@
 ---
 source: components/sidebar/items/presets/preset-item.tsx
-generated: '2025-06-08T13:21:01.662Z'
+generated: 2025-06-08T21:50:16.756Z
 tags: []
-hash: 6ec9a07382ca87a1c31f149b24d822b13584ce9f2ffab7334ac30575d4d223bb
+hash: eec4f5dd1a6ac8e66396065ad8fe41031f6f425bb86e658ec2119aacd3d0cdc8
 ---
-# PresetItem Component Documentation
 
-The `PresetItem` is a React functional component that represents a single preset item in the sidebar. This component is responsible for managing the state of the preset item and rendering the necessary UI components.
+# Documentation for `preset-item.tsx`
+
+This file is a React component that represents an individual preset item in a sidebar. It is located at `/Users/garymason/chatbot-ui/components/sidebar/items/presets/preset-item.tsx`.
 
 ## Imports
 
-- `ModelIcon` from "@/components/models/model-icon"
-- `ChatSettingsForm`, `Input`, `Label` from "@/components/ui"
-- `PRESET_NAME_MAX` from "@/db/limits"
-- `LLM_LIST` from "@/lib/models/llm/llm-list"
-- `Tables` from "@/supabase/types"
-- `FC`, `useState` from "react"
-- `SidebarItem` from "../all/sidebar-display-item"
+The file imports several components and constants from other parts of the application, including:
 
-## Props
+- UI components such as `ModelIcon`, `ChatSettingsForm`, `Input`, and `Label`.
+- The `PRESET_NAME_MAX` constant from the `limits` file in the `db` directory.
+- The `LLM_LIST` constant from the `llm-list` file in the `models/llm` directory.
+- The `Tables` type from the `types` file in the `supabase` directory.
+- The `useState` hook and `FC` (Function Component) type from the `react` library.
+- The `SidebarItem` component from the `all` directory.
 
-The `PresetItem` component accepts the following props:
+## Interface
 
-- `preset`: An object representing the preset item. It is of type `Tables<"presets">`.
+The `PresetItemProps` interface is defined to type the `preset` prop that the `PresetItem` component expects. This `preset` prop is an object that matches the structure of a preset in the `presets` table in the database.
 
-## State
+## Component
 
-The `PresetItem` component maintains the following state:
+The `PresetItem` component is a functional component that takes a `PresetItemProps` object as its props. It uses the `useState` hook to maintain local state for several properties of the preset, including its name, description, and chat settings.
 
-- `name`: The name of the preset item.
+The component finds the details of the model associated with the preset by searching the `LLM_LIST` for a model with a matching `modelId`.
+
+The component returns a `SidebarItem` component with several props:
+
+- `item`: The preset object.
 - `isTyping`: A boolean indicating whether the user is currently typing.
-- `description`: The description of the preset item.
-- `presetChatSettings`: An object containing the chat settings of the preset item.
+- `contentType`: A string indicating the type of content (in this case, "presets").
+- `icon`: A `ModelIcon` component representing the model associated with the preset.
+- `updateState`: An object containing the current state of the preset.
+- `renderInputs`: A function that returns the JSX to render the inputs for editing the preset.
 
-## Rendered Components
+## Usage
 
-The `PresetItem` component renders the following components:
-
-- `SidebarItem`: This component is used to display the preset item in the sidebar. It accepts the preset item, the typing status, the content type, an icon, the updated state, and a function to render the inputs.
-
-- `ModelIcon`: This component is used to display the model icon of the preset item. It accepts the provider, height, and width as props.
-
-- `Label` and `Input`: These components are used to display a label and an input field for the preset name.
-
-- `ChatSettingsForm`: This component is used to display the chat settings form. It accepts the chat settings, a function to handle changes in the chat settings, and a boolean to use the advanced dropdown.
-
-## Functions
-
-The `PresetItem` component uses the following functions:
-
-- `setName`, `setIsTyping`, `setDescription`, `setPresetChatSettings`: These functions are used to update the state of the `PresetItem` component.
-
-- `renderInputs`: This function is used to render the inputs for the preset item. It returns a JSX element.
+This component is likely used in a list or grid view to represent each preset in the sidebar of the application. It allows the user to view and edit the details of each preset.

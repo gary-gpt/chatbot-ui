@@ -1,64 +1,86 @@
 ---
 source: db/message-file-items.ts
-generated: '2025-06-08T13:21:01.629Z'
+generated: 2025-06-08T22:23:52.713Z
 tags: []
-hash: ab47fe6fbbaefabbbc94ffda0b1564b48e665f15bc2a1e8122313e32af031e9a
+hash: d8044318060910e566b73ea042de88e3f0b36489428037c141d4ddc26acaed43
 ---
-# Documentation
 
-## `getMessageFileItemsByMessageId(messageId: string)`
+# Message File Items Module Documentation
 
-This function is an asynchronous function that retrieves message file items by a given message ID. 
+This module is located at `/Users/garymason/chatbot-ui/db/message-file-items.ts`. It provides functionalities for retrieving and creating message file items in a chatbot application. The module interacts with the Supabase database using the Supabase JavaScript client.
 
-### Parameters
+## Dependencies
 
-- `messageId` (string): The ID of the message to retrieve file items for.
+This module imports the Supabase client from the `@/lib/supabase/browser-client` module. It also imports the `TablesInsert` type from the `@/supabase/types` module.
 
-### Returns
+## Functions
 
-- A promise that resolves to the message file items for the given message ID.
+### getMessageFileItemsByMessageId
 
-### Errors
+This function retrieves message file items associated with a specific message ID from the `messages` table in the database.
+
+```ts
+export const getMessageFileItemsByMessageId = async (messageId: string) => {
+  const { data: messageFileItems, error } = await supabase
+    .from("messages")
+    .select(
+      `
+      id,
+      file_items (*)
+    `
+    )
+    .eq("id", messageId)
+    .single()
+
+  if (!messageFileItems) {
+    throw new Error(error.message)
+  }
+
+  return messageFileItems
+}
+```
+
+#### Parameters
+
+- `messageId` (string): The ID of the message for which to retrieve the file items.
+
+#### Returns
+
+- A promise that resolves with the message file items associated with the given message ID.
+
+#### Errors
 
 - Throws an error if no message file items are found for the given message ID.
 
-### Usage
+### createMessageFileItems
 
-```javascript
-getMessageFileItemsByMessageId('1234')
-  .then(messageFileItems => console.log(messageFileItems))
-  .catch(error => console.error(error));
+This function creates new message file items in the `message_file_items` table in the database.
+
+```ts
+export const createMessageFileItems = async (
+  messageFileItems: TablesInsert<"message_file_items">[]
+) => {
+  const { data: createdMessageFileItems, error } = await supabase
+    .from("message_file_items")
+    .insert(messageFileItems)
+    .select("*")
+
+  if (!createdMessageFileItems) {
+    throw new Error(error.message)
+  }
+
+  return createdMessageFileItems
+}
 ```
 
-## `createMessageFileItems(messageFileItems: TablesInsert<"message_file_items">[])`
+#### Parameters
 
-This function is an asynchronous function that creates new message file items.
+- `messageFileItems` (Array of `TablesInsert<"message_file_items">`): An array of message file items to create in the database.
 
-### Parameters
+#### Returns
 
-- `messageFileItems` (TablesInsert<"message_file_items">[]): An array of objects representing the message file items to be created. Each object should match the structure of the "message_file_items" table.
+- A promise that resolves with the created message file items.
 
-### Returns
+#### Errors
 
-- A promise that resolves to the created message file items.
-
-### Errors
-
-- Throws an error if there is a problem creating the message file items.
-
-### Usage
-
-```javascript
-const newMessageFileItems = [
-  {
-    id: '1234',
-    file_item: 'file1',
-    // other fields...
-  },
-  // other items...
-];
-
-createMessageFileItems(newMessageFileItems)
-  .then(createdMessageFileItems => console.log(createdMessageFileItems))
-  .catch(error => console.error(error));
-```
+- Throws an error if the message file items could not be created.

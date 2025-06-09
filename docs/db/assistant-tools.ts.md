@@ -1,44 +1,114 @@
 ---
 source: db/assistant-tools.ts
-generated: '2025-06-08T13:21:01.628Z'
+generated: 2025-06-08T22:19:45.780Z
 tags: []
-hash: aa6c5cab9e9b4c35c5cf89b1c2889ccb94627471dafc17ff2ad18b87684d75cf
+hash: 9ed7350db56b642fb7cc925f95688ff2f8e7965d1b4d960d12ec5b481cfd300a
 ---
-# Assistant Tools API
 
-This module provides functions for interacting with assistant tools data in the Supabase database.
+# Assistant Tools Database Operations
+
+This file `assistant-tools.ts` contains functions for performing operations on the `assistant_tools` table in the database. The operations include fetching, creating, and deleting assistant tools.
+
+## Dependencies
+
+The file imports the `supabase` client from the `browser-client` file in the `lib/supabase` directory. It also imports the `TablesInsert` type from the `types` file in the `supabase` directory.
+
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert } from "@/supabase/types"
+```
 
 ## Functions
 
-### `getAssistantToolsByAssistantId(assistantId: string)`
+### getAssistantToolsByAssistantId
 
-Fetches assistant tools by the assistant's ID.
+This function retrieves the tools of an assistant by the assistant's ID. It throws an error if the assistant's tools are not found.
 
-- `assistantId: string`: The ID of the assistant.
+```ts
+export const getAssistantToolsByAssistantId = async (assistantId: string) => {
+  const { data: assistantTools, error } = await supabase
+    .from("assistants")
+    .select(
+      `
+        id, 
+        name, 
+        tools (*)
+      `
+    )
+    .eq("id", assistantId)
+    .single()
 
-Returns a Promise that resolves to the assistant's tools. If the assistant does not exist or an error occurs, the Promise will be rejected with an Error.
+  if (!assistantTools) {
+    throw new Error(error.message)
+  }
 
-### `createAssistantTool(assistantTool: TablesInsert<"assistant_tools">)`
+  return assistantTools
+}
+```
 
-Creates a new assistant tool.
+### createAssistantTool
 
-- `assistantTool: TablesInsert<"assistant_tools">`: The assistant tool to create.
+This function creates a new assistant tool in the `assistant_tools` table. It throws an error if the tool cannot be created.
 
-Returns a Promise that resolves to the created assistant tool. If an error occurs during creation, the Promise will be rejected with an Error.
+```ts
+export const createAssistantTool = async (
+  assistantTool: TablesInsert<"assistant_tools">
+) => {
+  const { data: createdAssistantTool, error } = await supabase
+    .from("assistant_tools")
+    .insert(assistantTool)
+    .select("*")
 
-### `createAssistantTools(assistantTools: TablesInsert<"assistant_tools">[])`
+  if (!createdAssistantTool) {
+    throw new Error(error.message)
+  }
 
-Creates multiple new assistant tools.
+  return createdAssistantTool
+}
+```
 
-- `assistantTools: TablesInsert<"assistant_tools">[]`: An array of assistant tools to create.
+### createAssistantTools
 
-Returns a Promise that resolves to the created assistant tools. If an error occurs during creation, the Promise will be rejected with an Error.
+This function creates multiple assistant tools in the `assistant_tools` table. It throws an error if the tools cannot be created.
 
-### `deleteAssistantTool(assistantId: string, toolId: string)`
+```ts
+export const createAssistantTools = async (
+  assistantTools: TablesInsert<"assistant_tools">[]
+) => {
+  const { data: createdAssistantTools, error } = await supabase
+    .from("assistant_tools")
+    .insert(assistantTools)
+    .select("*")
 
-Deletes an assistant tool.
+  if (!createdAssistantTools) {
+    throw new Error(error.message)
+  }
 
-- `assistantId: string`: The ID of the assistant.
-- `toolId: string`: The ID of the tool.
+  return createdAssistantTools
+}
+```
 
-Returns a Promise that resolves to true if the deletion was successful. If an error occurs during deletion, the Promise will be rejected with an Error.
+### deleteAssistantTool
+
+This function deletes an assistant tool from the `assistant_tools` table using the assistant's ID and the tool's ID. It throws an error if the tool cannot be deleted.
+
+```ts
+export const deleteAssistantTool = async (
+  assistantId: string,
+  toolId: string
+) => {
+  const { error } = await supabase
+    .from("assistant_tools")
+    .delete()
+    .eq("assistant_id", assistantId)
+    .eq("tool_id", toolId)
+
+  if (error) throw new Error(error.message)
+
+  return true
+}
+```
+
+## Error Handling
+
+Each function in this file uses error handling to ensure that appropriate error messages are thrown when an operation fails. This is done using the `throw new Error(error.message)` statement.

@@ -1,38 +1,78 @@
 ---
 source: components/icons/google-svg.tsx
-generated: '2025-06-08T13:21:01.634Z'
+generated: 2025-06-08T21:33:50.874Z
 tags: []
-hash: d89017258f59c6c77381dc8dcedb94baa5eadad0b11969782231561d9346343e
+hash: edf455e079503fae7cbea19ddb96a9942299c96e7c2658615c21c2163d5d2561
 ---
-# GoogleSVG Component
 
-The `GoogleSVG` is a functional component from the `react` library. This component renders a Google logo SVG.
+# GoogleSVG Component Documentation
 
-## Props
+This document provides a detailed explanation of the `GoogleSVG` component located at `/Users/garymason/chatbot-ui/components/icons/google-svg.tsx`.
 
-The `GoogleSVG` component accepts the following props:
+## Overview
 
-- `height` (optional): A number that sets the height of the SVG. The default value is `40`.
-- `width` (optional): A number that sets the width of the SVG. The default value is `40`.
-- `className` (optional): A string that sets the CSS class of the SVG.
+The `GoogleSVG` component is a functional component that renders a Google logo SVG (Scalable Vector Graphics). The component is built using TypeScript and React.
+
+## Code Explanation
+
+### Import Statements
+
+```ts
+import { FC } from "react"
+```
+
+This line imports the `FC` (Functional Component) type from the React library. This type is used to type-check our component and its props.
+
+### Interface Definition
+
+```ts
+interface GoogleSVGProps {
+  height?: number
+  width?: number
+  className?: string
+}
+```
+
+This interface defines the props that the `GoogleSVG` component accepts. All props are optional:
+
+- `height`: This prop specifies the height of the SVG. If not provided, it defaults to `40`.
+- `width`: This prop specifies the width of the SVG. If not provided, it defaults to `40`.
+- `className`: This prop allows the user to provide additional CSS classes to the SVG.
+
+### Component Definition
+
+```ts
+export const GoogleSVG: FC<GoogleSVGProps> = ({
+  height = 40,
+  width = 40,
+  className
+}) => {
+  //...
+}
+```
+
+This is the definition of the `GoogleSVG` component. It uses destructuring to extract the props and provide default values for `height` and `width` if they are not provided.
+
+### SVG Rendering
+
+The component returns an SVG element that represents the Google logo. The `height`, `width`, and `className` props are applied to the SVG element. The SVG paths are filled with different colors to create the Google logo.
 
 ## Usage
 
-Here is an example of how to use the `GoogleSVG` component:
+To use this component, import it from its location and use it in your JSX like any other component. You can optionally provide `height`, `width`, and `className` props to customize the SVG.
+
+Example:
 
 ```jsx
-<GoogleSVG height={50} width={50} className="my-svg-class" />
+import { GoogleSVG } from "/path/to/google-svg"
+
+function MyComponent() {
+  return (
+    <div>
+      <GoogleSVG height={50} width={50} className="my-custom-class" />
+    </div>
+  )
+}
 ```
 
-In this example, a Google logo SVG is rendered with a height and width of `50` and a CSS class of `my-svg-class`.
-
-## SVG Details
-
-The SVG rendered by this component is a Google logo. It consists of four `<path>` elements, each representing a different color in the Google logo. The colors are represented in hexadecimal format:
-
-- `#FFC107`: Yellow
-- `#FF3D00`: Red
-- `#4CAF50`: Green
-- `#1976D2`: Blue
-
-The `viewBox` attribute on the SVG element is set to `"0 0 48 48"`, which means the aspect ratio of the SVG is preserved when scaling.
+This will render a Google logo with a height and width of `50`, and with an additional CSS class of `my-custom-class`.

@@ -1,51 +1,61 @@
 ---
 source: lib/memory/parseMemoryTrigger.ts
-generated: '2025-06-08T13:21:01.647Z'
+generated: 2025-06-08T22:33:26.936Z
 tags: []
-hash: be43c6cb5f7f44f4326101267ed208b1071f5a78607d71a815f948ed3c69fc7e
+hash: 9fd7c02ec208ace1836dae4acb6a5f628aa3345f6669de064192d96b9eea4e8b
 ---
-# Documentation for `parseMemoryTrigger.ts`
 
-This file is located in `lib/memory/parseMemoryTrigger.ts`.
+# Documentation for parseMemoryTrigger.ts
 
-## Function: `parseMemoryTrigger`
+This documentation provides a detailed overview of the `parseMemoryTrigger.ts` file located in the `lib/memory` directory. The primary function of this file is to define the `parseMemoryTrigger` function.
 
-This function is used to parse a memory trigger. Currently, it is a temporary stub, and the memory trigger system is disabled for modular testing.
+## Function: parseMemoryTrigger
 
-### Syntax
-
-```typescript
-parseMemoryTrigger(_input: string): {
+```ts
+export const parseMemoryTrigger = (
+  _input: string
+): {
   isMemoryTrigger: boolean
   memoryContent: string
   tags?: string
   category?: string
   needsConfirmation?: boolean
+} => {
+  // TEMP STUB — Memory trigger system disabled for modular testing
+  return {
+    isMemoryTrigger: false,
+    memoryContent: "",
+    tags: "",
+    category: "",
+    needsConfirmation: false
+  }
 }
 ```
 
+### Summary
+
+The `parseMemoryTrigger` function is designed to parse a memory trigger from a given input string. It returns an object with several properties that provide information about the memory trigger.
+
 ### Parameters
+
+The function accepts a single parameter:
 
 - `_input` (string): The input string to be parsed.
 
-### Return Value
+### Return Object
 
 The function returns an object with the following properties:
 
-- `isMemoryTrigger` (boolean): This property indicates whether the input is a memory trigger. In the current stub, this is always `false`.
-- `memoryContent` (string): This property contains the content of the memory. In the current stub, this is always an empty string.
-- `tags` (string, optional): This property contains the tags associated with the memory. In the current stub, this is always an empty string.
-- `category` (string, optional): This property contains the category of the memory. In the current stub, this is always an empty string.
-- `needsConfirmation` (boolean, optional): This property indicates whether the memory trigger needs confirmation. In the current stub, this is always `false`.
+- `isMemoryTrigger` (boolean): Indicates whether the input string is a memory trigger.
+- `memoryContent` (string): The content of the memory trigger.
+- `tags` (string, optional): The tags associated with the memory trigger.
+- `category` (string, optional): The category of the memory trigger.
+- `needsConfirmation` (boolean, optional): Indicates whether the memory trigger requires confirmation.
 
-### Example
+### Current State
 
-```typescript
-const result = parseMemoryTrigger("some input string");
-console.log(result);
-// Output: { isMemoryTrigger: false, memoryContent: "", tags: "", category: "", needsConfirmation: false }
-```
+Currently, the function is a temporary stub and is disabled for modular testing. It returns an object with default values. The `isMemoryTrigger` property is set to `false`, `memoryContent`, `tags`, and `category` are empty strings, and `needsConfirmation` is set to `false`.
 
-### Note
+### Future Implementation
 
-This function is currently a stub and does not perform any parsing. The memory trigger system is disabled for modular testing.
+In future implementations, this function will parse the `_input` string to determine if it is a memory trigger and extract the relevant information to populate the return object's properties.

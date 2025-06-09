@@ -1,26 +1,21 @@
 ---
 source: lib/supabase/client.ts
-generated: '2025-06-08T13:21:01.647Z'
+generated: 2025-06-08T22:39:40.089Z
 tags: []
-hash: 7dba5213a8fe8f0e9343543f86443a1b28d532adc9c74a37ff61f447d0656fff
+hash: 4d2c4376dde9d79efbb56c7e002a3a288fd949ad81170546875add41f176ccba
 ---
-# Source Code Documentation
 
-This file is a part of a server-side rendering (SSR) application that uses Supabase, a real-time database and backend-as-a-service provider. It exports a single function `createClient` that creates and returns a new Supabase client for the browser.
+# Supabase Client Configuration
 
-## Import
+This file is located at `/Users/garymason/chatbot-ui/lib/supabase/client.ts`. It is responsible for creating and exporting a Supabase client, which is used to interact with the Supabase backend.
 
-```javascript
-import { createBrowserClient } from "@supabase/ssr"
-```
+## Dependencies
 
-This line imports the `createBrowserClient` function from the `@supabase/ssr` package. This function is used to create a new Supabase client for the browser.
+The file imports a function `createBrowserClient` from the `@supabase/ssr` package. This function is used to create a Supabase client.
 
-## Exported Function
+## Function: createClient
 
-### `createClient`
-
-```javascript
+```ts
 export const createClient = () =>
   createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -28,31 +23,23 @@ export const createClient = () =>
   )
 ```
 
-This function, when called, creates and returns a new Supabase client for the browser. It does not take any arguments.
+The `createClient` function is an exported function that creates a new Supabase client. It does not take any parameters and returns the created client.
 
-#### Parameters
+The `createBrowserClient` function is called with two arguments:
 
-This function does not accept any parameters.
+1. `process.env.NEXT_PUBLIC_SUPABASE_URL`: This is the URL of the Supabase backend. It is read from the environment variable `NEXT_PUBLIC_SUPABASE_URL`.
 
-#### Return Value
+2. `process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY`: This is the anonymous key for the Supabase backend. It is read from the environment variable `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
 
-Returns a new Supabase client for the browser.
-
-#### Environment Variables
-
-This function uses two environment variables:
-
-- `NEXT_PUBLIC_SUPABASE_URL`: The URL of your Supabase instance. This should be a string that represents a valid URL.
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: The anonymous key for your Supabase instance. This should be a string.
-
-Both of these environment variables are required for the function to work correctly. If either of these environment variables is not set, the function will throw an error.
+The `!` operator is used to assert that these environment variables are not `null` or `undefined`. If they are, TypeScript will throw a compile-time error.
 
 ## Usage
 
-To use this function, you simply need to call it:
+To use this client in other parts of the application, you can import it like so:
 
-```javascript
+```ts
+import { createClient } from '/path/to/client';
 const client = createClient();
 ```
 
-This will create a new Supabase client and assign it to the `client` variable.
+Then, you can use the `client` to interact with the Supabase backend.

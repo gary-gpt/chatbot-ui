@@ -1,37 +1,74 @@
 ---
 source: components/sidebar/items/folders/delete-folder.tsx
-generated: '2025-06-08T13:21:01.662Z'
+generated: 2025-06-08T21:48:13.810Z
 tags: []
-hash: e07ac761f818deb83da183d42093a4c606e5a48bccc14109afabb057e3c5cc6b
+hash: 1bf01cb1a5b8aefab76dbcca23f51adf5bcfa776678f0af47f9f410325e36e93
 ---
-# DeleteFolder Component
 
-The `DeleteFolder` component is a React Functional Component that provides functionality for deleting a folder and its associated items.
+# Delete Folder Component Documentation
 
-## Props
+This document provides an overview of the `DeleteFolder` component found in the file `/Users/garymason/chatbot-ui/components/sidebar/items/folders/delete-folder.tsx`. This component is used to delete a folder and optionally its contents from the chatbot UI.
 
-The component accepts the following props:
+## Code Overview
 
-- `folder`: An object representing the folder to be deleted. It should be of the type `Tables<"folders">`.
-- `contentType`: A string representing the type of content in the folder. It should be of the type `ContentType`.
+```ts
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@/components/ui/dialog"
+import { ChatbotUIContext } from "@/context/context"
+import { deleteFolder } from "@/db/folders"
+import { supabase } from "@/lib/supabase/browser-client"
+import { Tables } from "@/supabase/types"
+import { ContentType } from "@/types"
+import { IconTrash } from "@tabler/icons-react"
+import { FC, useContext, useRef, useState } from "react"
+import { toast } from "sonner"
 
-## Context
+interface DeleteFolderProps {
+  folder: Tables<"folders">
+  contentType: ContentType
+}
 
-The component uses the `ChatbotUIContext` to get several state update functions.
+export const DeleteFolder: FC<DeleteFolderProps> = ({
+  folder,
+  contentType
+}) => {
+  // ...
+}
+```
 
-## State
+## Component Props
 
-The component maintains the following state:
+The `DeleteFolder` component accepts the following props:
 
-- `showFolderDialog`: A boolean indicating whether the delete folder dialog is open or not.
+- `folder`: An object representing the folder to be deleted. This object should match the `folders` table structure in the Supabase database.
+- `contentType`: A string representing the type of content contained within the folder.
 
-## Methods
+## Component State
 
-The component provides the following methods:
+The component maintains the following state variables:
 
-- `handleDeleteFolderOnly`: This method deletes the folder only, leaving the items within the folder intact.
-- `handleDeleteFolderAndItems`: This method deletes both the folder and the items within the folder.
+- `showFolderDialog`: A boolean value controlling the visibility of the delete confirmation dialog.
+- `stateUpdateFunctions`: An object mapping content types to their respective state update functions.
 
-## Rendered JSX
+## Component Methods
 
-The component renders a `Dialog` component that contains a `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogDescription`, and `DialogFooter`. The `DialogTrigger` is an `IconTrash` component that, when clicked, opens the delete folder dialog. The `DialogContent` contains a `DialogHeader` with a `DialogTitle` and `DialogDescription`, and a `DialogFooter` with three `Button` components. One button cancels the operation, one deletes the folder and its items, and one deletes only the folder.
+The component defines the following methods:
+
+- `handleDeleteFolderOnly`: This method deletes the folder from the database and updates the UI state accordingly. It also sets any items within the deleted folder to have a `null` folder_id.
+- `handleDeleteFolderAndItems`: This method deletes both the folder and its items from the database. It updates the UI state to reflect these changes.
+
+## Component Rendering
+
+The `DeleteFolder` component renders a `Dialog` component. The dialog contains a `DialogTrigger` that displays a trash icon. When clicked, a confirmation dialog appears with the options to either delete the folder only or delete the folder and its contents. The dialog also provides a cancel button to dismiss the dialog without making any changes.
+
+## Code Summary
+
+In summary, the `DeleteFolder` component provides the functionality to delete a folder and optionally its contents from the chatbot UI. It does this by interacting with the Supabase database and updating the UI state to reflect these changes.

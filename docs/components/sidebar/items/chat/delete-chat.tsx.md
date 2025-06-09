@@ -1,39 +1,79 @@
 ---
 source: components/sidebar/items/chat/delete-chat.tsx
-generated: '2025-06-08T13:21:01.661Z'
+generated: 2025-06-08T21:45:37.750Z
 tags: []
-hash: 1e5f8dbd6b02a9b550c0c907369f9570818b32a24f0c37b587c500fa267ed7ae
+hash: f4e4efacc97aed30834bfd42543865885db1bb93db264c8ce3e9180fa0a9e60e
 ---
-# DeleteChat Component
 
-The `DeleteChat` component is a functional component that provides the functionality to delete a chat. It uses a dialog box to confirm the deletion of the chat.
+# Delete Chat Component Documentation
 
-## Props
+This document describes the `DeleteChat` component in the file `/Users/garymason/chatbot-ui/components/sidebar/items/chat/delete-chat.tsx`. This component is responsible for deleting a chat from the chat interface.
 
-The `DeleteChat` component accepts the following props:
+## Code Overview
 
-- `chat`: An object of type `Tables<"chats">` which represents the chat to be deleted.
+```ts
+import { useChatHandler } from "@/components/chat/chat-hooks/use-chat-handler"
+import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@/components/ui/dialog"
+import { ChatbotUIContext } from "@/context/context"
+import { deleteChat } from "@/db/chats"
+import useHotkey from "@/lib/hooks/use-hotkey"
+import { Tables } from "@/supabase/types"
+import { IconTrash } from "@tabler/icons-react"
+import { FC, useContext, useRef, useState } from "react"
 
-## Dependencies
+interface DeleteChatProps {
+  chat: Tables<"chats">
+}
 
-- `useChatHandler`: A custom hook used to handle new chat creation.
-- `Button`: A UI component for the button.
-- `Dialog`, `DialogContent`, `DialogDescription`, `DialogFooter`, `DialogHeader`, `DialogTitle`, `DialogTrigger`: UI components for the dialog box.
-- `ChatbotUIContext`: The context that provides the chatbot UI state.
-- `deleteChat`: A function to delete a chat from the database.
-- `useHotkey`: A custom hook to handle keyboard shortcuts.
-- `Tables`: A type representing the database tables.
-- `IconTrash`: An icon component for the trash icon.
-- `FC`, `useContext`, `useRef`, `useState`: React hooks and types.
+export const DeleteChat: FC<DeleteChatProps> = ({ chat }) => {
+  // Code logic here...
+}
+```
 
-## Functionality
+## Import Statements
 
-The `DeleteChat` component uses the `useHotkey` hook to listen for the 'Backspace' key press and show the delete chat dialog box. It uses the `useContext` hook to get the `setChats` function from the `ChatbotUIContext`.
+The code starts by importing necessary modules and components. These include context, hooks, UI components, database functions, and types.
 
-The `handleDeleteChat` function is an asynchronous function that deletes the chat from the database, updates the chats state by filtering out the deleted chat, hides the delete chat dialog box, and handles the creation of a new chat.
+## DeleteChatProps Interface
 
-The `handleKeyDown` function listens for the 'Enter' key press and triggers a click event on the delete button.
+The `DeleteChatProps` interface is defined to type check the props that the `DeleteChat` component receives. It expects a `chat` object of type `Tables<"chats">`.
 
-## Rendering
+## DeleteChat Component
 
-The `DeleteChat` component renders a dialog box with a trash icon as the trigger. The dialog box includes a header with the title and description, and a footer with 'Cancel' and 'Delete' buttons. The 'Cancel' button hides the dialog box, and the 'Delete' button triggers the `handleDeleteChat` function. The dialog box listens for the 'Enter' key press and triggers a click event on the delete button.
+The `DeleteChat` component is a functional component that receives a `chat` object as a prop.
+
+```ts
+export const DeleteChat: FC<DeleteChatProps> = ({ chat }) => {
+  // Code logic here...
+}
+```
+
+### Hooks and Context
+
+The component uses several hooks and context:
+
+- `useHotkey`: This hook is used to listen for the "Backspace" key press and show the delete chat dialog when pressed.
+- `useContext`: This hook is used to access the `ChatbotUIContext` and get the `setChats` function.
+- `useChatHandler`: This hook is used to get the `handleNewChat` function.
+- `useRef`: This hook is used to create a reference to the delete button.
+- `useState`: This hook is used to manage the state of the delete chat dialog visibility.
+
+### Event Handlers
+
+The component defines several event handlers:
+
+- `handleDeleteChat`: This function deletes the chat from the database, updates the chats state, hides the delete chat dialog, and handles the creation of a new chat.
+- `handleKeyDown`: This function listens for the "Enter" key press and triggers a click event on the delete button.
+
+### Component Return
+
+The component returns a `Dialog` component that contains the delete chat dialog. The dialog includes a trigger, content, header, and footer. The trigger is an `IconTrash` component, and the content includes a title, description, and two buttons for canceling and confirming the deletion. The delete button uses the `buttonRef` and `handleDeleteChat` function.

@@ -1,21 +1,26 @@
 ---
 source: components/chat/chat-retrieval-settings.tsx
-generated: '2025-06-08T13:21:01.634Z'
+generated: 2025-06-08T21:29:52.652Z
 tags: []
-hash: 29993c971d1f8c718ed6a32187f55c9a0e178b3054f3fdac1c6d0a21f65addf8
+hash: ccdcb3339dbba6d4cb219f3b5eb3d9f5e2a61b0aa3e16dbcaaa3d7b472f9a5b6
 ---
-# Chat Retrieval Settings Component
 
-This is a functional component in React that provides an interface for adjusting the chat retrieval settings in a chatbot UI.
+# Chatbot UI - Chat Retrieval Settings Component
+
+This document describes the purpose and logic of the `ChatRetrievalSettings` component in the file `/Users/garymason/chatbot-ui/components/chat/chat-retrieval-settings.tsx`.
+
+## Overview
+
+The `ChatRetrievalSettings` component is a functional component that provides an interface for adjusting the chat retrieval settings in a chatbot UI. The settings can be adjusted through a dialog that opens when the settings icon is clicked. The dialog contains a slider for adjusting the source count, which is the number of sources from which the chatbot retrieves information.
 
 ## Imports
 
 The component imports several dependencies:
 
-- `ChatbotUIContext` from the context folder in the source directory. This context provides the source count state and its setter function.
-- `IconAdjustmentsHorizontal` from the `@tabler/icons-react` package. This is the icon used for the settings button.
-- `FC`, `useContext`, and `useState` from the `react` package. These are used to define the component, access context, and manage local state respectively.
-- Several UI components (`Button`, `Dialog`, `DialogContent`, `DialogFooter`, `DialogTrigger`, `Label`, `Slider`, `WithTooltip`) from the UI directory in the source directory. These are used to build the component's UI.
+- `ChatbotUIContext`: The context that provides the source count state and its setter function.
+- `IconAdjustmentsHorizontal`: An icon from the `@tabler/icons-react` library that represents the settings.
+- `FC, useContext, useState`: React hooks and types.
+- Several UI components (`Button`, `Dialog`, `DialogContent`, `DialogFooter`, `DialogTrigger`, `Label`, `Slider`, `WithTooltip`) from the local UI library.
 
 ## Props
 
@@ -23,22 +28,40 @@ The component does not accept any props.
 
 ## State
 
-The component maintains a single piece of local state: `isOpen`. This state determines whether the settings dialog is open or not.
+The component maintains two pieces of state:
 
-## Rendered JSX
+- `sourceCount`: The number of sources from which the chatbot retrieves information. This state is obtained from the `ChatbotUIContext`.
+- `isOpen`: A boolean that indicates whether the settings dialog is open. This state is managed locally with the `useState` hook.
 
-The component renders a `Dialog` component. The dialog is controlled by the `isOpen` state and its setter function `setIsOpen`.
+## Component Structure
 
-The dialog trigger is a `WithTooltip` component that displays a tooltip with the text "Adjust retrieval settings." when hovered over. The trigger itself is an `IconAdjustmentsHorizontal` icon.
+The component returns a `Dialog` component that contains the following child components:
 
-The dialog content consists of a `Label` and a `Slider`. The `Label` displays the current source count. The `Slider` allows the user to adjust the source count. The slider's value is tied to the source count from the context, and changes to the slider's value update the source count.
+- `DialogTrigger`: Contains a `WithTooltip` component that displays a tooltip with the text "Adjust retrieval settings." when the settings icon is hovered over.
+- `DialogContent`: Contains a `Label` component that displays the current source count and a `Slider` component that allows the user to adjust the source count.
+- `DialogFooter`: Contains a `Button` component that closes the dialog when clicked.
 
-The dialog footer contains a `Button` that closes the dialog when clicked.
+## Event Handlers
 
-## Usage
+The component defines the following event handlers:
 
-This component does not accept any props, so it can be used in JSX as follows:
+- `onOpenChange`: Sets the `isOpen` state to open or close the dialog.
+- `onValueChange`: Sets the `sourceCount` state to the value selected on the slider.
+- `onClick`: Closes the dialog when the "Save & Close" button is clicked.
 
-```jsx
-<ChatRetrievalSettings />
+```ts
+// Event handler for opening and closing the dialog
+onOpenChange={setIsOpen}
+
+// Event handler for adjusting the source count
+onValueChange={values => {
+  setSourceCount(values[0])
+}}
+
+// Event handler for closing the dialog
+onClick={() => setIsOpen(false)}
 ```
+
+## Styling
+
+The component uses Tailwind CSS for styling. The styles are applied inline using the `className` prop.

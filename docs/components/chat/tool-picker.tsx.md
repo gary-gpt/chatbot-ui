@@ -1,40 +1,92 @@
 ---
 source: components/chat/tool-picker.tsx
-generated: '2025-06-08T13:21:01.635Z'
+generated: 2025-06-08T21:32:55.512Z
 tags: []
-hash: 09fe3b65453dd91a7f8022c98b4db2c1757c194ab730429b0c0a2b632763177d
+hash: 69454c9953c18c5a76c5d9203f72ae49f61a9c8cf20a427a9a327b9e1fa641f3
 ---
-# ToolPicker Component Documentation
 
-## Overview
+# Documentation for `tool-picker.tsx`
 
-`ToolPicker` is a functional component in React that provides an interface for selecting a tool from a list of available tools. The list of tools is filtered based on a command and the selected tool is handled by a function from a custom hook. The component also provides keyboard navigation for the tool list.
+This file defines a component `ToolPicker` in a chatbot UI. The `ToolPicker` component provides an interface for users to select a tool from a list. The list of tools can be filtered by a command, and the tool picker can be opened or closed. The component also handles keyboard events for navigating the list of tools.
 
-## Imports
+## Import Statements
 
-- `ChatbotUIContext` from "@/context/context": A context that provides state and functions related to the chatbot UI.
-- `Tables` from "@/supabase/types": A type definition for the structure of tables in the Supabase database.
-- `IconBolt` from "@tabler/icons-react": An icon component from the tabler icons library.
-- `FC, useContext, useEffect, useRef` from "react": Various hooks and types from the React library.
-- `usePromptAndCommand` from "./chat-hooks/use-prompt-and-command": A custom hook that provides functions for handling prompts and commands in the chatbot UI.
+```ts
+import { ChatbotUIContext } from "@/context/context"
+import { Tables } from "@/supabase/types"
+import { IconBolt } from "@tabler/icons-react"
+import { FC, useContext, useEffect, useRef } from "react"
+import { usePromptAndCommand } from "./chat-hooks/use-prompt-and-command"
+```
 
-## Props
+The import statements import necessary dependencies for the `ToolPicker` component. These include:
 
-The `ToolPicker` component does not take any props.
+- `ChatbotUIContext`: The context object for the chatbot UI.
+- `Tables`: A type from the Supabase library, used for typing the tools.
+- `IconBolt`: An icon from the Tabler Icons library.
+- `FC`, `useContext`, `useEffect`, `useRef`: React hooks and types.
+- `usePromptAndCommand`: A custom hook defined in the same directory, used to handle the selection of a tool.
 
-## State and Effects
+## Component Props
 
-- `tools, focusTool, toolCommand, isToolPickerOpen, setIsToolPickerOpen`: State variables and functions from the `ChatbotUIContext`.
-- `handleSelectTool`: A function from the `usePromptAndCommand` hook that handles the selection of a tool.
-- `itemsRef`: A ref that holds an array of div elements, each representing a tool in the list.
-- `useEffect`: An effect that focuses the first tool in the list when the `focusTool` state variable changes.
+```ts
+interface ToolPickerProps {}
+```
 
-## Functions
+The `ToolPickerProps` interface is currently empty, meaning the `ToolPicker` component does not accept any props.
 
-- `handleOpenChange(isOpen: boolean)`: A function that sets the `isToolPickerOpen` state variable.
-- `callSelectTool(tool: Tables<"tools">)`: A function that calls `handleSelectTool` and closes the tool picker.
-- `getKeyDownHandler(index: number)`: A function that returns a function for handling key down events on a tool. The returned function handles the "Backspace", "Enter", "Tab", "ArrowDown", and "ArrowUp" keys.
+## Component Definition
 
-## Return
+```ts
+export const ToolPicker: FC<ToolPickerProps> = ({}) => { ... }
+```
 
-The `ToolPicker` component returns a div element that contains a list of tools. Each tool is represented by a div element that contains an `IconBolt` and the tool's name and description. The list of tools is only rendered if the `isToolPickerOpen` state variable is true. If there are no tools in the filtered list, a message is displayed instead.
+The `ToolPicker` component is defined as a functional component with `ToolPickerProps` as its props type.
+
+## Context and Custom Hook
+
+```ts
+const {
+  tools,
+  focusTool,
+  toolCommand,
+  isToolPickerOpen,
+  setIsToolPickerOpen
+} = useContext(ChatbotUIContext)
+
+const { handleSelectTool } = usePromptAndCommand()
+```
+
+The component uses the `useContext` hook to access the `ChatbotUIContext`, and the `usePromptAndCommand` custom hook to get the `handleSelectTool` function.
+
+## Ref and Effect
+
+```ts
+const itemsRef = useRef<(HTMLDivElement | null)[]>([])
+
+useEffect(() => {
+  if (focusTool && itemsRef.current[0]) {
+    itemsRef.current[0].focus()
+  }
+}, [focusTool])
+```
+
+The `itemsRef` ref is used to store references to the tool div elements. The `useEffect` hook is used to focus the first tool when `focusTool` changes.
+
+## Tool Filtering
+
+```ts
+const filteredTools = tools.filter(tool =>
+  tool.name.toLowerCase().includes(toolCommand.toLowerCase())
+)
+```
+
+The `filteredTools` constant stores the list of tools that match the `toolCommand`.
+
+## Event Handlers
+
+The component defines several event handlers for opening and closing the tool picker, selecting a tool, and handling key down events.
+
+## Render
+
+The component renders a list of the filtered tools, or a message if no tools match the filter. Each tool is rendered as a div with a click and key down handler, and the tool's name and description are displayed. If the tool picker is not open, nothing is rendered.

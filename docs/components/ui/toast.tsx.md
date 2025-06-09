@@ -1,71 +1,48 @@
 ---
 source: components/ui/toast.tsx
-generated: '2025-06-08T13:21:01.644Z'
+generated: 2025-06-08T22:11:15.940Z
 tags: []
-hash: 62825f40db8496ca793cf5b11bea315ae668b08c4eb479a6cc2f9cedef4589c0
+hash: 96812d68077e225e1a40a0300deed515522760d919ab8bfabb036859c77a5735
 ---
+
 # Toast Component Documentation
 
-This file contains the implementation for the Toast component and related sub-components. The Toast component is a notification element that provides feedback about an operation's status or updates.
+This document provides an overview of the `toast.tsx` file, which is a part of the Chatbot UI. The file is located at `/Users/garymason/chatbot-ui/components/ui/toast.tsx`.
+
+The file defines several components that make up a toast notification system. Toast notifications are small messages that appear temporarily to provide feedback to the user. They often appear after the user has performed an action.
 
 ## Imports
 
-- `React` from the "react" library.
-- `ToastPrimitives` from the "@radix-ui/react-toast" library.
-- `cva` and `VariantProps` from the "class-variance-authority" library.
-- `X` from the "lucide-react" library.
-- `cn` from the "@/lib/utils" file.
+The file imports several modules and components from external libraries such as `react`, `@radix-ui/react-toast`, `class-variance-authority`, and `lucide-react`. It also imports a utility function `cn` from a local file.
 
-## Components
+## ToastProvider
 
-### ToastProvider
+`ToastProvider` is a simple wrapper around `ToastPrimitives.Provider` from the `@radix-ui/react-toast` package. It doesn't add any additional functionality or props.
 
-This is the provider for the Toast component, it uses the `Provider` from `ToastPrimitives`.
+## ToastViewport
 
-### ToastViewport
+`ToastViewport` is a component that wraps around `ToastPrimitives.Viewport`. It sets up the positioning and styling of the toast notifications. It uses the `React.forwardRef` function to pass along any ref that is attached to it.
 
-This is a wrapper around the `Viewport` from `ToastPrimitives`. It sets the position and dimensions of the toast notifications.
+## Toast
 
-### Toast
+`Toast` is the main component that represents a toast notification. It uses `React.forwardRef` to pass along any ref that is attached to it. It also applies a set of CSS classes and variants to the toast notification.
 
-This is the main Toast component. It uses the `Root` from `ToastPrimitives` and applies various styles based on the provided variant.
+## ToastAction
 
-### ToastAction
+`ToastAction` is a component that represents an action button within a toast notification. It uses `React.forwardRef` to pass along any ref that is attached to it. It also applies a set of CSS classes to the action button.
 
-This component is used for actions within the Toast component. It uses the `Action` from `ToastPrimitives` and applies various styles.
+## ToastClose
 
-### ToastClose
+`ToastClose` is a component that represents a close button within a toast notification. It uses `React.forwardRef` to pass along any ref that is attached to it. It also applies a set of CSS classes to the close button.
 
-This component is used for closing the Toast component. It uses the `Close` from `ToastPrimitives` and applies various styles.
+## ToastTitle
 
-### ToastTitle
+`ToastTitle` is a component that represents the title of a toast notification. It uses `React.forwardRef` to pass along any ref that is attached to it. It also applies a set of CSS classes to the title.
 
-This component is used for the title of the Toast component. It uses the `Title` from `ToastPrimitives` and applies various styles.
+## ToastDescription
 
-### ToastDescription
-
-This component is used for the description of the Toast component. It uses the `Description` from `ToastPrimitives` and applies various styles.
-
-## Types
-
-### ToastProps
-
-This type is the props for the Toast component.
-
-### ToastActionElement
-
-This type is a React element of the ToastAction component.
+`ToastDescription` is a component that represents the description of a toast notification. It uses `React.forwardRef` to pass along any ref that is attached to it. It also applies a set of CSS classes to the description.
 
 ## Exports
 
-The file exports the following:
-
-- `ToastProps` type
-- `ToastActionElement` type
-- `ToastProvider` component
-- `ToastViewport` component
-- `Toast` component
-- `ToastTitle` component
-- `ToastDescription` component
-- `ToastClose` component
-- `ToastAction` component
+The file exports several types and components that can be used in other parts of the application. These include `ToastProps`, `ToastActionElement`, `ToastProvider`, `ToastViewport`, `Toast`, `ToastTitle`, `ToastDescription`, `ToastClose`, and `ToastAction`.

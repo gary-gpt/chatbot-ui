@@ -1,65 +1,104 @@
 ---
 source: components/chat/chat-hooks/use-scroll.tsx
-generated: '2025-06-08T13:21:01.649Z'
+generated: 2025-06-08T21:28:38.040Z
 tags: []
-hash: 4c6337aaf018a28486d694ec7e1013bfb347e8f3dcdfc94193b3e8dc48c70c4f
+hash: 4348f874cf16f2e87c10fd876abdb9207063de668225459bddc0fe03c19cd788
 ---
-# useScroll Hook Documentation
 
-The `useScroll` hook is a custom React hook that provides functionality for handling scrolling events within a chat interface. It maintains several pieces of state related to the scroll position of the chat window and provides methods for programmatically scrolling to the top or bottom of the chat.
+# Documentation for useScroll.tsx
 
-## Importing
+This file contains a custom React Hook called `useScroll`. This hook is used to manage the scrolling behavior of the chat messages in a Chatbot UI. It provides several functionalities such as scrolling to the top or bottom of the chat, detecting whether the chat is overflowing, and handling user scroll events.
 
-```javascript
-import { useScroll } from "<path-to-useScroll>"
+## Import Statements
+
+```ts
+import { ChatbotUIContext } from "@/context/context"
+import {
+  type UIEventHandler,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState
+} from "react"
 ```
 
-## Return Values
+The import statements include necessary React hooks, the `ChatbotUIContext` from the application context, and the `UIEventHandler` type from React.
 
-The `useScroll` hook returns an object with the following properties:
+## useScroll Hook
 
-- `messagesStartRef`: A React ref object pointing to the first message in the chat.
-- `messagesEndRef`: A React ref object pointing to the last message in the chat.
-- `isAtTop`: A boolean indicating whether the scroll position is at the top of the chat.
-- `isAtBottom`: A boolean indicating whether the scroll position is at the bottom of the chat.
-- `userScrolled`: A boolean indicating whether the user has manually scrolled the chat.
-- `isOverflowing`: A boolean indicating whether the chat content overflows the chat container.
-- `handleScroll`: A function that handles scroll events on the chat container.
-- `scrollToTop`: A function that scrolls the chat to the top.
-- `scrollToBottom`: A function that scrolls the chat to the bottom.
-- `setIsAtBottom`: A function to set the `isAtBottom` state.
-
-## Usage
-
-The `useScroll` hook is intended to be used within a React component that needs to manage scrolling behavior. It should be called at the top level of a functional component or custom hook. 
-
-The `handleScroll` function should be attached to the `onScroll` event of the chat container. The `scrollToTop` and `scrollToBottom` functions can be called programmatically to control the scroll position of the chat.
-
-## Example
-
-```javascript
-import React from 'react';
-import { useScroll } from "<path-to-useScroll>"
-
-const ChatComponent = () => {
-  const { 
-    messagesStartRef, 
-    messagesEndRef, 
-    isAtTop, 
-    isAtBottom, 
-    userScrolled, 
-    isOverflowing, 
-    handleScroll, 
-    scrollToTop, 
-    scrollToBottom, 
-    setIsAtBottom 
-  } = useScroll();
-
-  // Render chat messages and attach handleScroll to onScroll event
-  // Use scrollToTop and scrollToBottom as needed
+```ts
+export const useScroll = () => {
+  // ...
 }
 ```
 
-## Dependencies
+The `useScroll` hook is exported for use in other components.
 
-This hook depends on the `ChatbotUIContext` context and the following hooks from React: `useCallback`, `useContext`, `useEffect`, `useRef`, `useState`.
+## State and Refs
+
+```ts
+const { isGenerating, chatMessages } = useContext(ChatbotUIContext)
+
+const messagesStartRef = useRef<HTMLDivElement>(null)
+const messagesEndRef = useRef<HTMLDivElement>(null)
+const isAutoScrolling = useRef(false)
+
+const [isAtTop, setIsAtTop] = useState(false)
+const [isAtBottom, setIsAtBottom] = useState(true)
+const [userScrolled, setUserScrolled] = useState(false)
+const [isOverflowing, setIsOverflowing] = useState(false)
+```
+
+The hook uses several state variables and refs to keep track of the current state of the chat messages and the user's interactions with them.
+
+## useEffect Hooks
+
+```ts
+useEffect(() => {
+  // ...
+}, [isGenerating])
+
+useEffect(() => {
+  // ...
+}, [chatMessages])
+```
+
+Two `useEffect` hooks are used to perform side effects when the `isGenerating` and `chatMessages` values change. The first one resets the `userScrolled` state when the chatbot stops generating messages. The second one triggers a scroll to the bottom of the chat when new messages are generated and the user has not manually scrolled.
+
+## Event Handlers
+
+```ts
+const handleScroll: UIEventHandler<HTMLDivElement> = useCallback(e => {
+  // ...
+}, [])
+
+const scrollToTop = useCallback(() => {
+  // ...
+}, [])
+
+const scrollToBottom = useCallback(() => {
+  // ...
+}, [])
+```
+
+Three event handlers are defined to handle user scroll events and to programmatically scroll to the top or bottom of the chat.
+
+## Return Statement
+
+```ts
+return {
+  messagesStartRef,
+  messagesEndRef,
+  isAtTop,
+  isAtBottom,
+  userScrolled,
+  isOverflowing,
+  handleScroll,
+  scrollToTop,
+  scrollToBottom,
+  setIsAtBottom
+}
+```
+
+The hook returns an object containing the refs, state variables, and event handlers, which can be used by the component that calls this hook.

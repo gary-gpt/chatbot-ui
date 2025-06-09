@@ -1,74 +1,75 @@
 ---
 source: db/storage/message-images.ts
-generated: '2025-06-08T13:21:01.646Z'
+generated: 2025-06-08T22:27:13.582Z
 tags: []
-hash: cc635aa372b9fca94e1cbe8d48a7b91621f359fc4fa6def20201985ad8c1fc92
+hash: d86ecc0b2b4821673ca04e216c61b0d7520b06ac839d71479f563510a7c1731d
 ---
-# Documentation
 
-## Functions
+# Message Images Storage Module
 
-### uploadMessageImage
+This module is located at `/Users/garymason/chatbot-ui/db/storage/message-images.ts` and it is responsible for handling the upload and retrieval of message images in a chatbot application. It uses Supabase, a Firebase alternative, for handling storage operations.
 
-This function is used to upload an image to a Supabase storage bucket.
+## Code Overview
 
-```typescript
-uploadMessageImage(path: string, image: File): Promise<string>
+This module exports two main functions:
+
+1. `uploadMessageImage`: This function is used to upload an image to the Supabase storage.
+2. `getMessageImageFromStorage`: This function is used to retrieve an image from the Supabase storage.
+
+### Importing Dependencies
+
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
 ```
 
-#### Parameters
+The module imports the `supabase` client from the local library. This client is used to interact with the Supabase service.
 
-- `path` (string): The path where the image will be stored in the bucket.
-- `image` (File): The image file to be uploaded.
+### Upload Message Image Function
 
-#### Returns
+```ts
+export const uploadMessageImage = async (path: string, image: File) => {
+  const bucket = "message_images"
 
-- A promise that resolves to the path where the image was stored.
+  const imageSizeLimit = 6000000 // 6MB
 
-#### Errors
+  if (image.size > imageSizeLimit) {
+    throw new Error(`Image must be less than ${imageSizeLimit / 1000000}MB`)
+  }
 
-- Throws an error if the image size is greater than 6MB.
-- Throws an error if there was an issue uploading the image to Supabase.
+  const { error } = await supabase.storage.from(bucket).upload(path, image, {
+    upsert: true
+  })
 
-### getMessageImageFromStorage
+  if (error) {
+    throw new Error("Error uploading image")
+  }
 
-This function is used to get a signed URL for an image from a Supabase storage bucket. The URL is valid for 24 hours.
-
-```typescript
-getMessageImageFromStorage(filePath: string): Promise<string>
+  return path
+}
 ```
 
-#### Parameters
+The `uploadMessageImage` function is an asynchronous function that takes two parameters: `path` and `image`. The `path` is the location where the image will be stored in the Supabase storage, and `image` is the file to be uploaded.
 
-- `filePath` (string): The path where the image is stored in the bucket.
+The function first defines the name of the bucket where the images will be stored. It then checks if the size of the image is less than the limit (6MB). If the image size is larger than the limit, it throws an error.
 
-#### Returns
+The function then attempts to upload the image to the Supabase storage. If an error occurs during this process, it throws an error. If the upload is successful, it returns the path where the image was stored.
 
-- A promise that resolves to the signed URL for the image.
+### Get Message Image From Storage Function
 
-#### Errors
+```ts
+export const getMessageImageFromStorage = async (filePath: string) => {
+  const { data, error } = await supabase.storage
+    .from("message_images")
+    .createSignedUrl(filePath, 60 * 60 * 24) // 24hrs
 
-- Throws an error if there was an issue generating the signed URL for the image.
+  if (error) {
+    throw new Error("Error downloading message image")
+  }
 
-## Usage
-
-First, import the functions:
-
-```typescript
-import { uploadMessageImage, getMessageImageFromStorage } from "@/lib/supabase/browser-client"
+  return data.signedUrl
+}
 ```
 
-Then, you can use them to upload an image and get its URL:
+The `getMessageImageFromStorage` function is an asynchronous function that takes a `filePath` as a parameter. This `filePath` is the location of the image in the Supabase storage.
 
-```typescript
-const path = 'path/to/image.png'
-const image = new File([''], 'filename')
-
-uploadMessageImage(path, image)
-  .then(path => console.log(`Image uploaded at ${path}`))
-  .catch(error => console.error(`Error uploading image: ${error}`))
-
-getMessageImageFromStorage(path)
-  .then(url => console.log(`Image URL: ${url}`))
-  .catch(error => console.error(`Error getting image URL: ${error}`))
-```
+The function attempts to create a signed URL for the image, which is valid for 24 hours. If an error occurs during this process, it throws an error. If the operation is successful, it returns the signed URL. This URL can be used to download the image.

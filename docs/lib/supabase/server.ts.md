@@ -1,51 +1,48 @@
 ---
 source: lib/supabase/server.ts
-generated: '2025-06-08T13:21:01.647Z'
+generated: 2025-06-08T22:40:15.196Z
 tags: []
-hash: ffa82e822a86fa49e7812a88af092df2020aa0aa0d63b34682c86ad30e1b50aa
+hash: 464604608a87f80326b45224f462541e203b0f9ebe03e22d3f4a73d598ba3e40
 ---
-# createClient Function Documentation
 
-## Overview
+# Server.ts Documentation
 
-The `createClient` function is an exported function that creates a server client for Supabase. It uses environment variables for the Supabase URL and the anonymous key, and a cookie store for managing cookies.
+This file is located at `/Users/garymason/chatbot-ui/lib/supabase/server.ts`. It is used to create a server client for Supabase, a scalable and open-source Firebase alternative. This client is used to interact with the Supabase backend.
 
-## Import
+## Dependencies
 
-```javascript
-import { createClient } from "./path/to/your/file";
-```
+The file imports the following dependencies:
 
-## Parameters
+- `createServerClient` and `CookieOptions` type from the `@supabase/ssr` package.
+- `cookies` from the `next/headers` package.
 
-The `createClient` function takes one parameter:
+## Exported Function
 
-- `cookieStore`: This is the return type of the `cookies` function from the `next/headers` package. It's used to get, set, and remove cookies.
+The file exports a single function `createClient`.
 
-## Returns
+### `createClient(cookieStore: ReturnType<typeof cookies>)`
 
-The function returns a server client created by the `createServerClient` function from the `@supabase/ssr` package.
+This function creates and returns a server client for Supabase. It takes a `cookieStore` object as an argument, which is expected to be the return type of the `cookies` function from `next/headers`.
 
-## Usage
+The `createServerClient` function is called with the Supabase URL and anonymous key from the environment variables, and a configuration object.
 
-```javascript
-const cookieStore = cookies();
-const client = createClient(cookieStore);
-```
+The configuration object has a `cookies` property, which is an object with three methods: `get`, `set`, and `remove`. These methods are used to interact with the cookies in the `cookieStore`.
 
-## Cookie Management
+#### `get(name: string)`
 
-The `createClient` function uses the `cookieStore` parameter to manage cookies. It provides three methods for this:
+This method returns the value of the cookie with the given name.
 
-- `get(name: string)`: This method returns the value of the cookie with the given name.
-- `set(name: string, value: string, options: CookieOptions)`: This method sets a cookie with the given name, value, and options. If an error occurs (for example, if the method is called from a Server Component), it can be ignored if you have middleware refreshing user sessions.
-- `remove(name: string, options: CookieOptions)`: This method removes a cookie with the given name and options. It does this by setting the value of the cookie to an empty string. If an error occurs (for example, if the method is called from a Server Component), it can be ignored if you have middleware refreshing user sessions.
+#### `set(name: string, value: string, options: CookieOptions)`
+
+This method sets a cookie with the given name, value, and options. If an error occurs (usually when called from a Server Component), it is caught and ignored. This is acceptable if there is middleware that refreshes user sessions.
+
+#### `remove(name: string, options: CookieOptions)`
+
+This method removes a cookie with the given name and options. It does this by setting the value of the cookie to an empty string. If an error occurs (usually when called from a Server Component), it is caught and ignored. This is acceptable if there is middleware that refreshes user sessions.
 
 ## Environment Variables
 
-The `createClient` function uses two environment variables:
+The file uses the following environment variables:
 
-- `NEXT_PUBLIC_SUPABASE_URL`: The URL of your Supabase instance.
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: The anonymous key for your Supabase instance.
-
-Make sure to set these environment variables in your `.env` file or in your hosting platform's environment variables.
+- `NEXT_PUBLIC_SUPABASE_URL`: The URL of the Supabase server.
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: The anonymous key for the Supabase server.

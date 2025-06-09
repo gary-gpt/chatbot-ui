@@ -1,47 +1,94 @@
 ---
 source: lib/generate-local-embedding.ts
-generated: '2025-06-08T13:21:01.631Z'
+generated: 2025-06-08T22:31:41.565Z
 tags: []
-hash: 6295ab3fdd9253c42f07a2049a772375697328de3b40e21883246486b780b184
+hash: d20ce0fac0df0b05ac42986de2c7afeeab7b60259b7facfbe9d170bacc3cc31f
 ---
-# Documentation
 
-## Module: generateLocalEmbedding
+# Chatbot UI - Generate Local Embedding
 
-This module is a part of the `@xenova/transformers` package. It exports an asynchronous function `generateLocalEmbedding` which generates an embedding for the provided content.
+This document provides an explanation of the `generateLocalEmbedding` function in the `generate-local-embedding.ts` file located in `/Users/garymason/chatbot-ui/lib/`. This function is used to generate embeddings for a given content string using the Xenova transformer.
 
-### Import
+## Code Overview
 
-```javascript
-import { generateLocalEmbedding } from "<module-path>";
+```ts
+import { pipeline } from "@xenova/transformers"
+
+export async function generateLocalEmbedding(content: string) {
+  const generateEmbedding = await pipeline(
+    "feature-extraction",
+    "Xenova/all-MiniLM-L6-v2"
+  )
+
+  const output = await generateEmbedding(content, {
+    pooling: "mean",
+    "normalize: true
+  })
+
+  const embedding = Array.from(output.data)
+
+  return embedding
+}
 ```
 
-### Function: generateLocalEmbedding(content: string)
+## Function: generateLocalEmbedding
 
-This function takes a string as an argument and generates an embedding for it.
+This function takes a string of content as input and returns an array of embeddings.
 
-#### Parameters
+### Parameters
 
-- `content` (string): The content for which the embedding needs to be generated.
+- `content` (string): The content for which the embeddings are to be generated.
 
-#### Returns
+### Returns
 
-- Returns a Promise that resolves to an array of numbers. This array is the embedding for the provided content.
+- Array: An array of embeddings for the input content.
 
-#### Example
+### Code Breakdown
 
-```javascript
-const content = "This is a sample content";
-const embedding = await generateLocalEmbedding(content);
-console.log(embedding); // Logs the generated embedding
+1. **Import the necessary module**
+
+   The `pipeline` function from the `@xenova/transformers` module is imported. This function is used to create an instance of the transformer model.
+
+```ts
+import { pipeline } from "@xenova/transformers"
 ```
 
-#### How it works
+2. **Initialize the transformer model**
 
-1. The function uses the `pipeline` function from the `@xenova/transformers` package to create a `generateEmbedding` function. This function uses the `feature-extraction` pipeline and the `Xenova/all-MiniLM-L6-v2` model.
+   The `pipeline` function is called with the `feature-extraction` task and the `Xenova/all-MiniLM-L6-v2` model. The returned promise is awaited and the result is stored in the `generateEmbedding` variable.
 
-2. The `generateEmbedding` function is then called with the `content` and an options object. The options object specifies that the `pooling` should be `mean` and normalization should be done.
+```ts
+const generateEmbedding = await pipeline(
+  "feature-extraction",
+  "Xenova/all-MiniLM-L6-v2"
+)
+```
 
-3. The output of the `generateEmbedding` function is an object with a `data` property. This `data` property is an iterable that contains the embedding for the `content`.
+3. **Generate embeddings**
 
-4. The `data` property is converted to an array and returned.
+   The `generateEmbedding` function is called with the `content` string and an options object. The options object specifies that the `mean` pooling strategy should be used and that the output should be normalized. The returned promise is awaited and the result is stored in the `output` variable.
+
+```ts
+const output = await generateEmbedding(content, {
+  pooling: "mean",
+  normalize: true
+})
+```
+
+4. **Convert the output to an array**
+
+   The `Array.from` method is used to convert the `data` property of the `output` object to an array. This array is stored in the `embedding` variable.
+
+```ts
+const embedding = Array.from(output.data)
+```
+
+5. **Return the embeddings**
+
+   The `embedding` array is returned.
+
+```ts
+return embedding
+```
+
+This function is used to generate embeddings for a given content string. These embeddings can be used for various tasks such as text classification, sentiment analysis, etc.

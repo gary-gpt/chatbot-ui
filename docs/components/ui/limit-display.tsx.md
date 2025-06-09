@@ -1,43 +1,56 @@
 ---
 source: components/ui/limit-display.tsx
-generated: '2025-06-08T13:21:01.641Z'
+generated: 2025-06-08T22:03:29.859Z
 tags: []
-hash: ae728be504786a8d0e88d504c1e67e553311c43cd2de0679428e3770c6778fd4
+hash: ec85fcdf6674304660cfe17baa951b726a45688d2e5abdbe418e9ebddbced895
 ---
-# LimitDisplay Component Documentation
 
-## Importing the Component
+# Limit Display Component Documentation
 
-```javascript
-import { LimitDisplay } from "<path-to-component>/LimitDisplay";
+This document provides an overview of the `LimitDisplay` component found in the file `/Users/garymason/chatbot-ui/components/ui/limit-display.tsx`.
+
+## Overview
+
+The `LimitDisplay` component is a simple, functional component written in TypeScript that displays the current usage and the limit of a certain resource. It is a part of a chatbot user interface.
+
+## Code Breakdown
+
+```ts
+import { FC } from "react"
 ```
 
-## Props
+The component imports `FC` (FunctionComponent) from the `react` library. This is a type used for functional components in TypeScript.
 
-The `LimitDisplay` component takes the following props:
+```ts
+interface LimitDisplayProps {
+  used: number
+  limit: number
+}
+```
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| used | number | The amount currently used or consumed. |
-| limit | number | The maximum limit or capacity. |
+This interface defines the props that the `LimitDisplay` component expects to receive. Both `used` and `limit` are numbers. `used` represents the current usage of a resource, and `limit` represents the maximum allowed usage of that resource.
+
+```ts
+export const LimitDisplay: FC<LimitDisplayProps> = ({ used, limit }) => {
+  return (
+    <div className="text-xs italic">
+      {used}/{limit}
+    </div>
+  )
+}
+```
+
+This is the definition of the `LimitDisplay` component. It is a functional component that takes `LimitDisplayProps` as props. The component returns a `div` element with the class `text-xs italic` that displays the current usage and the limit of a resource, separated by a slash.
 
 ## Usage
 
-The `LimitDisplay` component is a functional component that displays the amount used out of a total limit. It is typically used to show the usage of a resource, such as memory or disk space.
+To use the `LimitDisplay` component, import it from its file and use it in JSX, passing the `used` and `limit` props as numbers:
 
-Here is an example of how to use the `LimitDisplay` component:
+```ts
+import { LimitDisplay } from './components/ui/limit-display';
 
-```javascript
-<LimitDisplay used={50} limit={100} />
+// In a component render method
+<LimitDisplay used={5} limit={10} />
 ```
 
-In the above example, the component will render "50/100".
-
-## Styling
-
-The component uses the following CSS classes for styling:
-
-- `text-xs`: This class is used to set the font size of the text.
-- `italic`: This class is used to set the font style of the text to italic.
-
-You can override these classes in your CSS if you want to customize the appearance of the component.
+This will render a `div` that displays "5/10", indicating that half of the resource is currently in use.

@@ -1,58 +1,59 @@
 ---
 source: lib/chat-setting-limits.ts
-generated: '2025-06-08T13:21:01.630Z'
+generated: 2025-06-08T22:30:18.992Z
 tags: []
-hash: de6365efa99e4a8e92406d57e35b7d3b360ad9077b8e6bd95ce5beb3bae6cced
+hash: 1571a25aaec6a45fe85bedcca7b320f199e1daae70ba9b4a265847b830d0c048
 ---
-# Source Code Documentation
 
-This source code defines a TypeScript object `CHAT_SETTING_LIMITS` that maps `LLMID` keys to `ChatSettingLimits` objects. 
+# Chat Setting Limits Documentation
 
-## Import
+This TypeScript file, `chat-setting-limits.ts`, defines the settings limits for various chatbot models. These settings include minimum and maximum temperature, maximum token output length, and maximum context length.
 
-```typescript
+## Code Overview
+
+The code first imports a type, `LLMID`, from the types module. This type is used as a key in the `CHAT_SETTING_LIMITS` object.
+
+A `ChatSettingLimits` type is then defined, which is an object with four properties:
+
+- `MIN_TEMPERATURE`: a number representing the minimum temperature setting for a chatbot model.
+- `MAX_TEMPERATURE`: a number representing the maximum temperature setting for a chatbot model.
+- `MAX_TOKEN_OUTPUT_LENGTH`: a number representing the maximum token output length for a chatbot model.
+- `MAX_CONTEXT_LENGTH`: a number representing the maximum context length for a chatbot model.
+
+The `CHAT_SETTING_LIMITS` object is then defined and exported. This object maps each `LLMID` to a `ChatSettingLimits` object. The `LLMID` is a unique identifier for each chatbot model.
+
+## Chatbot Models
+
+The chatbot models are grouped into categories:
+
+- ANTHROPIC MODELS
+- GOOGLE MODELS
+- MISTRAL MODELS
+- GROQ MODELS
+- OPENAI MODELS
+- PERPLEXITY MODELS
+
+Each model has its own set of limits defined in a `ChatSettingLimits` object.
+
+## Code Summary
+
+```ts
+// Import the LLMID type from the types module
 import { LLMID } from "@/types"
-```
 
-This line imports the `LLMID` type from the "@/types" module.
-
-## Type Definition
-
-```typescript
+// Define the ChatSettingLimits type
 type ChatSettingLimits = {
   MIN_TEMPERATURE: number
   MAX_TEMPERATURE: number
   MAX_TOKEN_OUTPUT_LENGTH: number
   MAX_CONTEXT_LENGTH: number
 }
-```
 
-`ChatSettingLimits` is a type that defines an object with four properties:
-
-- `MIN_TEMPERATURE`: The minimum temperature value. It is a number.
-- `MAX_TEMPERATURE`: The maximum temperature value. It is a number.
-- `MAX_TOKEN_OUTPUT_LENGTH`: The maximum token output length. It is a number.
-- `MAX_CONTEXT_LENGTH`: The maximum context length. It is a number.
-
-## Exported Constant
-
-```typescript
-export const CHAT_SETTING_LIMITS: Record<LLMID, ChatSettingLimits>
-```
-
-`CHAT_SETTING_LIMITS` is a constant object that maps `LLMID` keys to `ChatSettingLimits` objects. Each key in the object represents a specific model and the corresponding value is an object that contains the limits for that model. 
-
-For example, the model "claude-2.1" has the following limits:
-
-```typescript
-"claude-2.1": {
-  MIN_TEMPERATURE: 0.0,
-  MAX_TEMPERATURE: 1.0,
-  MAX_TOKEN_OUTPUT_LENGTH: 4096,
-  MAX_CONTEXT_LENGTH: 200000
+// Define and export the CHAT_SETTING_LIMITS object
+export const CHAT_SETTING_LIMITS: Record<LLMID, ChatSettingLimits> = {
+  // Define the settings limits for each chatbot model
+  ...
 }
 ```
 
-This means that for the "claude-2.1" model, the minimum temperature is 0.0, the maximum temperature is 1.0, the maximum token output length is 4096, and the maximum context length is 200000.
-
-The `CHAT_SETTING_LIMITS` object contains similar entries for various other models.
+This file is essential for controlling the behavior of different chatbot models. The limits defined in this file are used to ensure that the chatbot models operate within their capabilities and provide the best user experience.

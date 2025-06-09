@@ -1,49 +1,66 @@
 ---
 source: components/chat/prompt-picker.tsx
-generated: '2025-06-08T13:21:01.635Z'
+generated: 2025-06-08T21:31:52.644Z
 tags: []
-hash: 434019132f75e358aa84369abc6b226ff4e7ce93d649d87100d5d51d047a4f59
+hash: ffa7dad2a452e62240e64377d42f80fb662d58641cd17ea9395e64cb1cb0a095
 ---
-# PromptPicker Component
 
-This is a documentation for the `PromptPicker` component.
+# Documentation for `prompt-picker.tsx`
+
+This file is a React component named `PromptPicker` that is used to display a list of prompts to the user and allow them to select one. It also handles the logic for filtering prompts based on a search term, and for handling user interactions such as selecting a prompt or closing the prompt picker.
 
 ## Import Statements
 
-```jsx
-import { ChatbotUIContext } from "@/context/context"
-import { Tables } from "@/supabase/types"
-import { FC, useContext, useEffect, useRef, useState } from "react"
-import { Button } from "../ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog"
-import { Label } from "../ui/label"
-import { TextareaAutosize } from "../ui/textarea-autosize"
-import { usePromptAndCommand } from "./chat-hooks/use-prompt-and-command"
-```
+The file begins by importing necessary dependencies and components from React, the project's own files, and third-party libraries.
 
-## Props
+## `PromptPickerProps` Interface
 
-The `PromptPicker` component does not take any props.
+This interface is currently empty, indicating that the `PromptPicker` component does not expect any props.
 
-## Component
+## `PromptPicker` Component
 
-The `PromptPicker` component is a functional component that provides an interface for selecting prompts. It uses the `ChatbotUIContext` to access and manipulate the state of the chatbot UI.
+This is the main component of the file. It uses the `ChatbotUIContext` to access various pieces of state and functions related to the chatbot UI. It also uses the `usePromptAndCommand` hook to get the `handleSelectPrompt` function.
 
-## State Variables
+### State Variables
 
-- `promptVariables`: An array of objects, each containing a `promptId`, `name`, and `value`. This is used to store the variables of the selected prompt.
-- `showPromptVariables`: A boolean indicating whether the prompt variables dialog should be shown.
+The component declares several state variables:
+
+- `promptVariables`: An array of objects, each representing a variable in a prompt.
+- `showPromptVariables`: A boolean indicating whether to show the prompt variables dialog.
 - `isTyping`: A boolean indicating whether the user is currently typing.
 
-## Functions
+### `useEffect` Hook
 
-- `handleOpenChange(isOpen: boolean)`: Sets the `isPromptPickerOpen` state to the passed `isOpen` value.
-- `callSelectPrompt(prompt: Tables<"prompts">)`: Handles the selection of a prompt. If the prompt content contains variables, it sets the `promptVariables` state and shows the prompt variables dialog. Otherwise, it calls the `handleSelectPrompt` function and closes the prompt picker.
-- `getKeyDownHandler(index: number)`: Returns a function that handles keydown events for the prompt picker items. It handles navigation between items using the arrow keys, selection of an item using the enter key, and closing of the prompt picker using the backspace key.
-- `handleSubmitPromptVariables()`: Submits the entered prompt variables. It replaces the variables in the prompt content with their entered values, calls the `handleSelectPrompt` function with the new prompt, and closes the prompt variables dialog.
-- `handleCancelPromptVariables()`: Cancels the entry of prompt variables. It closes the prompt variables dialog without making any changes.
-- `handleKeydownPromptVariables(e: React.KeyboardEvent<HTMLDivElement>)`: Handles keydown events for the prompt variables dialog. If the enter key is pressed and the user is not currently typing, it calls the `handleSubmitPromptVariables` function.
+This hook is used to focus the first item in the prompt picker when the `focusPrompt` value changes.
 
-## Return
+### `filteredPrompts` Variable
 
-The component returns a div that contains a list of prompts that match the current slash command. If the `showPromptVariables` state is true, it also returns a dialog for entering prompt variables.
+This variable holds the list of prompts that match the current slash command.
+
+### `handleOpenChange` Function
+
+This function is used to open or close the prompt picker.
+
+### `callSelectPrompt` Function
+
+This function is called when a prompt is selected. It checks if the prompt contains any variables and, if so, it opens the prompt variables dialog. Otherwise, it selects the prompt and closes the prompt picker.
+
+### `getKeyDownHandler` Function
+
+This function returns a function that handles keydown events for a given index. It handles navigation between prompts using the arrow keys, selection of a prompt using the Enter key, and closing the prompt picker using the Backspace key.
+
+### `handleSubmitPromptVariables` Function
+
+This function is called when the prompt variables dialog is submitted. It replaces the variables in the selected prompt with their entered values, selects the prompt, and closes the prompt picker and the prompt variables dialog.
+
+### `handleCancelPromptVariables` Function
+
+This function is called when the prompt variables dialog is cancelled. It closes the dialog without making any changes.
+
+### `handleKeydownPromptVariables` Function
+
+This function handles keydown events in the prompt variables dialog. If the Enter key is pressed and the user is not currently typing, it submits the dialog.
+
+### Return Statement
+
+The component returns a div that contains either the prompt variables dialog or a list of prompts that match the current slash command. If no prompts match the command, a message is displayed to the user.

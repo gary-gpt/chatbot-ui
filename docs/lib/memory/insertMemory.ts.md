@@ -1,50 +1,64 @@
 ---
 source: lib/memory/insertMemory.ts
-generated: '2025-06-08T13:21:01.647Z'
+generated: 2025-06-08T22:33:10.606Z
 tags: []
-hash: 759a957a96151f3e0cab446d9691b7d86b3f14aa6033a2d1126dabad6fbd00b7
+hash: 7dd66729e293352e5ec25cc50160a301fbb669a143560b876e53e8b82bb43853
 ---
-# Memory Insertion Module
 
-This module is responsible for inserting memory into the `memory` table in the Supabase database.
+# Documentation for insertMemory.ts
 
-## Dependencies
+This file is located at `/Users/garymason/chatbot-ui/lib/memory/insertMemory.ts`. It contains a single function `insertMemory` that is used to insert a new memory into the `memory` table in a Supabase database.
 
-This module relies on the Supabase client from the `@/lib/supabase/browser-client` module.
+## Importing Dependencies
 
-## Types
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+```
 
-### `InsertMemoryParams`
+The file imports the `supabase` client from the `browser-client` file in the `supabase` directory. This client is used to interact with the Supabase database.
 
-This type is used to define the structure of the memory object that will be inserted into the database. It has the following properties:
+## InsertMemoryParams Type
 
-- `project_name: string`: The name of the project.
-- `category: string`: The category of the memory.
-- `content: string`: The content of the memory.
-- `tags?: string`: Optional. The tags associated with the memory.
+```ts
+export type InsertMemoryParams = {
+  project_name: string
+  category: string
+  content: string
+  tags?: string
+}
+```
 
-## Functions
+The `InsertMemoryParams` type is an object that represents a memory. It has the following properties:
 
-### `insertMemory(memory: InsertMemoryParams)`
+- `project_name`: The name of the project associated with the memory.
+- `category`: The category of the memory.
+- `content`: The content of the memory.
+- `tags`: Optional tags associated with the memory.
 
-This asynchronous function is responsible for inserting a memory into the `memory` table in the Supabase database.
+## insertMemory Function
 
-#### Parameters
+```ts
+export async function insertMemory(memory: InsertMemoryParams) {
+  ...
+}
+```
 
-- `memory: InsertMemoryParams`: The memory object to be inserted.
+The `insertMemory` function is an asynchronous function that inserts a new memory into the `memory` table in the Supabase database. It takes a single argument `memory` of type `InsertMemoryParams`.
 
-#### Return
+### Function Logic
 
-This function returns the inserted data if the operation is successful. If an error occurs, it throws an error with the error message.
+1. The function first logs a message to the console indicating that it is attempting a simple select operation on the `memory` table.
 
-#### Behavior
+2. It then performs a select operation on the `memory` table, selecting all columns and limiting the result to 1 row. The result of this operation is logged to the console.
 
-This function first logs a message indicating that it is attempting a simple select operation. It then performs a select operation on the `memory` table, selecting all columns and limiting the results to one row. The result of this operation is logged.
+3. The function then logs a message to the console indicating that it is attempting to insert the `memory` object into the `memory` table.
 
-Next, the function logs a message indicating that it is attempting to insert the provided memory object into the `memory` table. It performs the insert operation, forcing the full response body to be returned.
+4. The function performs the insert operation, inserting the `memory` object into the `memory` table. It then selects all columns from the inserted row(s). The result of this operation is destructured into `data`, `error`, `status`, and `statusText`.
 
-The function logs the data returned by the insert operation, any error that occurred, and the status and status text of the operation.
+5. The function logs the `data`, `error`, `status`, and `statusText` to the console.
 
-If an error occurred during the insert operation, the function throws an error with the error message. If no error message is available, it throws an error with the message "Unknown Supabase error".
+6. If there was an error with the insert operation, the function throws an error with the error message or a default error message.
 
-Finally, if the insert operation was successful, the function returns the inserted data.
+7. If there was no error, the function returns the `data`.
+
+This function is used to insert new memories into the `memory` table in the Supabase database. It logs all operations and results to the console for debugging purposes.

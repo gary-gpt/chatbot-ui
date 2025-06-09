@@ -1,54 +1,34 @@
 ---
 source: components/sidebar/items/tools/tool-item.tsx
-generated: '2025-06-08T13:21:01.663Z'
+generated: 2025-06-08T21:51:44.119Z
 tags: []
-hash: ef2d9e7be0f246181554e669d39bcde1689a5fe21682e4c754c01c66ba0e0221
+hash: b974c3a3bbb840ce377acc19c9ce6aedbd1162cbec2cb31878f4f81ee5eb37f1
 ---
-# ToolItem Component
 
-The `ToolItem` component is a functional component in React that represents a single tool item. It uses the `SidebarItem` component to display the tool's details and allows the user to edit these details.
+# Documentation for `tool-item.tsx`
 
-## Props
+This file is a React component that represents a single tool item in the sidebar of a chatbot UI. The tool item can be edited directly in the sidebar, with changes being reflected in the state of the component.
 
-The `ToolItem` component accepts the following props:
+## Import Statements
 
-- `tool`: An object representing a tool. It should match the `Tables<"tools">` type from the `@/supabase/types` module.
+The component imports several other components and libraries to function correctly. These include UI components like `Input`, `Label`, and `TextareaAutosize` for user input, as well as constants and validation functions for handling OpenAPI schemas.
 
-## State
+## Component Props
 
-The `ToolItem` component maintains the following state variables:
+The `ToolItem` component accepts a single prop: `tool`. This prop is an object that represents the data of the tool being displayed and edited. It includes properties like `name`, `description`, `url`, `custom_headers`, and `schema`.
 
-- `name`: The name of the tool. Initialized with the `name` property of the `tool` prop.
-- `isTyping`: A boolean indicating whether the user is currently typing. Initialized as `false`.
-- `description`: The description of the tool. Initialized with the `description` property of the `tool` prop.
-- `url`: The URL of the tool. Initialized with the `url` property of the `tool` prop.
-- `customHeaders`: The custom headers of the tool. Initialized with the `custom_headers` property of the `tool` prop.
-- `schema`: The schema of the tool. Initialized with the `schema` property of the `tool` prop.
-- `schemaError`: A string representing any error that occurs when parsing or validating the `schema`. Initialized as an empty string.
+## Component State
+
+The state of the component is managed with the `useState` hook from React. The state variables include `name`, `isTyping`, `description`, `url`, `customHeaders`, `schema`, and `schemaError`.
 
 ## Rendered JSX
 
-The `ToolItem` component renders a `SidebarItem` component with the following props:
+The component returns a `SidebarItem` component with several props and children. The `item` prop is the `tool` object passed as a prop to `ToolItem`. The `isTyping` prop is a state variable that tracks whether the user is currently typing. The `contentType` prop is a string that represents the type of content being displayed and edited. The `icon` prop is an `IconBolt` component from the `@tabler/icons-react` library.
 
-- `item`: The `tool` prop.
-- `isTyping`: The `isTyping` state variable.
-- `contentType`: The string `"tools"`.
-- `icon`: An `IconBolt` component with a `size` of `30`.
-- `updateState`: An object containing the current state variables.
-- `renderInputs`: A function that returns a JSX element containing the input fields for editing the tool's details.
+The `updateState` prop is an object that represents the current state of the tool item. It includes properties like `name`, `description`, `url`, `customHeaders`, and `schema`.
 
-The `renderInputs` function renders a series of `Label` and `Input` or `TextareaAutosize` components for each editable field. The `onChange` or `onValueChange` prop of each input field is set to a function that updates the corresponding state variable.
+The `renderInputs` prop is a function that returns a JSX element. This element includes several `Input` and `TextareaAutosize` components for editing the properties of the tool item. The `TextareaAutosize` component for editing the `schema` property also includes logic for validating the entered schema and displaying any validation errors.
 
-The `schema` field also includes a validation step that parses the input as JSON and validates it as an OpenAPI schema. If the validation fails, the `schemaError` state variable is updated with the error message.
+## Commented Out Code
 
-## Import Dependencies
-
-The `ToolItem` component imports the following dependencies:
-
-- `Input`, `Label`, and `TextareaAutosize` components from the `@/components/ui` module.
-- `TOOL_DESCRIPTION_MAX` and `TOOL_NAME_MAX` constants from the `@/db/limits` module.
-- `validateOpenAPI` function from the `@/lib/openapi-conversion` module.
-- `Tables` type from the `@/supabase/types` module.
-- `IconBolt` component from the `@tabler/icons-react` module.
-- `FC` and `useState` from the `react` module.
-- `SidebarItem` component from the `../all/sidebar-display-item` module.
+There are several blocks of code that are currently commented out. These include an `Input` component for editing the `url` property of the tool item, as well as several `Checkbox` components for selecting categories for the tool item. If these features are needed in the future, the code can be uncommented and used.

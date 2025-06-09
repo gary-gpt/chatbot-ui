@@ -1,49 +1,60 @@
 ---
 source: types/sidebar-data.ts
-generated: '2025-06-08T13:21:01.633Z'
+generated: 2025-06-08T22:46:17.382Z
 tags: []
-hash: e14ec904afb32b721bc32dd25b035a88b72aca583e7ce19916a07023a05add38
+hash: d2bee69e03767451af4675b7f852a686a08fdcfb4d18feea5f79f63a0c0e5e3a
 ---
-# Documentation
 
-## Overview
-This file contains type definitions for data list and data item types. These types are used to define the structure of data related to different tables in the Supabase database.
+# Sidebar Data Types Documentation
 
-## Imports
-The file imports the `Tables` type from the `@/supabase/types` module.
+This document explains the purpose and logic of the TypeScript file located at `/Users/garymason/chatbot-ui/types/sidebar-data.ts`. This file contains type definitions for the data that is displayed in the sidebar of a chatbot user interface.
 
-## Types
+## Code Summary
 
-### `DataListType`
+The file exports two TypeScript types: `DataListType` and `DataItemType`. These types are used to define the structure of the data that can be displayed in the sidebar of the chatbot UI.
 
-This is a union type that represents a list of items from various tables in the Supabase database. The tables include:
+## Code Details
 
-- `collections`
-- `chats`
-- `presets`
-- `prompts`
-- `files`
-- `assistants`
-- `tools`
-- `models`
+### Import Statement
 
-Each item in the list is an array of the `Tables` type, parameterized by the name of the table.
+```ts
+import { Tables } from "@/supabase/types"
+```
 
-### `DataItemType`
+This line imports the `Tables` type from the `@/supabase/types` module. The `Tables` type is a generic type that is used to define the structure of the data stored in different tables in a Supabase database.
 
-This is a union type that represents a single item from various tables in the Supabase database. The tables include:
+### DataListType
 
-- `collections`
-- `chats`
-- `presets`
-- `prompts`
-- `files`
-- `assistants`
-- `tools`
-- `models`
+```ts
+export type DataListType =
+  | Tables<"collections">[]
+  | Tables<"chats">[]
+  | Tables<"presets">[]
+  | Tables<"prompts">[]
+  | Tables<"files">[]
+  | Tables<"assistants">[]
+  | Tables<"tools">[]
+  | Tables<"models">[]
+```
 
-Each item is of the `Tables` type, parameterized by the name of the table.
+The `DataListType` is a union type that can be an array of any of the specified table types. This type is used when the sidebar needs to display a list of items from a specific table in the database.
 
-## Usage
+### DataItemType
 
-These types are typically used when interacting with the Supabase database. They provide a way to ensure that the data being fetched from or inserted into the database matches the expected structure.
+```ts
+export type DataItemType =
+  | Tables<"collections">
+  | Tables<"chats">
+  | Tables<"presets">
+  | Tables<"prompts">
+  | Tables<"files">
+  | Tables<"assistants">
+  | Tables<"tools">
+  | Tables<"models">
+```
+
+The `DataItemType` is a union type that can be an item from any of the specified table types. This type is used when the sidebar needs to display a single item from a specific table in the database.
+
+## Conclusion
+
+In conclusion, the `sidebar-data.ts` file is used to define the types of data that can be displayed in the sidebar of the chatbot UI. It uses the `Tables` type from the `@/supabase/types` module to define the structure of the data.

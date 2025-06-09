@@ -1,48 +1,69 @@
 ---
 source: db/storage/files.ts
-generated: '2025-06-08T13:21:01.646Z'
+generated: 2025-06-08T22:26:55.948Z
 tags: []
-hash: 77af3f5b02771e38bafaf022c30f7655406002a82213c52168ba63794e217279
+hash: 1651b94c2d306f8f9b560cd14353c7ddc13d40d13d52b6ba661c36ca7450384f
 ---
-# File Operations Documentation
 
-This documentation covers the file operations module which includes functions for uploading, deleting, and retrieving files from storage.
+# Chatbot UI - File Storage Operations
 
-## Functions
+This TypeScript file (`files.ts`) is part of a chatbot user interface and is responsible for handling file storage operations. It uses the Supabase client to interact with the storage and the Sonner library to display toast notifications.
 
-### uploadFile(file: File, payload: { name: string, user_id: string, file_id: string })
+## Code Overview
 
-This function uploads a file to the storage. It takes two parameters:
+The file contains three exported functions:
 
-- `file`: The file to be uploaded.
-- `payload`: An object containing the following properties:
-  - `name`: The name of the file.
-  - `user_id`: The ID of the user uploading the file.
-  - `file_id`: The ID of the file.
+- `uploadFile`: Uploads a file to the storage.
+- `deleteFileFromStorage`: Deletes a file from the storage.
+- `getFileFromStorage`: Retrieves a file from the storage.
 
-The function checks if the file size exceeds the limit defined in the environment variable `NEXT_PUBLIC_USER_FILE_SIZE_LIMIT`. If the file size exceeds the limit, an error is thrown.
+## Functions Detail
 
-The function then uploads the file to the storage and returns the file path. If there's an error during the upload, an error is thrown.
+### Upload File
 
-### deleteFileFromStorage(filePath: string)
+```ts
+export const uploadFile = async (
+  file: File,
+  payload: {
+    name: string
+    user_id: string
+    file_id: string
+  }
+) => {
+  //...
+}
+```
 
-This function deletes a file from the storage. It takes one parameter:
+This function uploads a file to the storage. It takes two parameters: `file` (the file to be uploaded) and `payload` (an object containing the file's metadata).
 
-- `filePath`: The path of the file to be deleted.
+The function first checks if the file size exceeds the limit specified in the environment variable `NEXT_PUBLIC_USER_FILE_SIZE_LIMIT`. If the file size is too large, it throws an error.
 
-The function attempts to remove the file from the storage. If there's an error during the removal, a toast error message is displayed.
+The file is then uploaded to the storage under a path constructed from the user ID and file ID. If an error occurs during the upload, the function throws an error.
 
-### getFileFromStorage(filePath: string)
+### Delete File from Storage
 
-This function retrieves a file from the storage. It takes one parameter:
+```ts
+export const deleteFileFromStorage = async (filePath: string) => {
+  //...
+}
+```
 
-- `filePath`: The path of the file to be retrieved.
+This function deletes a file from the storage. It takes one parameter: `filePath` (the path of the file to be deleted).
 
-The function attempts to create a signed URL for the file, which is valid for 24 hours. If there's an error during this process, an error is thrown. If successful, the function returns the signed URL.
+The function attempts to delete the file from the storage. If an error occurs during the deletion, it displays a toast notification and returns early.
 
-## Dependencies
+### Get File from Storage
 
-This module depends on the following packages:
+```ts
+export const getFileFromStorage = async (filePath: string) => {
+  //...
+}
+```
 
-- `supabase`: Used for interacting with the storage.
-- `sonner`: Used for displaying toast notifications.
+This function retrieves a file from the storage. It takes one parameter: `filePath` (the path of the file to be retrieved).
+
+The function attempts to create a signed URL for the file, which is valid for 24 hours. If an error occurs during this process, it logs the error and throws an error.
+
+## Error Handling
+
+Each function includes error handling to ensure that any issues encountered during the file operations are appropriately handled and communicated. This includes throwing errors and displaying toast notifications.

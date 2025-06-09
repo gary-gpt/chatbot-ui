@@ -1,47 +1,60 @@
 ---
 source: lib/hooks/use-copy-to-clipboard.tsx
-generated: '2025-06-08T13:21:01.647Z'
+generated: 2025-06-08T22:31:57.800Z
 tags: []
-hash: 385305363302b4bdcf1db08698eacd9ff70751fd415f8978e5ce4aa68c02e14c
+hash: 6fa3fd386a03bb6cbbb84e989b4fcad8ee52ffc6acca98a816d1de1a45ca74b1
 ---
-# useCopyToClipboard Hook
 
-The `useCopyToClipboard` hook is a custom React hook that allows you to copy a string to the clipboard and manage the state of whether the copy operation was successful.
+# Documentation for useCopyToClipboard Hook
 
-## Props
+This document provides an overview of the `useCopyToClipboard` hook located in the file `/Users/garymason/chatbot-ui/lib/hooks/use-copy-to-clipboard.tsx`.
 
-The `useCopyToClipboard` hook accepts an object with the following properties:
+## Summary
 
-### `timeout` (optional)
+The `useCopyToClipboard` hook is a custom React hook that allows you to copy a string value to the clipboard. It also provides a state variable `isCopied` that indicates whether a value has been copied to the clipboard.
 
-The `timeout` property is an optional number that specifies the duration (in milliseconds) for which the `isCopied` state remains `true` after a successful copy operation. The default value is `2000` (2 seconds).
+## Interface: useCopyToClipboardProps
 
-## Return Value
-
-The `useCopyToClipboard` hook returns an object with the following properties:
-
-### `isCopied`
-
-The `isCopied` property is a boolean that indicates whether the last copy operation was successful. It remains `true` for the duration specified by the `timeout` prop after a successful copy operation, and then reverts back to `false`.
-
-### `copyToClipboard`
-
-The `copyToClipboard` property is a function that accepts a string as an argument. When invoked, it attempts to copy the provided string to the clipboard. If the copy operation is successful, it sets the `isCopied` state to `true` for the duration specified by the `timeout` prop.
-
-## Usage
-
-```jsx
-import { useCopyToClipboard } from './useCopyToClipboard'
-
-const Component = () => {
-  const { isCopied, copyToClipboard } = useCopyToClipboard({ timeout: 3000 })
-
-  return (
-    <button onClick={() => copyToClipboard('Hello, world!')}>
-      {isCopied ? 'Copied!' : 'Copy to clipboard'}
-    </button>
-  )
+```ts
+export interface useCopyToClipboardProps {
+  timeout?: number
 }
 ```
 
-In the above example, clicking the button copies the string 'Hello, world!' to the clipboard. The button's label changes to 'Copied!' for 3 seconds after a successful copy operation, and then reverts back to 'Copy to clipboard'.
+This interface defines the properties that can be passed to the `useCopyToClipboard` hook. Currently, it only contains an optional `timeout` property. This property specifies the duration (in milliseconds) for which the `isCopied` state remains `true` after a value has been copied to the clipboard. The default value is 2000 milliseconds (or 2 seconds).
+
+## Function: useCopyToClipboard
+
+```ts
+export function useCopyToClipboard({
+  timeout = 2000
+}: useCopyToClipboardProps) {
+  const [isCopied, setIsCopied] = useState<Boolean>(false)
+
+  const copyToClipboard = (value: string) => {
+    if (typeof window === "undefined" || !navigator.clipboard?.writeText) {
+      return
+    }
+
+    if (!value) {
+      return
+    }
+
+    navigator.clipboard.writeText(value).then(() => {
+      setIsCopied(true)
+
+      setTimeout(() => {
+        setIsCopied(false)
+      }, timeout)
+    })
+  }
+
+  return { isCopied, copyToClipboard }
+}
+```
+
+This is the main function of the hook. It takes an object of `useCopyToClipboardProps` as an argument and returns an object with two properties: `isCopied` and `copyToClipboard`.
+
+- `isCopied`: A state variable that is `true` if a value has been copied to the clipboard and `false` otherwise.
+
+- `copyToClipboard`: A function that takes a string value as an argument and copies it to the clipboard. If the `window` object is undefined or the `navigator.clipboard.writeText` method is not available, the function returns without doing anything. If the value is empty, the function also returns without doing anything. After successfully copying the value to the clipboard, the function sets `isCopied` to `true` and then sets it back to `false` after the specified `timeout` duration.

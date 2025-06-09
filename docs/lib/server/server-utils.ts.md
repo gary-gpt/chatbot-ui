@@ -1,37 +1,43 @@
 ---
 source: lib/server/server-utils.ts
-generated: '2025-06-08T13:21:01.647Z'
+generated: 2025-06-08T22:39:19.092Z
 tags: []
-hash: 7d884f2f544ac77a0b952e09e75cec9150dad08b6e14a82a2470b863cc5fe385
+hash: b8286cb655f8b46478ebc486c8e6a3fe55811baadb2065a27647c3960f3bdc05
 ---
-# Function Documentation
 
-## createResponse
+# Server Utilities Documentation
 
-This function is used to create a new `Response` object with the provided data and status. The data is converted into a JSON string and the content type is set as "application/json".
+This document provides a detailed explanation of the server utility function `createResponse` found in the file `/Users/garymason/chatbot-ui/lib/server/server-utils.ts`.
 
-**Syntax:**
+## Function Summary
 
-```javascript
-createResponse(data: object, status: number): Response
+The `createResponse` function is a utility function used to create a new HTTP response with a given data object and status code. The function takes two parameters: `data` and `status`. The `data` parameter is an object that contains the data to be sent in the response, and `status` is a number representing the HTTP status code for the response.
+
+The function returns a new `Response` object with the given data and status. The data is stringified into a JSON format and set as the body of the response. The status code is set as the status of the response. The `Content-Type` header of the response is set to `"application/json"` to indicate that the response body contains JSON data.
+
+## Code Breakdown
+
+```ts
+export function createResponse(data: object, status: number): Response {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+}
 ```
 
-**Parameters:**
+1. `export function createResponse(data: object, status: number): Response`: This line declares the `createResponse` function and exports it so that it can be imported and used in other files. The function takes two parameters: `data` of type `object` and `status` of type `number`. The function returns a `Response` object.
 
-- `data: object` - This is the data that you want to include in the response. It should be an object that can be converted into a JSON string.
+2. `return new Response(JSON.stringify(data), {`: This line begins the creation of a new `Response` object. The first argument to the `Response` constructor is `JSON.stringify(data)`, which converts the `data` object into a JSON string.
 
-- `status: number` - This is the HTTP status code that you want to set for the response.
+3. `status,`: This line sets the status of the response to the `status` parameter.
 
-**Returns:**
+4. `headers: { "Content-Type": "application/json" }`: This line sets the `Content-Type` header of the response to `"application/json"`, indicating that the response body contains JSON data.
 
-This function returns a new `Response` object with the provided data and status.
+5. `})`: This line ends the `Response` constructor and the `createResponse` function.
 
-**Example:**
+## Usage
 
-```javascript
-const data = { message: "Hello, World!" };
-const status = 200;
-const response = createResponse(data, status);
-```
-
-In this example, the `createResponse` function is used to create a new `Response` object with the message "Hello, World!" and the status code 200. The `Response` object is then stored in the `response` variable.
+The `createResponse` function can be used to create a new HTTP response with a given data object and status code. For example, to create a response with a status code of 200 and a data object of `{ message: "Success" }`, you would call `createResponse({ message: "Success" }, 200)`.

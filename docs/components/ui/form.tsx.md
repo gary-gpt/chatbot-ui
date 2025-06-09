@@ -1,41 +1,50 @@
 ---
 source: components/ui/form.tsx
-generated: '2025-06-08T13:21:01.641Z'
+generated: 2025-06-08T22:01:53.121Z
 tags: []
-hash: 602c2746423027b70ccd4900781012c664f0b29fa5af4cbbd75bae6e02322db8
+hash: f6f8e44b38dcd43350add2bfadf565165d857698fc8ddf85e8643e4cefa29c58
 ---
-# Form Component
 
-This file exports several components and hooks related to form handling, including `Form`, `FormItem`, `FormLabel`, `FormControl`, `FormDescription`, `FormMessage`, `FormField`, and `useFormField`.
+# Form Component Documentation
+
+This TypeScript file defines a set of React components and hooks to create a form. It uses the `react-hook-form` library for form state management and the `@radix-ui/react-label` and `@radix-ui/react-slot` libraries for creating form labels and form controls.
+
+## Imports
+
+The file imports necessary modules from React, `@radix-ui/react-label`, `@radix-ui/react-slot`, `react-hook-form`, and local modules.
 
 ## Form
 
-The `Form` component is a wrapper for the `FormProvider` from `react-hook-form`. It doesn't add any additional functionality or props.
+`Form` is a provider component that wraps the form and provides form state to all child components. It uses the `FormProvider` component from `react-hook-form`.
 
 ## FormField
 
-The `FormField` component is a wrapper for the `Controller` component from `react-hook-form`. It provides a context that includes the name of the field.
+`FormField` is a context provider component that provides the name of the form field to all child components. It uses the `Controller` component from `react-hook-form` to control the form field.
 
 ## useFormField
 
-The `useFormField` hook is a custom hook that provides several pieces of information related to a form field. It should be used within a `FormField` component.
+`useFormField` is a custom hook that provides form field context and form item context. It throws an error if it is not used within a `FormField` component. It returns an object that contains the id, name, formItemId, formDescriptionId, formMessageId, and fieldState.
 
 ## FormItem
 
-The `FormItem` component is a `div` element that provides a context with a unique `id`. This `id` is used to generate other ids for form-related elements.
+`FormItem` is a context provider component that provides a unique id to all child components. It returns a `div` element with a class name of `space-y-2` and the provided class name.
 
 ## FormLabel
 
-The `FormLabel` component is a wrapper for the `Label` component. It uses the `useFormField` hook to determine if the associated form field has an error, and if so, it applies the `text-destructive` class.
+`FormLabel` is a component that displays the label of a form field. It uses the `Label` component and adds the class `text-destructive` if there is an error.
 
 ## FormControl
 
-The `FormControl` component is a wrapper for the `Slot` component from `@radix-ui/react-slot`. It uses the `useFormField` hook to set several `aria-` attributes related to accessibility.
+`FormControl` is a component that displays the control of a form field. It uses the `Slot` component and sets the `aria-describedby` and `aria-invalid` attributes based on the error state.
 
 ## FormDescription
 
-The `FormDescription` component is a `p` element that displays a description for a form field. It uses the `useFormField` hook to set its `id`.
+`FormDescription` is a component that displays the description of a form field. It returns a `p` element with a class name of `text-muted-foreground text-sm` and the provided class name.
 
 ## FormMessage
 
-The `FormMessage` component is a `p` element that displays a message for a form field. It uses the `useFormField` hook to determine if the associated form field has an error, and if so, it displays the error message. If there is no error, it displays its children.
+`FormMessage` is a component that displays the error message of a form field. It returns a `p` element with a class name of `text-destructive text-sm font-medium` and the provided class name. If there is no error message or children, it returns `null`.
+
+## Exports
+
+The file exports the `useFormField` hook and the `Form`, `FormItem`, `FormLabel`, `FormControl`, `FormDescription`, `FormMessage`, and `FormField` components.

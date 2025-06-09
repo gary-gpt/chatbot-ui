@@ -1,50 +1,68 @@
 ---
 source: components/sidebar/sidebar-switch-item.tsx
-generated: '2025-06-08T13:21:01.637Z'
+generated: 2025-06-08T21:53:13.334Z
 tags: []
-hash: 9bde646dceaad316d3deb145f5b097ef97a326cf9c8d6f284fa5dc651739649d
+hash: 6f8efd3ad1719fd7d40902e95a8ac6db09a5a19cbabc50e7c92852601d74fdb4
 ---
-# SidebarSwitchItem Component
 
-This document provides an overview of the `SidebarSwitchItem` component in the source code.
+# Sidebar Switch Item Component Documentation
 
-## Import Statements
+This document provides a detailed explanation of the SidebarSwitchItem component in the file `/Users/garymason/chatbot-ui/components/sidebar/sidebar-switch-item.tsx`.
 
-The file begins with import statements for required modules and components:
+## Overview
 
-- `ContentType` from "@/types"
-- `FC` from "react"
-- `TabsTrigger` from "../ui/tabs"
-- `WithTooltip` from "../ui/with-tooltip"
+The SidebarSwitchItem component is a functional component that renders a tab trigger with a tooltip. It's part of the sidebar in the chatbot UI. The component takes in three props: `contentType`, `icon`, and `onContentTypeChange`.
 
-## Interface: SidebarSwitchItemProps
+## Code Details
 
-This interface defines the props that the `SidebarSwitchItem` component expects:
+```ts
+import { ContentType } from "@/types"
+import { FC } from "react"
+import { TabsTrigger } from "../ui/tabs"
+import { WithTooltip } from "../ui/with-tooltip"
+```
 
-- `contentType`: This prop is of type `ContentType` and represents the type of content.
-- `icon`: This prop is a `ReactNode` and represents the icon to be displayed.
-- `onContentTypeChange`: This is a function that takes a `ContentType` as an argument and does not return anything. It's used to handle changes in content type.
+At the beginning of the file, we import the necessary modules and types. `ContentType` is a custom type defined elsewhere in the application. `FC` is a type from React that stands for Functional Component. `TabsTrigger` and `WithTooltip` are custom components defined in the UI directory.
 
-## Component: SidebarSwitchItem
+```ts
+interface SidebarSwitchItemProps {
+  contentType: ContentType
+  icon: React.ReactNode
+  onContentTypeChange: (contentType: ContentType) => void
+}
+```
 
-This is a functional component that uses the `SidebarSwitchItemProps` interface for its props. The component returns a `WithTooltip` component.
+Here we define an interface for the props that the SidebarSwitchItem component will accept. `contentType` is a `ContentType` type, `icon` is a `ReactNode` (which means it can be any valid React child), and `onContentTypeChange` is a function that takes a `ContentType` as an argument and returns nothing (`void`).
 
-### Props
+```ts
+export const SidebarSwitchItem: FC<SidebarSwitchItemProps> = ({
+  contentType,
+  icon,
+  onContentTypeChange
+}) => {
+  return (
+    <WithTooltip
+      display={
+        <div>{contentType[0].toUpperCase() + contentType.substring(1)}</div>
+      }
+      trigger={
+        <TabsTrigger
+          className="hover:opacity-50"
+          value={contentType}
+          onClick={() => onContentTypeChange(contentType as ContentType)}
+        >
+          {icon}
+        </TabsTrigger>
+      }
+    />
+  )
+}
+```
 
-The component accepts the following props:
+This is the main component. It's a functional component that takes `SidebarSwitchItemProps` as its props. The component returns a `WithTooltip` component, which takes two props: `display` and `trigger`.
 
-- `contentType`: The type of the content.
-- `icon`: The icon to be displayed.
-- `onContentTypeChange`: The function to handle changes in content type.
+The `display` prop is a `div` that contains the `contentType` with the first letter capitalized. 
 
-### Rendered JSX
+The `trigger` prop is a `TabsTrigger` component, which takes three props: `className`, `value`, and `onClick`. The `className` is a string that sets the CSS class for the component. The `value` is the `contentType` prop passed into the `SidebarSwitchItem` component. The `onClick` prop is a function that calls the `onContentTypeChange` function passed into the `SidebarSwitchItem` component with the `contentType` as its argument.
 
-The component returns a `WithTooltip` component with the following props:
-
-- `display`: A `div` that displays the `contentType` with the first letter capitalized.
-- `trigger`: A `TabsTrigger` component that has the following props:
-  - `className`: A string that sets the CSS class of the component. It changes the opacity to 50% when hovered over.
-  - `value`: The `contentType` prop.
-  - `onClick`: A function that calls `onContentTypeChange` with `contentType` as an argument when clicked. The `contentType` is cast as a `ContentType` type.
-
-The `TabsTrigger` component displays the `icon` prop as its children.
+The `TabsTrigger` component also has a child, which is the `icon` prop passed into the `SidebarSwitchItem` component.

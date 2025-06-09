@@ -1,32 +1,38 @@
 ---
 source: components/utility/providers.tsx
-generated: '2025-06-08T13:21:01.638Z'
+generated: 2025-06-08T22:16:32.751Z
 tags: []
-hash: bd5a8dc50dec299c54552b1f7df77721a6f2b499b7df02714febf281c5e6ee3e
+hash: a42b8ac3bdccaad86f0d88e0309458558f9386ac1c6f86a5b77e28393eb50ec1
 ---
-# Providers Component
 
-This file exports a `Providers` component which is a functional component (FC) that accepts `ThemeProviderProps` as props.
+# Documentation for `providers.tsx`
 
-## Import Statements
+This file is located at `/Users/garymason/chatbot-ui/components/utility/providers.tsx`. It exports a `Providers` component that wraps the application's children components with `NextThemesProvider` and `TooltipProvider`.
 
-```javascript
+## Imports
+
+```ts
+"use client"
+
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { ThemeProviderProps } from "next-themes/dist/types"
 import { FC } from "react"
 ```
 
-The file imports:
+The `use client` directive at the top of the file indicates that this code is intended to run on the client side.
 
-- `TooltipProvider` from the `@/components/ui/tooltip` module. This is a context provider for tooltips.
-- `ThemeProvider` from the `next-themes` module, aliased as `NextThemesProvider`. This is a context provider for theming in Next.js applications.
-- `ThemeProviderProps` from the `next-themes/dist/types` module. This is the TypeScript type for the props that the `NextThemesProvider` accepts.
-- `FC` (Functional Component) from the `react` module. This is a TypeScript type for functional components in React.
+The `TooltipProvider` is imported from the local `tooltip` component.
+
+The `ThemeProvider` from the `next-themes` package is imported and renamed to `NextThemesProvider` to avoid confusion with other possible theme providers.
+
+The `ThemeProviderProps` type is imported from `next-themes/dist/types` to provide TypeScript type checking for the props that the `Providers` component will receive.
+
+The `FC` (Function Component) type is imported from `react` to type the `Providers` component.
 
 ## Providers Component
 
-```javascript
+```ts
 export const Providers: FC<ThemeProviderProps> = ({ children, ...props }) => {
   return (
     <NextThemesProvider {...props}>
@@ -36,6 +42,12 @@ export const Providers: FC<ThemeProviderProps> = ({ children, ...props }) => {
 }
 ```
 
-The `Providers` component is a functional component that accepts `ThemeProviderProps` as its props. The component returns a `NextThemesProvider` component with the passed props and a `TooltipProvider` component as its child. The children passed to the `Providers` component are rendered inside the `TooltipProvider` component.
+The `Providers` component is a functional component that receives props of type `ThemeProviderProps`. 
 
-This structure allows all children of the `Providers` component to have access to both the theme context provided by `NextThemesProvider` and the tooltip context provided by `TooltipProvider`.
+The component returns a JSX element that wraps the `children` with `NextThemesProvider` and `TooltipProvider`. 
+
+The `NextThemesProvider` component receives all the props passed to `Providers` (excluding `children`), while the `TooltipProvider` wraps around the `children`.
+
+This structure ensures that all child components within `Providers` will have access to the theme and tooltip context provided by `NextThemesProvider` and `TooltipProvider` respectively.
+
+The `Providers` component is exported for use in other parts of the application.

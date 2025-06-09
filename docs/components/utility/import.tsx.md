@@ -1,35 +1,85 @@
 ---
 source: components/utility/import.tsx
-generated: '2025-06-08T13:21:01.638Z'
+generated: 2025-06-08T22:15:48.556Z
 tags: []
-hash: 6f50ece2348c4febca19a3a139a485798a4c999ba97f14c4cc9826b010873e84
+hash: ee2495d6b1e95ce07f2cb768dc09bdfc3b8c8a9dc7541c75e1a5f787a6ab4c31
 ---
-# Import Component
 
-This component is responsible for importing data from JSON files into the chatbot application. The imported data can be of various types such as chats, presets, prompts, files, collections, assistants, and tools.
+# Import.tsx Code Documentation
 
-## Props
+This TypeScript file is a component of a chatbot UI that allows users to import data from JSON files. The data can include chats, presets, prompts, files, collections, assistants, and tools.
 
-The `Import` component does not accept any props.
+## Import Statements
 
-## State
+The file begins with a series of import statements, bringing in necessary components, contexts, and functions from various directories. It also imports several hooks from React, including `FC`, `useContext`, `useRef`, and `useState`.
 
-The `Import` component maintains several state variables:
+```ts
+import { ChatbotUIContext } from "@/context/context"
+import { createAssistants } from "@/db/assistants"
+...
+import { IconUpload, IconX } from "@tabler/icons-react"
+import { FC, useContext, useRef, useState } from "react"
+import { toast } from "sonner"
+...
+```
 
-- `isOpen`: A boolean indicating whether the import dialog is open or not.
-- `importList`: An array of objects representing the data to be imported.
-- `importCounts`: An object keeping track of the number of items to be imported for each data type.
+## Interface Definition
 
-## Functions
+An empty interface `ImportProps` is defined, which is used as the type for the props of the `Import` component.
 
-The `Import` component defines several functions:
+```ts
+interface ImportProps {}
+```
 
-- `handleSelectFiles`: This function is triggered when the user selects files to import. It reads the files, parses the JSON data, and updates the `importList` and `importCounts` state variables.
-- `handleRemoveItem`: This function removes a specific item from the `importList` and updates the `importCounts`.
-- `handleCancel`: This function resets the `importList` and `importCounts` and closes the import dialog.
-- `handleSaveData`: This function saves the imported data to the respective databases and updates the application state accordingly.
-- `handleKeyDown`: This function listens for the `Enter` key press and triggers the `handleSaveData` function.
+## Import Component
 
-## Rendered UI
+The `Import` component is a functional component that uses the ChatbotUIContext to access and set various states. It also uses local states for managing the import list, import counts, and the open status of the import dialog.
 
-The `Import` component renders an upload icon. When clicked, a dialog opens where the user can select JSON files to import. The dialog displays the list of selected files and the counts of items to be imported for each data type. The user can remove individual items from the list or cancel the import operation. When the user clicks the "Save Data" button, the `handleSaveData` function is triggered to save the imported data.
+```ts
+export const Import: FC<ImportProps> = ({}) => {
+  ...
+}
+```
+
+### State Definitions
+
+The component defines several states using the `useState` hook. These states include `isOpen` for managing the dialog box, `importList` for storing the imported data, and `importCounts` for keeping track of the number of each type of data imported.
+
+```ts
+const [isOpen, setIsOpen] = useState(false)
+const [importList, setImportList] = useState<Array<Record<string, any>>>([])
+...
+```
+
+### Event Handlers
+
+Several event handlers are defined within the `Import` component. These include `handleSelectFiles` for processing selected files, `handleRemoveItem` for removing items from the import list, `handleCancel` for resetting the state and closing the dialog, `handleSaveData` for saving the imported data, and `handleKeyDown` for handling keyboard events.
+
+```ts
+const handleSelectFiles = async (e: any) => {...}
+const handleRemoveItem = (item: any) => {...}
+const handleCancel = () => {...}
+const handleSaveData = async () => {...}
+const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {...}
+```
+
+### Rendered JSX
+
+The component returns a JSX element that includes an upload icon, and a dialog box that opens when the icon is clicked. The dialog box includes a list of imported items, a count of each type of data imported, an input for selecting files, and buttons for canceling or saving the imported data.
+
+```ts
+return (
+    <>
+      <IconUpload
+        className="cursor-pointer hover:opacity-50"
+        size={SIDEBAR_ICON_SIZE}
+        onClick={() => setIsOpen(true)}
+      />
+      ...
+    </>
+  )
+```
+
+## Conclusion
+
+This file provides a component for importing data into a chatbot UI. It includes functionality for selecting files, processing and displaying the imported data, and saving the data.

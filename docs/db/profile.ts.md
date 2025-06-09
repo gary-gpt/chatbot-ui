@@ -1,52 +1,118 @@
 ---
 source: db/profile.ts
-generated: '2025-06-08T13:21:01.630Z'
+generated: 2025-06-08T22:26:07.485Z
 tags: []
-hash: 23b1a5d761e7695a9c3b58c844158726e2c1e1e4833e8b1822c60bbb956b6ffa
+hash: f25838cf2ec10bcc20a9863c60e9697390c0df5a819f537616a9b24365b6e08b
 ---
-# Profile Service
 
-This service provides methods to interact with the `profiles` table in Supabase.
+# Chatbot UI - Profile Database Operations
 
-## Methods
+This document provides an overview of the `profile.ts` file located at `/Users/garymason/chatbot-ui/db/`. This file contains functions for interacting with the `profiles` table in the database using the Supabase client.
 
-### `getProfileByUserId(userId: string)`
+## Imports
 
-This method retrieves a single profile associated with the given `userId`. 
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert, TablesUpdate } from "@/supabase/types"
+```
 
-- `userId` (string): The ID of the user whose profile is to be retrieved.
+The file imports the Supabase client from a local file, and two types, `TablesInsert` and `TablesUpdate`, from another local file.
 
-Returns a Promise that resolves with the profile data. If no profile is found, it throws an error.
+## Function: getProfileByUserId
 
-### `getProfilesByUserId(userId: string)`
+```ts
+export const getProfileByUserId = async (userId: string) => {
+  const { data: profile, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("user_id", userId)
+    .single()
 
-This method retrieves all profiles associated with the given `userId`.
+  if (!profile) {
+    throw new Error(error.message)
+  }
 
-- `userId` (string): The ID of the user whose profiles are to be retrieved.
+  return profile
+}
+```
 
-Returns a Promise that resolves with an array of profile data. If no profiles are found, it throws an error.
+This function retrieves a single profile from the `profiles` table where the `user_id` matches the provided `userId`. If no profile is found, it throws an error with the message from the Supabase client.
 
-### `createProfile(profile: TablesInsert<"profiles">)`
+## Function: getProfilesByUserId
 
-This method creates a new profile with the provided data.
+```ts
+export const getProfilesByUserId = async (userId: string) => {
+  const { data: profiles, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("user_id", userId)
 
-- `profile` (TablesInsert<"profiles">): The profile data to be inserted.
+  if (!profiles) {
+    throw new Error(error.message)
+  }
 
-Returns a Promise that resolves with the created profile data. If there is an error during insertion, it throws an error.
+  return profiles
+}
+```
 
-### `updateProfile(profileId: string, profile: TablesUpdate<"profiles">)`
+This function retrieves all profiles from the `profiles` table where the `user_id` matches the provided `userId`. If no profiles are found, it throws an error with the message from the Supabase client.
 
-This method updates an existing profile with the provided data.
+## Function: createProfile
 
-- `profileId` (string): The ID of the profile to be updated.
-- `profile` (TablesUpdate<"profiles">): The new profile data.
+```ts
+export const createProfile = async (profile: TablesInsert<"profiles">) => {
+  const { data: createdProfile, error } = await supabase
+    .from("profiles")
+    .insert([profile])
+    .select("*")
+    .single()
 
-Returns a Promise that resolves with the updated profile data. If there is an error during update, it throws an error.
+  if (error) {
+    throw new Error(error.message)
+  }
 
-### `deleteProfile(profileId: string)`
+  return createdProfile
+}
+```
 
-This method deletes a profile with the given `profileId`.
+This function inserts a new profile into the `profiles` table. The `profile` parameter should be an object that matches the `TablesInsert` type for the `profiles` table. If an error occurs during the operation, it throws an error with the message from the Supabase client.
 
-- `profileId` (string): The ID of the profile to be deleted.
+## Function: updateProfile
 
-Returns a Promise that resolves with `true` if the deletion is successful. If there is an error during deletion, it throws an error.
+```ts
+export const updateProfile = async (
+  profileId: string,
+  profile: TablesUpdate<"profiles">
+) => {
+  const { data: updatedProfile, error } = await supabase
+    .from("profiles")
+    .update(profile)
+    .eq("id", profileId)
+    .select("*")
+    .single()
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return updatedProfile
+}
+```
+
+This function updates an existing profile in the `profiles` table. The `profileId` parameter should be the ID of the profile to update, and the `profile` parameter should be an object that matches the `TablesUpdate` type for the `profiles` table. If an error occurs during the operation, it throws an error with the message from the Supabase client.
+
+## Function: deleteProfile
+
+```ts
+export const deleteProfile = async (profileId: string) => {
+  const { error } = await supabase.from("profiles").delete().eq("id", profileId)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return true
+}
+```
+
+This function deletes a profile from the `profiles` table. The `profileId` parameter should be the ID of the profile to delete. If an error occurs during the operation, it throws an error with the message from the Supabase client. If the operation is successful, it returns `true`.

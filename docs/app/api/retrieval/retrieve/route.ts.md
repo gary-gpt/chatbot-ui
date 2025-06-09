@@ -1,49 +1,104 @@
 ---
 source: app/api/retrieval/retrieve/route.ts
-generated: '2025-06-08T13:21:01.660Z'
+generated: 2025-06-08T21:24:43.001Z
 tags: []
-hash: 1711fb876702529e5639b9eda4a641da155c89d7fdb24a6d80741b5e64d1486b
+hash: f9978342ee97923e7226bc559d21eff0a0e9965c7f332ab3c1556ff6ba1dcbad
 ---
-# POST Function Documentation
 
-This function is an asynchronous function named `POST` that takes a `request` object as an argument and returns a `Response` object.
+# Chatbot UI API: Retrieve Route
 
-## Import Statements
+This TypeScript file is part of a chatbot UI application. It defines an asynchronous POST function that handles requests to the `/retrieve` route. The function retrieves and returns the most similar chunks of data from a database, based on the user's input and chosen embedding provider.
 
-The function imports several modules and functions:
+## Code Overview
 
-- `generateLocalEmbedding` from "@/lib/generate-local-embedding"
-- `checkApiKey` and `getServerProfile` from "@/lib/server/server-chat-helpers"
-- `Database` from "@/supabase/types"
-- `createClient` from "@supabase/supabase-js"
-- `OpenAI` from "openai"
+### Import Statements
 
-## Function Parameters
+The file begins by importing necessary modules and functions:
 
-The function accepts a single parameter:
+```ts
+import { generateLocalEmbedding } from "@/lib/generate-local-embedding"
+import { checkApiKey, getServerProfile } from "@/lib/server/server-chat-helpers"
+import { Database } from "@/supabase/types"
+import { createClient } from "@supabase/supabase-js"
+import OpenAI from "openai"
+```
 
-- `request`: A `Request` object that contains the HTTP request information.
+### POST Function
 
-## Function Logic
+The `POST` function is an asynchronous function that handles POST requests:
 
-1. The function first parses the JSON body of the request into a JavaScript object. The object is then destructured into several variables: `userInput`, `fileIds`, `embeddingsProvider`, and `sourceCount`.
+```ts
+export async function POST(request: Request) {
+  ...
+}
+```
 
-2. It then creates a new Set from the `fileIds` array to remove any duplicate file IDs and assigns it to `uniqueFileIds`.
+#### Request Data
 
-3. The function then creates a new Supabase client using the Supabase URL and service role key from the environment variables.
+The function begins by parsing the JSON data from the request. It expects the following properties:
 
-4. It retrieves the server profile and checks if the `embeddingsProvider` is set to "openai". If it is, it checks if the server profile is using Azure OpenAI. If it is, it checks the Azure OpenAI API key. If it's not using Azure OpenAI, it checks the OpenAI API key.
+- `userInput`: a string representing the user's input
+- `fileIds`: an array of string file IDs
+- `embeddingsProvider`: a string representing the chosen embedding provider ("openai" or "local")
+- `sourceCount`: a number representing the number of sources to match
 
-5. Depending on whether the server profile is using Azure OpenAI or not, it creates a new instance of OpenAI with the appropriate configuration.
+```ts
+const json = await request.json()
+const { userInput, fileIds, embeddingsProvider, sourceCount } = json as {
+  userInput: string
+  fileIds: string[]
+  embeddingsProvider: "openai" | "local"
+  sourceCount: number
+}
+```
 
-6. If the `embeddingsProvider` is set to "openai", it creates a new embedding using the OpenAI API and maps the resulting data to an array of embeddings. It then uses the Supabase client to call a stored procedure named "match_file_items_openai" with the embedding, source count, and unique file IDs as arguments. If an error occurs during this process, it throws the error.
+#### Database Connection
 
-7. If the `embeddingsProvider` is set to "local", it generates a local embedding and calls a stored procedure named "match_file_items_local" with the embedding, source count, and unique file IDs as arguments. If an error occurs during this process, it throws the error.
+The function then creates a new Supabase client using environment variables:
 
-8. The function then sorts the resulting array of chunks in descending order based on their similarity and assigns it to `mostSimilarChunks`.
+```ts
+const supabaseAdmin = createClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+```
 
-9. Finally, the function returns a new `Response` object with a status of 200 and a body containing a JSON string of the most similar chunks.
+#### Embedding Generation
+
+Depending on the `embeddingsProvider` selected, the function generates embeddings using either OpenAI or a local method:
+
+```ts
+if (embeddingsProvider === "openai") {
+  ...
+} else if (embeddingsProvider === "local") {
+  ...
+}
+```
+
+#### Similarity Calculation
+
+The function then retrieves the most similar chunks of data from the database, based on the generated embeddings:
+
+```ts
+const mostSimilarChunks = chunks?.sort(
+  (a, b) => b.similarity - a.similarity
+)
+```
+
+#### Response
+
+Finally, the function returns a response with the most similar chunks of data, or an error message if an error occurred:
+
+```ts
+return new Response(JSON.stringify({ results: mostSimilarChunks }), {
+  status: 200
+})
+...
+return new Response(JSON.stringify({ message: errorMessage }), {
+  status: errorCode
+})
+```
 
 ## Error Handling
 
-If an error occurs at any point during the function, it catches the error and returns a new `Response` object with a status of 500 (or the status from the error if it exists) and a body containing a JSON string with a message describing the error.
+The function includes a try-catch block to handle any errors that may occur during execution. If an error occurs, the function returns a response with a status of 500 and a message indicating that an unexpected error occurred. If the error includes a specific message, that message is included in the response instead.

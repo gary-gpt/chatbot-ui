@@ -1,48 +1,17 @@
 ---
 source: components/setup/finish-step.tsx
-generated: '2025-06-08T13:21:01.636Z'
+generated: 2025-06-08T21:38:22.442Z
 tags: []
-hash: 6b294c7a4876e8ec2162864ea2ac7101c3d9e879cb82e74fdf2be86da0e91517
+hash: 66eb46b7ffcf908ccb6f35630d807e255e7d128104f3075ff9af4421cf19e0ef
 ---
-# FinishStep Component
 
-The `FinishStep` component is a functional component that displays a welcome message to the Chatbot UI. It optionally includes the first name of the user if a `displayName` is provided.
+# FinishStep Component Documentation
 
-## Props
+This markdown file documents the `FinishStep` component located at `/Users/garymason/chatbot-ui/components/setup/finish-step.tsx`. This component is part of a chatbot user interface and is used to display a welcome message to the user.
 
-The `FinishStep` component takes the following props:
+## Code Overview
 
-- `displayName` (string): The full name of the user. If this prop is provided, the first name of the user will be included in the welcome message.
-
-## Usage
-
-```jsx
-import { FinishStep } from './FinishStep';
-
-<FinishStep displayName="John Doe" />
-```
-
-In the above example, the `FinishStep` component will render the following:
-
-```html
-<div class="space-y-4">
-  <div>Welcome to Chatbot UI, John!</div>
-  <div>Click next to start chatting.</div>
-</div>
-```
-
-If no `displayName` is provided, the component will render the following:
-
-```html
-<div class="space-y-4">
-  <div>Welcome to Chatbot UI!</div>
-  <div>Click next to start chatting.</div>
-</div>
-```
-
-## Source Code
-
-```jsx
+```ts
 import { FC } from "react"
 
 interface FinishStepProps {
@@ -62,3 +31,44 @@ export const FinishStep: FC<FinishStepProps> = ({ displayName }) => {
   )
 }
 ```
+
+## Import Statements
+
+```ts
+import { FC } from "react"
+```
+
+The `FC` (Functional Component) type from `react` is imported. This is a TypeScript type used to describe functional components.
+
+## Interface
+
+```ts
+interface FinishStepProps {
+  displayName: string
+}
+```
+
+The `FinishStepProps` interface is defined to type check the props that the `FinishStep` component expects. It expects one prop:
+
+- `displayName`: A string that represents the name of the user.
+
+## FinishStep Component
+
+```ts
+export const FinishStep: FC<FinishStepProps> = ({ displayName }) => {
+  return (
+    <div className="space-y-4">
+      <div>
+        Welcome to Chatbot UI
+        {displayName.length > 0 ? `, ${displayName.split(" ")[0]}` : null}!
+      </div>
+
+      <div>Click next to start chatting.</div>
+    </div>
+  )
+}
+```
+
+The `FinishStep` component is a functional component that receives `displayName` as a prop. It returns a JSX element that displays a welcome message to the user. If `displayName` is provided and is not an empty string, the first word of `displayName` is appended to the welcome message. If `displayName` is not provided or is an empty string, no name is appended to the welcome message.
+
+The component also displays a message instructing the user to click next to start chatting.

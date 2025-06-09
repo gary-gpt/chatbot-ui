@@ -1,44 +1,99 @@
 ---
 source: lib/models/llm/anthropic-llm-list.ts
-generated: '2025-06-08T13:21:01.658Z'
+generated: 2025-06-08T22:34:14.750Z
 tags: []
-hash: c88159b2a05dca0e84be4b989562b75fa49043e1d7b4c06634d7619e884e1ccf
+hash: a5e672ebeaa72d226f5b813ab528d8a2e7d13fc91935ab1d9ee558543281c8b3
 ---
-# Anthropic Models Documentation
 
-This file contains a list of Anthropic models, each with their respective details. The models are defined as constants and are then exported as part of an array `ANTHROPIC_LLM_LIST`.
+# Anthropic Language Learning Models (LLM) List
+
+This TypeScript file, located at `/Users/garymason/chatbot-ui/lib/models/llm/anthropic-llm-list.ts`, contains a list of Language Learning Models (LLMs) provided by Anthropic. Each model is represented as a constant object of type `LLM`, and the list of all models is exported as `ANTHROPIC_LLM_LIST`.
 
 ## Constants
 
-Each model is a constant of type `LLM` and contains the following properties:
+### ANTHROPIC_PLATFORM_LINK
 
-- `modelId`: A unique identifier for the model.
-- `modelName`: The name of the model.
-- `provider`: The provider of the model, in this case, 'anthropic'.
-- `hostedId`: The id of the hosted model.
-- `platformLink`: A link to the platform where the model is hosted.
-- `imageInput`: A boolean indicating whether the model accepts image input.
-- `pricing`: An object containing pricing details for the model. It includes the currency, unit, input cost, and output cost.
+This constant is a string that contains the URL to the documentation for getting started with the Anthropic API.
 
-## Models
+```ts
+const ANTHROPIC_PLATFORM_LINK = "https://docs.anthropic.com/claude/reference/getting-started-with-the-api"
+```
 
-The following models are defined:
+### Language Learning Models (LLMs)
 
-- `CLAUDE_2`: Claude 2 model.
-- `CLAUDE_INSTANT`: Claude Instant model.
-- `CLAUDE_3_HAIKU`: Claude 3 Haiku model.
-- `CLAUDE_3_SONNET`: Claude 3 Sonnet model.
-- `CLAUDE_3_OPUS`: Claude 3 Opus model.
-- `CLAUDE_3_5_SONNET`: Claude 3.5 Sonnet model.
+Each LLM is represented as a constant object of type `LLM`. The properties of this object include the model's ID, name, provider, hosted ID, a link to the platform, whether it accepts image input, and its pricing details.
 
-## Export
+#### CLAUDE_2
 
-The file exports the `ANTHROPIC_LLM_LIST` constant, which is an array of all the defined models.
+This is an LLM named "Claude 2". It does not accept image input. The pricing details are in USD and per 1M tokens.
 
-## Updates
+```ts
+const CLAUDE_2: LLM = {
+  // ...
+}
+```
 
-Each model has a comment indicating the last update date. Please refer to these comments for the most recent changes.
+#### CLAUDE_INSTANT
 
-## Reference
+This is an LLM named "Claude Instant". It does not accept image input. The pricing details are in USD and per 1M tokens.
 
-For more information about the models, please refer to the [Anthropic platform documentation](https://docs.anthropic.com/claude/reference/getting-started-with-the-api).
+```ts
+const CLAUDE_INSTANT: LLM = {
+  // ...
+}
+```
+
+#### CLAUDE_3_HAIKU
+
+This is an LLM named "Claude 3 Haiku". It accepts image input. The pricing details are in USD and per 1M tokens.
+
+```ts
+const CLAUDE_3_HAIKU: LLM = {
+  // ...
+}
+```
+
+#### CLAUDE_3_SONNET
+
+This is an LLM named "Claude 3 Sonnet". It accepts image input. The pricing details are in USD and per 1M tokens.
+
+```ts
+const CLAUDE_3_SONNET: LLM = {
+  // ...
+}
+```
+
+#### CLAUDE_3_OPUS
+
+This is an LLM named "Claude 3 Opus". It accepts image input. The pricing details are in USD and per 1M tokens.
+
+```ts
+const CLAUDE_3_OPUS: LLM = {
+  // ...
+}
+```
+
+#### CLAUDE_3_5_SONNET
+
+This is an LLM named "Claude 3.5 Sonnet". It accepts image input. The pricing details are in USD and per 1M tokens.
+
+```ts
+const CLAUDE_3_5_SONNET: LLM = {
+  // ...
+}
+```
+
+## Exported List
+
+The `ANTHROPIC_LLM_LIST` is an array that contains all the LLMs. This list is exported for use in other parts of the application.
+
+```ts
+export const ANTHROPIC_LLM_LIST: LLM[] = [
+  CLAUDE_2,
+  CLAUDE_INSTANT,
+  CLAUDE_3_HAIKU,
+  CLAUDE_3_SONNET,
+  CLAUDE_3_OPUS,
+  CLAUDE_3_5_SONNET
+]
+```

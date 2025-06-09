@@ -1,41 +1,87 @@
 ---
 source: components/utility/change-password.tsx
-generated: '2025-06-08T13:21:01.637Z'
+generated: 2025-06-08T22:14:20.281Z
 tags: []
-hash: 68b58feb5567d2f5f997705b0754933fd92f2c69e30d01841ca5bc2a1c038314
+hash: 46c6ff0bd70eab202ad734e6147a4a9dd971787e4fc05b0addc6410925ecf583
 ---
-# ChangePassword Component
 
-This is a functional component in React that provides an interface for users to change their password.
+# Change Password Component Documentation
+
+The `change-password.tsx` file is a React component that provides a user interface for changing the password of a user in a chatbot application. It uses the Supabase client to interact with the backend for updating the user's password.
+
+## Code Overview
+
+```ts
+"use client"
+```
+This line indicates that the code runs on the client-side.
 
 ## Imports
 
-- `supabase` from "@/lib/supabase/browser-client": This is the Supabase client used for interacting with the Supabase backend.
-- `useRouter` from "next/navigation": This is a hook from Next.js that allows you to control navigation within your application.
-- `FC, useState` from "react": These are React hooks for creating functional components and managing state within them.
-- `Button` from "../ui/button": This is a UI component for a button.
-- `Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle` from "../ui/dialog": These are UI components for creating a dialog box.
-- `Input` from "../ui/input": This is a UI component for an input field.
-- `toast` from "sonner": This is a library for displaying toast notifications.
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { useRouter } from "next/navigation"
+import { FC, useState } from "react"
+import { Button } from "../ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "../ui/dialog"
+import { Input } from "../ui/input"
+import { toast } from "sonner"
+```
+The component imports several dependencies:
 
-## Props
+- `supabase`: The Supabase client for interacting with the backend.
+- `useRouter`: A hook from Next.js for routing.
+- `FC` and `useState`: React's Function Component and state hook.
+- `Button`, `Dialog`, `DialogContent`, `DialogFooter`, `DialogHeader`, `DialogTitle`, and `Input`: UI components for the dialog.
+- `toast`: A library for showing toast notifications.
 
-This component does not accept any props.
+## Component Definition
 
-## State
+```ts
+interface ChangePasswordProps {}
 
-- `newPassword`: This state variable holds the value of the new password input field.
-- `confirmPassword`: This state variable holds the value of the confirm password input field.
+export const ChangePassword: FC<ChangePasswordProps> = () => {
+  // ...
+}
+```
+The `ChangePassword` component is a function component that doesn't take any props.
 
-## Functions
+## State Variables
 
-- `handleResetPassword`: This asynchronous function is triggered when the user clicks the "Confirm Change" button. It first checks if the `newPassword` state variable is empty, and if so, it displays a toast notification asking the user to enter their new password. If `newPassword` is not empty, it calls `supabase.auth.updateUser` to update the user's password, displays a success toast notification, and redirects the user to the login page.
+```ts
+const [newPassword, setNewPassword] = useState("")
+const [confirmPassword, setConfirmPassword] = useState("")
+```
+The component maintains two state variables: `newPassword` and `confirmPassword`. These variables hold the values of the new password and its confirmation.
 
-## Return
+## Password Reset Handler
 
-This component returns a `Dialog` component with the following children:
+```ts
+const handleResetPassword = async () => {
+  if (!newPassword) return toast.info("Please enter your new password.")
 
-- `DialogContent`: This is the main content of the dialog. It contains the following:
-  - `DialogHeader`: This contains the `DialogTitle`, which is set to "Change Password".
-  - Two `Input` components: These are for the new password and confirm password fields. Their values are bound to the `newPassword` and `confirmPassword` state variables respectively, and they update these state variables whenever their values change.
-  - `DialogFooter`: This contains a `Button` component that triggers the `handleResetPassword` function when clicked.
+  await supabase.auth.updateUser({ password: newPassword })
+
+  toast.success("Password changed successfully.")
+
+  return router.push("/login")
+}
+```
+The `handleResetPassword` function is an async function that handles the password reset process. It first checks if the `newPassword` is not empty. If it's empty, it shows a toast notification asking the user to enter the new password. Then, it calls `supabase.auth.updateUser` to update the user's password. After the password is updated, it shows a success toast notification and redirects the user to the login page.
+
+## Component Return
+
+```ts
+return (
+  <Dialog open={true}>
+    // ...
+  </Dialog>
+)
+```
+The component returns a `Dialog` component that contains the form for changing the password. The form includes two `Input` components for entering the new password and its confirmation, and a `Button` component for submitting the form. The `handleResetPassword` function is attached to the `onClick` event of the `Button` component.

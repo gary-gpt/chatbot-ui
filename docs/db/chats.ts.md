@@ -1,60 +1,134 @@
 ---
 source: db/chats.ts
-generated: '2025-06-08T13:21:01.628Z'
+generated: 2025-06-08T22:21:12.876Z
 tags: []
-hash: 9c3ad1438f3603257e61bf18d13ba2565f98834937abf25fc8f49ad42b90ed95
+hash: 760b60135a5815a612873e35a049f38fec6fd0214cf815f76a687728a84c704b
 ---
-# Chat Service Documentation
 
-This module provides a set of functions to interact with the `chats` table in the Supabase database.
+# Chatbot UI Database Operations
 
-## Functions
+This document explains the purpose and logic of the TypeScript file `chats.ts` located at `/Users/garymason/chatbot-ui/db/`. This file contains several functions that interact with the `chats` table in a Supabase database.
 
-### `getChatById(chatId: string)`
+## Imports
 
-This function retrieves a chat by its ID.
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert, TablesUpdate } from "@/supabase/types"
+```
 
-- `chatId`: The ID of the chat to retrieve.
+The file imports the `supabase` object from the `browser-client` module to interact with the Supabase database. It also imports `TablesInsert` and `TablesUpdate` types from the `types` module to define the structure of the data for inserting and updating records.
 
-Returns a Promise that resolves to the chat object.
+## Function: getChatById
 
-### `getChatsByWorkspaceId(workspaceId: string)`
+```ts
+export const getChatById = async (chatId: string) => {
+  const { data: chat } = await supabase
+    .from("chats")
+    .select("*")
+    .eq("id", chatId)
+    .maybeSingle()
 
-This function retrieves all chats associated with a specific workspace ID.
+  return chat
+}
+```
 
-- `workspaceId`: The ID of the workspace.
+This function retrieves a chat record from the `chats` table by its `id`. It uses the `maybeSingle()` function to return either one record or `null` if no record is found.
 
-Returns a Promise that resolves to an array of chat objects. If no chats are found, it throws an Error.
+## Function: getChatsByWorkspaceId
 
-### `createChat(chat: TablesInsert<"chats">)`
+```ts
+export const getChatsByWorkspaceId = async (workspaceId: string) => {
+  const { data: chats, error } = await supabase
+    .from("chats")
+    .select("*")
+    .eq("workspace_id", workspaceId)
+    .order("created_at", { ascending: false })
 
-This function creates a new chat in the database.
+  if (!chats) {
+    throw new Error(error.message)
+  }
 
-- `chat`: The chat object to create.
+  return chats
+}
+```
 
-Returns a Promise that resolves to the created chat object. If the creation fails, it throws an Error.
+This function retrieves all chat records from the `chats` table that belong to a specific workspace, identified by `workspace_id`. The records are ordered by `created_at` in descending order. If no records are found, it throws an error with the message from the Supabase client.
 
-### `createChats(chats: TablesInsert<"chats">[])`
+## Function: createChat
 
-This function creates multiple new chats in the database.
+```ts
+export const createChat = async (chat: TablesInsert<"chats">) => {
+  const { data: createdChat, error } = await supabase
+    .from("chats")
+    .insert([chat])
+    .select("*")
+    .single()
 
-- `chats`: An array of chat objects to create.
+  if (error) {
+    throw new Error(error.message)
+  }
 
-Returns a Promise that resolves to an array of created chat objects. If the creation fails, it throws an Error.
+  return createdChat
+}
+```
 
-### `updateChat(chatId: string, chat: TablesUpdate<"chats">)`
+This function inserts a new chat record into the `chats` table. It expects a `chat` object that conforms to the `TablesInsert<"chats">` type. If the insertion is successful, it returns the created chat record. If not, it throws an error with the message from the Supabase client.
 
-This function updates a chat in the database.
+## Function: createChats
 
-- `chatId`: The ID of the chat to update.
-- `chat`: The chat object with updated values.
+```ts
+export const createChats = async (chats: TablesInsert<"chats">[]) => {
+  const { data: createdChats, error } = await supabase
+    .from("chats")
+    .insert(chats)
+    .select("*")
 
-Returns a Promise that resolves to the updated chat object. If the update fails, it throws an Error.
+  if (error) {
+    throw new Error(error.message)
+  }
 
-### `deleteChat(chatId: string)`
+  return createdChats
+}
+```
 
-This function deletes a chat from the database.
+This function inserts multiple chat records into the `chats` table. It expects an array of `chat` objects that conform to the `TablesInsert<"chats">` type. If the insertion is successful, it returns the created chat records. If not, it throws an error with the message from the Supabase client.
 
-- `chatId`: The ID of the chat to delete.
+## Function: updateChat
 
-Returns a Promise that resolves to `true` if the deletion was successful. If the deletion fails, it throws an Error.
+```ts
+export const updateChat = async (
+  chatId: string,
+  chat: TablesUpdate<"chats">
+) => {
+  const { data: updatedChat, error } = await supabase
+    .from("chats")
+    .update(chat)
+    .eq("id", chatId)
+    .select("*")
+    .single()
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return updatedChat
+}
+```
+
+This function updates a chat record in the `chats` table. It expects a `chatId` and a `chat` object that conforms to the `TablesUpdate<"chats">` type. If the update is successful, it returns the updated chat record. If not, it throws an error with the message from the Supabase client.
+
+## Function: deleteChat
+
+```ts
+export const deleteChat = async (chatId: string) => {
+  const { error } = await supabase.from("chats").delete().eq("id", chatId)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  return true
+}
+```
+
+This function deletes a chat record from the `chats` table by its `id`. If the deletion is successful, it returns `true`. If not, it throws an error with the message from the Supabase client.

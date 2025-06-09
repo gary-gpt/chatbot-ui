@@ -1,38 +1,74 @@
 ---
 source: app/api/username/available/route.ts
-generated: '2025-06-08T13:21:01.660Z'
+generated: 2025-06-08T21:24:58.692Z
 tags: []
-hash: 43ddb8dc27a2e4ba4f0b3a66c125f30d16b7a5e65bf8a35039643b1a9623190c
+hash: b333f6f46c867f9d1fd1501eed6a91cd9e30a6ebdded5279ea69e537e2545750
 ---
-# Source Code Documentation
 
-This source code file is written in TypeScript and is used to handle POST requests to check if a username is available in a Supabase database.
+# Documentation for /Users/garymason/chatbot-ui/app/api/username/available/route.ts
 
-## Imports
+This file contains a single exported function `POST` which is an asynchronous function that checks if a username is available in a Supabase database. 
 
-The file imports two modules from the Supabase JavaScript library:
+## Dependencies
 
-- `Database` from "@/supabase/types"
-- `createClient` from "@supabase/supabase-js"
+The function relies on the `Database` type from "@/supabase/types" and the `createClient` function from the "@supabase/supabase-js" package.
 
-## Constants
+## Function `POST`
 
-The `runtime` constant is defined and set to "edge".
+### Parameters
 
-## Functions
+The `POST` function takes a single parameter `request` of type `Request`. 
 
-### POST
+### Process
 
-The `POST` function is an asynchronous function that handles POST requests. It expects a `Request` object as a parameter.
+1. It first extracts the `username` from the JSON body of the `request`.
+2. It then creates a Supabase client using the Supabase URL and service role key from the environment variables.
+3. Using the Supabase client, it queries the `profiles` table in the database for the provided `username`.
+4. If the `username` does not exist in the database, it throws an error.
+5. If the `username` exists, it returns a response with a JSON body indicating that the username is not available (`isAvailable: false`).
+6. If any error occurs during the process, it catches the error and returns a response with a JSON body containing the error message and a status code of 500.
 
-The function first parses the request body into a JSON object and destructures the `username` property from it.
+```ts
+export async function POST(request: Request) {
+  // Extract the username from the request body
+  const json = await request.json()
+  const { username } = json as {
+    username: string
+  }
 
-It then creates a Supabase client using the `createClient` function, with the Supabase URL and service role key retrieved from the environment variables.
+  try {
+    // Create a Supabase client
+    const supabaseAdmin = createClient<Database>(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
 
-The function then queries the "profiles" table in the Supabase database, selecting the "username" column where the username equals the username passed in the request.
+    // Query the database for the username
+    const { data: usernames, error } = await supabaseAdmin
+      .from("profiles")
+      .select("username")
+      .eq("username", username)
 
-If no usernames are found, an error is thrown with the message from the error returned by the Supabase client.
+    // If the username does not exist, throw an error
+    if (!usernames) {
+      throw new Error(error.message)
+    }
 
-If usernames are found, a response is returned with a JSON object containing a `isAvailable` property, which is set to `true` if no usernames were found, and `false` otherwise.
+    // If the username exists, return a response indicating that the username is not available
+    return new Response(JSON.stringify({ isAvailable: !usernames.length }), {
+      status: 200
+    })
+  } catch (error: any) {
+    // If an error occurs, return a response with the error message and a status code of 500
+    const errorMessage = error.error?.message || "An unexpected error occurred"
+    const errorCode = error.status || 500
+    return new Response(JSON.stringify({ message: errorMessage }), {
+      status: errorCode
+    })
+  }
+}
+```
 
-If an error occurs during the execution of the function, a response is returned with a JSON object containing a `message` property, which is set to the error message, and a `status` property, which is set to the error status code. If no error message or status code is available, they are set to "An unexpected error occurred" and `500`, respectively.
+## Runtime
+
+The runtime environment for this function is specified as "edge".

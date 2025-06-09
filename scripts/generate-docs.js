@@ -1,106 +1,140 @@
-import dotenv from 'dotenv';
-import path from 'path';
-
-// Force load .env.local using absolute path
-dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
-
-if (!process.env.OPENAI_API_KEY) {
-  console.warn('⚠️  OPENAI_API_KEY not loaded.');
-} else {
-  console.log('✅ Loaded OPENAI_API_KEY:', process.env.OPENAI_API_KEY.slice(0, 5) + '...');
-}
-
 import fs from 'fs';
-import matter from 'gray-matter';
+import path from 'path';
 import crypto from 'crypto';
-import { chunkFile } from './utils/chunk-utils.js';
+import { fileURLToPath } from 'url';
 import { generateMarkdownFromCode } from './utils/llm-utils.js';
 
-const PROJECT_ROOT = process.cwd();
-const DOCS_DIR = path.join(PROJECT_ROOT, 'docs');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const EXCLUDED_PATHS = [
-  '__tests__', 'test', 'playwright', '.next', 'node_modules', 'public', 'docs', 'scripts'
-];
+const ROOT_DIR = path.resolve(__dirname, '..');
+const DOCS_DIR = path.join(ROOT_DIR, 'docs');
+const isDryRun = process.argv.includes('--dry-run');
 
-function getAllProjectFiles(dirPath) {
-  const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-  let files = [];
+function getAllHumanFiles(dir, fileList = []) {
+  const excludeDirs = new Set([
+    'node_modules', '.git', '.next', '.turbo', 'out',
+    'public', 'docs', 'dist', 'build', 'scripts', '.vercel'
+  ]);
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
 
   for (const entry of entries) {
-    const fullPath = path.join(dirPath, entry.name);
+    const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      if (!EXCLUDED_PATHS.includes(entry.name)) {
-        files = files.concat(getAllProjectFiles(fullPath));
+      if (!excludeDirs.has(entry.name)) {
+        getAllHumanFiles(fullPath, fileList);
       }
-    } else if (/\.(ts|tsx|js|jsx)$/.test(entry.name)) {
-      files.push(fullPath);
+    } else if (
+      entry.isFile() &&
+      (entry.name.endsWith('.ts') ||
+        entry.name.endsWith('.tsx') ||
+        entry.name.endsWith('.js') ||
+        entry.name.endsWith('.jsx') ||
+        entry.name.endsWith('.mjs') ||
+        entry.name.endsWith('.cjs') ||
+        entry.name.endsWith('.css'))
+    ) {
+      fileList.push(fullPath);
     }
   }
 
-  return files;
-}
-
-function ensureDirExists(filePath) {
-  const dir = path.dirname(filePath);
-  fs.mkdirSync(dir, { recursive: true });
+  return fileList;
 }
 
 function computeHash(content) {
   return crypto.createHash('sha256').update(content).digest('hex');
 }
 
-function addMetadataHeader(markdown, sourcePath) {
-  const generated = new Date().toISOString();
-  const hash = computeHash(markdown);
-
-  const yamlHeader = [
-    '---',
-    `source: "${sourcePath.replace(PROJECT_ROOT + '/', '')}"`,
-    `generated: "${generated}"`,
-    `hash: "${hash}"`,
-    `tags: []`,
-    '---\n\n'
-  ].join('\n');
-
-  return yamlHeader + markdown;
+function parseFrontmatter(mdContent) {
+  const match = mdContent.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return null;
+  const yaml = Object.fromEntries(
+    match[1]
+      .split('\n')
+      .map((line) => line.split(/:\s(.+)/))
+      .filter(([k, v]) => k && v)
+  );
+  return yaml;
 }
 
-async function documentFile(filePath) {
-  const outputPath = path.join(DOCS_DIR, filePath.replace(PROJECT_ROOT + '/', '') + '.md');
-  ensureDirExists(outputPath);
+function hasValidFrontmatter(docPath, sourceHash) {
+  if (!fs.existsSync(docPath)) return false;
+  const content = fs.readFileSync(docPath, 'utf8');
+  const fm = parseFrontmatter(content);
+  return fm && fm.hash === sourceHash;
+}
 
-  try {
-    const chunks = await chunkFile(filePath);
-    let finalMarkdown = '';
-
-    for (const chunk of chunks) {
-      const partial = await generateMarkdownFromCode(chunk, filePath);
-      finalMarkdown += `\n\n` + partial;
-    }
-
-    const withMetadata = addMetadataHeader(finalMarkdown.trim(), filePath);
-    fs.writeFileSync(outputPath, withMetadata, 'utf8');
-    console.log(`✅ Documented: ${filePath.replace(PROJECT_ROOT + '/', '')}`);
-  } catch (err) {
-    console.error(`❌ Error processing ${filePath}:`, err.message || err);
-  }
+function addOrUpdateFrontmatter(markdown, meta) {
+  const existing = parseFrontmatter(markdown);
+  const newFrontmatter = `---\nsource: ${meta.source}\ngenerated: ${meta.generated}\ntags: []\nhash: ${meta.hash}\n---`;
+  const contentWithoutFM = markdown.replace(/^---\n[\s\S]*?\n---/, '').trim();
+  return `${newFrontmatter}\n\n${contentWithoutFM}`;
 }
 
 async function main() {
-  const targetFiles = process.argv.slice(2);
-  const files = targetFiles.length
-    ? targetFiles.map(p => path.resolve(PROJECT_ROOT, p))
-    : getAllProjectFiles(PROJECT_ROOT);
+  const files = getAllHumanFiles(ROOT_DIR);
+  const results = [];
 
-  console.log(`📁 Found ${files.length} eligible files`);
+  for (const filePath of files) {
+    const reasons = [];
 
-  for (const file of files) {
-    await documentFile(file);
+    const relativePath = path.relative(ROOT_DIR, filePath);
+    const docPath = path.join(DOCS_DIR, `${relativePath}.md`);
+
+    const sourceExists = fs.existsSync(filePath);
+    if (!sourceExists) {
+      reasons.push('Source file missing');
+    }
+
+    const sourceCode = sourceExists ? fs.readFileSync(filePath, 'utf8') : '';
+    const sourceHash = computeHash(sourceCode);
+
+    const docExists = fs.existsSync(docPath);
+    const docContent = docExists ? fs.readFileSync(docPath, 'utf8').trim() : '';
+    const isDocEmpty = docContent === '';
+
+    const hasValid = hasValidFrontmatter(docPath, sourceHash);
+    const shouldGenerate = !docExists || isDocEmpty || !hasValid;
+
+    if (!shouldGenerate) {
+      reasons.push('Doc exists and frontmatter is valid — skipping');
+    }
+
+    if (shouldGenerate) {
+      if (isDryRun) {
+        results.push({ file: docPath, action: 'Generate', reasons });
+      } else {
+        const markdown = await generateMarkdownFromCode(sourceCode, filePath);
+        const updatedMarkdown = addOrUpdateFrontmatter(markdown, {
+          source: relativePath,
+          generated: new Date().toISOString(),
+          hash: sourceHash
+        });
+
+        fs.mkdirSync(path.dirname(docPath), { recursive: true });
+        fs.writeFileSync(docPath, updatedMarkdown, 'utf8');
+        results.push({ file: docPath, action: 'Generate', reasons });
+      }
+    } else {
+      results.push({ file: docPath, action: 'Skip', reasons });
+    }
+
+    console.log(`${relativePath} → ${shouldGenerate ? '📝 GENERATE' : '⏭️ SKIP'} | ${reasons.join('; ')}`);
   }
 
-  console.log('✨ Done generating documentation.');
+  const summary = results.reduce(
+    (acc, r) => {
+      acc[r.action]++;
+      return acc;
+    },
+    { Generate: 0, Skip: 0 }
+  );
+
+  console.log(`\n📄 Docs Generation Summary${isDryRun ? ' (DRY RUN)' : ''}`);
+  console.log(`📝 Will Generate: ${summary.Generate}`);
+  console.log(`⏭️ Will Skip: ${summary.Skip}`);
 }
 
 main();

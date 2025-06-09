@@ -1,43 +1,52 @@
 ---
 source: db/storage/workspace-images.ts
-generated: '2025-06-08T13:21:01.646Z'
+generated: 2025-06-08T22:27:48.602Z
 tags: []
-hash: 8e16443eac08a4c186864ca73bc8ac81be41cee5d0874e3a06a1e1f1777af17c
+hash: 2aa40a9acfa6b9675c881e81b803712d5e656c9d9b6ccc7063bd4cee721b53aa
 ---
-# Documentation
 
-## Functions
+# Workspace Images Module Documentation
 
-### `uploadWorkspaceImage(workspace: Tables<"workspaces">, image: File)`
+This module, located at `/Users/garymason/chatbot-ui/db/storage/workspace-images.ts`, contains two functions for handling workspace images in a chatbot application. These functions interact with a Supabase database to upload and retrieve workspace images.
 
-This function is used to upload an image to a workspace. The function takes two parameters:
+## Imports
 
-- `workspace`: An object of the workspace where the image will be uploaded. The object is of type `Tables<"workspaces">`.
-- `image`: The image file to be uploaded. The image file should be of type `File`.
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { Tables } from "@/supabase/types"
+```
 
-The function first checks if the size of the image is less than the limit (6MB). If the image size is greater than the limit, an error is thrown.
+The module imports the `supabase` client from the application's Supabase library and the `Tables` type from the application's Supabase types.
 
-If the workspace already has an image, the function deletes the old image before uploading the new one.
+## uploadWorkspaceImage Function
 
-The function returns the file path of the uploaded image.
+```ts
+export const uploadWorkspaceImage = async (
+  workspace: Tables<"workspaces">,
+  image: File
+) => {
+  // Function body
+}
+```
 
-### `getWorkspaceImageFromStorage(filePath: string)`
+This function uploads a workspace image to the Supabase storage. It takes two parameters: `workspace`, which is an object of the `Tables<"workspaces">` type, and `image`, which is a `File` object representing the image to be uploaded.
 
-This function is used to get a signed URL for the workspace image from the storage. The function takes one parameter:
+The function first checks if the size of the image exceeds a limit of 6MB. If the image size is too large, it throws an error.
 
-- `filePath`: The file path of the image in the storage.
+If a current image exists for the workspace (i.e., `workspace.image_path` is not empty), the function deletes the old image from the storage. If an error occurs during the deletion, it throws an error.
 
-The function creates a signed URL for the image that is valid for 24 hours.
+Finally, the function uploads the new image to the storage. If an error occurs during the upload, it throws an error. If the upload is successful, the function returns the file path of the uploaded image.
 
-If there is an error while creating the signed URL, an error is thrown.
+## getWorkspaceImageFromStorage Function
 
-The function returns the signed URL for the image.
+```ts
+export const getWorkspaceImageFromStorage = async (filePath: string) => {
+  // Function body
+}
+```
 
-## Errors
+This function retrieves a workspace image from the Supabase storage. It takes one parameter: `filePath`, which is a string representing the file path of the image in the storage.
 
-The functions throw errors in the following scenarios:
+The function creates a signed URL for the image, which is valid for 24 hours. If an error occurs during this process, it throws an error. If the process is successful, the function returns the signed URL.
 
-- If the size of the image to be uploaded is greater than the limit (6MB), an error is thrown with the message "Image must be less than 6MB".
-- If there is an error while deleting the old image, an error is thrown with the message "Error deleting old image".
-- If there is an error while uploading the image, an error is thrown with the message "Error uploading image".
-- If there is an error while creating the signed URL for the image, an error is thrown with the message "Error downloading workspace image".
+If any other error occurs during the execution of the function, it logs the error to the console.

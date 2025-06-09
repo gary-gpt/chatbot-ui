@@ -1,40 +1,78 @@
 ---
 source: components/chat/chat-messages.tsx
-generated: '2025-06-08T13:21:01.634Z'
+generated: 2025-06-08T21:29:36.439Z
 tags: []
-hash: 0930bc181b27a09a1e25d4bd779ff048fdd6d7a55202fea74d58f21381781af3
+hash: cb6540dacb3bc90907d283c6e8e55a03809f77d0eaedd2998ecf2bded4a00d40
 ---
-# ChatMessages Component
 
-This is a React functional component that handles the display of chat messages. It uses the `ChatbotUIContext` to get the chat messages and chat file items. It also uses a custom hook `useChatHandler` to handle the editing of messages.
+# Chat Messages Component Documentation
 
-## Imports
+This document explains the purpose and logic of the `ChatMessages` component found in the file `/Users/garymason/chatbot-ui/components/chat/chat-messages.tsx`.
 
-- `useChatHandler` from "@/components/chat/chat-hooks/use-chat-handler"
-- `ChatbotUIContext` from "@/context/context"
-- `Tables` from "@/supabase/types"
-- `FC, useContext, useState` from "react"
-- `Message` from "../messages/message"
+## Overview
 
-## Props
+The `ChatMessages` component is a functional component in React that is responsible for rendering a list of chat messages. It uses the `ChatbotUIContext` for accessing chat messages and file items related to the chat. It also provides functionality for editing a message.
 
-This component does not accept any props.
+## Code Breakdown
 
-## State
+### Imports
 
-The component maintains a local state `editingMessage` to keep track of the message that is currently being edited.
+```ts
+import { useChatHandler } from "@/components/chat/chat-hooks/use-chat-handler"
+import { ChatbotUIContext } from "@/context/context"
+import { Tables } from "@/supabase/types"
+import { FC, useContext, useState } from "react"
+import { Message } from "../messages/message"
+```
 
-## Render
+The component imports several hooks and components from various modules:
 
-The component renders a list of `Message` components. Each `Message` component is passed the following props:
+- `useChatHandler`: A custom hook that provides chat handling functionality.
+- `ChatbotUIContext`: The context that provides access to chat messages and file items.
+- `Tables`: A type from the Supabase library, used for defining the type of the `editingMessage` state.
+- `FC, useContext, useState`: React hooks and types.
+- `Message`: A component that renders a single chat message.
 
-- `key`: The sequence number of the message.
-- `message`: The message object.
-- `fileItems`: The file items associated with the message.
-- `isEditing`: A boolean indicating whether the message is currently being edited.
-- `isLast`: A boolean indicating whether the message is the last in the list.
-- `onStartEdit`: A function to set the `editingMessage` state.
-- `onCancelEdit`: A function to unset the `editingMessage` state.
-- `onSubmitEdit`: A function from `useChatHandler` to handle the submission of the edited message.
+### Props and State
 
-The chat messages are sorted by their sequence number before being mapped to `Message` components. For each message, the associated file items are filtered from `chatFileItems` before being passed to the `Message` component.
+```ts
+interface ChatMessagesProps {}
+
+export const ChatMessages: FC<ChatMessagesProps> = ({}) => {
+  const { chatMessages, chatFileItems } = useContext(ChatbotUIContext)
+
+  const { handleSendEdit } = useChatHandler()
+
+  const [editingMessage, setEditingMessage] = useState<Tables<"messages">>()
+```
+
+The `ChatMessages` component doesn't accept any props. It uses the `useContext` hook to access the `chatMessages` and `chatFileItems` from the `ChatbotUIContext`. It also uses the `useChatHandler` hook to get the `handleSendEdit` function for handling message edits. The `useState` hook is used to manage the state of the currently editing message.
+
+### Rendering Chat Messages
+
+```ts
+return chatMessages
+    .sort((a, b) => a.message.sequence_number - b.message.sequence_number)
+    .map((chatMessage, index, array) => {
+      const messageFileItems = chatFileItems.filter(
+        (chatFileItem, _, self) =>
+          chatMessage.fileItems.includes(chatFileItem.id) &&
+          self.findIndex(item => item.id === chatFileItem.id) === _
+      )
+
+      return (
+        <Message
+          key={chatMessage.message.sequence_number}
+          message={chatMessage.message}
+          fileItems={messageFileItems}
+          isEditing={editingMessage?.id === chatMessage.message.id}
+          isLast={index === array.length - 1}
+          onStartEdit={setEditingMessage}
+          onCancelEdit={() => setEditingMessage(undefined)}
+          onSubmitEdit={handleSendEdit}
+        />
+      )
+    })
+```
+
+The component renders the `chatMessages` sorted by their sequence number. For each message, it filters the `chatFileItems` that are included in the message's file items. Then, it renders a `Message` component for each chat message, passing the necessary props for displaying the message, handling the editing state, and handling the edit submission.

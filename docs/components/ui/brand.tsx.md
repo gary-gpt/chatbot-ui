@@ -1,43 +1,67 @@
 ---
 source: components/ui/brand.tsx
-generated: '2025-06-08T13:21:01.639Z'
+generated: 2025-06-08T21:56:58.413Z
 tags: []
-hash: 9cda4048cd0cbcb5f2ba4b7ded0c960e42940780c7713e25177e5c70cba477ea
+hash: 840b05236cd6273c70f498dfe4ca98060376cbd67eb489472a0d7626c6df9aa3
 ---
+
 # Brand Component Documentation
 
-The `Brand` component is a functional component that is used to create a clickable brand logo and name, which redirects to the specified URL when clicked.
+This file is located at `/Users/garymason/chatbot-ui/components/ui/brand.tsx`. It exports a single component, `Brand`, which is a functional component that displays a link to the Chatbot UI website.
 
-## Importing the Component
+## Imports
 
-The `Brand` component can be imported from its defined file as follows:
-
-```jsx
-import { Brand } from "<path-to-component-file>"
+```ts
+import Link from "next/link"
+import { FC } from "react"
+import { ChatbotUISVG } from "../icons/chatbotui-svg"
 ```
 
-## Component Props
+The `Brand` component uses three imports:
 
-The `Brand` component accepts the following props:
+- `Link` from `next/link`, which is a component provided by Next.js for client-side transitions between routes.
+- `FC` (Function Component) from `react`, which is a type used for functional components in TypeScript.
+- `ChatbotUISVG` from `../icons/chatbotui-svg`, which is a custom SVG component for the Chatbot UI logo.
 
-- `theme` (optional): This prop is used to set the theme of the `ChatbotUISVG` component. It accepts two values: `"dark"` or `"light"`. If not provided, the default value is `"dark"`.
+## Props
 
-## Usage
-
-Here is an example of how to use the `Brand` component:
-
-```jsx
-<Brand theme="light" />
+```ts
+interface BrandProps {
+  theme?: "dark" | "light"
+}
 ```
 
-In the above example, the `Brand` component will display a light-themed `ChatbotUISVG` component.
+The `Brand` component accepts a single prop, `theme`, which is optional and can be either "dark" or "light". This prop is used to determine the color theme of the `ChatbotUISVG` component.
 
-## Component Structure
+## Component
 
-The `Brand` component is structured as follows:
+```ts
+export const Brand: FC<BrandProps> = ({ theme = "dark" }) => {
+  return (
+    <Link
+      className="flex cursor-pointer flex-col items-center hover:opacity-50"
+      href="https://www.chatbotui.com"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div className="mb-2">
+        <ChatbotUISVG theme={theme === "dark" ? "dark" : "light"} scale={0.3} />
+      </div>
 
-- A `Link` component that wraps the brand logo and name. The `Link` component has a `href` attribute set to `"https://www.chatbotui.com"`, which is the URL the user will be redirected to when the brand logo or name is clicked. The `Link` component also includes several CSS classes for styling and hover effects.
+      <div className="text-4xl font-bold tracking-wide">Chatbot UI</div>
+    </Link>
+  )
+}
+```
 
-- Inside the `Link` component, there is a `div` that contains the `ChatbotUISVG` component, which displays the brand logo. The `ChatbotUISVG` component's `theme` prop is set based on the `theme` prop passed to the `Brand` component. The `scale` prop of the `ChatbotUISVG` component is set to `0.3`.
+The `Brand` component is a functional component that renders a `Link` component. This `Link` component has several props:
 
-- Below the `ChatbotUISVG` component, there is another `div` that contains the brand name, "Chatbot UI". This `div` includes several CSS classes for styling the text.
+- `className`: This is a string of CSS classes that style the link.
+- `href`: This is the URL that the link points to.
+- `target`: This is set to `_blank` to open the link in a new tab.
+- `rel`: This is set to `noopener noreferrer` for security reasons.
+
+Inside the `Link` component, there are two `div` elements:
+
+- The first `div` contains the `ChatbotUISVG` component, which displays the Chatbot UI logo. The `theme` prop of the `ChatbotUISVG` component is set based on the `theme` prop of the `Brand` component, and the `scale` prop is set to `0.3`.
+- The second `div` contains the text "Chatbot UI", which is styled with several CSS classes.

@@ -1,50 +1,276 @@
 ---
 source: app/api/retrieval/process/route.ts
-generated: '2025-06-08T13:21:01.660Z'
+generated: 2025-06-08T21:24:24.392Z
 tags: []
-hash: 8b124001cc32446cbfaa2b9f9dcf417d33843a4db7dd2b852f226a0f997e40ce
+hash: 25f9360d73bcc936e80a874dd25027681c4ccb5e8cec8a27398265bfa8065708
 ---
-# POST Function
 
-The `POST` function is an asynchronous function that handles the POST request.
+# Documentation for `route.ts`
 
-## Import Statements
+This file is located at `/Users/garymason/chatbot-ui/app/api/retrieval/process/route.ts`. It is written in TypeScript and is used to handle the processing of different file types and generating embeddings for a chatbot UI.
 
-The function imports several modules and functions:
+## Code Summary
 
-- `generateLocalEmbedding` from "@/lib/generate-local-embedding"
-- `processCSV`, `processJSON`, `processMarkdown`, `processPdf`, `processTxt` from "@/lib/retrieval/processing"
-- `checkApiKey`, `getServerProfile` from "@/lib/server/server-chat-helpers"
-- `Database` from "@/supabase/types"
-- `FileItemChunk` from "@/types"
-- `createClient` from "@supabase/supabase-js"
-- `NextResponse` from "next/server"
-- `OpenAI` from "openai"
+The `POST` function is an asynchronous function that handles the processing of different file types and generates embeddings for the content. It uses the Supabase client to interact with the database and retrieve file metadata. It also uses the OpenAI API to generate embeddings if the provider is set to "openai". If the provider is set to "local", it will generate local embeddings.
 
-## Functionality
+## Code Breakdown
 
-The function starts by creating a Supabase client using the Supabase URL and service role key from the environment variables.
+```ts
+import { generateLocalEmbedding } from "@/lib/generate-local-embedding"
+import {
+  processCSV,
+  processJSON,
+  processMarkdown,
+  processPdf,
+  processTxt
+} from "@/lib/retrieval/processing"
+import { checkApiKey, getServerProfile } from "@/lib/server/server-chat-helpers"
+import { Database } from "@/supabase/types"
+import { FileItemChunk } from "@/types"
+import { createClient } from "@supabase/supabase-js"
+import { NextResponse } from "next/server"
+import OpenAI from "openai"
+```
 
-It then retrieves the server profile and form data from the request.
+The above code imports necessary libraries, functions, and types that are used in the `POST` function.
 
-The function retrieves the file metadata from the Supabase database using the file_id from the form data. If the file metadata cannot be retrieved or the file does not exist, it throws an error.
+```ts
+export async function POST(req: Request) {
+```
 
-The function then checks if the user_id from the file metadata matches the user_id from the server profile. If they do not match, it throws an "Unauthorized" error.
+The `POST` function is exported for use in other modules. It is an asynchronous function that takes a `Request` object as an argument.
 
-The function retrieves the file from the Supabase storage using the file path from the file metadata. If the file cannot be retrieved, it throws an error.
+```ts
+const supabaseAdmin = createClient<Database>(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+)
+```
 
-The function then creates a Blob from the file and determines the file extension.
+A Supabase client is created using the Supabase URL and service role key from the environment variables.
 
-If the embeddings provider from the form data is "openai", the function checks if the Azure OpenAI API key or the OpenAI API key from the server profile is valid.
+```ts
+const profile = await getServerProfile()
+```
 
-The function then processes the file based on its extension using the appropriate processing function. If the file extension is not supported, it returns a response with a status of 400 and a message of "Unsupported file type".
+The server profile is retrieved using the `getServerProfile` function.
 
-The function then generates embeddings for the file chunks. If the embeddings provider is "openai", it uses the OpenAI API to generate the embeddings. If the embeddings provider is "local", it uses the `generateLocalEmbedding` function to generate the embeddings.
+```ts
+const formData = await req.formData()
+```
 
-The function then creates an array of file items from the file chunks and embeddings and upserts the file items to the "file_items" table in the Supabase database.
+The form data from the request is retrieved.
 
-The function updates the total number of tokens in the file in the "files" table in the Supabase database.
+```ts
+const file_id = formData.get("file_id") as string
+const embeddingsProvider = formData.get("embeddingsProvider") as string
+```
 
-Finally, the function returns a response with a status of 200 and a message of "Embed Successful".
+The file ID and embeddings provider are retrieved from the form data.
 
-If any errors occur during the execution of the function, it logs the error stack, creates an error message and error code, and returns a response with the error code and error message.
+```ts
+const { data: fileMetadata, error: metadataError } = await supabaseAdmin
+  .from("files")
+  .select("*")
+  .eq("id", file_id)
+  .single()
+```
+
+The file metadata is retrieved from the database using the file ID. If there is an error, it is caught and stored in `metadataError`.
+
+```ts
+if (metadataError) {
+  throw new Error(
+    `Failed to retrieve file metadata: ${metadataError.message}`
+  )
+}
+```
+
+If there is an error retrieving the file metadata, an error is thrown with a message.
+
+```ts
+if (!fileMetadata) {
+  throw new Error("File not found")
+}
+```
+
+If the file metadata is not found, an error is thrown with a message.
+
+```ts
+if (fileMetadata.user_id !== profile.user_id) {
+  throw new Error("Unauthorized")
+}
+```
+
+If the user ID in the file metadata does not match the user ID in the server profile, an error is thrown with a message.
+
+```ts
+const { data: file, error: fileError } = await supabaseAdmin.storage
+  .from("files")
+  .download(fileMetadata.file_path)
+```
+
+The file is downloaded from the storage using the file path from the metadata. If there is an error, it is caught and stored in `fileError`.
+
+```ts
+if (fileError)
+  throw new Error(`Failed to retrieve file: ${fileError.message}`)
+```
+
+If there is an error retrieving the file, an error is thrown with a message.
+
+```ts
+const fileBuffer = Buffer.from(await file.arrayBuffer())
+const blob = new Blob([fileBuffer])
+const fileExtension = fileMetadata.name.split(".").pop()?.toLowerCase()
+```
+
+The file is converted to a buffer and then to a blob. The file extension is retrieved from the file name.
+
+```ts
+if (embeddingsProvider === "openai") {
+  try {
+    if (profile.use_azure_openai) {
+      checkApiKey(profile.azure_openai_api_key, "Azure OpenAI")
+    } else {
+      checkApiKey(profile.openai_api_key, "OpenAI")
+    }
+  } catch (error: any) {
+    error.message =
+      error.message +
+      ", make sure it is configured or else use local embeddings"
+    throw error
+  }
+}
+```
+
+If the embeddings provider is "openai", the API key is checked. If there is an error, it is caught and a message is added to the error before it is thrown.
+
+```ts
+let chunks: FileItemChunk[] = []
+
+switch (fileExtension) {
+  case "csv":
+    chunks = await processCSV(blob)
+    break
+  case "json":
+    chunks = await processJSON(blob)
+    break
+  case "md":
+    chunks = await processMarkdown(blob)
+    break
+  case "pdf":
+    chunks = await processPdf(blob)
+    break
+  case "txt":
+    chunks = await processTxt(blob)
+    break
+  default:
+    return new NextResponse("Unsupported file type", {
+      status: 400
+    })
+}
+```
+
+The file is processed based on its extension. If the extension is not supported, a response is returned with a status of 400 and a message.
+
+```ts
+let embeddings: any = []
+
+let openai
+if (profile.use_azure_openai) {
+  openai = new OpenAI({
+    apiKey: profile.azure_openai_api_key || "",
+    baseURL: `${profile.azure_openai_endpoint}/openai/deployments/${profile.azure_openai_embeddings_id}`,
+    defaultQuery: { "api-version": "2023-12-01-preview" },
+    defaultHeaders: { "api-key": profile.azure_openai_api_key }
+  })
+} else {
+  openai = new OpenAI({
+    apiKey: profile.openai_api_key || "",
+    organization: profile.openai_organization_id
+  })
+}
+```
+
+An OpenAI client is created based on the server profile.
+
+```ts
+if (embeddingsProvider === "openai") {
+  const response = await openai.embeddings.create({
+    model: "text-embedding-3-small",
+    input: chunks.map(chunk => chunk.content)
+  })
+
+  embeddings = response.data.map((item: any) => {
+    return item.embedding
+  })
+} else if (embeddingsProvider === "local") {
+  const embeddingPromises = chunks.map(async chunk => {
+    try {
+      return await generateLocalEmbedding(chunk.content)
+    } catch (error) {
+      console.error(`Error generating embedding for chunk: ${chunk}`, error)
+
+      return null
+    }
+  })
+
+  embeddings = await Promise.all(embeddingPromises)
+}
+```
+
+If the embeddings provider is "openai", embeddings are created using the OpenAI API. If the provider is "local", local embeddings are generated.
+
+```ts
+const file_items = chunks.map((chunk, index) => ({
+  file_id,
+  user_id: profile.user_id,
+  content: chunk.content,
+  tokens: chunk.tokens,
+  openai_embedding:
+    embeddingsProvider === "openai"
+      ? ((embeddings[index] || null) as any)
+      : null,
+  local_embedding:
+    embeddingsProvider === "local"
+      ? ((embeddings[index] || null) as any)
+      : null
+}))
+
+await supabaseAdmin.from("file_items").upsert(file_items)
+```
+
+The file items are created from the chunks and embeddings and then upserted into the database.
+
+```ts
+const totalTokens = file_items.reduce((acc, item) => acc + item.tokens, 0)
+
+await supabaseAdmin
+  .from("files")
+  .update({ tokens: totalTokens })
+  .eq("id", file_id)
+```
+
+The total number of tokens is calculated and the file record is updated in the database with the total tokens.
+
+```ts
+return new NextResponse("Embed Successful", {
+  status: 200
+})
+```
+
+A response is returned with a status of 200 and a message.
+
+```ts
+} catch (error: any) {
+  console.log(`Error in retrieval/process: ${error.stack}`)
+  const errorMessage = error?.message || "An unexpected error occurred"
+  const errorCode = error.status || 500
+  return new Response(JSON.stringify({ message: errorMessage }), {
+    status: errorCode
+  })
+}
+```
+
+If there is an error at any point in the function, it is caught and logged. A response is returned with a status of 500 and an error message.

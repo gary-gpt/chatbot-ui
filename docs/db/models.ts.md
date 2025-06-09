@@ -1,51 +1,139 @@
 ---
 source: db/models.ts
-generated: '2025-06-08T13:21:01.629Z'
+generated: 2025-06-08T22:24:48.066Z
 tags: []
-hash: a0ff9962c8d389c097867d408a71319d0e44bf31407b868da3fd4cdbc31b1e30
+hash: c015b9d1d6d77da119fddcbd916e0d1534d6b861a7032627aa481d43fdf1a93e
 ---
-# Source Code Documentation
 
-This file contains several functions that interact with the `models` and `model_workspaces` tables in the Supabase database. 
+# Models.ts
+
+This TypeScript file, located at `/Users/garymason/chatbot-ui/db/models.ts`, provides a set of functions for interacting with the `models` and `workspaces` tables in a Supabase database. It includes functions for retrieving, creating, updating, and deleting models and workspaces.
+
+## Imports
+
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert, TablesUpdate } from "@/supabase/types"
+```
+
+The file imports `supabase` from a local Supabase client library and `TablesInsert` and `TablesUpdate` types from a local Supabase types file.
 
 ## Functions
 
-### `getModelById(modelId: string)`
+### getModelById
 
-This function retrieves a model by its ID from the `models` table. If the model does not exist, it throws an error.
+```ts
+export const getModelById = async (modelId: string) => {
+  ...
+}
+```
 
-### `getModelWorkspacesByWorkspaceId(workspaceId: string)`
+This function retrieves a model from the `models` table by its `id`.
 
-This function retrieves a workspace by its ID from the `workspaces` table, including all associated models. If the workspace does not exist, it throws an error.
+### getModelWorkspacesByWorkspaceId
 
-### `getModelWorkspacesByModelId(modelId: string)`
+```ts
+export const getModelWorkspacesByWorkspaceId = async (workspaceId: string) => {
+  ...
+}
+```
 
-This function retrieves a model by its ID from the `models` table, including all associated workspaces. If the model does not exist, it throws an error.
+This function retrieves a workspace from the `workspaces` table by its `id`, including all associated models.
 
-### `createModel(model: TablesInsert<"models">, workspace_id: string)`
+### getModelWorkspacesByModelId
 
-This function inserts a new model into the `models` table and associates it with a workspace in the `model_workspaces` table. If there is an error during insertion, it throws an error.
+```ts
+export const getModelWorkspacesByModelId = async (modelId: string) => {
+  ...
+}
+```
 
-### `createModels(models: TablesInsert<"models">[], workspace_id: string)`
+This function retrieves a model from the `models` table by its `id`, including all associated workspaces.
 
-This function inserts multiple new models into the `models` table and associates them with a workspace in the `model_workspaces` table. If there is an error during insertion, it throws an error.
+### createModel
 
-### `createModelWorkspace(item: { user_id: string, model_id: string, workspace_id: string })`
+```ts
+export const createModel = async (
+  model: TablesInsert<"models">,
+  workspace_id: string
+) => {
+  ...
+}
+```
 
-This function inserts a new association between a model and a workspace into the `model_workspaces` table. If there is an error during insertion, it throws an error.
+This function creates a new model in the `models` table and associates it with a workspace.
 
-### `createModelWorkspaces(items: { user_id: string; model_id: string; workspace_id: string }[])`
+### createModels
 
-This function inserts multiple new associations between models and a workspace into the `model_workspaces` table. If there is an error during insertion, it throws an error.
+```ts
+export const createModels = async (
+  models: TablesInsert<"models">[],
+  workspace_id: string
+) => {
+  ...
+}
+```
 
-### `updateModel(modelId: string, model: TablesUpdate<"models">)`
+This function creates multiple new models in the `models` table and associates them with a workspace.
 
-This function updates a model in the `models` table by its ID. If there is an error during the update, it throws an error.
+### createModelWorkspace
 
-### `deleteModel(modelId: string)`
+```ts
+export const createModelWorkspace = async (item: {
+  user_id: string
+  model_id: string
+  workspace_id: string
+}) => {
+  ...
+}
+```
 
-This function deletes a model from the `models` table by its ID. If there is an error during deletion, it throws an error.
+This function creates a new association between a model and a workspace in the `model_workspaces` table.
 
-### `deleteModelWorkspace(modelId: string, workspaceId: string)`
+### createModelWorkspaces
 
-This function deletes an association between a model and a workspace from the `model_workspaces` table using their IDs. If there is an error during deletion, it throws an error.
+```ts
+export const createModelWorkspaces = async (
+  items: { user_id: string; model_id: string; workspace_id: string }[]
+) => {
+  ...
+}
+```
+
+This function creates multiple new associations between models and workspaces in the `model_workspaces` table.
+
+### updateModel
+
+```ts
+export const updateModel = async (
+  modelId: string,
+  model: TablesUpdate<"models">
+) => {
+  ...
+}
+```
+
+This function updates a model in the `models` table.
+
+### deleteModel
+
+```ts
+export const deleteModel = async (modelId: string) => {
+  ...
+}
+```
+
+This function deletes a model from the `models` table.
+
+### deleteModelWorkspace
+
+```ts
+export const deleteModelWorkspace = async (
+  modelId: string,
+  workspaceId: string
+) => {
+  ...
+}
+```
+
+This function deletes an association between a model and a workspace from the `model_workspaces` table.

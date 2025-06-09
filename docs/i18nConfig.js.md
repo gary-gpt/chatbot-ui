@@ -1,50 +1,119 @@
 ---
 source: i18nConfig.js
-generated: '2025-06-08T13:21:01.626Z'
+generated: 2025-06-08T22:29:13.534Z
 tags: []
-hash: eae2483cbeb28ce4a700357b08f92757ca37be34d609b13d66f5ee6c244695d9
+hash: ffe536f53fda6bb562001605eaee648abe2156fe5afaf48dc9b0b53e07943240
 ---
-# i18nConfig.js
 
-This module exports a configuration object for internationalization (i18n) settings.
+# i18nConfig.js Documentation
 
-## Configuration Object
+This document provides an overview of the `i18nConfig.js` file located at `/Users/garymason/chatbot-ui/`. This file is written in TypeScript and is responsible for setting up internationalization (i18n) configuration for a chatbot user interface.
 
-The configuration object, `i18nConfig`, contains the following properties:
+## Code Overview
 
-- `defaultLocale`: This is a string that represents the default locale to be used. The default locale is set to English (`en`).
+```ts
+const i18nConfig = {
+  defaultLocale: "en",
+  locales: [
+    "ar",
+    "bn",
+    "de",
+    "en",
+    "es",
+    "fr",
+    "he",
+    "id",
+    "it",
+    "ja",
+    "ko",
+    "pt",
+    "ru",
+    "si",
+    "sv",
+    "te",
+    "vi",
+    "zh"
+  ]
+}
 
-- `locales`: This is an array of strings where each string represents a supported locale. The supported locales include:
-
-  - Arabic (`ar`)
-  - Bengali (`bn`)
-  - German (`de`)
-  - English (`en`)
-  - Spanish (`es`)
-  - French (`fr`)
-  - Hebrew (`he`)
-  - Indonesian (`id`)
-  - Italian (`it`)
-  - Japanese (`ja`)
-  - Korean (`ko`)
-  - Portuguese (`pt`)
-  - Russian (`ru`)
-  - Sinhalese (`si`)
-  - Swedish (`sv`)
-  - Telugu (`te`)
-  - Vietnamese (`vi`)
-  - Chinese (`zh`)
-
-## Usage
-
-Import the `i18nConfig` object into your application to access the internationalization settings.
-
-```javascript
-const i18nConfig = require('./path/to/i18nConfig');
+module.exports = i18nConfig
 ```
 
-Replace `'./path/to/i18nConfig'` with the actual path to the `i18nConfig.js` file in your project.
+## Code Breakdown
 
-## Note
+### i18nConfig Object
 
-Ensure that all locales specified in the `locales` array have corresponding translation files in your application. The application might throw errors if it cannot find the translation files for the specified locales.
+The `i18nConfig` object is the main configuration object for the internationalization settings of the chatbot UI.
+
+```ts
+const i18nConfig = {
+  defaultLocale: "en",
+  locales: [
+    "ar",
+    "bn",
+    "de",
+    "en",
+    "es",
+    "fr",
+    "he",
+    "id",
+    "it",
+    "ja",
+    "ko",
+    "pt",
+    "ru",
+    "si",
+    "sv",
+    "te",
+    "vi",
+    "zh"
+  ]
+}
+```
+
+#### defaultLocale
+
+The `defaultLocale` property sets the default language for the chatbot UI. In this case, it is set to English (`"en"`).
+
+```ts
+defaultLocale: "en",
+```
+
+#### locales
+
+The `locales` property is an array that lists all the languages supported by the chatbot UI. Each language is represented by its respective ISO 639-1 code.
+
+```ts
+locales: [
+  "ar",
+  "bn",
+  "de",
+  "en",
+  "es",
+  "fr",
+  "he",
+  "id",
+  "it",
+  "ja",
+  "ko",
+  "pt",
+  "ru",
+  "si",
+  "sv",
+  "te",
+  "vi",
+  "zh"
+]
+```
+
+### Module Export
+
+The `i18nConfig` object is exported as a module so it can be imported and used in other parts of the application.
+
+```ts
+module.exports = i18nConfig
+```
+
+## Conclusion
+
+The `i18nConfig.js` file is a simple but crucial part of the chatbot UI, as it allows for the support of multiple languages, thereby making the chatbot more accessible to users from different linguistic backgrounds.

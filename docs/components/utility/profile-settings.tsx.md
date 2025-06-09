@@ -1,55 +1,64 @@
 ---
 source: components/utility/profile-settings.tsx
-generated: '2025-06-08T13:21:01.638Z'
+generated: 2025-06-08T22:16:20.424Z
 tags: []
-hash: 65f94628762ca6cac4e730e2f87ce2285027697e14e8ce0152acf8524acff492
+hash: b5fe68f0cda7f63ec3798a8699ff0b2f95abdcfa10e19b4395289e9820513ffa
 ---
-# ProfileSettings Component
 
-This component is used to manage the user's profile settings.
+# Profile Settings Component
 
-## Props
+This document explains the purpose and logic of the `ProfileSettings` component in the file `/Users/garymason/chatbot-ui/components/utility/profile-settings.tsx`.
 
-The `ProfileSettings` component does not take any props.
+## Overview
 
-## State
+The `ProfileSettings` component is a functional component that provides a user interface for managing user profile settings in a chatbot application. It allows users to update their profile information, including their username, profile image, chat display name, and AI instructions. It also provides an interface for managing API keys for various AI services.
 
-The component maintains several state variables:
+## Imports
 
-- `isOpen`: A boolean value indicating whether the settings sheet is open.
-- `displayName`: The display name of the user.
-- `username`: The username of the user.
-- `usernameAvailable`: A boolean value indicating whether the entered username is available.
-- `loadingUsername`: A boolean value indicating whether the username availability is being checked.
-- `profileImageSrc`: The source URL of the profile image.
-- `profileImageFile`: The profile image file.
-- `profileInstructions`: The profile instructions provided by the user.
-- `useAzureOpenai`: A boolean value indicating whether to use Azure OpenAI.
-- `openaiAPIKey`: The OpenAI API key.
-- `openaiOrgID`: The OpenAI organization ID.
-- `azureOpenaiAPIKey`: The Azure OpenAI API key.
-- `azureOpenaiEndpoint`: The Azure OpenAI endpoint.
-- `azureOpenai35TurboID`: The Azure OpenAI GPT-3.5 Turbo deployment name.
-- `azureOpenai45TurboID`: The Azure OpenAI GPT-4.5 Turbo deployment name.
-- `azureOpenai45VisionID`: The Azure OpenAI GPT-4.5 Vision deployment name.
-- `azureEmbeddingsID`: The Azure OpenAI embeddings deployment name.
-- `anthropicAPIKey`: The Anthropic API key.
-- `googleGeminiAPIKey`: The Google Gemini API key.
-- `mistralAPIKey`: The Mistral API key.
-- `groqAPIKey`: The Groq API key.
-- `perplexityAPIKey`: The Perplexity API key.
-- `openrouterAPIKey`: The OpenRouter API key.
+The component imports various hooks, components, utilities, and constants from different libraries and modules. These include:
 
-## Functions
+- `ChatbotUIContext` from the context module, which provides access to the global state and actions of the application.
+- Constants from the `limits` module, which define the maximum lengths for various profile fields.
+- Database functions from the `profile` and `profile-images` modules, which are used to update the user's profile and upload profile images.
+- Utility functions from the `export-old-data` and `fetch-models` modules, which are used to export old data and fetch models.
+- The `LLM_LIST_MAP` constant from the `llm-list` module, which maps providers to their models.
+- The `supabase` client from the `browser-client` module, which is used to interact with the Supabase database.
+- The `cn` utility function from the `utils` module, which is used to conditionally join class names.
+- Various icons from the `@tabler/icons-react` library, which are used in the user interface.
+- The `Image` component from the `next/image` library, which is used to display images.
+- The `useRouter` hook from the `next/navigation` library, which is used to navigate between pages.
+- The `FC` type and `useCallback`, `useContext`, `useRef`, and `useState` hooks from the `react` library, which are used to define the component and manage its state and side effects.
+- The `toast` function from the `sonner` library, which is used to display toast notifications.
+- The `SIDEBAR_ICON_SIZE` constant from the `sidebar-switcher` module, which defines the size of the sidebar icons.
+- Various components from the `ui` module, which are used in the user interface.
+- The `ThemeSwitcher` component from the current module, which is used to switch between different themes.
 
-The component defines several functions:
+## Component Definition
 
-- `handleSignOut`: Signs out the user and redirects them to the login page.
-- `handleSave`: Saves the updated profile settings.
-- `debounce`: A utility function for debouncing function calls.
-- `checkUsernameAvailability`: Checks if the entered username is available.
-- `handleKeyDown`: Handles the `Enter` key press to save the settings.
+The `ProfileSettings` component is defined as a functional component that takes no props. It uses the `ChatbotUIContext` to access the global state and actions of the application.
 
-## Render
+## State Variables
 
-The component renders a `Sheet` component which contains the user settings. The settings are divided into two tabs: `Profile` and `API Keys`. The `Profile` tab allows the user to update their username, profile image, chat display name, and profile context. The `API Keys` tab allows the user to update their API keys for various services. The bottom of the sheet contains a `ThemeSwitcher` component and a download button for exporting Chatbot UI 1.0 data as JSON. The sheet also contains a `Save` button to save the updated settings.
+The component uses several state variables to manage its state:
+
+- `isOpen` determines whether the profile settings sheet is open.
+- `displayName`, `username`, `usernameAvailable`, `loadingUsername`, `profileImageSrc`, `profileImageFile`, and `profileInstructions` store the user's display name, username, whether the username is available, whether the username is being loaded, the source of the profile image, the profile image file, and the profile instructions, respectively.
+- `useAzureOpenai`, `openaiAPIKey`, `openaiOrgID`, `azureOpenaiAPIKey`, `azureOpenaiEndpoint`, `azureOpenai35TurboID`, `azureOpenai45TurboID`, `azureOpenai45VisionID`, `azureEmbeddingsID`, `anthropicAPIKey`, `googleGeminiAPIKey`, `mistralAPIKey`, `groqAPIKey`, `perplexityAPIKey`, and `openrouterAPIKey` store the user's API keys and related settings for various AI services.
+
+## Event Handlers
+
+The component defines several event handlers:
+
+- `handleSignOut` signs the user out and redirects them to the login page.
+- `handleSave` updates the user's profile and refreshes the available models.
+- `debounce` is a utility function that debounces another function, preventing it from being called too frequently.
+- `checkUsernameAvailability` checks whether a username is available.
+- `handleKeyDown` triggers the save button when the Enter key is pressed.
+
+## Render Method
+
+The render method returns a `Sheet` component that contains the user interface for managing the user's profile settings. It includes inputs for the user's username, profile image, chat display name, and AI instructions, as well as tabs for managing the user's API keys. It also includes a theme switcher and a download button for exporting old data.
+
+## Export
+
+The `ProfileSettings` component is exported as a named export from the module.

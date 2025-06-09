@@ -1,53 +1,72 @@
 ---
 source: components/ui/toaster.tsx
-generated: '2025-06-08T13:21:01.644Z'
+generated: 2025-06-08T22:11:34.454Z
 tags: []
-hash: 18fddb907082698393718136c520d7d9121d18e6f5b65a6d5003e37399a76261
+hash: 6a261e8f3f6c8107abbef8891881dcaafac3472dfa7b4797bb239c697adfeb5c
 ---
-# Toaster Component
 
-The `Toaster` component is a part of the UI that handles the display of toast notifications in the application. It uses the `ToastProvider` to wrap all the toast notifications and the `ToastViewport` to display them.
+# Toaster Component Documentation
 
-## Importing
+This markdown file documents the `Toaster` component located at `/Users/garymason/chatbot-ui/components/ui/toaster.tsx`.
 
-```javascript
-import { Toaster } from "@/components/ui/toast"
+## Overview
+
+The `Toaster` component is responsible for displaying toast notifications in the application. It uses the `useToast` hook to get the list of toasts to display and renders them within a `ToastProvider` component.
+
+## Code Breakdown
+
+```ts
+"use client"
 ```
+This line indicates that the code is meant to be run on the client side.
 
-## Usage
+```ts
+import {
+  Toast,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport
+} from "@/components/ui/toast"
 
-```javascript
-<Toaster />
+import { useToast } from "@/components/ui/use-toast"
 ```
+These lines import the necessary components and hooks from the application's UI library. The `Toast` related components are used to structure and style the toast notifications. The `useToast` hook is used to fetch the list of toasts to display.
 
-## Component Details
+```ts
+export function Toaster() {
+  const { toasts } = useToast()
+```
+The `Toaster` function component is declared and the `useToast` hook is called within it. The `toasts` object is destructured from the result of the `useToast` hook. This object contains an array of toast notifications to display.
 
-This component uses the `useToast` hook to fetch the list of toasts to be displayed. Each toast is a `Toast` component that has a unique `id`, `title`, `description`, and `action`. The `Toast` component also accepts additional props.
+```ts
+return (
+    <ToastProvider>
+      {toasts.map(function ({ id, title, description, action, ...props }) {
+        return (
+          <Toast key={id} {...props}>
+            <div className="grid gap-1">
+              {title && <ToastTitle>{title}</ToastTitle>}
+              {description && (
+                <ToastDescription>{description}</ToastDescription>
+              )}
+            </div>
+            {action}
+            <ToastClose />
+          </Toast>
+        )
+      })}
+      <ToastViewport />
+    </ToastProvider>
+  )
+```
+The `Toaster` component returns a `ToastProvider` component. Inside the `ToastProvider`, it maps over the `toasts` array and for each toast, it returns a `Toast` component. 
 
-### Toast Component
+Each `Toast` component is given a unique `key` prop (the `id` of the toast) and any additional props (`...props`). Inside the `Toast` component, a `div` with the class `grid gap-1` is used to structure the content. 
 
-Each toast notification is wrapped in a `Toast` component. The `Toast` component has the following sub-components:
+If the toast has a `title`, a `ToastTitle` component is rendered with the `title` as its children. If the toast has a `description`, a `ToastDescription` component is rendered with the `description` as its children. 
 
-- `ToastTitle`: This component displays the title of the toast notification. It is only displayed if the `title` prop is provided.
-- `ToastDescription`: This component displays the description of the toast notification. It is only displayed if the `description` prop is provided.
-- `ToastClose`: This component displays a close button for the toast notification.
+If the toast has an `action`, it is rendered as is. Finally, a `ToastClose` component is rendered which presumably provides a way for users to close the toast notification.
 
-All the sub-components are wrapped in a `div` with a grid layout and a gap of 1.
-
-### ToastProvider
-
-The `ToastProvider` wraps all the toast notifications. It is responsible for managing the state of the toasts.
-
-### ToastViewport
-
-The `ToastViewport` is the component where the toast notifications are displayed.
-
-## Props
-
-The `Toaster` component does not accept any props. However, the `Toast` component accepts the following props:
-
-- `id`: A unique identifier for the toast notification.
-- `title`: The title of the toast notification.
-- `description`: The description of the toast notification.
-- `action`: An action to be performed when the toast notification is clicked.
-- `...props`: Additional props to be passed to the `Toast` component.
+After the `toasts` array is mapped over, a `ToastViewport` component is rendered. This component likely provides a viewport for the toast notifications to be displayed in.

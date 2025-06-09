@@ -1,43 +1,84 @@
 ---
 source: lib/retrieval/processing/docx.ts
-generated: '2025-06-08T13:21:01.659Z'
+generated: 2025-06-08T22:37:28.901Z
 tags: []
-hash: 3ecfbb8a857a3994f74f03e803189a6616c74e5df04b92da07d459c4bcd7d36f
+hash: 2d534f9e29d330dd77403bf3147820e33899a149b33e683293e1efb496d8eb8c
 ---
-# processDocX Function
 
-This document provides a detailed overview of the `processDocX` function in the source code.
+# Documentation for `docx.ts`
 
-## Import Statements
+The `docx.ts` file is a TypeScript module that exports a single function `processDocX`. This function is used to process a text string, split it into chunks, and return an array of chunks with their respective token counts. 
 
-The function imports the following modules and values:
+## Dependencies
 
-- `FileItemChunk` from "@/types": This is a type that represents a chunk of a file item.
-- `encode` from "gpt-tokenizer": This is a function used for tokenizing text.
-- `RecursiveCharacterTextSplitter` from "langchain/text_splitter": This is a class used for splitting text into chunks.
-- `CHUNK_OVERLAP` and `CHUNK_SIZE` from the current directory: These are constants that define the overlap and size of the chunks.
+This module imports several dependencies:
 
-## Function Signature
+- `FileItemChunk` from "@/types": This is a custom type that represents a chunk of text and its token count.
+- `encode` from "gpt-tokenizer": This is a function used to tokenize a string of text.
+- `RecursiveCharacterTextSplitter` from "langchain/text_splitter": This is a class that is used to split a string of text into chunks.
+- `CHUNK_OVERLAP`, `CHUNK_SIZE` from ".": These are constants that define the size of the chunks and the overlap between them.
 
-```typescript
-export const processDocX = async (text: string): Promise<FileItemChunk[]>
+## Function: `processDocX`
+
+This function takes a string of text as input and returns a Promise that resolves to an array of `FileItemChunk` objects.
+
+```ts
+export const processDocX = async (text: string): Promise<FileItemChunk[]> => {
+  ...
+}
 ```
 
-The `processDocX` function is an asynchronous function that takes a string as an argument and returns a promise that resolves to an array of `FileItemChunk` objects.
+### Parameters
 
-## Function Description
+- `text: string`: The input text to be processed.
 
-The `processDocX` function processes a given text by splitting it into chunks and encoding each chunk. The function creates a new instance of `RecursiveCharacterTextSplitter` with `CHUNK_SIZE` and `CHUNK_OVERLAP` as parameters. It then uses this instance to split the input text into documents.
+### Return Value
 
-The function iterates over each document, encodes the content of the document, and pushes a new `FileItemChunk` object into the `chunks` array. Each `FileItemChunk` object contains the content of the document and the number of tokens in the content.
+A Promise that resolves to an array of `FileItemChunk` objects. Each `FileItemChunk` object contains the following properties:
 
-Finally, the function returns the `chunks` array.
+- `content: string`: The chunk of text.
+- `tokens: number`: The token count of the chunk.
 
-## Example
+### Logic
 
-```typescript
-const text = "This is a sample text."
-const chunks = await processDocX(text)
+1. The function creates a new instance of `RecursiveCharacterTextSplitter` with `CHUNK_SIZE` and `CHUNK_OVERLAP` as parameters.
+
+```ts
+  const splitter = new RecursiveCharacterTextSplitter({
+    chunkSize: CHUNK_SIZE,
+    chunkOverlap: CHUNK_OVERLAP
+  })
 ```
 
-This will split the `text` into chunks, encode each chunk, and return an array of `FileItemChunk` objects. Each object will contain the content of a chunk and the number of tokens in the content.
+2. It then uses the `createDocuments` method of the splitter to split the input text into chunks. This operation is asynchronous, so it uses the `await` keyword.
+
+```ts
+  const splitDocs = await splitter.createDocuments([text])
+```
+
+3. The function initializes an empty array `chunks` to store the `FileItemChunk` objects.
+
+```ts
+  let chunks: FileItemChunk[] = []
+```
+
+4. It then loops over the `splitDocs` array. For each document, it creates a new `FileItemChunk` object with the content of the document and the token count (obtained by calling the `encode` function on the content). This object is then pushed to the `chunks` array.
+
+```ts
+  for (let i = 0; i < splitDocs.length; i++) {
+    const doc = splitDocs[i]
+
+    chunks.push({
+      content: doc.pageContent,
+      tokens: encode(doc.pageContent).length
+    })
+  }
+```
+
+5. Finally, the function returns the `chunks` array.
+
+```ts
+  return chunks
+```
+
+This function is used to process a text string and split it into manageable chunks, each with its own token count. This is useful in scenarios where the text is too large to be processed at once, such as in a chatbot or a text analysis tool.

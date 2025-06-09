@@ -1,113 +1,137 @@
 ---
 source: db/tools.ts
-generated: '2025-06-08T13:21:01.630Z'
+generated: 2025-06-08T22:28:15.533Z
 tags: []
-hash: 7d86f4030e9b688a20c27193f8c681318e3fd31b55a85774b7304fe7bf543335
----
-# Tool Management Module
-
-This module provides functions for managing tools and their associated workspaces in a Supabase database.
-
-## Functions
-
-### `getToolById(toolId: string)`
-
-Fetches a tool from the `tools` table by its ID.
-
-- `toolId`: The ID of the tool to fetch.
-
-Returns the tool data if found, throws an error otherwise.
-
+hash: 3309d96c4c8fb6609e86e1b253282995a2ae5e516358283dde6c13d6ec076507
 ---
 
-### `getToolWorkspacesByWorkspaceId(workspaceId: string)`
+# Tools Module Documentation
 
-Fetches a workspace and its associated tools from the `workspaces` table by workspace ID.
+This module, located at `/Users/garymason/chatbot-ui/db/tools.ts`, contains several functions for interacting with the `tools` and `tool_workspaces` tables in a Supabase database. These functions include methods for creating, reading, updating, and deleting tools and tool workspaces.
 
-- `workspaceId`: The ID of the workspace to fetch.
+## Import Statements
 
-Returns the workspace data if found, throws an error otherwise.
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert, TablesUpdate } from "@/supabase/types"
+```
 
----
+The module imports the Supabase client from a local file and two types, `TablesInsert` and `TablesUpdate`, from another local file.
 
-### `getToolWorkspacesByToolId(toolId: string)`
+## Function: getToolById
 
-Fetches a tool and its associated workspaces from the `tools` table by tool ID.
+```ts
+export const getToolById = async (toolId: string) => {
+  //...
+}
+```
 
-- `toolId`: The ID of the tool to fetch.
+This function retrieves a tool by its ID from the `tools` table. If the tool is not found, it throws an error.
 
-Returns the tool data if found, throws an error otherwise.
+## Function: getToolWorkspacesByWorkspaceId
 
----
+```ts
+export const getToolWorkspacesByWorkspaceId = async (workspaceId: string) => {
+  //...
+}
+```
 
-### `createTool(tool: TablesInsert<"tools">, workspace_id: string)`
+This function retrieves a workspace and its associated tools by the workspace's ID from the `workspaces` and `tools` tables. If the workspace is not found, it throws an error.
 
-Creates a new tool in the `tools` table and associates it with a workspace.
+## Function: getToolWorkspacesByToolId
 
-- `tool`: The data for the new tool.
-- `workspace_id`: The ID of the workspace to associate with the new tool.
+```ts
+export const getToolWorkspacesByToolId = async (toolId: string) => {
+  //...
+}
+```
 
-Returns the created tool data, throws an error if creation fails.
+This function retrieves a tool and its associated workspaces by the tool's ID from the `tools` and `workspaces` tables. If the tool is not found, it throws an error.
 
----
+## Function: createTool
 
-### `createTools(tools: TablesInsert<"tools">[], workspace_id: string)`
+```ts
+export const createTool = async (
+  tool: TablesInsert<"tools">,
+  workspace_id: string
+) => {
+  //...
+}
+```
 
-Creates multiple new tools in the `tools` table and associates them with a workspace.
+This function creates a new tool in the `tools` table and associates it with a workspace in the `tool_workspaces` table. If there is an error during creation, it throws an error.
 
-- `tools`: An array of data for the new tools.
-- `workspace_id`: The ID of the workspace to associate with the new tools.
+## Function: createTools
 
-Returns the created tools data, throws an error if creation fails.
+```ts
+export const createTools = async (
+  tools: TablesInsert<"tools">[],
+  workspace_id: string
+) => {
+  //...
+}
+```
 
----
+This function creates multiple new tools in the `tools` table and associates them with a workspace in the `tool_workspaces` table. If there is an error during creation, it throws an error.
 
-### `createToolWorkspace(item: { user_id: string, tool_id: string, workspace_id: string })`
+## Function: createToolWorkspace
 
-Creates a new association between a tool and a workspace in the `tool_workspaces` table.
+```ts
+export const createToolWorkspace = async (item: {
+  user_id: string
+  tool_id: string
+  workspace_id: string
+}) => {
+  //...
+}
+```
 
-- `item`: The data for the new association, including the user ID, tool ID, and workspace ID.
+This function creates a new association between a tool and a workspace in the `tool_workspaces` table. If there is an error during creation, it throws an error.
 
-Returns the created association data, throws an error if creation fails.
+## Function: createToolWorkspaces
 
----
+```ts
+export const createToolWorkspaces = async (
+  items: { user_id: string; tool_id: string; workspace_id: string }[]
+) => {
+  //...
+}
+```
 
-### `createToolWorkspaces(items: { user_id: string; tool_id: string; workspace_id: string }[])`
+This function creates multiple new associations between tools and workspaces in the `tool_workspaces` table. If there is an error during creation, it throws an error.
 
-Creates multiple new associations between tools and a workspace in the `tool_workspaces` table.
+## Function: updateTool
 
-- `items`: An array of data for the new associations, each including the user ID, tool ID, and workspace ID.
+```ts
+export const updateTool = async (
+  toolId: string,
+  tool: TablesUpdate<"tools">
+) => {
+  //...
+}
+```
 
-Returns the created associations data, throws an error if creation fails.
+This function updates a tool in the `tools` table. If there is an error during the update, it throws an error.
 
----
+## Function: deleteTool
 
-### `updateTool(toolId: string, tool: TablesUpdate<"tools">)`
+```ts
+export const deleteTool = async (toolId: string) => {
+  //...
+}
+```
 
-Updates a tool in the `tools` table.
+This function deletes a tool from the `tools` table. If there is an error during deletion, it throws an error.
 
-- `toolId`: The ID of the tool to update.
-- `tool`: The new data for the tool.
+## Function: deleteToolWorkspace
 
-Returns the updated tool data, throws an error if update fails.
+```ts
+export const deleteToolWorkspace = async (
+  toolId: string,
+  workspaceId: string
+) => {
+  //...
+}
+```
 
----
-
-### `deleteTool(toolId: string)`
-
-Deletes a tool from the `tools` table.
-
-- `toolId`: The ID of the tool to delete.
-
-Returns `true` if deletion is successful, throws an error otherwise.
-
----
-
-### `deleteToolWorkspace(toolId: string, workspaceId: string)`
-
-Deletes an association between a tool and a workspace from the `tool_workspaces` table.
-
-- `toolId`: The ID of the tool in the association to delete.
-- `workspaceId`: The ID of the workspace in the association to delete.
-
-Returns `true` if deletion is successful, throws an error otherwise.
+This function deletes an association between a tool and a workspace from the `tool_workspaces` table. If there is an error during deletion, it throws an error.

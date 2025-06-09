@@ -1,53 +1,82 @@
 ---
 source: components/messages/message-codeblock.tsx
-generated: '2025-06-08T13:21:01.635Z'
+generated: 2025-06-08T21:34:52.927Z
 tags: []
-hash: 352b69d4610ff75993d5f7306d45a341038e735f16a498eed27428a8a14b2767
+hash: 49a081d875ceb017268c433b08a6646bf29b5897bad960242c20de37ea508547
 ---
-# MessageCodeBlock Component
 
-This is a React component that displays a block of code with syntax highlighting and provides options to copy the code to clipboard or download it as a file.
+# MessageCodeBlock Component Documentation
 
-## Importing
+This document provides an overview of the `MessageCodeBlock` component located at `/Users/garymason/chatbot-ui/components/messages/message-codeblock.tsx`. This component is used to display code blocks in a chat interface, with syntax highlighting and options to copy or download the code.
 
-```javascript
-import { MessageCodeBlock } from "path/to/component"
+## Import Statements
+
+```ts
+import { Button } from "@/components/ui/button"
+import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard"
+import { IconCheck, IconCopy, IconDownload } from "@tabler/icons-react"
+import { FC, memo } from "react"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism"
 ```
 
-## Props
+The component imports several dependencies, including:
 
-| Prop     | Type   | Description                                        |
-|----------|--------|----------------------------------------------------|
-| language | string | The programming language of the code block.        |
-| value    | string | The code to be displayed in the code block.        |
+- A `Button` component for user interactions.
+- A `useCopyToClipboard` hook to enable copying code to the clipboard.
+- Several icons from `@tabler/icons-react` for the user interface.
+- The `Prism` component from `react-syntax-highlighter` for syntax highlighting.
+- The `oneDark` style from `react-syntax-highlighter` for the code block's appearance.
 
-## Usage
+## Interfaces
 
-```jsx
-<MessageCodeBlock language="javascript" value="console.log('Hello, world!');" />
+```ts
+interface MessageCodeBlockProps {
+  language: string
+  value: string
+}
+
+interface languageMap {
+  [key: string]: string | undefined
+}
 ```
 
-This will render a block of JavaScript code with syntax highlighting. The block will have a button to copy the code to clipboard and another button to download the code as a file.
+The `MessageCodeBlockProps` interface defines the props for the `MessageCodeBlock` component. It expects two properties: `language` (the programming language of the code block) and `value` (the code to be displayed).
 
-## Dependencies
+The `languageMap` interface is used to map programming language names to their respective file extensions.
 
-This component uses the following external packages:
+## Constants and Helper Functions
 
-- `@tabler/icons-react` for icons.
-- `react-syntax-highlighter` for syntax highlighting.
+```ts
+export const programmingLanguages: languageMap = { ... }
 
-## Helper Functions
+export const generateRandomString = (length: number, lowercase = false) => { ... }
+```
 
-- `generateRandomString(length: number, lowercase: boolean)`: Generates a random string of specified length. If `lowercase` is `true`, the string will be in lowercase.
+The `programmingLanguages` constant is a map of programming language names to their file extensions, using the `languageMap` interface.
 
-## Constants
+The `generateRandomString` function generates a random string of a specified length. It can generate either uppercase or lowercase strings.
 
-- `programmingLanguages`: An object mapping programming language names to their file extensions.
+## MessageCodeBlock Component
 
-## Hooks
+```ts
+export const MessageCodeBlock: FC<MessageCodeBlockProps> = memo(
+  ({ language, value }) => { ... }
+)
+```
 
-- `useCopyToClipboard({ timeout: number })`: A custom hook that provides functionality to copy text to clipboard. It returns an object with `isCopied` (a boolean indicating whether the text has been copied) and `copyToClipboard` (a function to copy text to clipboard). The `timeout` parameter specifies the duration for which `isCopied` remains `true` after `copyToClipboard` is called.
+The `MessageCodeBlock` component is a functional component that uses the `MessageCodeBlockProps` interface for its props. It is wrapped in `React.memo` to prevent unnecessary re-renders.
 
-## Styling
+The component provides a code block with syntax highlighting for the specified language. It also includes buttons for copying the code to the clipboard and downloading the code as a file.
 
-This component uses Tailwind CSS for styling.
+The `downloadAsFile` function creates a file with the code and prompts the user to save it. The `onCopy` function copies the code to the clipboard.
+
+The component returns a `div` element with the code block and the buttons. The `SyntaxHighlighter` component is used to display the code with syntax highlighting.
+
+## Export Statement
+
+```ts
+MessageCodeBlock.displayName = "MessageCodeBlock"
+```
+
+The `displayName` property is set to "MessageCodeBlock" for debugging purposes.

@@ -1,53 +1,78 @@
 ---
 source: components/ui/scroll-area.tsx
-generated: '2025-06-08T13:21:01.642Z'
+generated: 2025-06-08T22:06:41.588Z
 tags: []
-hash: 61a424794469cde3f32769500dbf70b63c0d8bc1f6a5263ea6f6ae1183a09d57
+hash: 6e8924f2ad7871287c6176bb4bb50a95b1bb96a657d5b8c4a8e6f4467359ef0a
 ---
-# ScrollArea and ScrollBar Component Documentation
 
-This file exports two React components: `ScrollArea` and `ScrollBar`.
+# Scroll-Area Component Documentation
 
-## Importing the Components
+This document explains the purpose and logic of the `scroll-area.tsx` file located in `/Users/garymason/chatbot-ui/components/ui/`. This component is a custom implementation of a scrollable area using the Radix UI library.
 
-```javascript
-import { ScrollArea, ScrollBar } from './path-to-this-file';
+## Code Overview
+
+The `scroll-area.tsx` file exports two main components: `ScrollArea` and `ScrollBar`. These components are built using the `ScrollAreaPrimitive` components from the `@radix-ui/react-scroll-area` library.
+
+### ScrollArea Component
+
+The `ScrollArea` component is a wrapper around the `ScrollAreaPrimitive.Root` component. It takes in `className`, `children`, and `props` as parameters and passes them to the `ScrollAreaPrimitive.Root` component.
+
+```ts
+const ScrollArea = React.forwardRef<
+  React.ElementRef<typeof ScrollAreaPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
+>(({ className, children, ...props }, ref) => (
+  <ScrollAreaPrimitive.Root
+    ref={ref}
+    className={cn("relative overflow-hidden", className)}
+    {...props}
+  >
+    <ScrollAreaPrimitive.Viewport className="size-full rounded-[inherit]">
+      {children}
+    </ScrollAreaPrimitive.Viewport>
+    <ScrollBar />
+    <ScrollAreaPrimitive.Corner />
+  </ScrollAreaPrimitive.Root>
+))
+ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName
 ```
 
-## ScrollArea Component
+### ScrollBar Component
 
-`ScrollArea` is a wrapper component that provides a scrollable area with a custom scrollbar. It uses the `ScrollAreaPrimitive.Root` component from the `@radix-ui/react-scroll-area` library.
+The `ScrollBar` component is a wrapper around the `ScrollAreaPrimitive.ScrollAreaScrollbar` component. It takes in `className`, `orientation`, and `props` as parameters and passes them to the `ScrollAreaPrimitive.ScrollAreaScrollbar` component. The `orientation` parameter determines the direction of the scrollbar (vertical or horizontal).
 
-### Props
-
-In addition to the standard React props, `ScrollArea` accepts the following:
-
-- `className`: A string that defines the CSS classes to apply to the component.
-- `children`: The child elements to be displayed within the scrollable area.
-
-### Example Usage
-
-```javascript
-<ScrollArea className="custom-class">
-  <div>Scrollable content</div>
-</ScrollArea>
+```ts
+const ScrollBar = React.forwardRef<
+  React.ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
+  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>
+>(({ className, orientation = "vertical", ...props }, ref) => (
+  <ScrollAreaPrimitive.ScrollAreaScrollbar
+    ref={ref}
+    orientation={orientation}
+    className={cn(
+      "flex touch-none select-none transition-colors",
+      orientation === "vertical" &&
+        "h-full w-2.5 border-l border-l-transparent p-px",
+      orientation === "horizontal" &&
+        "h-2.5 flex-col border-t border-t-transparent p-px",
+      className
+    )}
+    {...props}
+  >
+    <ScrollAreaPrimitive.ScrollAreaThumb className="bg-border relative flex-1 rounded-full" />
+  </ScrollAreaPrimitive.ScrollAreaScrollbar>
+))
+ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName
 ```
 
-## ScrollBar Component
+## Exported Components
 
-`ScrollBar` is a component that provides a custom scrollbar. It uses the `ScrollAreaPrimitive.ScrollAreaScrollbar` component from the `@radix-ui/react-scroll-area` library.
+The `ScrollArea` and `ScrollBar` components are exported for use in other parts of the application.
 
-### Props
-
-In addition to the standard React props, `ScrollBar` accepts the following:
-
-- `className`: A string that defines the CSS classes to apply to the component.
-- `orientation`: A string that defines the orientation of the scrollbar. It can be either "vertical" or "horizontal". The default value is "vertical".
-
-### Example Usage
-
-```javascript
-<ScrollBar className="custom-class" orientation="horizontal" />
+```ts
+export { ScrollArea, ScrollBar }
 ```
 
-Note: `ScrollBar` is used internally by `ScrollArea` and may not typically be used directly.
+## Conclusion
+
+This file provides a custom implementation of a scrollable area and scrollbar using the Radix UI library. The `ScrollArea` and `ScrollBar` components can be imported and used in other parts of the application.

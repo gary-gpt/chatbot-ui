@@ -1,39 +1,110 @@
 ---
 source: app/api/chat/anthropic/route.ts
-generated: '2025-06-08T13:21:01.659Z'
+generated: 2025-06-08T21:18:40.422Z
 tags: []
-hash: 731486f4db953d44782c72198c3e729a256cb1c152cc36f75b4783315674a4a5
+hash: 71abb5f5eff20294b1d45bd74475db7a7b4e2127747b89bfacc7fff177b06eaf
 ---
-# POST Function Documentation
 
-This function is an asynchronous function named `POST` which is designed to handle POST requests. It takes a `request` object of type `NextRequest` as an argument.
+# Anthropic Chatbot API Route
 
-## Import Statements
+This file contains the code for the POST request handler of the `/api/chat/anthropic` route in a Next.js serverless function. The handler is responsible for processing chat messages and interacting with the Anthropic AI SDK to generate responses.
 
-The function relies on several import statements to access various libraries and modules:
+## Imports
 
-- `CHAT_SETTING_LIMITS` from "@/lib/chat-setting-limits"
-- `checkApiKey` and `getServerProfile` from "@/lib/server/server-chat-helpers"
-- `getBase64FromDataURL` and `getMediaTypeFromDataURL` from "@/lib/utils"
-- `ChatSettings` from "@/types"
-- `Anthropic` from "@anthropic-ai/sdk"
-- `AnthropicStream` and `StreamingTextResponse` from "ai"
-- `NextRequest` and `NextResponse` from "next/server"
+```ts
+import { CHAT_SETTING_LIMITS } from "@/lib/chat-setting-limits"
+import { checkApiKey, getServerProfile } from "@/lib/server/server-chat-helpers"
+import { getBase64FromDataURL, getMediaTypeFromDataURL } from "@/lib/utils"
+import { ChatSettings } from "@/types"
+import Anthropic from "@anthropic-ai/sdk"
+import { AnthropicStream, StreamingTextResponse } from "ai"
+import { NextRequest, NextResponse } from "next/server"
+```
 
-## Functionality
+The handler imports several helper functions, types, and libraries, including the Anthropic AI SDK and Next.js server types.
 
-The `POST` function first parses the JSON body of the request into a `chatSettings` object of type `ChatSettings` and a `messages` array.
+## Runtime
 
-It then retrieves the server profile and checks the validity of the Anthropic API key. If the API key is not found or is incorrect, it returns an error message and a status code of 500.
+```ts
+export const runtime = "edge"
+```
 
-The function then formats the messages in a specific way to be compatible with the Anthropic API. If the content of a message is a string, it wraps it in an object with a `type` of "text". If the content is an image URL, it converts the URL to a base64 string and gets the media type from the data URL.
+The `runtime` constant is set to "edge", indicating that this serverless function is intended to be run on the edge network.
 
-The function then creates a new instance of the `Anthropic` class with the API key from the server profile and tries to create a new message with the `chatSettings` and formatted messages.
+## POST Function
 
-If the message creation is successful, it streams the response. If there are any errors during this process, it logs the error and returns a status code of 500 with an error message.
+```ts
+export async function POST(request: NextRequest) {
+```
 
-## Error Handling
+The `POST` function is an asynchronous function that handles POST requests. It takes a `NextRequest` object as an argument.
 
-The function has extensive error handling to deal with potential issues. If there is an error while parsing the Anthropic API response, it logs the error and returns a status code of 500 with an error message. If there is an error while calling the Anthropic API, it logs the error and returns a status code of 500 with an error message.
+### Request Parsing
 
-If there is any other unexpected error, it logs the error and returns a status code of 500 with an error message. If the error message contains "api key not found", it suggests setting the API key in the profile settings. If the error code is 401, it suggests fixing the API key in the profile settings.
+```ts
+const json = await request.json()
+const { chatSettings, messages } = json as {
+  chatSettings: ChatSettings
+  messages: any[]
+}
+```
+
+The function begins by parsing the incoming request's JSON body. It expects the body to contain `chatSettings` and `messages` properties.
+
+### Server Profile and API Key Check
+
+```ts
+const profile = await getServerProfile()
+checkApiKey(profile.anthropic_api_key, "Anthropic")
+```
+
+The function retrieves the server profile and checks the Anthropic API key.
+
+### Message Formatting
+
+```ts
+let ANTHROPIC_FORMATTED_MESSAGES: any = messages.slice(1)
+```
+
+The function slices the `messages` array to exclude the first message.
+
+```ts
+ANTHROPIC_FORMATTED_MESSAGES = ANTHROPIC_FORMATTED_MESSAGES?.map(
+  (message: any) => {
+    // ...
+  }
+)
+```
+
+The function then maps over the `ANTHROPIC_FORMATTED_MESSAGES` array to format each message.
+
+### Anthropic API Call
+
+```ts
+const anthropic = new Anthropic({
+  apiKey: profile.anthropic_api_key || ""
+})
+```
+
+The function initializes a new instance of the Anthropic SDK with the API key from the server profile.
+
+```ts
+const response = await anthropic.messages.create({
+  // ...
+})
+```
+
+The function then makes a call to the `anthropic.messages.create` method to generate a response from the Anthropic API.
+
+### Response Streaming
+
+```ts
+const stream = AnthropicStream(response)
+return new StreamingTextResponse(stream)
+```
+
+The function creates a new stream from the API response and returns a new `StreamingTextResponse`.
+
+### Error Handling
+
+The function includes several `catch` blocks to handle potential errors that may occur during the execution of the function. It logs the errors to the console and returns a `NextResponse` with an appropriate error message and status code.

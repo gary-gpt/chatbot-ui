@@ -1,47 +1,103 @@
 ---
-source: 'app/[locale]/layout.tsx'
-generated: '2025-06-08T13:21:01.633Z'
+source: app/[locale]/layout.tsx
+generated: 2025-06-08T21:16:05.391Z
 tags: []
-hash: 076ee024e5d6ccacabbbcfe5272d909292e5530f2b19687aaf31accdb661d346
+hash: 351d8e442fde228713040be3f1b539b42cc3d8408733d957811e55be17867f95
 ---
-# RootLayout Component
 
-This file exports the `RootLayout` function, which is a React component that sets up the root layout for the application. This includes setting up the internationalization (i18n) and Supabase client, as well as the global state and toaster notifications.
+# Chatbot UI Layout Documentation
+
+This file, located at `/Users/garymason/chatbot-ui/app/[locale]/layout.tsx`, contains the main layout of the Chatbot UI application. It is written in TypeScript and uses React for rendering the UI.
 
 ## Imports
 
-- Various components and utilities are imported from the project's own modules, including a toaster component, global state, providers, and translation provider.
-- The `initTranslations` function is imported from a library for handling internationalization (i18n).
-- Types related to the Supabase database are imported.
-- The `createServerClient` function is imported from the Supabase server-side rendering (SSR) package.
-- Metadata and viewport types are imported from the Next.js package.
-- The `Inter` function is imported from the Next.js Google font package.
-- The `cookies` function is imported from the Next.js headers package.
-- The `ReactNode` type is imported from the React package.
-- Global CSS styles are imported.
+The file begins by importing various components, libraries, and types necessary for the layout.
 
-## Constants
+```ts
+import { Toaster } from "@/components/ui/sonner"
+import { GlobalState } from "@/components/utility/global-state"
+import { Providers } from "@/components/utility/providers"
+import TranslationsProvider from "@/components/utility/translations-provider"
+import initTranslations from "@/lib/i18n"
+import { Database } from "@/supabase/types"
+import { createServerClient } from "@supabase/ssr"
+import { Metadata, Viewport } from "next"
+import { Inter } from "next/font/google"
+import { cookies } from "next/headers"
+import { ReactNode } from "react"
+import "./globals.css"
+```
 
-- The `inter` constant is a Google font with the Latin subset.
-- The `APP_NAME`, `APP_DEFAULT_TITLE`, `APP_TITLE_TEMPLATE`, and `APP_DESCRIPTION` constants are used for metadata.
-- The `metadata` and `viewport` constants are used for the Next.js configuration.
-- The `i18nNamespaces` constant is an array containing the namespaces for the i18n translations.
+## Constants and Interfaces
 
-## RootLayoutProps Interface
+The file then defines several constants related to the application's metadata and viewport settings, as well as an interface for the root layout props.
 
-The `RootLayoutProps` interface defines the props that the `RootLayout` component expects:
+```ts
+const inter = Inter({ subsets: ["latin"] })
+const APP_NAME = "Chatbot UI"
+const APP_DEFAULT_TITLE = "Chatbot UI"
+const APP_TITLE_TEMPLATE = "%s - Chatbot UI"
+const APP_DESCRIPTION = "Chabot UI PWA!"
 
-- `children`: A React node.
-- `params`: An object with a `locale` string property.
+interface RootLayoutProps {
+  children: ReactNode
+  params: {
+    locale: string
+  }
+}
+```
+
+## Metadata and Viewport
+
+The `metadata` and `viewport` objects are exported for use elsewhere in the application. They define various settings and information about the application.
+
+```ts
+export const metadata: Metadata = {
+  // ...
+}
+
+export const viewport: Viewport = {
+  themeColor: "#000000"
+}
+```
 
 ## RootLayout Function
 
-The `RootLayout` function is an asynchronous function that takes a `RootLayoutProps` object as an argument and returns a JSX element. It sets up the Supabase client with a cookie store for handling sessions, initializes the i18n translations, and returns the root layout for the application.
+The `RootLayout` function is the main component of this file. It's an asynchronous function that takes in `children` and `locale` as props, and returns a React component.
 
-The root layout includes the following:
+```ts
+export default async function RootLayout({
+  children,
+  params: { locale }
+}: RootLayoutProps) {
+  // ...
+}
+```
 
-- A `Providers` component that sets up the application's providers.
-- A `TranslationsProvider` component that sets up the i18n translations.
-- A `Toaster` component for displaying notifications.
-- A `GlobalState` component that wraps the children if a session exists.
-- The children of the `RootLayout` component.
+Inside the `RootLayout` function, a cookie store is created, a Supabase client is initialized, and a session is fetched. Then, translations are initialized based on the provided locale.
+
+The function returns a React component that includes the `Providers`, `TranslationsProvider`, and `Toaster` components, as well as the `children` passed to the function. If a session exists, the `children` are wrapped in a `GlobalState` component.
+
+```ts
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers attribute="class" defaultTheme="dark">
+          <TranslationsProvider
+            namespaces={i18nNamespaces}
+            locale={locale}
+            resources={resources}
+          >
+            <Toaster richColors position="top-center" duration={3000} />
+            <div className="bg-background text-foreground flex h-dvh flex-col items-center overflow-x-auto">
+              {session ? <GlobalState>{children}</GlobalState> : children}
+            </div>
+          </TranslationsProvider>
+        </Providers>
+      </body>
+    </html>
+  )
+}
+```
+
+This layout is the base for the Chatbot UI application, and it ensures that the necessary providers and components are included on every page.

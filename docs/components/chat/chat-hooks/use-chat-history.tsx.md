@@ -1,47 +1,79 @@
 ---
 source: components/chat/chat-hooks/use-chat-history.tsx
-generated: '2025-06-08T13:21:01.649Z'
+generated: 2025-06-08T21:27:51.448Z
 tags: []
-hash: ee3e8e20d3fddd0f16c87847f064b269ff2883d7662863c3bfb8be07a52935e7
+hash: cb091d4d3855cc2242cbbe91f78821a3bac4299f247f01ee2707977e333e45ed
 ---
-# useChatHistoryHandler Hook
 
-This is a custom hook that handles chat history in the chat component. It provides functions to set the new message content to the previous or next user message in the chat history.
+# Documentation for useChatHistoryHandler.tsx
 
-## Usage
+This file is a custom React hook that handles chat history in the chat component of a chatbot UI. The hook provides functions to set the new message content to the previous or next user message in the chat history.
 
-```javascript
-import { useChatHistoryHandler } from 'path/to/hook';
+## Import Statements
 
-const { setNewMessageContentToPreviousUserMessage, setNewMessageContentToNextUserMessage } = useChatHistoryHandler();
+```ts
+import { ChatbotUIContext } from "@/context/context"
+import { useContext, useEffect, useState } from "react"
 ```
 
-## Functions
+The hook imports the `ChatbotUIContext` from the context folder, which provides the context for the chatbot UI. It also imports `useContext`, `useEffect`, and `useState` from React.
 
-### setNewMessageContentToPreviousUserMessage
+## useChatHistoryHandler Function
 
-This function sets the new message content to the previous user message.
-
-```javascript
-setNewMessageContentToPreviousUserMessage();
+```ts
+export const useChatHistoryHandler = () => {
 ```
 
-### setNewMessageContentToNextUserMessage
+This is the main function of the file. It's a custom hook that returns an object containing two functions: `setNewMessageContentToPreviousUserMessage` and `setNewMessageContentToNextUserMessage`.
 
-This function sets the new message content to the next user message in the chat history. If there is a next user message, it updates the user input and message history index accordingly. If there is no next user message, it resets the user input and sets the message history index to the end of the chat history.
+### Context and State Variables
 
-```javascript
-setNewMessageContentToNextUserMessage();
+```ts
+const { setUserInput, chatMessages, isGenerating } =
+    useContext(ChatbotUIContext)
+const userRoleString = "user"
+
+const [messageHistoryIndex, setMessageHistoryIndex] = useState<number>(
+    chatMessages.length
+)
 ```
 
-## Dependencies
+The hook uses the `ChatbotUIContext` to get the `setUserInput`, `chatMessages`, and `isGenerating` values. It also sets the `userRoleString` to "user" and initializes `messageHistoryIndex` state variable with the length of `chatMessages`.
 
-This hook depends on the `ChatbotUIContext` for getting the current user input, chat messages, and the status of message generation. It also uses the `useContext`, `useEffect`, and `useState` hooks from React.
+### useEffect Hook
 
-## State
+```ts
+useEffect(() => {
+    if (!isGenerating && messageHistoryIndex > chatMessages.length)
+      setMessageHistoryIndex(chatMessages.length)
+  }, [chatMessages, isGenerating, messageHistoryIndex])
+```
 
-The hook maintains a local state `messageHistoryIndex` which keeps track of the current index in the chat history.
+This `useEffect` hook checks if the `messageHistoryIndex` is out of bounds (greater than the length of `chatMessages`) and if so, it resets the `messageHistoryIndex` to the length of `chatMessages`.
 
-## Side Effects
+### setNewMessageContentToPreviousUserMessage Function
 
-The hook has a side effect that runs whenever the `chatMessages`, `isGenerating`, or `messageHistoryIndex` changes. If messages get deleted the history index pointed could be out of bounds, so it sets the `messageHistoryIndex` to `chatMessages.length`.
+```ts
+const setNewMessageContentToPreviousUserMessage = () => {
+```
+
+This function sets the new message content to the previous user message in the chat history.
+
+### setNewMessageContentToNextUserMessage Function
+
+```ts
+const setNewMessageContentToNextUserMessage = () => {
+```
+
+This function sets the new message content to the next user message in the chat history. If there is no next user message, it resets the user input and sets the message history index to the end of the chat history.
+
+## Return Statement
+
+```ts
+return {
+    setNewMessageContentToPreviousUserMessage,
+    setNewMessageContentToNextUserMessage
+  }
+```
+
+The hook returns an object containing the `setNewMessageContentToPreviousUserMessage` and `setNewMessageContentToNextUserMessage` functions.

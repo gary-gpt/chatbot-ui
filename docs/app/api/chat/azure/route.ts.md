@@ -1,54 +1,77 @@
 ---
 source: app/api/chat/azure/route.ts
-generated: '2025-06-08T13:21:01.660Z'
+generated: 2025-06-08T21:18:56.707Z
 tags: []
-hash: 64305e19c327ced96b42e29f035e6c1e4d0008894b482850d21c8b4245a0bb7f
+hash: 0f9ceba03ea4faa7448f4eb5c7a2dce6eed08d12416bf4e7ff1de8a8bdc02faa
 ---
-# Azure OpenAI Chat API Handler
 
-This module exports a single function `POST` that handles POST requests to the Azure OpenAI Chat API.
+# Azure Chatbot Route Documentation
 
-## Imports
+This TypeScript file, located at `/Users/garymason/chatbot-ui/app/api/chat/azure/route.ts`, defines the POST method for the Azure OpenAI chatbot API route. It is responsible for handling the chatbot's interaction with the Azure OpenAI service.
 
-- `checkApiKey` and `getServerProfile` from "@/lib/server/server-chat-helpers"
-- `ChatAPIPayload` from "@/types"
-- `OpenAIStream` and `StreamingTextResponse` from "ai"
-- `OpenAI` from "openai"
-- `ChatCompletionCreateParamsBase` from "openai/resources/chat/completions.mjs"
+## Dependencies
 
-## Constants
+The script imports several dependencies:
 
-- `runtime`: A constant string set to "edge".
+- Helper functions from the server-chat-helpers file
+- The ChatAPIPayload type
+- OpenAI and OpenAIStream from the OpenAI library
+- The ChatCompletionCreateParamsBase type from the OpenAI library
 
-## Functions
+## Runtime
 
-### POST(request: Request)
+The script sets the runtime to "edge".
 
-This function handles POST requests. It takes a `Request` object as an argument and returns a `Promise` that resolves to a `Response` object.
+## POST Function
 
-#### Parameters
+The POST function is an asynchronous function that takes a request as an argument. It performs the following steps:
 
-- `request`: A `Request` object representing the incoming request.
+1. Parses the request to JSON.
+2. Extracts the chatSettings and messages from the JSON payload.
+3. Retrieves the server profile and checks the Azure OpenAI API key.
+4. Determines the deployment ID based on the chat model specified in the chatSettings.
+5. If the endpoint, key, or deployment ID are not found, it returns a 400 status response with an appropriate error message.
+6. Initializes a new instance of the OpenAI object with the appropriate settings.
+7. Sends a chat completion request to the Azure OpenAI service.
+8. Returns a streaming text response from the Azure OpenAI service.
+9. If any error occurs during the process, it returns a response with the error message and status code.
 
-#### Returns
+```ts
+// The POST function
+export async function POST(request: Request) {
+  // Parse the request to JSON
+  const json = await request.json()
+  const { chatSettings, messages } = json as ChatAPIPayload
 
-A `Promise` that resolves to a `Response` object. The response can be one of the following:
+  try {
+    // Retrieve the server profile and check the Azure OpenAI API key
+    const profile = await getServerProfile()
+    checkApiKey(profile.azure_openai_api_key, "Azure OpenAI")
 
-- A `StreamingTextResponse` object if the request is successful.
-- A `Response` object with a status of 400 and a message of "Model not found" if the specified model is not found.
-- A `Response` object with a status of 400 and a message of "Azure resources not found" if the required Azure resources (ENDPOINT, KEY, DEPLOYMENT_ID) are not found.
-- A `Response` object with a status of 500 and a message of "An unexpected error occurred" if an unexpected error occurs.
+    // Determine the deployment ID based on the chat model
+    let DEPLOYMENT_ID = ""
+    //...
 
-#### Logic
+    // Initialize a new instance of the OpenAI object
+    const azureOpenai = new OpenAI({
+      //...
+    })
 
-1. The function first parses the JSON body of the request and extracts the `chatSettings` and `messages` properties.
+    // Send a chat completion request to the Azure OpenAI service
+    const response = await azureOpenai.chat.completions.create({
+      //...
+    })
 
-2. It then retrieves the server profile and checks the API key.
+    // Return a streaming text response from the Azure OpenAI service
+    const stream = OpenAIStream(response)
+    return new StreamingTextResponse(stream)
+  } catch (error: any) {
+    // Return a response with the error message and status code
+    //...
+  }
+}
+```
 
-3. Depending on the model specified in `chatSettings`, it sets the `DEPLOYMENT_ID`. If the model is not recognized, it returns a `Response` object with a status of 400 and a message of "Model not found".
+## Error Handling
 
-4. If any of the required Azure resources (ENDPOINT, KEY, DEPLOYMENT_ID) are not found, it returns a `Response` object with a status of 400 and a message of "Azure resources not found".
-
-5. It then creates a new instance of `OpenAI` and makes a request to the Azure OpenAI Chat API.
-
-6. If the request is successful, it returns a `StreamingTextResponse` object. If an error occurs, it returns a `Response` object with the appropriate status and error message.
+The POST function includes a try-catch block to handle any errors that may occur during the process. If an error occurs, it returns a response with the error message and status code. If no specific error message is provided, it defaults to "An unexpected error occurred". If no specific status code is provided, it defaults to 500.

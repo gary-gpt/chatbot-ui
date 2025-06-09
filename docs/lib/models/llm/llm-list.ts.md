@@ -1,40 +1,59 @@
 ---
 source: lib/models/llm/llm-list.ts
-generated: '2025-06-08T13:21:01.658Z'
+generated: 2025-06-08T22:35:10.359Z
 tags: []
-hash: e34a814177b7bf865cd199873ca637878f1402be253eb0d0426d5f186ded6e7d
+hash: a0b040062e23d6bad3f37bcf82c374e50f959a07214d9a0a1b783bf92ce8c3d3
 ---
-# Source Code Documentation
 
-This source code file is responsible for importing and exporting lists of Language Learning Models (LLMs) from various sources.
+# LLM List
+
+This file is located at `/Users/garymason/chatbot-ui/lib/models/llm/llm-list.ts`. It's a TypeScript file that exports two constants: `LLM_LIST` and `LLM_LIST_MAP`. These constants are used to manage and access different sets of Language Learning Models (LLMs) from various providers.
 
 ## Imports
 
-The file imports the `LLM` type from the "@/types" directory. This type is used to define the structure of the LLM objects within the lists.
+The file imports several LLM lists from different sources:
 
-It also imports six different LLM lists:
+```ts
+import { LLM } from "@/types"
+import { ANTHROPIC_LLM_LIST } from "./anthropic-llm-list"
+import { GOOGLE_LLM_LIST } from "./google-llm-list"
+import { MISTRAL_LLM_LIST } from "./mistral-llm-list"
+import { GROQ_LLM_LIST } from "./groq-llm-list"
+import { OPENAI_LLM_LIST } from "./openai-llm-list"
+import { PERPLEXITY_LLM_LIST } from "./perplexity-llm-list"
+```
 
-1. `ANTHROPIC_LLM_LIST` from "./anthropic-llm-list"
-2. `GOOGLE_LLM_LIST` from "./google-llm-list"
-3. `MISTRAL_LLM_LIST` from "./mistral-llm-list"
-4. `GROQ_LLM_LIST` from "./groq-llm-list"
-5. `OPENAI_LLM_LIST` from "./openai-llm-list"
-6. `PERPLEXITY_LLM_LIST` from "./perplexity-llm-list"
+## LLM_LIST
 
-These lists contain LLMs from different sources or providers.
+`LLM_LIST` is a constant that combines all imported LLM lists into one array:
 
-## Exports
+```ts
+export const LLM_LIST: LLM[] = [
+  ...OPENAI_LLM_LIST,
+  ...GOOGLE_LLM_LIST,
+  ...MISTRAL_LLM_LIST,
+  ...GROQ_LLM_LIST,
+  ...PERPLEXITY_LLM_LIST,
+  ...ANTHROPIC_LLM_LIST
+]
+```
 
-The file exports two constants:
+The `...` operator is used to spread the elements of each LLM list into the `LLM_LIST` array.
 
-### `LLM_LIST`
+## LLM_LIST_MAP
 
-`LLM_LIST` is an array that combines all the imported LLM lists into one. The spread operator (`...`) is used to insert the elements of each list into `LLM_LIST`.
+`LLM_LIST_MAP` is a constant that maps the name of each LLM provider to its corresponding LLM list:
 
-### `LLM_LIST_MAP`
+```ts
+export const LLM_LIST_MAP: Record<string, LLM[]> = {
+  openai: OPENAI_LLM_LIST,
+  azure: OPENAI_LLM_LIST,
+  google: GOOGLE_LLM_LIST,
+  mistral: MISTRAL_LLM_LIST,
+  groq: GROQ_LLM_LIST,
+  perplexity: PERPLEXITY_LLM_LIST,
+  anthropic: ANTHROPIC_LLM_LIST
+}
+```
 
-`LLM_LIST_MAP` is an object where each key is a string representing the name of a source or provider, and each value is the corresponding LLM list. This object provides a way to access the LLM list from a specific source by using the source's name as a key.
-
-## Usage
-
-These exports can be used in other parts of the application to access the LLMs. For example, `LLM_LIST` could be used to display all LLMs in a single view, while `LLM_LIST_MAP` could be used to display LLMs from a specific source.
+This map provides a convenient way to access the LLM list of a specific provider by its name. Note that both 'openai' and 'azure' are mapped to `OPENAI_LLM_LIST`. This might be due to a shared infrastructure or similar LLMs between these two providers.

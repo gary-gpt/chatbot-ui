@@ -1,30 +1,60 @@
 ---
 source: types/valid-keys.ts
-generated: '2025-06-08T13:21:01.633Z'
+generated: 2025-06-08T22:46:36.346Z
 tags: []
-hash: 2a57b17caff3b3893025650816d690992e723666b4a84a38b48628743923e76c
+hash: 4b683c5a5c6c7308cc81043f522c7d2de49128650e7954e34053874b7f6991f0
 ---
-# Documentation for VALID_ENV_KEYS
 
-`VALID_ENV_KEYS` is an enumeration that contains the keys for various environment variables. These keys are used to access the corresponding values from the environment.
+# Documentation for `valid-keys.ts`
 
-## Enum Members
+This file is located at `/Users/garymason/chatbot-ui/types/valid-keys.ts`.
 
-- `OPENAI_API_KEY`: Key for the OpenAI API key environment variable.
-- `ANTHROPIC_API_KEY`: Key for the Anthropic API key environment variable.
-- `GOOGLE_GEMINI_API_KEY`: Key for the Google Gemini API key environment variable.
-- `MISTRAL_API_KEY`: Key for the Mistral API key environment variable.
-- `GROQ_API_KEY`: Key for the GROQ API key environment variable.
-- `PERPLEXITY_API_KEY`: Key for the Perplexity API key environment variable.
-- `AZURE_OPENAI_API_KEY`: Key for the Azure OpenAI API key environment variable.
-- `OPENROUTER_API_KEY`: Key for the OpenRouter API key environment variable.
-- `OPENAI_ORGANIZATION_ID`: Key for the OpenAI Organization ID environment variable.
-- `AZURE_OPENAI_ENDPOINT`: Key for the Azure OpenAI endpoint environment variable.
-- `AZURE_GPT_35_TURBO_NAME`: Key for the Azure GPT-3.5 Turbo name environment variable.
-- `AZURE_GPT_45_VISION_NAME`: Key for the Azure GPT-4.5 Vision name environment variable.
-- `AZURE_GPT_45_TURBO_NAME`: Key for the Azure GPT-4.5 Turbo name environment variable.
-- `AZURE_EMBEDDINGS_NAME`: Key for the Azure Embeddings name environment variable.
+## Overview
 
-## Usage
+The `valid-keys.ts` file exports an enumeration `VALID_ENV_KEYS` that lists all the valid environment variable keys that are used in the application. These keys are used to access various API keys and identifiers required for the application to function correctly.
 
-These keys are used to retrieve the corresponding environment variable values. The appropriate key should be used depending on the specific API or service you are interacting with. For example, if you are using the OpenAI API, you would use the `OPENAI_API_KEY` to get the API key from the environment variables.
+## Code Summary
+
+```ts
+export enum VALID_ENV_KEYS {
+  OPENAI_API_KEY = "OPENAI_API_KEY",
+  ANTHROPIC_API_KEY = "ANTHROPIC_API_KEY",
+  GOOGLE_GEMINI_API_KEY = "GOOGLE_GEMINI_API_KEY",
+  MISTRAL_API_KEY = "MISTRAL_API_KEY",
+  GROQ_API_KEY = "GROQ_API_KEY",
+  PERPLEXITY_API_KEY = "PERPLEXITY_API_KEY",
+  AZURE_OPENAI_API_KEY = "AZURE_OPENAI_API_KEY",
+  OPENROUTER_API_KEY = "OPENROUTER_API_KEY",
+
+  OPENAI_ORGANIZATION_ID = "OPENAI_ORGANIZATION_ID",
+
+  AZURE_OPENAI_ENDPOINT = "AZURE_OPENAI_ENDPOINT",
+  AZURE_GPT_35_TURBO_NAME = "AZURE_GPT_35_TURBO_NAME",
+  AZURE_GPT_45_VISION_NAME = "AZURE_GPT_45_VISION_NAME",
+  AZURE_GPT_45_TURBO_NAME = "AZURE_GPT_45_TURBO_NAME",
+  AZURE_EMBEDDINGS_NAME = "AZURE_EMBEDDINGS_NAME"
+}
+```
+
+## Enum: `VALID_ENV_KEYS`
+
+This enumeration lists the valid keys for environment variables in the application. Each key is associated with a specific API or service used in the application.
+
+### Keys
+
+- `OPENAI_API_KEY`: The API key for OpenAI.
+- `ANTHROPIC_API_KEY`: The API key for Anthropic.
+- `GOOGLE_GEMINI_API_KEY`: The API key for Google Gemini.
+- `MISTRAL_API_KEY`: The API key for Mistral.
+- `GROQ_API_KEY`: The API key for Groq.
+- `PERPLEXITY_API_KEY`: The API key for Perplexity.
+- `AZURE_OPENAI_API_KEY`: The API key for Azure's OpenAI service.
+- `OPENROUTER_API_KEY`: The API key for OpenRouter.
+
+- `OPENAI_ORGANIZATION_ID`: The organization ID for OpenAI.
+
+- `AZURE_OPENAI_ENDPOINT`: The endpoint for Azure's OpenAI service.
+- `AZURE_GPT_35_TURBO_NAME`: The name of the GPT-3.5 Turbo model on Azure.
+- `AZURE_GPT_45_VISION_NAME`: The name of the GPT-4.5 Vision model on Azure.
+- `AZURE_GPT_45_TURBO_NAME`: The name of the GPT-4.5 Turbo model on Azure.
+- `AZURE_EMBEDDINGS_NAME`: The name of the embeddings service on Azure.

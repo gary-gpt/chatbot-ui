@@ -1,51 +1,71 @@
 ---
 source: components/messages/message-markdown.tsx
-generated: '2025-06-08T13:21:01.636Z'
+generated: 2025-06-08T21:35:35.017Z
 tags: []
-hash: bf5626aa818c90f7d8335861406f5ee549e2f24faf1d495185899c87c208d79a
+hash: e19065da4f80cd4c3a3e312161f290b5805e2de2ef52bc28d0e5a2217a3f45ab
 ---
-# MessageMarkdown Component Documentation
 
-## Overview
+# Message Markdown Component Documentation
 
-`MessageMarkdown` is a functional component in React that uses the `MessageMarkdownMemoized` component to render markdown content. It uses `remarkGfm` and `remarkMath` plugins for markdown parsing and supports custom rendering for paragraph, image, and code elements.
+This document provides a detailed explanation of the `message-markdown.tsx` file located at `/Users/garymason/chatbot-ui/components/messages/`. This file exports a `MessageMarkdown` component which is a functional component in React that is used to render markdown content in a chatbot message.
 
-## Import Statement
+## Imports
 
-```jsx
-import { MessageMarkdown } from './path-to-component';
+```ts
+import React, { FC } from "react"
+import remarkGfm from "remark-gfm"
+import remarkMath from "remark-math"
+import { MessageCodeBlock } from "./message-codeblock"
+import { MessageMarkdownMemoized } from "./message-markdown-memoized"
 ```
 
-## Props
+The file imports several modules:
 
-The component accepts the following props:
+- `React` and `FC` (Functional Component) from the `react` library.
+- `remarkGfm` and `remarkMath` are plugins for the `remark` markdown processor, which add support for GitHub Flavored Markdown and math syntax respectively.
+- `MessageCodeBlock` is a component used to render code blocks.
+- `MessageMarkdownMemoized` is a memoized version of the `MessageMarkdown` component, which improves performance by re-rendering only when the props change.
 
-- `content` (string): The markdown content to be rendered.
+## Component Props
 
-## Usage
-
-```jsx
-<MessageMarkdown content="## This is a heading" />
+```ts
+interface MessageMarkdownProps {
+  content: string
+}
 ```
 
-## Custom Rendering
+The `MessageMarkdown` component accepts a single prop `content` which is a string that represents the markdown content to be rendered.
 
-The component supports custom rendering for the following elements:
+## Component Definition
 
-- **Paragraph (`p`)**: Paragraphs are rendered with a bottom margin of `2` except for the last paragraph.
+```ts
+export const MessageMarkdown: FC<MessageMarkdownProps> = ({ content }) => {
+  // Component logic...
+}
+```
 
-- **Image (`img`)**: Images are rendered with a maximum width of `67%`.
+The `MessageMarkdown` component is a functional component that takes `MessageMarkdownProps` as its props.
 
-- **Code (`code`)**: Code blocks are rendered differently based on their content. If the first child of the code block is a string and does not include a newline character, it is rendered as an inline code block. Otherwise, it is rendered using the `MessageCodeBlock` component. The language for syntax highlighting is determined by the `className` prop, which should be in the format `language-{language}`.
+## Component Logic
 
-## Styling
+The component returns a `MessageMarkdownMemoized` component with several props:
 
-The component uses Tailwind CSS for styling. The rendered markdown content has a minimum width of `100%`, a vertical spacing of `6`, and word break. It also includes specific styles for dark mode.
+- `className`: A string of CSS classes to style the component.
+- `remarkPlugins`: An array of plugins to be used by the `remark` markdown processor.
+- `components`: An object that maps markdown elements to React components.
 
-## Dependencies
+The `components` prop is where most of the logic resides. It defines how different markdown elements (`p`, `img`, `code`) are rendered:
 
-- `react`
-- `remark-gfm`
-- `remark-math`
-- `MessageCodeBlock`
-- `MessageMarkdownMemoized`
+- `p` elements are rendered as `p` elements with a specific CSS class.
+- `img` elements are rendered as `img` elements with a specific CSS class.
+- `code` elements are rendered either as `code` elements or `MessageCodeBlock` components, depending on their content.
+
+The `code` rendering logic is quite complex and involves several steps:
+
+1. It first checks if the first child of the `code` element is a special character (`▍`). If it is, it renders a `span` element with a specific CSS class.
+2. It then checks if the first child is a string. If it is, it replaces a special string (`"`▍`"`) with the special character (`▍`).
+3. It then checks if the `className` of the `code` element matches a specific pattern (`language-(\w+)`). If it does, it extracts the language from the `className`.
+4. It then checks if the first child is a string and does not include a newline character. If it does, it renders a `code` element with the modified children.
+5. If none of the above conditions are met, it renders a `MessageCodeBlock` component with the extracted language and the modified children.
+
+Finally, the `content` prop is passed as children to the `MessageCodeBlock` component.

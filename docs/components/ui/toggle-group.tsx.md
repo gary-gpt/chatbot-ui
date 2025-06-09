@@ -1,13 +1,13 @@
 ---
-source: "components/ui/toggle-group.tsx"
-generated: "2025-06-08T17:01:09.144Z"
-hash: "37e34300bfa1c0ad381e1d3c2a35963ba16b77128c066764c56ffdbaac7eaf86"
+source: components/ui/toggle-group.tsx
+generated: 2025-06-08T22:11:54.731Z
 tags: []
+hash: f2c9b9f3dade80c6ded413b969e4690690eaa1670c69821250106c8f681ad6ea
 ---
 
 # Documentation for `toggle-group.tsx`
 
-This file exports two components, `ToggleGroup` and `ToggleGroupItem`, which are used to create a group of toggle buttons. These components are built using the `@radix-ui/react-toggle-group` library.
+This file exports two components: `ToggleGroup` and `ToggleGroupItem`. These components are used to create a group of toggle buttons where only one button can be selected at a time.
 
 ## Import Statements
 
@@ -19,13 +19,9 @@ import { cn } from "@/lib/utils"
 import { toggleVariants } from "@/components/ui/toggle"
 ```
 
-- `React` is imported for creating and managing the components.
-- `ToggleGroupPrimitive` is the base component from the `@radix-ui/react-toggle-group` library.
-- `VariantProps` is a type from the `class-variance-authority` library, used for managing different variants of the components.
-- `cn` is a utility function for class name manipulation.
-- `toggleVariants` is a function that returns the appropriate class names based on the variant and size of the toggle button.
+The import statements bring in necessary dependencies from React, Radix UI, a utility function, and a custom toggle variant.
 
-## ToggleGroupContext
+## Context Creation
 
 ```ts
 const ToggleGroupContext = React.createContext<
@@ -36,9 +32,9 @@ const ToggleGroupContext = React.createContext<
 })
 ```
 
-A context is created to share the `size` and `variant` properties across all the child components of `ToggleGroup`. The default values for `size` and `variant` are both "default".
+A context `ToggleGroupContext` is created using React's `createContext` method. This context will provide a way to pass the `size` and `variant` props down to child components without having to pass props manually at every level.
 
-## ToggleGroup
+## ToggleGroup Component
 
 ```ts
 const ToggleGroup = React.forwardRef<
@@ -56,13 +52,11 @@ const ToggleGroup = React.forwardRef<
     </ToggleGroupContext.Provider>
   </ToggleGroupPrimitive.Root>
 ))
-
-ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName
 ```
 
-`ToggleGroup` is a wrapper component for `ToggleGroupPrimitive.Root` from the `@radix-ui/react-toggle-group` library. It uses the `ToggleGroupContext` to provide the `size` and `variant` properties to its children.
+`ToggleGroup` is a wrapper component that uses the `ToggleGroupPrimitive.Root` component from Radix UI. It uses `React.forwardRef` to get a ref from its parent component and passes it down to `ToggleGroupPrimitive.Root`. The `ToggleGroupContext.Provider` is used to provide the `size` and `variant` props to all child components.
 
-## ToggleGroupItem
+## ToggleGroupItem Component
 
 ```ts
 const ToggleGroupItem = React.forwardRef<
@@ -88,13 +82,11 @@ const ToggleGroupItem = React.forwardRef<
     </ToggleGroupPrimitive.Item>
   )
 })
-
-ToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName
 ```
 
-`ToggleGroupItem` is a wrapper component for `ToggleGroupPrimitive.Item` from the `@radix-ui/react-toggle-group` library. It uses the `ToggleGroupContext` to get the `size` and `variant` properties, and falls back to its own `size` and `variant` props if the context does not provide them.
+`ToggleGroupItem` is a component that represents an individual item within the `ToggleGroup`. It uses the `ToggleGroupPrimitive.Item` component from Radix UI. It also uses `React.forwardRef` to get a ref from its parent component and passes it down to `ToggleGroupPrimitive.Item`. It uses the `ToggleGroupContext` to get the `size` and `variant` props.
 
-## Exports
+## Export Statements
 
 ```ts
 export { ToggleGroup, ToggleGroupItem }

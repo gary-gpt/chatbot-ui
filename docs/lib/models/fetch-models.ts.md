@@ -1,39 +1,63 @@
 ---
 source: lib/models/fetch-models.ts
-generated: '2025-06-08T13:21:01.647Z'
+generated: 2025-06-08T22:33:41.782Z
 tags: []
-hash: bebb4f98799f25a5574f210dfb72f7cc24ca103cdddb9ece01d377a225744e0a
+hash: 7c8f664b591d4a97238692928fd7647df7170921832a444cd7726e8460cb9788
 ---
-# Documentation
 
-## Overview
+# fetch-models.ts
 
-This file contains three main functions: `fetchHostedModels`, `fetchOllamaModels`, and `fetchOpenRouterModels`. These functions are used to fetch different types of models from various providers.
+This TypeScript file, located at `/Users/garymason/chatbot-ui/lib/models/fetch-models.ts`, contains three functions that fetch different types of models from various providers. These models are used in the chatbot UI.
 
-## Functions
+## Import Statements
 
-### fetchHostedModels
+```ts
+import { Tables } from "@/supabase/types"
+import { LLM, LLMID, OpenRouterLLM } from "@/types"
+import { toast } from "sonner"
+import { LLM_LIST_MAP } from "./llm/llm-list"
+```
 
-This function fetches hosted models from a list of providers. The list of providers includes Google, Anthropic, Mistral, Groq, and Perplexity. If the profile uses Azure OpenAI, Azure is added to the list of providers, otherwise, OpenAI is added.
+The import statements fetch necessary types and functions from different modules. `Tables` is imported from the `supabase/types` module, `LLM`, `LLMID`, and `OpenRouterLLM` are imported from the `types` module, `toast` is imported from the `sonner` module, and `LLM_LIST_MAP` is imported from the `llm/llm-list` module.
 
-The function sends a request to the `/api/keys` endpoint and expects a JSON response. If the response is not okay, an error is thrown.
+## Function: fetchHostedModels
 
-The function then iterates over the list of providers. For each provider, it checks if the provider's API key is present in the profile or if the provider is using environment key map. If either of these conditions is true, the provider's models are added to the list of models to be returned.
+```ts
+export const fetchHostedModels = async (profile: Tables<"profiles">) => {
+  ...
+}
+```
 
-The function returns an object containing the environment key map and the list of hosted models.
+This function fetches hosted models from various providers. The function takes a `profile` object as an argument, which is of the type `Tables<"profiles">`. The function returns an object containing `envKeyMap` and `hostedModels`.
 
-### fetchOllamaModels
+## Function: fetchOllamaModels
 
-This function fetches models from the Ollama server. It sends a request to the `/api/tags` endpoint on the Ollama server and expects a JSON response. If the response is not okay, an error is thrown.
+```ts
+export const fetchOllamaModels = async () => {
+  ...
+}
+```
 
-The function then maps over the list of models in the response and transforms each model into an object with the following properties: `modelId`, `modelName`, `provider`, `hostedId`, `platformLink`, and `imageInput`.
+This function fetches models from the Ollama provider. It does not take any arguments and returns an array of `localModels`.
 
-The function returns the list of transformed models.
+## Function: fetchOpenRouterModels
 
-### fetchOpenRouterModels
+```ts
+export const fetchOpenRouterModels = async () => {
+  ...
+}
+```
 
-This function fetches models from the OpenRouter server. It sends a request to the `/api/v1/models` endpoint on the OpenRouter server and expects a JSON response. If the response is not okay, an error is thrown.
+This function fetches models from the OpenRouter provider. It does not take any arguments and returns an array of `openRouterModels`.
 
-The function then maps over the list of models in the response and transforms each model into an object with the following properties: `modelId`, `modelName`, `provider`, `hostedId`, `platformLink`, `imageInput`, and `maxContext`.
+# Error Handling
 
-The function returns the list of transformed models. If an error occurs during the fetch operation, the error is logged to the console and displayed as a toast notification.
+Each function includes error handling to catch and log any errors that occur during the fetch process. For example:
+
+```ts
+} catch (error) {
+  console.warn("Error fetching hosted models: " + error)
+}
+```
+
+This code block catches any errors that occur during the execution of the `fetchHostedModels` function and logs a warning message to the console. Similar error handling is included in the `fetchOllamaModels` and `fetchOpenRouterModels` functions.

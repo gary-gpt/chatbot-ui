@@ -1,50 +1,105 @@
 ---
 source: app/api/chat/groq/route.ts
-generated: '2025-06-08T13:21:01.660Z'
+generated: 2025-06-08T21:20:15.251Z
 tags: []
-hash: 424dbe7d91e90f34487e931577814072731e81602c03b86e2fadf34a1a956641
+hash: 72d4c1f4f325c27dc9487d78767def03aa46c95b603d7aa8c6a5d2bd0045021c
 ---
-# Chat API Documentation
 
-This file exports a `POST` function which is used to create chat completions using the Groq API. 
+# Chatbot UI - Groq Route
 
-## Imports
+This document provides an overview of the `route.ts` file located in the `/Users/garymason/chatbot-ui/app/api/chat/groq/` directory. This TypeScript file is responsible for handling POST requests to the chatbot's Groq API.
 
-- `CHAT_SETTING_LIMITS` from "@/lib/chat-setting-limits"
-- `checkApiKey`, `getServerProfile` from "@/lib/server/server-chat-helpers"
-- `ChatSettings` from "@/types"
-- `OpenAIStream`, `StreamingTextResponse` from "ai"
-- `OpenAI` from "openai"
+## Code Overview
 
-## Constants
+```ts
+import { CHAT_SETTING_LIMITS } from "@/lib/chat-setting-limits"
+import { checkApiKey, getServerProfile } from "@/lib/server/server-chat-helpers"
+import { ChatSettings } from "@/types"
+import { OpenAIStream, StreamingTextResponse } from "ai"
+import OpenAI from "openai"
+```
 
-- `runtime` is set to "edge"
+The script begins by importing necessary modules and functions. These include chat setting limits, server chat helper functions, chat settings type, and OpenAI related modules.
 
-## Functions
+```ts
+export const runtime = "edge"
+```
 
-### POST(request: Request)
+The `runtime` constant is set to `"edge"`, indicating that the function will run at the edge of the Cloudflare network, close to the user.
 
-This function is an asynchronous function that takes a `Request` object as an argument.
+```ts
+export async function POST(request: Request) {
+  const json = await request.json()
+  const { chatSettings, messages } = json as {
+    chatSettings: ChatSettings
+    messages: any[]
+  }
+```
 
-#### Parameters
+The `POST` function is an asynchronous function that handles POST requests. It first extracts the JSON body from the request, and then destructures `chatSettings` and `messages` from the JSON.
 
-- `request`: The request object.
+```ts
+try {
+  const profile = await getServerProfile()
 
-#### Process
+  checkApiKey(profile.groq_api_key, "G")
+```
 
-1. The function starts by parsing the JSON body of the request into a `chatSettings` object and a `messages` array.
-2. It then fetches the server profile and checks the API key.
-3. A new instance of `OpenAI` is created with the API key and base URL.
-4. A chat completion is created using the `chatSettings` and `messages`.
-5. The response is converted into a stream using `OpenAIStream`.
-6. The function returns a new `StreamingTextResponse` with the stream.
+The function then retrieves the server profile and checks the Groq API key.
 
-#### Error Handling
+```ts
+const groq = new OpenAI({
+  apiKey: profile.groq_api_key || "",
+  baseURL: "https://api.groq.com/openai/v1"
+})
+```
 
-If an error occurs during the process, the function catches it and returns a response with an error message and status code. The error message is customized based on the error:
+An instance of the OpenAI class is created, with the Groq API key and base URL provided as parameters.
 
-- If the error message includes "api key not found", the error message is set to "Groq API Key not found. Please set it in your profile settings."
-- If the status code is 401, the error message is set to "Groq API Key is incorrect. Please fix it in your profile settings."
-- For all other errors, the error message is set to "An unexpected error occurred" if no message is provided by the error.
+```ts
+const response = await groq.chat.completions.create({
+  model: chatSettings.model,
+  messages,
+  max_tokens:
+    CHAT_SETTING_LIMITS[chatSettings.model].MAX_TOKEN_OUTPUT_LENGTH,
+  stream: true
+})
+```
 
-The response is then returned with the error message and status code.
+A chat completion is created using the provided chat settings, messages, and maximum token output length. The `stream` parameter is set to `true`, indicating that the response should be streamed.
+
+```ts
+const stream = OpenAIStream(response)
+
+return new StreamingTextResponse(stream)
+```
+
+The response is then converted into a stream using the `OpenAIStream` function, and returned as a `StreamingTextResponse`.
+
+```ts
+} catch (error: any) {
+  let errorMessage = error.message || "An unexpected error occurred"
+  const errorCode = error.status || 500
+```
+
+If an error occurs during the execution of the function, an error message and error code are extracted from the error. If these are not provided, default values are used.
+
+```ts
+if (errorMessage.toLowerCase().includes("api key not found")) {
+  errorMessage =
+    "Groq API Key not found. Please set it in your profile settings."
+} else if (errorCode === 401) {
+  errorMessage =
+    "Groq API Key is incorrect. Please fix it in your profile settings."
+}
+```
+
+The error message is then checked for specific phrases to provide more detailed error messages to the user.
+
+```ts
+return new Response(JSON.stringify({ message: errorMessage }), {
+  status: errorCode
+})
+```
+
+Finally, a new `Response` is returned, with the error message and error code included in the response body and status, respectively.

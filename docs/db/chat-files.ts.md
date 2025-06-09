@@ -1,95 +1,87 @@
 ---
 source: db/chat-files.ts
-generated: '2025-06-08T13:21:01.628Z'
+generated: 2025-06-08T22:20:41.064Z
 tags: []
-hash: ecff46e1b0a87f89d290138f3a977beb98b72be9535375474892dd920d5d07f0
+hash: 235cd54eff0d74811a9b5789c03e2fcfe8168c14290fb18d33e0560779753f80
 ---
-# Chat Files API
 
-This module provides API functions to interact with chat files in the database using the Supabase client.
+# Chat Files Database Operations
 
-## Functions
+This TypeScript file, located at `/Users/garymason/chatbot-ui/db/chat-files.ts`, provides three functions that interact with a Supabase database to perform operations related to chat files. The functions are `getChatFilesByChatId`, `createChatFile`, and `createChatFiles`.
 
-### `getChatFilesByChatId(chatId: string)`
+## Import Statements
 
-This asynchronous function retrieves chat files associated with a specific chat ID.
-
-**Arguments**
-
-- `chatId` (string): The ID of the chat.
-
-**Returns**
-
-- A promise that resolves to the chat files data.
-
-**Throws**
-
-- Throws an error if no chat files are found for the provided chat ID.
-
-### `createChatFile(chatFile: TablesInsert<"chat_files">)`
-
-This asynchronous function creates a new chat file record in the database.
-
-**Arguments**
-
-- `chatFile` (TablesInsert<"chat_files">): The chat file data to be inserted.
-
-**Returns**
-
-- A promise that resolves to the created chat file data.
-
-**Throws**
-
-- Throws an error if the chat file could not be created.
-
-### `createChatFiles(chatFiles: TablesInsert<"chat_files">[])`
-
-This asynchronous function creates multiple new chat file records in the database.
-
-**Arguments**
-
-- `chatFiles` (TablesInsert<"chat_files">[]): An array of chat file data to be inserted.
-
-**Returns**
-
-- A promise that resolves to the array of created chat files data.
-
-**Throws**
-
-- Throws an error if the chat files could not be created.
-
-## Usage
-
-First, import the functions from the module:
-
-```javascript
-import { getChatFilesByChatId, createChatFile, createChatFiles } from "@/lib/chatFiles"
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert } from "@/supabase/types"
 ```
 
-Then, you can use the functions as follows:
+The first import statement imports the `supabase` object from the `browser-client` file in the `supabase` directory. This object is used to interact with the Supabase database.
 
-```javascript
-// Get chat files by chat ID
-const chatFiles = await getChatFilesByChatId("chatId")
+The second import statement imports the `TablesInsert` type from the `types` file in the `supabase` directory. This type is used to type check the `chatFile` and `chatFiles` parameters in the `createChatFile` and `createChatFiles` functions.
 
-// Create a new chat file
-const newChatFile = await createChatFile({
-  id: "fileId",
-  name: "fileName",
-  chatId: "chatId",
-})
+## Function: getChatFilesByChatId
 
-// Create multiple new chat files
-const newChatFiles = await createChatFiles([
-  {
-    id: "fileId1",
-    name: "fileName1",
-    chatId: "chatId1",
-  },
-  {
-    id: "fileId2",
-    name: "fileName2",
-    chatId: "chatId2",
-  },
-])
+```ts
+export const getChatFilesByChatId = async (chatId: string) => {
+  const { data: chatFiles, error } = await supabase
+    .from("chats")
+    .select(
+      `
+      id, 
+      name, 
+      files (*)
+    `
+    )
+    .eq("id", chatId)
+    .single()
+
+  if (!chatFiles) {
+    throw new Error(error.message)
+  }
+
+  return chatFiles
+}
 ```
+
+This function retrieves chat files associated with a specific chat ID. It takes a string `chatId` as a parameter and returns a promise that resolves to the chat files data. If there's an error during the operation, it throws an error with the error message.
+
+## Function: createChatFile
+
+```ts
+export const createChatFile = async (chatFile: TablesInsert<"chat_files">) => {
+  const { data: createdChatFile, error } = await supabase
+    .from("chat_files")
+    .insert(chatFile)
+    .select("*")
+
+  if (!createdChatFile) {
+    throw new Error(error.message)
+  }
+
+  return createdChatFile
+}
+```
+
+This function creates a new chat file in the database. It takes a `chatFile` object as a parameter, which should conform to the `TablesInsert<"chat_files">` type. It returns a promise that resolves to the created chat file data. If there's an error during the operation, it throws an error with the error message.
+
+## Function: createChatFiles
+
+```ts
+export const createChatFiles = async (
+  chatFiles: TablesInsert<"chat_files">[]
+) => {
+  const { data: createdChatFiles, error } = await supabase
+    .from("chat_files")
+    .insert(chatFiles)
+    .select("*")
+
+  if (!createdChatFiles) {
+    throw new Error(error.message)
+  }
+
+  return createdChatFiles
+}
+```
+
+This function creates multiple new chat files in the database. It takes an array of `chatFiles` objects as a parameter, where each object should conform to the `TablesInsert<"chat_files">` type. It returns a promise that resolves to the created chat files data. If there's an error during the operation, it throws an error with the error message.

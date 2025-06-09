@@ -1,37 +1,92 @@
 ---
 source: components/ui/avatar.tsx
-generated: '2025-06-08T13:21:01.639Z'
+generated: 2025-06-08T21:56:14.685Z
 tags: []
-hash: 62e1d1931e9ab355b87d6574472034deb8761102c08e4979f9e5b93b051f3bbe
+hash: a9c988e11bd608bb853c9b2d2b56d1db0124febf0619c591b1d9c4def112d1ea
 ---
+
 # Avatar Component Documentation
 
-This file exports three components: `Avatar`, `AvatarImage`, and `AvatarFallback`. These components are built using the `@radix-ui/react-avatar` primitives.
+This documentation covers the Avatar component of the chatbot UI. The Avatar component is located at `/Users/garymason/chatbot-ui/components/ui/avatar.tsx`.
 
-## Avatar
+## Overview
 
-The `Avatar` component is a forward-ref React component that uses the `AvatarPrimitive.Root` as its base. It accepts all the props that `AvatarPrimitive.Root` accepts, excluding `ref`. 
+This component file contains three main components: `Avatar`, `AvatarImage`, and `AvatarFallback`. These components are used to display user or bot avatars in the chat interface. The components are built using the Radix UI library.
 
-The `Avatar` component applies several CSS classes to the root element, including `relative`, `flex`, `size-10`, `shrink-0`, `overflow-hidden`, and `rounded-full`. If a `className` prop is provided, it will be appended to these default classes.
+## Dependencies
 
-The `displayName` of the `Avatar` component is set to the `displayName` of `AvatarPrimitive.Root`.
+The Avatar component relies on the following dependencies:
 
-## AvatarImage
+- `React`: A JavaScript library for building user interfaces.
+- `@radix-ui/react-avatar`: A Radix UI component for creating avatar elements.
+- `@/lib/utils`: A utility library used in this project.
 
-The `AvatarImage` component is a forward-ref React component that uses the `AvatarPrimitive.Image` as its base. It accepts all the props that `AvatarPrimitive.Image` accepts, excluding `ref`.
+## Components
 
-The `AvatarImage` component applies the `aspect-square` and `size-full` CSS classes to the root element. If a `className` prop is provided, it will be appended to these default classes.
+### Avatar
 
-The `displayName` of the `AvatarImage` component is set to the `displayName` of `AvatarPrimitive.Image`.
+This is the main Avatar component. It uses the `AvatarPrimitive.Root` component from the Radix UI library as its base. The component is a rounded, overflow-hidden flex container.
 
-## AvatarFallback
+```ts
+const Avatar = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Root
+    ref={ref}
+    className={cn(
+      "relative flex size-10 shrink-0 overflow-hidden rounded-full",
+      className
+    )}
+    {...props}
+  />
+))
+Avatar.displayName = AvatarPrimitive.Root.displayName
+```
 
-The `AvatarFallback` component is a forward-ref React component that uses the `AvatarPrimitive.Fallback` as its base. It accepts all the props that `AvatarPrimitive.Fallback` accepts, excluding `ref`.
+### AvatarImage
 
-The `AvatarFallback` component applies several CSS classes to the root element, including `bg-muted`, `flex`, `size-full`, `items-center`, `justify-center`, and `rounded-full`. If a `className` prop is provided, it will be appended to these default classes.
+This component is used to display the image of the avatar. It uses the `AvatarPrimitive.Image` component from the Radix UI library as its base. The image is displayed as a square aspect ratio and takes up the full size of its container.
 
-The `displayName` of the `AvatarFallback` component is set to the `displayName` of `AvatarPrimitive.Fallback`.
+```ts
+const AvatarImage = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Image>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Image
+    ref={ref}
+    className={cn("aspect-square size-full", className)}
+    {...props}
+  />
+))
+AvatarImage.displayName = AvatarPrimitive.Image.displayName
+```
+
+### AvatarFallback
+
+This component is used as a fallback when the avatar image cannot be loaded. It uses the `AvatarPrimitive.Fallback` component from the Radix UI library as its base. The fallback is a rounded, full-size flex container with centered items.
+
+```ts
+const AvatarFallback = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Fallback>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Fallback
+    ref={ref}
+    className={cn(
+      "bg-muted flex size-full items-center justify-center rounded-full",
+      className
+    )}
+    {...props}
+  />
+))
+AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
+```
 
 ## Exports
 
-The `Avatar`, `AvatarImage`, and `AvatarFallback` components are exported for use in other files.
+The `Avatar`, `AvatarImage`, and `AvatarFallback` components are exported for use in other parts of the application.
+
+```ts
+export { Avatar, AvatarImage, AvatarFallback }
+```

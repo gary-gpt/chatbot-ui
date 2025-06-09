@@ -1,55 +1,110 @@
 ---
 source: components/chat/chat-hooks/use-select-file-handler.tsx
-generated: '2025-06-08T13:21:01.650Z'
+generated: 2025-06-08T21:29:01.797Z
 tags: []
-hash: 9228352b54724e1aee9a7e8f6fe86ee087a140b6808ef3c72c866b1625ad8a00
+hash: 72bd54ec5868cb98774ae7044f9c90ef6edd7fc343149481ba0e4be059dbcb81
 ---
-# Documentation
 
-This file contains the `useSelectFileHandler` hook which is used for handling file selection in the chatbot UI.
+# use-select-file-handler.tsx
 
-## Imports
+This TypeScript file is a custom React hook that handles the selection and processing of files within a chatbot UI. It accepts a variety of file types, including CSV, JSON, Markdown, PDF, plain text, and Word documents, and handles them differently based on their type. It also provides functionality for handling image files.
 
-- `ChatbotUIContext` from "@/context/context": This is the context object for the chatbot UI.
-- `createDocXFile`, `createFile` from "@/db/files": These are functions for creating files in the database.
-- `LLM_LIST` from "@/lib/models/llm/llm-list": This is a list of LLM models.
-- `mammoth`: This is a library for handling .docx files.
-- `useContext`, `useEffect`, `useState` from "react": These are React hooks.
-- `toast` from "sonner": This is a library for displaying toast notifications.
+## Import Statements
 
-## Constants
+The file begins by importing necessary dependencies and context.
 
-- `ACCEPTED_FILE_TYPES`: This is a list of accepted file types for the chatbot UI.
+```ts
+import { ChatbotUIContext } from "@/context/context"
+import { createDocXFile, createFile } from "@/db/files"
+import { LLM_LIST } from "@/lib/models/llm/llm-list"
+import mammoth from "mammoth"
+import { useContext, useEffect, useState } from "react"
+import { toast } from "sonner"
+```
 
-## Hook: useSelectFileHandler
+## Accepted File Types
 
-This hook returns an object with two properties: `handleSelectDeviceFile` and `filesToAccept`.
+The `ACCEPTED_FILE_TYPES` constant is an array of MIME types that the chatbot UI can handle. It is exported so it can be used in other parts of the application.
 
-### handleSelectDeviceFile
+```ts
+export const ACCEPTED_FILE_TYPES = [
+  "text/csv",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/json",
+  "text/markdown",
+  "application/pdf",
+  "text/plain"
+].join(",")
+```
 
-This is an async function that handles the selection of a file from the device. It takes a `File` object as a parameter. It checks if the file type is supported, reads the file content, and creates a new file in the database.
+## useSelectFileHandler Hook
 
-### filesToAccept
+The `useSelectFileHandler` hook is the main export of this file. It provides the functionality to handle the selection of a file from the user's device.
 
-This is a state variable that holds the list of file types that the chatbot UI should accept. It is initially set to `ACCEPTED_FILE_TYPES` and is updated based on the `chatSettings` context.
+```ts
+export const useSelectFileHandler = () => {
+  ...
+}
+```
 
-## Context: ChatbotUIContext
+### Context and State
 
-This context provides several state variables and setters related to the chatbot UI, including:
+The hook uses the `ChatbotUIContext` to access various pieces of state and functions from the context. It also sets up local state for `filesToAccept` using the `useState` hook.
 
-- `selectedWorkspace`
-- `profile`
-- `chatSettings`
-- `setNewMessageImages`
-- `setNewMessageFiles`
-- `setShowFilesDisplay`
-- `setFiles`
-- `setUseRetrieval`
+```ts
+const {
+  selectedWorkspace,
+  profile,
+  chatSettings,
+  setNewMessageImages,
+  setNewMessageFiles,
+  setShowFilesDisplay,
+  setFiles,
+  setUseRetrieval
+} = useContext(ChatbotUIContext)
 
-## Dependencies
+const [filesToAccept, setFilesToAccept] = useState(ACCEPTED_FILE_TYPES)
+```
 
-This hook has a dependency on `chatSettings?.model`. Whenever this value changes, it calls `handleFilesToAccept` to update the `filesToAccept` state.
+### useEffect Hook
 
-## Error Handling
+The `useEffect` hook is used to call the `handleFilesToAccept` function whenever the `chatSettings?.model` changes.
 
-If an unsupported file type is selected, an error is thrown. If there is an error while reading the file content or creating the file in the database, a toast notification is displayed and the temporary file/image is removed from the state.
+```ts
+useEffect(() => {
+  handleFilesToAccept()
+}, [chatSettings?.model])
+```
+
+### handleFilesToAccept Function
+
+The `handleFilesToAccept` function checks if the current model allows for image input. If it does, it updates `filesToAccept` to include image MIME types.
+
+```ts
+const handleFilesToAccept = () => {
+  ...
+}
+```
+
+### handleSelectDeviceFile Function
+
+The `handleSelectDeviceFile` function is the main function of this hook. It handles the selection of a file from the user's device, reading the file as necessary based on its type, and creating a new file or image message as appropriate.
+
+```ts
+const handleSelectDeviceFile = async (file: File) => {
+  ...
+}
+```
+
+## Return Statement
+
+The `useSelectFileHandler` hook returns an object containing the `handleSelectDeviceFile` function and the `filesToAccept` state.
+
+```ts
+return {
+  handleSelectDeviceFile,
+  filesToAccept
+}
+```
+
+This allows these items to be used in the component that calls this hook.

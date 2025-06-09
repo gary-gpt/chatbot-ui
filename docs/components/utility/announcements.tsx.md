@@ -1,16 +1,17 @@
 ---
 source: components/utility/announcements.tsx
-generated: '2025-06-08T13:21:01.637Z'
+generated: 2025-06-08T22:13:58.844Z
 tags: []
-hash: 428fa284ccfc659aa759661c53dc77c26c4814b5ff76c4bc670962722c38593c
+hash: b2b3b1c902e846427e8940644a4517b3577b242fa65c4f6c0b49bcc721ce4e81
 ---
-# Announcements Component
 
-This is a React Functional Component that handles the display and management of announcements. It uses local storage to persist the state of the announcements.
+# Announcements Component Documentation
+
+This TypeScript file defines a React functional component `Announcements` that manages and displays a list of announcements. The component uses local storage to persist the state of announcements across sessions.
 
 ## Import Statements
 
-```jsx
+```ts
 import { Button } from "@/components/ui/button"
 import {
   Popover,
@@ -23,28 +24,99 @@ import { FC, useEffect, useState } from "react"
 import { SIDEBAR_ICON_SIZE } from "../sidebar/sidebar-switcher"
 ```
 
-## Props
+The import statements bring in necessary components, types, and hooks for the `Announcements` component. The `Button`, `Popover`, `PopoverContent`, and `PopoverTrigger` components are UI components used in the rendering of the `Announcements` component. The `Announcement` type is a TypeScript type that describes the structure of an announcement. The `IconExternalLink` and `IconSpeakerphone` are icons used in the UI. The `FC`, `useEffect`, and `useState` are React hooks. The `SIDEBAR_ICON_SIZE` is a constant that defines the size of the sidebar icon.
 
-The component does not accept any props.
+## Announcements Component
 
-## State
+```ts
+interface AnnouncementsProps {}
 
-The component maintains a state `announcements` which is an array of `Announcement` objects.
+export const Announcements: FC<AnnouncementsProps> = () => {
+  //...
+}
+```
 
-## Component Logic
+The `Announcements` component is a functional component with no props. It manages the state of announcements and renders a popover with the list of announcements.
 
-The component uses the `useEffect` hook to load announcements from local storage on initial render. It then filters out any announcements that are no longer in state, adds new announcements to the list, and combines the valid and new announcements. The announcements are then updated in state and local storage.
+## State and Effect Hook
 
-The component also provides functions to mark an announcement as read, mark all announcements as read, and mark all announcements as unread. These functions update both the state and local storage.
+```ts
+const [announcements, setAnnouncements] = useState<Announcement[]>([])
 
-## Rendered JSX
+useEffect(() => {
+  //...
+}, [])
+```
 
-The component renders a `Popover` containing a list of unread announcements. Each announcement displays a title, date, content, a button to mark the announcement as read, and a button to view a demo (if a link is provided). 
+The `useState` hook is used to manage the state of announcements. The `useEffect` hook is used to load the announcements from local storage when the component mounts.
 
-If there are unread announcements, a button is displayed to mark all announcements as read. If there are no unread announcements, a message is displayed stating "You are all caught up!" and a link is provided to show recent updates. 
+## Announcement Loading and State Update
 
-The number of unread announcements is also displayed on the `IconSpeakerphone` using a notification indicator.
+```ts
+const storedAnnouncements = localStorage.getItem("announcements")
+let parsedAnnouncements: Announcement[] = []
 
-## Styles
+if (storedAnnouncements) {
+  parsedAnnouncements = JSON.parse(storedAnnouncements)
+}
 
-The component uses Tailwind CSS for styling.
+// Filter out announcements that are no longer in state
+const validAnnouncements = announcements.filter((a: Announcement) =>
+  parsedAnnouncements.find(storedA => storedA.id === a.id)
+)
+
+// Add new announcements to the list
+const newAnnouncements = announcements.filter(
+  (a: Announcement) =>
+    !parsedAnnouncements.find(storedA => storedA.id === a.id)
+)
+
+// Combine valid and new announcements
+const combinedAnnouncements = [...validAnnouncements, ...newAnnouncements]
+
+// Mark announcements as read if they are marked as read in local storage
+const updatedAnnouncements = combinedAnnouncements.map(
+  (a: Announcement) => {
+    const storedAnnouncement = parsedAnnouncements.find(
+      (storedA: Announcement) => storedA.id === a.id
+    )
+    return storedAnnouncement?.read ? { ...a, read: true } : a
+  }
+)
+
+// Update state and local storage
+setAnnouncements(updatedAnnouncements)
+localStorage.setItem("announcements", JSON.stringify(updatedAnnouncements))
+```
+
+This block of code retrieves the stored announcements from local storage, parses them, filters out invalid announcements, adds new announcements, combines valid and new announcements, marks announcements as read if they are marked as read in local storage, and finally updates the state and local storage with the updated announcements.
+
+## Marking Announcements as Read/Unread
+
+```ts
+const markAsRead = (id: string) => {
+  //...
+}
+
+const markAllAsRead = () => {
+  //...
+}
+
+const markAllAsUnread = () => {
+  //...
+}
+```
+
+These functions are used to mark individual or all announcements as read or unread. They update both the state and local storage.
+
+## Component Rendering
+
+```ts
+return (
+  <Popover>
+    //...
+  </Popover>
+)
+```
+
+The component returns a `Popover` component that displays the list of announcements. The popover includes a trigger (an icon), and the content of the popover includes the list of announcements and buttons to mark announcements as read or unread.

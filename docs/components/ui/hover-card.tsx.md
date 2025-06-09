@@ -1,50 +1,70 @@
 ---
 source: components/ui/hover-card.tsx
-generated: '2025-06-08T13:21:01.641Z'
+generated: 2025-06-08T22:02:19.954Z
 tags: []
-hash: f4ffdeefe81ff0043c31cbfd61be468fa59eb6c9f740c76c1f225ea2f4c1f494
+hash: 96725c20242fe81a5b9d01d84eebc4bd39d4794a0fd560cd8708f030b5ad7f0d
 ---
-# HoverCard Component Documentation
 
-This file exports three components: `HoverCard`, `HoverCardTrigger`, and `HoverCardContent`. These components are built using the `@radix-ui/react-hover-card` library.
+# Hover Card Component Documentation
 
-## Importing the Components
+This document describes the `hover-card.tsx` file located at `/Users/garymason/chatbot-ui/components/ui/`. This file exports a `HoverCard` component, which is a UI component that displays additional information when the user hovers over it.
 
-```javascript
-import { HoverCard, HoverCardTrigger, HoverCardContent } from './path_to_this_file';
+## Code Summary
+
+This file is written in TypeScript and uses the React library for building the UI component. It also uses the `@radix-ui/react-hover-card` package, which provides primitive components to create a hover card.
+
+The `HoverCard` component is composed of three sub-components:
+
+1. `HoverCard`: The root component.
+2. `HoverCardTrigger`: The component that triggers the hover card to appear.
+3. `HoverCardContent`: The component that contains the content of the hover card.
+
+## Code Breakdown
+
+```ts
+"use client"
 ```
 
-## HoverCard
+This line indicates that the code is intended to run on the client-side.
 
-This is the root component for the hover card. It doesn't accept any props.
-
-## HoverCardTrigger
-
-This component is used to trigger the hover card. It doesn't accept any props.
-
-## HoverCardContent
-
-This component is used to display the content of the hover card. It accepts the following props:
-
-- `className` (optional): A string to specify CSS classes.
-- `align` (optional): A string to specify the alignment of the hover card. Default is `"center"`.
-- `sideOffset` (optional): A number to specify the offset from the side. Default is `4`.
-
-It also accepts all other props that can be passed to a `React.ElementRef` of `HoverCardPrimitive.Content`.
-
-The `HoverCardContent` component also has a `displayName` property which is set to `HoverCardPrimitive.Content.displayName`.
-
-## Usage
-
-```javascript
-<HoverCard>
-  <HoverCardTrigger>
-    Hover over me
-  </HoverCardTrigger>
-  <HoverCardContent className="custom-class" align="left" sideOffset={10}>
-    I am the content of the hover card.
-  </HoverCardContent>
-</HoverCard>
+```ts
+import * as React from "react"
+import * as HoverCardPrimitive from "@radix-ui/react-hover-card"
+import { cn } from "@/lib/utils"
 ```
 
-In this example, when the user hovers over the text "Hover over me", a hover card with the text "I am the content of the hover card." will be displayed. The hover card will be aligned to the left and will have an offset of 10 from the side. The hover card will also have the CSS class "custom-class".
+These lines import the necessary modules. The `React` library, the `HoverCardPrimitive` components from `@radix-ui/react-hover-card`, and a utility function `cn` from a local utility module.
+
+```ts
+const HoverCard = HoverCardPrimitive.Root
+const HoverCardTrigger = HoverCardPrimitive.Trigger
+```
+
+These lines create aliases for the `Root` and `Trigger` components from `HoverCardPrimitive`.
+
+```ts
+const HoverCardContent = React.forwardRef<
+  React.ElementRef<typeof HoverCardPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>
+>(({ className, align = "center", sideOffset = 4, ...props }, ref) => (
+  <HoverCardPrimitive.Content
+    ref={ref}
+    align={align}
+    sideOffset={sideOffset}
+    className={cn(
+      "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-64 rounded-md border p-4 shadow-md outline-none",
+      className
+    )}
+    {...props}
+  />
+))
+HoverCardContent.displayName = HoverCardPrimitive.Content.displayName
+```
+
+This block of code defines the `HoverCardContent` component. It uses `React.forwardRef` to create a component that can accept a `ref` prop. The component takes several props, including `className`, `align`, `sideOffset`, and other props that are spread into the component. The `className` prop is combined with a long string of class names using the `cn` utility function. The `displayName` of the component is set to the `displayName` of the `Content` component from `HoverCardPrimitive`.
+
+```ts
+export { HoverCard, HoverCardTrigger, HoverCardContent }
+```
+
+Finally, the `HoverCard`, `HoverCardTrigger`, and `HoverCardContent` components are exported for use in other parts of the application.

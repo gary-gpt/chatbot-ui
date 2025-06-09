@@ -1,54 +1,92 @@
 ---
 source: components/messages/message.tsx
-generated: '2025-06-08T13:21:01.636Z'
+generated: 2025-06-08T21:36:32.260Z
 tags: []
-hash: da3210bd39ac465b3a414e62e9a665dcd4f5bacc9ec33786f7ce1bfc7e4bfb1b
+hash: 64813ab8322efc62016f31a6a5393520943ab5f30cecd6cc06d1d76d0fd24ea7
 ---
-# Message Component
 
-The `Message` component is a functional component that displays a single message in a chat interface. It provides features such as editing, copying, and regenerating messages. It also displays message sources and associated images.
+# Message Component Documentation
+
+This document provides an overview of the `Message` component in the `chatbot-ui` application. The component is located in the file: `/Users/garymason/chatbot-ui/components/messages/message.tsx`.
+
+## Overview
+
+The `Message` component is a functional component that displays a chat message in the chat interface. It handles both user and assistant messages, as well as system prompts. The component provides features like editing messages, copying message content, regenerating assistant messages, and viewing file sources related to a message.
+
+## Imports
+
+The component imports several hooks, contexts, types, and components from various modules within the application. It also imports several icons from the `@tabler/icons-react` package.
 
 ## Props
 
 The `Message` component accepts the following props:
 
-- `message`: An object representing a single message from the `messages` table.
-- `fileItems`: An array of file items associated with the message from the `file_items` table.
-- `isEditing`: A boolean indicating if the message is currently being edited.
-- `isLast`: A boolean indicating if the message is the last one in the chat.
-- `onStartEdit`: A function that is called when the user starts editing a message.
-- `onCancelEdit`: A function that is called when the user cancels editing a message.
-- `onSubmitEdit`: A function that is called when the user submits an edited message. It accepts two arguments: the new message value and the sequence number of the message.
+- `message`: The message object to be displayed.
+- `fileItems`: An array of file items related to the message.
+- `isEditing`: A boolean indicating whether the message is currently being edited.
+- `isLast`: A boolean indicating whether the message is the last one in the chat.
+- `onStartEdit`: A function to be called when the user starts editing a message.
+- `onCancelEdit`: A function to be called when the user cancels editing a message.
+- `onSubmitEdit`: A function to be called when the user submits an edited message.
 
-## State
+## State Variables
 
-The `Message` component maintains several pieces of state:
+The component uses several state variables to manage its internal state, including:
 
-- `isHovering`: A boolean indicating if the mouse is hovering over the message.
-- `editedMessage`: The current value of the message being edited.
-- `showImagePreview`: A boolean indicating if the image preview is currently shown.
-- `selectedImage`: The currently selected image to be previewed.
-- `showFileItemPreview`: A boolean indicating if the file item preview is currently shown.
-- `selectedFileItem`: The currently selected file item to be previewed.
-- `viewSources`: A boolean indicating if the sources of the message are currently shown.
+- `isHovering`: Indicates whether the mouse is hovering over the message.
+- `editedMessage`: The current content of the message being edited.
+- `showImagePreview`: Controls the visibility of the image preview modal.
+- `selectedImage`: The currently selected image for preview.
+- `showFileItemPreview`: Controls the visibility of the file item preview modal.
+- `selectedFileItem`: The currently selected file item for preview.
+- `viewSources`: Controls whether the file sources for a message are visible.
 
-## Component Logic
+## Event Handlers
 
-The `Message` component uses the `ChatbotUIContext` to access various pieces of data such as the user's profile, the available models, and the current chat messages. It also uses the `useChatHandler` hook to handle sending messages.
+The component defines several event handlers, including:
 
-The component handles several user interactions such as copying a message, starting and submitting an edit, and regenerating a message. It also handles showing and hiding previews for images and file items.
+- `handleCopy`: Copies the message content to the clipboard.
+- `handleSendEdit`: Submits an edited message and cancels editing mode.
+- `handleKeyDown`: Handles keyboard events during message editing.
+- `handleRegenerate`: Regenerates an assistant message.
+- `handleStartEdit`: Starts editing a message.
 
-The component renders a message along with its associated actions and details. If the message is being edited, a textarea is shown for the user to input the new message. If the message has associated file items, a summary of the sources is shown. If the message has associated images, these are displayed as well.
+## Rendered JSX
 
-## Subcomponents
+The component renders a div that contains the message content, message actions, and related file sources. If the message is being edited, a textarea is displayed for the user to edit the message content. If the message has related file items, a list of file sources is displayed.
 
-The `Message` component uses several subcomponents:
+## Preview Modals
 
-- `MessageActions`: Displays actions that can be performed on a message such as copying, editing, and regenerating.
-- `MessageMarkdown`: Renders the content of a message as Markdown.
-- `FilePreview`: Displays a preview of an image or file item.
-- `Button`: A generic button component.
-- `TextareaAutosize`: A textarea that automatically adjusts its size based on its content.
-- `WithTooltip`: A wrapper component that displays a tooltip when its child is hovered over.
-- `ModelIcon`: Displays an icon representing a model.
-- `FileIcon`: Displays an icon representing a file type.
+The component can display two types of preview modals: an image preview modal and a file item preview modal. The visibility of these modals is controlled by the `showImagePreview` and `showFileItemPreview` state variables, respectively. The content of the modals is determined by the `selectedImage` and `selectedFileItem` state variables.
+
+## Code Summary
+
+```ts
+// Import necessary dependencies
+
+// Define the Message component
+export const Message: FC<MessageProps> = ({
+  message,
+  fileItems,
+  isEditing,
+  isLast,
+  onStartEdit,
+  onCancelEdit,
+  onSubmitEdit
+}) => {
+  // Use context and hooks
+
+  // Define state variables
+
+  // Define event handlers
+
+  // Render the component
+  return (
+    // JSX code...
+  )
+}
+```
+
+## Conclusion
+
+The `Message` component is a key part of the chat interface in the `chatbot-ui` application. It handles the display of chat messages and provides several features to interact with these messages.

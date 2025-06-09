@@ -1,45 +1,66 @@
 ---
 source: lib/hooks/use-hotkey.tsx
-generated: '2025-06-08T13:21:01.647Z'
+generated: 2025-06-08T22:32:17.361Z
 tags: []
-hash: f949b947160c07d2fd7f1153c53bf43103e427a1e31a8b36fc37313f85ff4b0d
+hash: 8cd78b8be8f6d89203e9ac5de0c70b3c121ab355a27abf5ab40c122c018ecd55
 ---
-# useHotkey Hook
 
-This module exports a custom React Hook called `useHotkey`.
+# Documentation for useHotkey Hook
 
-## Function Signature
+This document provides an overview of the `useHotkey` hook located at `/Users/garymason/chatbot-ui/lib/hooks/use-hotkey.tsx`. This hook is a custom React hook that allows you to assign a callback function to a specific keyboard shortcut.
 
-```typescript
-const useHotkey = (key: string, callback: () => void): void
+## Code Overview
+
+```ts
+import { useEffect } from "react"
+
+const useHotkey = (key: string, callback: () => void): void => {
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent): void => {
+      if (event.metaKey && event.shiftKey && event.key === key) {
+        event.preventDefault()
+        callback()
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [key, callback])
+}
+
+export default useHotkey
 ```
 
-## Parameters
+## Function: useHotkey
 
-- `key` (string): The key combination that will trigger the callback function. This should be a string representing a keyboard key. For example, "a" for the 'A' key, "b" for the 'B' key, etc.
+The `useHotkey` function is a custom React hook that takes two parameters: a `key` of type `string` and a `callback` function. This hook sets up a keyboard event listener that triggers the provided callback function when the user presses the specified key while holding down both the meta key (commonly the command key on Mac or the Windows key on Windows) and the shift key.
 
-- `callback` (function): The function that will be executed when the specified key combination is pressed. This function should not return anything.
+### Parameters
 
-## Description
+- `key` (string): The key that, when pressed in combination with the meta key and the shift key, will trigger the callback function.
+- `callback` (function): The function that will be called when the specified key combination is pressed.
 
-The `useHotkey` hook listens for a specific key combination to be pressed and then executes a callback function when that key combination is detected. The key combination is defined as the Meta key (commonly known as the Command key on macOS or the Windows key on Windows) and the Shift key, in addition to the key specified by the `key` parameter.
+### Usage
 
-The hook uses the `useEffect` hook from React to set up an event listener on the `window` object when the component mounts. This event listener listens for the "keydown" event. When a "keydown" event occurs, the event listener checks if the Meta key, the Shift key, and the specified key are all pressed at the same time. If they are, it prevents the default action for the keydown event and then executes the callback function.
+The `useHotkey` hook is used inside a React component. When the component mounts, an event listener is added to the window object that listens for `keydown` events. If the event's `key` matches the `key` parameter and both the meta key and the shift key are being pressed, the event's default behavior is prevented and the callback function is executed.
 
-When the component unmounts, the `useEffect` hook removes the event listener from the `window` object.
+When the component unmounts, the event listener is removed from the window object, preventing memory leaks.
 
-## Example
+### Example
 
-```javascript
-import useHotkey from './useHotkey';
+```ts
+import useHotkey from './hooks/use-hotkey'
 
-function ExampleComponent() {
-  useHotkey('a', () => {
-    console.log('Hotkey activated');
-  });
+const MyComponent = () => {
+  useHotkey('s', () => {
+    console.log('You pressed Meta+Shift+S!')
+  })
 
-  return <div>Press Cmd+Shift+A</div>;
+  return <div>Press Meta+Shift+S to see a message in the console.</div>
 }
 ```
 
-In this example, the `useHotkey` hook is used in a component called `ExampleComponent`. When the user presses the Meta key, the Shift key, and the 'A' key at the same time, the message "Hotkey activated" is logged to the console.
+In this example, the `useHotkey` hook is used in the `MyComponent` component to log a message to the console when the user presses Meta+Shift+S.

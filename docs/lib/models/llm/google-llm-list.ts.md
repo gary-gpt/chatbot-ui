@@ -1,28 +1,38 @@
 ---
 source: lib/models/llm/google-llm-list.ts
-generated: '2025-06-08T13:21:01.658Z'
+generated: 2025-06-08T22:34:35.644Z
 tags: []
-hash: 97d4bfdff576efff1fb3abecf4fadedc4842bc54a4c9fc14f0c90cb0ef92c508
+hash: 2a8652a1286e6ec8cacf0b59d34f75a276217c8f5759a4984cf386112b218fcd
 ---
-# Google Models Documentation
 
-This file contains the definitions of several Google models. Each model is an object of type `LLM`, which is imported from "@/types". The models are stored as constants and are exported as part of the `GOOGLE_LLM_LIST` array.
+# Google LLM List
+
+This TypeScript file, located at `/Users/garymason/chatbot-ui/lib/models/llm/google-llm-list.ts`, defines a list of Google's Language Learning Models (LLMs). Each model is represented as an object with properties such as `modelId`, `modelName`, `provider`, `hostedId`, `platformLink`, and `imageInput`.
+
+## Imports
+
+```ts
+import { LLM } from "@/types"
+```
+
+The file imports the `LLM` type from the `@/types` module. This type is used to define the structure of the LLM objects.
 
 ## Constants
 
-### `GOOGLE_PLATORM_LINK`
-
-This is a string constant that contains the URL of the Google AI platform.
-
-```javascript
+```ts
 const GOOGLE_PLATORM_LINK = "https://ai.google.dev/"
 ```
 
-### `GEMINI_1_5_FLASH`
+This constant stores the URL for Google's AI platform.
 
-This is an object that represents the Gemini 1.5 Flash model. It was last updated on 12/22/23.
+## Google Models
 
-```javascript
+The file defines several Google LLMs, each as a constant object of type `LLM`. 
+
+### Gemini 1.5 Flash
+
+```ts
+// Gemini 1.5 Flash
 const GEMINI_1_5_FLASH: LLM = {
   modelId: "gemini-1.5-flash",
   modelName: "Gemini 1.5 Flash",
@@ -33,11 +43,10 @@ const GEMINI_1_5_FLASH: LLM = {
 }
 ```
 
-### `GEMINI_1_5_PRO`
+### Gemini 1.5 Pro
 
-This object represents the Gemini 1.5 Pro model. It was last updated on 05/28/24.
-
-```javascript
+```ts
+// Gemini 1.5 Pro (UPDATED 05/28/24)
 const GEMINI_1_5_PRO: LLM = {
   modelId: "gemini-1.5-pro-latest",
   modelName: "Gemini 1.5 Pro",
@@ -48,11 +57,10 @@ const GEMINI_1_5_PRO: LLM = {
 }
 ```
 
-### `GEMINI_PRO`
+### Gemini Pro
 
-This object represents the Gemini Pro model. It was last updated on 12/22/23.
-
-```javascript
+```ts
+// Gemini Pro (UPDATED 12/22/23)
 const GEMINI_PRO: LLM = {
   modelId: "gemini-pro",
   modelName: "Gemini Pro",
@@ -63,11 +71,10 @@ const GEMINI_PRO: LLM = {
 }
 ```
 
-### `GEMINI_PRO_VISION`
+### Gemini Pro Vision
 
-This object represents the Gemini Pro Vision model. It was last updated on 12/22/23.
-
-```javascript
+```ts
+// Gemini Pro Vision (UPDATED 12/22/23)
 const GEMINI_PRO_VISION: LLM = {
   modelId: "gemini-pro-vision",
   modelName: "Gemini Pro Vision",
@@ -78,13 +85,9 @@ const GEMINI_PRO_VISION: LLM = {
 }
 ```
 
-## Exported Constants
+## Exported List
 
-### `GOOGLE_LLM_LIST`
-
-This is an array that contains all the Google model objects.
-
-```javascript
+```ts
 export const GOOGLE_LLM_LIST: LLM[] = [
   GEMINI_PRO,
   GEMINI_PRO_VISION,
@@ -92,3 +95,5 @@ export const GOOGLE_LLM_LIST: LLM[] = [
   GEMINI_1_5_FLASH
 ]
 ```
+
+Finally, the file exports a list of all the defined Google LLMs. This list can be imported by other modules to access the LLMs.

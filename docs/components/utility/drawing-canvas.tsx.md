@@ -1,45 +1,99 @@
 ---
 source: components/utility/drawing-canvas.tsx
-generated: '2025-06-08T13:21:01.638Z'
+generated: 2025-06-08T22:15:02.231Z
 tags: []
-hash: 38018800663a9c380828ed8aa9a2b2843894fd4eda126ed430c8c1ef914b4604
+hash: ecb87fe98e7857fee54a9760a3fe526629ce73c9120d3b2179c8b7b49dd93539
 ---
+
 # DrawingCanvas Component Documentation
 
-The `DrawingCanvas` component is a React functional component that provides a drawing canvas interface for images. It allows users to draw on images with a red line and save the edited image.
+This document provides an overview of the `DrawingCanvas` component in the `chatbot-ui` project. This component is located in the file `/Users/garymason/chatbot-ui/components/utility/drawing-canvas.tsx`.
 
-## Props
+## Overview
 
-The `DrawingCanvas` component accepts the following props:
+The `DrawingCanvas` component is a functional component that provides a canvas for drawing. It uses the `ChatbotUIContext` to update the chatbot's messages with new images. The component allows users to draw on a loaded image and save the drawing as a new image.
 
-- `imageItem`: An object of `MessageImage` type. It represents the image on which the user will draw.
+## Code Breakdown
 
-## State Variables
+### Imports
 
-- `isDrawing`: A boolean state variable that indicates whether the user is currently drawing on the canvas.
-
-## Functions
-
-- `startDrawing`: This function is triggered when the user presses the mouse button down. It starts the drawing process on the canvas.
-
-- `draw`: This function is triggered when the user moves the mouse. It continues the drawing process on the canvas.
-
-- `finishDrawing`: This function is triggered when the user releases the mouse button or leaves the canvas. It finishes the drawing process and saves the edited image.
-
-## Usage
-
-The `DrawingCanvas` component is used in the following way:
-
-```jsx
-<DrawingCanvas imageItem={imageItem} />
+```ts
+import { ChatbotUIContext } from "@/context/context"
+import { MessageImage } from "@/types"
+import { FC, MouseEvent, useContext, useEffect, useRef, useState } from "react"
 ```
 
-Where `imageItem` is an object of `MessageImage` type.
+The component imports necessary dependencies, including the `ChatbotUIContext` from the application's context, the `MessageImage` type, and several hooks and types from `react`.
 
-## Styles
+### Component Props
 
-The canvas has a `cursor-crosshair` and `rounded` classes applied to it. It also has a maximum height of 67vh and a maximum width of 67vw.
+```ts
+interface DrawingCanvasProps {
+  imageItem: MessageImage
+}
+```
 
-## Dependencies
+The `DrawingCanvas` component accepts a single prop `imageItem` of type `MessageImage`.
 
-This component uses the `ChatbotUIContext` to set new message images. It also uses the `MessageImage` type from `@/types`. The component is built using React hooks such as `useContext`, `useEffect`, `useRef`, and `useState`.
+### Component Definition
+
+```ts
+export const DrawingCanvas: FC<DrawingCanvasProps> = ({ imageItem }) => {
+  ...
+}
+```
+
+The `DrawingCanvas` component is a functional component that takes `DrawingCanvasProps` as its props.
+
+### State and Context
+
+```ts
+const { setNewMessageImages } = useContext(ChatbotUIContext)
+const canvasRef = useRef<HTMLCanvasElement>(null)
+const [isDrawing, setIsDrawing] = useState(false)
+```
+
+The component uses the `useContext` hook to access the `setNewMessageImages` function from the `ChatbotUIContext`. It also uses the `useRef` hook to create a reference to the canvas element, and the `useState` hook to manage a boolean state indicating whether the user is currently drawing.
+
+### useEffect Hook
+
+```ts
+useEffect(() => {
+  ...
+}, [imageItem.url])
+```
+
+The `useEffect` hook is used to perform side effects when the `imageItem.url` prop changes. It loads the image from the provided URL, calculates the appropriate dimensions to maintain the image's aspect ratio within the parent element, and draws the image onto the canvas.
+
+### Event Handlers
+
+```ts
+const startDrawing = ({ nativeEvent }: MouseEvent) => { ... }
+const draw = ({ nativeEvent }: MouseEvent) => { ... }
+const finishDrawing = () => { ... }
+```
+
+These functions are event handlers for mouse events. `startDrawing` is called when the mouse button is pressed, initializing the drawing process. `draw` is called when the mouse moves, drawing a line if the user is currently drawing. `finishDrawing` is called when the mouse button is released or leaves the canvas, finalizing the drawing and saving it as a new image.
+
+### Component Return
+
+```ts
+return (
+  <canvas
+    ref={canvasRef}
+    className="cursor-crosshair rounded"
+    width={2000}
+    height={2000}
+    onMouseDown={startDrawing}
+    onMouseUp={finishDrawing}
+    onMouseMove={draw}
+    onMouseLeave={finishDrawing}
+    style={{
+      maxHeight: "67vh",
+      maxWidth: "67vw"
+    }}
+  />
+)
+```
+
+The component returns a `canvas` element with attached event handlers for drawing and a ref to the canvas element. It has a fixed width and height, and a maximum height and width defined in viewport units to ensure it fits within the viewport.

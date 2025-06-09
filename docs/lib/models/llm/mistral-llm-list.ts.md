@@ -1,112 +1,48 @@
 ---
 source: lib/models/llm/mistral-llm-list.ts
-generated: '2025-06-08T13:21:01.658Z'
+generated: 2025-06-08T22:35:30.379Z
 tags: []
-hash: b97bd7fc20e037d9cc7a1f9260ec77a4c88b69c2576061d1d579fab078d6d4e2
+hash: 6bb6b08762c1a74e23f1ad5fb6b17b70988aec557af856452bf609f17e1da3ab
 ---
-# Source Code Documentation
 
-This source code file defines and exports a list of Mistral models. Each model is defined as an object of type `LLM` and includes various properties related to the model.
+# Mistral Language Learning Models (LLM) List
 
-## Imports
+This TypeScript file defines a list of Mistral's Language Learning Models (LLM) and their respective details. The file is located at `/Users/garymason/chatbot-ui/lib/models/llm/mistral-llm-list.ts`.
 
-```javascript
+## Code Summary
+
+The code begins by importing the `LLM` type from the `@/types` directory. It then defines a constant `MISTRAL_PLATORM_LINK` which is a URL string pointing to Mistral's documentation.
+
+Following this, the code defines four objects, each representing a different Mistral model. Each object is of type `LLM` and contains the following properties:
+
+- `modelId`: A unique identifier for the model.
+- `modelName`: The name of the model.
+- `provider`: The provider of the model (in this case, all models are provided by Mistral).
+- `hostedId`: The identifier for the hosted model.
+- `platformLink`: A link to the platform's documentation (in this case, all models link to Mistral's documentation).
+- `imageInput`: A boolean value indicating whether the model accepts image input.
+- `pricing`: An optional object that includes the pricing details for using the model.
+
+The four models defined are `MISTRAL_7B`, `MIXTRAL`, `MISTRAL_MEDIUM`, and `MISTRAL_LARGE`. Each model has different pricing details, with the exception of `MISTRAL_7B` which does not include a `pricing` property.
+
+Finally, the code exports a constant `MISTRAL_LLM_LIST` which is an array of the four defined models.
+
+## Code Breakdown
+
+```ts
+// Import the LLM type
 import { LLM } from "@/types"
-```
 
-The `LLM` type is imported from the local `types` module.
-
-## Constants
-
-```javascript
+// Define the link to Mistral's documentation
 const MISTRAL_PLATORM_LINK = "https://docs.mistral.ai/"
-```
 
-`MISTRAL_PLATORM_LINK` is a constant string that represents the URL of the Mistral platform documentation.
+// Define the Mistral models
+const MISTRAL_7B: LLM = { ... }
+const MIXTRAL: LLM = { ... }
+const MISTRAL_MEDIUM: LLM = { ... }
+const MISTRAL_LARGE: LLM = { ... }
 
-## Mistral Models
-
-### Mistral 7B
-
-```javascript
-const MISTRAL_7B: LLM = {
-  modelId: "mistral-tiny",
-  modelName: "Mistral Tiny",
-  provider: "mistral",
-  hostedId: "mistral-tiny",
-  platformLink: MISTRAL_PLATORM_LINK,
-  imageInput: false
-}
-```
-
-`MISTRAL_7B` is a model object with properties including the model ID, model name, provider, hosted ID, platform link, and a boolean indicating if the model accepts image input.
-
-### Mixtral
-
-```javascript
-const MIXTRAL: LLM = {
-  modelId: "mistral-small-latest",
-  modelName: "Mistral Small",
-  provider: "mistral",
-  hostedId: "mistral-small-latest",
-  platformLink: MISTRAL_PLATORM_LINK,
-  imageInput: false,
-  pricing: {
-    currency: "USD",
-    unit: "1M tokens",
-    inputCost: 2,
-    outputCost: 6
-  }
-}
-```
-
-`MIXTRAL` is a model object similar to `MISTRAL_7B` but also includes a `pricing` object with properties for currency, unit, input cost, and output cost.
-
-### Mistral Medium
-
-```javascript
-const MISTRAL_MEDIUM: LLM = {
-  modelId: "mistral-medium-latest",
-  modelName: "Mistral Medium",
-  provider: "mistral",
-  hostedId: "mistral-medium-latest",
-  platformLink: MISTRAL_PLATORM_LINK,
-  imageInput: false,
-  pricing: {
-    currency: "USD",
-    unit: "1M tokens",
-    inputCost: 2.7,
-    outputCost: 8.1
-  }
-}
-```
-
-`MISTRAL_MEDIUM` is a model object similar to `MIXTRAL`.
-
-### Mistral Large
-
-```javascript
-const MISTRAL_LARGE: LLM = {
-  modelId: "mistral-large-latest",
-  modelName: "Mistral Large",
-  provider: "mistral",
-  hostedId: "mistral-large-latest",
-  platformLink: MISTRAL_PLATORM_LINK,
-  imageInput: false,
-  pricing: {
-    currency: "USD",
-    unit: "1M tokens",
-    inputCost: 8,
-    outputCost: 24
-  }
-}
-```
-
-`MISTRAL_LARGE` is a model object similar to `MISTRAL_MEDIUM`.
-
-## Exported Constants
-
-```javascript
+// Export a list of the Mistral models
 export const MISTRAL_LLM_LIST: LLM[] = [
   MISTRAL_7B,
   MIXTRAL,
@@ -115,4 +51,6 @@ export const MISTRAL_LLM_LIST: LLM[] = [
 ]
 ```
 
-`MISTRAL_LLM_LIST` is an array of the defined Mistral model objects and is exported for use in other modules.
+## Note
+
+Each model object is annotated with a comment indicating the last update date. This can be useful for tracking changes and updates to the models.

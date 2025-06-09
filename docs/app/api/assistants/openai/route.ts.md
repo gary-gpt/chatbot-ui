@@ -1,39 +1,69 @@
 ---
 source: app/api/assistants/openai/route.ts
-generated: '2025-06-08T13:21:01.659Z'
+generated: 2025-06-08T21:18:18.448Z
 tags: []
-hash: 4fa1563925d59d539f817f983d6581a37e7a358d7f1bff3fa9bd794124074ee6
+hash: f99b5b7d40b2d90debb10f6a0b0011b815275801813865f37d564e0e5dae0d33
 ---
-# Source Code Documentation
 
-## Import Statements
+# OpenAI Assistants Route
 
-The source code begins by importing necessary modules and functions:
+This file is located at `/Users/garymason/chatbot-ui/app/api/assistants/openai/route.ts`. It is a TypeScript file that defines the route for fetching the list of OpenAI Assistants.
 
-- `checkApiKey` and `getServerProfile` functions from the `server-chat-helpers` file in the `server` directory.
-- `ServerRuntime` from the `next` package.
-- `OpenAI` from the `openai` package.
+## Imports
 
-## Runtime Configuration
+The file imports several modules and functions:
 
-The `runtime` constant is set to `"edge"`, which is a value of the `ServerRuntime` type.
+- `checkApiKey` and `getServerProfile` from "@/lib/server/server-chat-helpers"
+- `ServerRuntime` from "next"
+- `OpenAI` from "openai"
+
+## Runtime
+
+The file defines the `runtime` as `edge`, which is a type of `ServerRuntime`.
 
 ## GET Function
 
-The `GET` function is an asynchronous function that interacts with the OpenAI API. 
+The main function in this file is the `GET` function. This is an asynchronous function that fetches the list of OpenAI Assistants.
 
-### Function Flow
+### Function Logic
 
-1. The function starts by retrieving the server profile using the `getServerProfile` function.
+1. The function first calls `getServerProfile` to fetch the server profile.
 
-2. The OpenAI API key from the server profile is then validated using the `checkApiKey` function. 
+2. It then uses `checkApiKey` to validate the OpenAI API key in the server profile.
 
-3. An instance of `OpenAI` is created using the API key and organization ID from the server profile.
+3. If the API key is valid, it creates a new instance of OpenAI using the API key and the organization ID from the server profile.
 
-4. The function then retrieves a list of up to 100 assistants from the OpenAI API using the `list` method from `openai.beta.assistants`.
+4. It then calls `openai.beta.assistants.list` to fetch the list of OpenAI Assistants. It sets the limit to 100.
 
-5. If the operations are successful, the function returns a `Response` object with a status of 200 and a body containing the list of assistants in JSON format.
+5. If the request is successful, it returns a new `Response` object with the list of assistants and a status of 200.
 
-### Error Handling
+6. If an error occurs during the process, it catches the error and returns a new `Response` object with the error message and the error status. If no error message or status is provided, it defaults to "An unexpected error occurred" and 500, respectively.
 
-If an error occurs at any point during the execution of the function, an error message is generated and a `Response` object is returned. The status of the response is set to the error status if available, or 500 by default. The body of the response contains the error message in JSON format.
+```ts
+export async function GET() {
+  try {
+    const profile = await getServerProfile() // Fetch server profile
+
+    checkApiKey(profile.openai_api_key, "OpenAI") // Validate API key
+
+    const openai = new OpenAI({ // Create new OpenAI instance
+      apiKey: profile.openai_api_key || "",
+      organization: profile.openai_organization_id
+    })
+
+    const myAssistants = await openai.beta.assistants.list({ // Fetch list of assistants
+      limit: 100
+    })
+
+    return new Response(JSON.stringify({ assistants: myAssistants.data }), { // Return list of assistants
+      status: 200
+    })
+  } catch (error: any) {
+    const errorMessage = error.error?.message || "An unexpected error occurred" // Default error message
+    const errorCode = error.status || 500 // Default error status
+    return new Response(JSON.stringify({ message: errorMessage }), { // Return error message
+      status: errorCode
+    })
+  }
+}
+```

@@ -1,47 +1,62 @@
 ---
 source: components/chat/assistant-picker.tsx
-generated: '2025-06-08T13:21:01.634Z'
+generated: 2025-06-08T21:26:00.701Z
 tags: []
-hash: f8beabc858e0d5d5236f7a072356aca1de2f0bd03505ddfb5773d27df6fa615f
+hash: c1d1b4d9b8691be6df474785257fac8fd62b052c2675423caf976411994a4895
 ---
-# AssistantPicker Component
 
-This file exports the `AssistantPicker` component which is a functional component (FC) with no props.
+# AssistantPicker Component Documentation
 
-## Imports
+This document describes the `AssistantPicker` component, a part of the chatbot user interface (UI) in a TypeScript project. The component is located at `/Users/garymason/chatbot-ui/components/chat/assistant-picker.tsx`.
 
-- `ChatbotUIContext` from "@/context/context"
-- `Tables` from "@/supabase/types"
-- `IconRobotFace` from "@tabler/icons-react"
-- `Image` from "next/image"
-- `FC, useContext, useEffect, useRef` from "react"
-- `usePromptAndCommand` from "./chat-hooks/use-prompt-and-command"
+## Overview
 
-## Component
+The `AssistantPicker` component is a functional component that allows users to select an assistant from a list of available assistants. The component uses the context `ChatbotUIContext` to access and manipulate the state of the chatbot UI. It also uses the custom hook `usePromptAndCommand` to handle the selection of an assistant.
 
-The `AssistantPicker` component is responsible for displaying a list of chatbot assistants and handling user interactions with the list. 
+## Code Breakdown
 
-### State and Context
+### Imports
 
-The component uses the `ChatbotUIContext` to access and manipulate the state of the chatbot UI. The following values are used from the context:
+The component imports necessary dependencies, including React hooks, context, types, and icons.
 
-- `assistants`: An array of assistant objects.
-- `assistantImages`: An array of assistant image objects.
-- `focusAssistant`: A boolean indicating whether an assistant is in focus.
-- `atCommand`: A string that represents the current command.
-- `isAssistantPickerOpen`: A boolean indicating whether the assistant picker is open.
-- `setIsAssistantPickerOpen`: A function to set the value of `isAssistantPickerOpen`.
+### Props
 
-### Hooks
+The `AssistantPickerProps` interface is currently empty, indicating that the component does not accept any props.
 
-The `usePromptAndCommand` hook is used to get the `handleSelectAssistant` function which is used to handle the selection of an assistant.
+### Component Definition
 
-### Functions
+The `AssistantPicker` component is defined as a functional component. It uses the `useContext` hook to access the chatbot UI context and the `usePromptAndCommand` hook to get the `handleSelectAssistant` function.
 
-- `handleOpenChange`: A function that sets the state of `isAssistantPickerOpen`.
-- `callSelectAssistant`: A function that calls `handleSelectAssistant` and `handleOpenChange`.
-- `getKeyDownHandler`: A function that returns a function to handle key down events.
+### Refs and Effects
 
-### Return
+The `itemsRef` ref is used to store references to the assistant picker items. The `useEffect` hook is used to focus on the first assistant picker item when the `focusAssistant` value changes.
 
-The component returns a list of assistants if `isAssistantPickerOpen` is true. If there are no assistants, it displays a message "No matching assistants." Each assistant in the list is a div element that can be focused and clicked. When an assistant is clicked, the `callSelectAssistant` function is called. When a key is pressed while an assistant is focused, the `getKeyDownHandler` function is called.
+### Assistant Filtering
+
+The `filteredAssistants` constant is a filtered list of assistants that includes only those whose names include the `atCommand` string.
+
+### Event Handlers
+
+Several event handlers are defined:
+
+- `handleOpenChange`: Sets the `isAssistantPickerOpen` state.
+- `callSelectAssistant`: Calls `handleSelectAssistant` and closes the assistant picker.
+- `getKeyDownHandler`: Returns a function that handles keydown events on an assistant picker item.
+
+### Rendering
+
+The component returns a JSX element that renders the assistant picker if `isAssistantPickerOpen` is `true`. The picker includes a list of `filteredAssistants`, each with an image (or a default icon), name, and description. If no assistants match the current `atCommand`, a message is displayed.
+
+## Usage
+
+This component is used in the chatbot UI to allow users to select an assistant. It is expected to be used within a provider of the `ChatbotUIContext`.
+
+```ts
+<ChatbotUIContext.Provider value={...}>
+  <AssistantPicker />
+</ChatbotUIContext.Provider>
+```
+
+## Conclusion
+
+The `AssistantPicker` component is a crucial part of the chatbot UI, providing an interactive list of assistants for the user to choose from. It uses context and custom hooks to manage state and handle events, demonstrating a modern approach to React component design.

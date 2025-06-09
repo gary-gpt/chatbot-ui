@@ -1,52 +1,98 @@
 ---
 source: app/api/chat/google/route.ts
-generated: '2025-06-08T13:21:01.660Z'
+generated: 2025-06-08T21:19:46.067Z
 tags: []
-hash: 5d54fe07b7f94d6f856a4b5e6aa15ab1f199830572ee6c4f6cf61a7449e9cf94
+hash: 6752e3ed4a57f53ea2dd467cadaba3983d49b65f087077f512ebd407e426e502
 ---
-# Documentation
 
-## Overview
+# Chatbot API - Google Route
 
-This file contains the implementation of an HTTP POST request handler for a chat application. It uses Google's Generative AI to generate responses to chat messages.
+This file is located at `/Users/garymason/chatbot-ui/app/api/chat/google/route.ts`. It defines the logic for handling POST requests to the Google Chatbot API route.
 
-## Imports
+## Code Summary
 
-- `checkApiKey` and `getServerProfile` are helper functions imported from the `server-chat-helpers` module.
-- `ChatSettings` is a TypeScript type imported from the `types` module.
-- `GoogleGenerativeAI` is a class imported from the `@google/generative-ai` package.
+The code imports necessary modules and types, then exports a `runtime` constant and an asynchronous `POST` function. The `POST` function handles incoming requests, processes them with the Google Generative AI, and returns the AI's response. If an error occurs, it will return a response with an appropriate error message.
 
-## Constants
+## Code Breakdown
 
-- `runtime`: This constant is set to "edge".
+```ts
+import { checkApiKey, getServerProfile } from "@/lib/server/server-chat-helpers"
+import { ChatSettings } from "@/types"
+import { GoogleGenerativeAI } from "@google/generative-ai"
+```
+The above lines import necessary helper functions, types, and modules.
 
-## Functions
+```ts
+export const runtime = "edge"
+```
+This line exports a constant `runtime` with the value `"edge"`.
 
-### POST(request: Request)
+```ts
+export async function POST(request: Request) {
+  const json = await request.json()
+  const { chatSettings, messages } = json as {
+    chatSettings: ChatSettings
+    messages: any[]
+  }
+```
+This block of code defines an asynchronous function `POST` that takes a `request` as an argument. It then parses the request into JSON and destructures the `chatSettings` and `messages` properties from the JSON object.
 
-This is an asynchronous function that handles HTTP POST requests.
+```ts
+try {
+    const profile = await getServerProfile()
 
-#### Parameters
+    checkApiKey(profile.google_gemini_api_key, "Google")
 
-- `request`: The incoming HTTP request.
+    const genAI = new GoogleGenerativeAI(profile.google_gemini_api_key || "")
+    const googleModel = genAI.getGenerativeModel({ model: chatSettings.model })
 
-#### Implementation
+    const lastMessage = messages.pop()
 
-The function first parses the JSON body of the request, expecting it to contain `chatSettings` (of type `ChatSettings`) and `messages` (an array of any type).
+    const chat = googleModel.startChat({
+      history: messages,
+      generationConfig: {
+        temperature: chatSettings.temperature
+      }
+    })
 
-It then retrieves the server profile and checks the validity of the Google Gemini API key.
+    const response = await chat.sendMessageStream(lastMessage.parts)
+```
+This `try` block retrieves the server profile, checks the Google API key, initializes the Google Generative AI with the API key, and gets the generative model based on the chat settings. It then starts a chat with the Google model using the message history and chat settings, and sends the last message from the messages array.
 
-Using the API key, it creates a new instance of `GoogleGenerativeAI` and retrieves the generative model based on the `model` specified in `chatSettings`.
+```ts
+const encoder = new TextEncoder()
+    const readableStream = new ReadableStream({
+      async start(controller) {
+        for await (const chunk of response.stream) {
+          const chunkText = chunk.text()
+          controller.enqueue(encoder.encode(chunkText))
+        }
+        controller.close()
+      }
+    })
 
-The function then starts a chat with the generative model, using the `messages` as history and the `temperature` specified in `chatSettings` as the generation configuration.
+    return new Response(readableStream, {
+      headers: { "Content-Type": "text/plain" }
+    })
+```
+This block of code creates a new `TextEncoder`, then creates a `ReadableStream` from the response stream. It encodes each chunk of the stream into text and enqueues it into the stream controller. Finally, it returns a new `Response` with the readable stream and a "Content-Type" header set to "text/plain".
 
-It sends the last message in the `messages` array to the model and waits for a response.
+```ts
+catch (error: any) {
+    let errorMessage = error.message || "An unexpected error occurred"
+    const errorCode = error.status || 500
 
-The response is then encoded into a readable stream and returned in the response body.
+    if (errorMessage.toLowerCase().includes("api key not found")) {
+      errorMessage =
+        "Google Gemini API Key not found. Please set it in your profile settings."
+    } else if (errorMessage.toLowerCase().includes("api key not valid")) {
+      errorMessage =
+        "Google Gemini API Key is incorrect. Please fix it in your profile settings."
+    }
 
-If any error occurs during this process, the function catches it and returns a response with an appropriate error message and status code.
-
-#### Returns
-
-- A `Response` object containing a readable stream of the chat response, with a "Content-Type" header set to "text/plain".
-- In case of an error, a `Response` object with a status code and a JSON body containing an error message.
+    return new Response(JSON.stringify({ message: errorMessage }), {
+      status: errorCode
+    })
+  }
+```
+This `catch` block handles any errors that occur during the execution of the `try` block. It sets a default error message and status code, then checks if the error message includes specific phrases to provide more detailed error messages. It then returns a new `Response` with the error message and status code.

@@ -1,67 +1,97 @@
 ---
 source: lib/build-prompt.ts
-generated: '2025-06-08T13:21:01.630Z'
+generated: 2025-06-08T22:30:03.835Z
 tags: []
-hash: fb57fc354fcbc5bdcd4ddae19b760ef9538082514adb7181b3f30dd52edb451d
+hash: e6abe862c85aa74d652826ae063d3e36b3aa6a6624e49cffecba0621ce56bf9f
 ---
-# Source Code Documentation
 
-## Overview
+# Chatbot UI Code Documentation
 
-This file contains several functions that are used to build and adapt messages for a chat system. The messages are built based on a payload that includes chat settings, workspace instructions, chat messages, an assistant, message file items, and chat file items.
+This TypeScript file is located at `/Users/garymason/chatbot-ui/lib/build-prompt.ts`. It contains functions for building and adapting messages for a chatbot UI. The main functions are `buildFinalMessages` and `adaptMessagesForGoogleGemini`.
 
-## Functions
+## Import Statements
 
-### buildBasePrompt
+The file begins by importing necessary modules and types.
 
-This function constructs a base prompt for the chat system. It takes four parameters:
+```ts
+import { Tables } from "@/supabase/types"
+import { ChatPayload, MessageImage } from "@/types"
+import { encode } from "gpt-tokenizer"
+import { getBase64FromDataURL, getMediaTypeFromDataURL } from "@/lib/utils"
+```
 
-- `prompt`: A string that represents the user's instructions.
-- `profileContext`: A string that represents the user's profile context.
-- `workspaceInstructions`: A string that represents the system's instructions.
-- `assistant`: An object that represents the assistant. It can be null.
+## buildBasePrompt Function
 
-The function returns a string that represents the full prompt.
+The `buildBasePrompt` function takes in a prompt, profile context, workspace instructions, and assistant details. It constructs a full prompt based on these inputs.
 
-### buildFinalMessages
+```ts
+const buildBasePrompt = (
+  prompt: string,
+  profileContext: string,
+  workspaceInstructions: string,
+  assistant: Tables<"assistants"> | null
+) => {
+  // Function body
+}
+```
 
-This asynchronous function builds the final messages for the chat system. It takes three parameters:
+## buildFinalMessages Function
 
-- `payload`: An object that represents the chat payload.
-- `profile`: An object that represents the user's profile.
-- `chatImages`: An array of objects that represent the chat images.
+The `buildFinalMessages` function takes in a payload, profile, and chat images. It processes the chat messages and builds the final messages to be sent in the chat.
 
-The function returns an array of final messages.
+```ts
+export async function buildFinalMessages(
+  payload: ChatPayload,
+  profile: Tables<"profiles">,
+  chatImages: MessageImage[]
+) {
+  // Function body
+}
+```
 
-### buildRetrievalText
+## buildRetrievalText Function
 
-This function builds a retrieval text for the chat system. It takes one parameter:
+The `buildRetrievalText` function takes in file items and constructs a retrieval text based on these items.
 
-- `fileItems`: An array of objects that represent the file items.
+```ts
+function buildRetrievalText(fileItems: Tables<"file_items">[]) {
+  // Function body
+}
+```
 
-The function returns a string that represents the retrieval text.
+## adaptSingleMessageForGoogleGemini Function
 
-### adaptSingleMessageForGoogleGemini
+The `adaptSingleMessageForGoogleGemini` function takes in a message and adapts it for Google Gemini.
 
-This function adapts a single message for Google Gemini. It takes one parameter:
+```ts
+function adaptSingleMessageForGoogleGemini(message: any) {
+  // Function body
+}
+```
 
-- `message`: An object that represents the message.
+## adaptMessagesForGeminiVision Function
 
-The function returns an object that represents the adapted message.
+The `adaptMessagesForGeminiVision` function takes in messages and adapts them for Gemini Vision.
 
-### adaptMessagesForGeminiVision
+```ts
+function adaptMessagesForGeminiVision(messages: any[]) {
+  // Function body
+}
+```
 
-This function adapts messages for Gemini Vision. It takes one parameter:
+## adaptMessagesForGoogleGemini Function
 
-- `messages`: An array of objects that represent the messages.
+The `adaptMessagesForGoogleGemini` function takes in a payload and messages, and adapts the messages for Google Gemini.
 
-The function returns an array of objects that represent the adapted messages.
+```ts
+export async function adaptMessagesForGoogleGemini(
+  payload: ChatPayload,
+  messages: any[]
+) {
+  // Function body
+}
+```
 
-### adaptMessagesForGoogleGemini
+## Summary
 
-This asynchronous function adapts messages for Google Gemini. It takes two parameters:
-
-- `payload`: An object that represents the chat payload.
-- `messages`: An array of objects that represent the messages.
-
-The function returns an array of objects that represent the adapted messages.
+In summary, this file contains functions for building and adapting messages for a chatbot UI. It is part of a larger chatbot UI application.

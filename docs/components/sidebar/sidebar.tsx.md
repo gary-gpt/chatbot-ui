@@ -1,42 +1,156 @@
 ---
 source: components/sidebar/sidebar.tsx
-generated: '2025-06-08T13:21:01.637Z'
+generated: 2025-06-08T21:54:04.679Z
 tags: []
-hash: fe924c35d85f2ce77929b92da855d55bcaaf829a20e30590d02fd427c099da29
+hash: fb3dae4011fa3b3807c0df24892ae88e6ff8d505307bd2a7d8d34634e3d1d06a
 ---
-# Sidebar Component
 
-This file defines a `Sidebar` component for the application. The sidebar is a functional component that takes in two props: `contentType` and `showSidebar`.
+# Sidebar Component Documentation
 
-## Imports
+The `Sidebar` component is a part of the Chatbot UI. It is responsible for rendering the sidebar of the application, which contains various content types such as chats, presets, prompts, files, collections, assistants, tools, and models.
 
-The file imports several dependencies:
+## File Location
 
-- `ChatbotUIContext` from "@/context/context": This is the context object for the chatbot UI.
-- `Tables` from "@/supabase/types": This is a type definition for the tables in the Supabase database.
-- `ContentType` from "@/types": This is a type definition for the content types that can be displayed in the sidebar.
-- `FC, useContext` from "react": These are React hooks for creating functional components and using context within them.
-- `SIDEBAR_WIDTH` from "../ui/dashboard": This is a constant that defines the width of the sidebar.
-- `TabsContent` from "../ui/tabs": This is a UI component for displaying tabbed content.
-- `WorkspaceSwitcher` from "../utility/workspace-switcher": This is a utility component for switching between workspaces.
-- `WorkspaceSettings` from "../workspace/workspace-settings": This is a component for displaying workspace settings.
-- `SidebarContent` from "./sidebar-content": This is a component for displaying the content of the sidebar.
+`/Users/garymason/chatbot-ui/components/sidebar/sidebar.tsx`
 
-## Props
+## Code Overview
 
-The `Sidebar` component takes in the following props:
+### Imports
 
-- `contentType`: This is the type of content to be displayed in the sidebar. It is of type `ContentType`.
-- `showSidebar`: This is a boolean that determines whether the sidebar should be displayed or not.
+The component imports several dependencies:
 
-## Functionality
+- Context and types from the application's own modules.
+- `FC` (Functional Component) and `useContext` from React for component creation and context usage.
+- Constants and components from other parts of the application.
 
-The `Sidebar` component uses the `ChatbotUIContext` to get the current state of the chatbot UI. It then filters the folders based on their type and displays the relevant content in the sidebar based on the `contentType` prop.
+### SidebarProps Interface
 
-The `renderSidebarContent` function is used to render the `SidebarContent` component with the appropriate content and folders.
+The `SidebarProps` interface defines the props that the `Sidebar` component expects:
 
-The sidebar's width is determined by the `showSidebar` prop and the `SIDEBAR_WIDTH` constant. If `showSidebar` is `true`, the sidebar's width is `SIDEBAR_WIDTH - 60px`. If `showSidebar` is `false`, the sidebar's width is `0px`.
+- `contentType`: A string that represents the type of content to display in the sidebar.
+- `showSidebar`: A boolean that indicates whether the sidebar should be displayed.
 
-The `WorkspaceSwitcher` and `WorkspaceSettings` components are displayed at the top of the sidebar.
+### Sidebar Component
 
-The content of the sidebar is determined by a switch statement that checks the `contentType` prop and calls the `renderSidebarContent` function with the appropriate arguments.
+The `Sidebar` component is a functional component that takes `SidebarProps` as its props. It uses the `ChatbotUIContext` to get the data for different content types and filters the folders based on the content type.
+
+The `renderSidebarContent` function is defined within the `Sidebar` component. It takes a content type, an array of data, and an array of folders, and renders the `SidebarContent` component with these props.
+
+The component returns a `TabsContent` component, which includes a `WorkspaceSwitcher`, `WorkspaceSettings`, and the content returned by the `renderSidebarContent` function.
+
+## Code Breakdown
+
+```ts
+export const Sidebar: FC<SidebarProps> = ({ contentType, showSidebar }) => {
+  const {
+    folders,
+    chats,
+    presets,
+    prompts,
+    files,
+    collections,
+    assistants,
+    tools,
+    models
+  } = useContext(ChatbotUIContext)
+```
+
+The `Sidebar` component is defined. It uses the `ChatbotUIContext` to get the data for different content types.
+
+```ts
+  const chatFolders = folders.filter(folder => folder.type === "chats")
+  const presetFolders = folders.filter(folder => folder.type === "presets")
+  const promptFolders = folders.filter(folder => folder.type === "prompts")
+  const filesFolders = folders.filter(folder => folder.type === "files")
+  const collectionFolders = folders.filter(
+    folder => folder.type === "collections"
+  )
+  const assistantFolders = folders.filter(
+    folder => folder.type === "assistants"
+  )
+  const toolFolders = folders.filter(folder => folder.type === "tools")
+  const modelFolders = folders.filter(folder => folder.type === "models")
+```
+
+The folders are filtered based on their type.
+
+```ts
+  const renderSidebarContent = (
+    contentType: ContentType,
+    data: any[],
+    folders: Tables<"folders">[]
+  ) => {
+    return (
+      <SidebarContent contentType={contentType} data={data} folders={folders} />
+    )
+  }
+```
+
+The `renderSidebarContent` function is defined. It renders the `SidebarContent` component with the given content type, data, and folders.
+
+```ts
+  return (
+    <TabsContent
+      className="m-0 w-full space-y-2"
+      style={{
+        minWidth: showSidebar ? `calc(${SIDEBAR_WIDTH}px - 60px)` : "0px",
+        maxWidth: showSidebar ? `calc(${SIDEBAR_WIDTH}px - 60px)` : "0px",
+        width: showSidebar ? `calc(${SIDEBAR_WIDTH}px - 60px)` : "0px"
+      }}
+      value={contentType}
+    >
+```
+
+The component returns a `TabsContent` component. The width of the `TabsContent` is determined by the `showSidebar` prop.
+
+```ts
+        {(() => {
+          switch (contentType) {
+            case "chats":
+              return renderSidebarContent("chats", chats, chatFolders)
+
+            case "presets":
+              return renderSidebarContent("presets", presets, presetFolders)
+
+            case "prompts":
+              return renderSidebarContent("prompts", prompts, promptFolders)
+
+            case "files":
+              return renderSidebarContent("files", files, filesFolders)
+
+            case "collections":
+              return renderSidebarContent(
+                "collections",
+                collections,
+                collectionFolders
+              )
+
+            case "assistants":
+              return renderSidebarContent(
+                "assistants",
+                assistants,
+                assistantFolders
+              )
+
+            case "tools":
+              return renderSidebarContent("tools", tools, toolFolders)
+
+            case "models":
+              return renderSidebarContent("models", models, modelFolders)
+
+            default:
+              return null
+          }
+        })()}
+```
+
+The content to be rendered is determined by the `contentType` prop. The `renderSidebarContent` function is called with the appropriate arguments based on the `contentType`. If the `contentType` does not match any of the cases, `null` is returned.
+
+```ts
+      </div>
+    </TabsContent>
+  )
+}
+```
+
+The `TabsContent` component is closed, and the `Sidebar` component is ended.

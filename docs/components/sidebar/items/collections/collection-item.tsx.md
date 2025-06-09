@@ -1,40 +1,130 @@
 ---
 source: components/sidebar/items/collections/collection-item.tsx
-generated: '2025-06-08T13:21:01.662Z'
+generated: 2025-06-08T21:46:49.914Z
 tags: []
-hash: b30b359c04209e33f270b29929a1d37ca45d83dfee20dba2a144f2d210b6280a
+hash: 4e5ff2d8f1e417b1d2624b48d909337ed5b10ec50049e9a74219277d1ee20a2b
 ---
-# CollectionItem Component
 
-The `CollectionItem` component is a functional component that displays a collection item in a sidebar. It allows users to select files to be included in the collection, and to edit the collection's name and description.
+# Collection Item Component Documentation
 
-## Props
+This documentation covers the `CollectionItem` component located at `/Users/garymason/chatbot-ui/components/sidebar/items/collections/collection-item.tsx`. This component is used to render a single collection item in the sidebar of the application.
 
-- `collection`: An object of type `Tables<"collections">` representing the collection to be displayed.
+## Code Overview
 
-## State
+```ts
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { COLLECTION_DESCRIPTION_MAX, COLLECTION_NAME_MAX } from "@/db/limits"
+import { Tables } from "@/supabase/types"
+import { CollectionFile } from "@/types"
+import { IconBooks } from "@tabler/icons-react"
+import { FC, useState } from "react"
+import { SidebarItem } from "../all/sidebar-display-item"
+import { CollectionFileSelect } from "./collection-file-select"
+```
 
-- `name`: A string representing the name of the collection. Initialized with the name of the collection passed as a prop.
-- `isTyping`: A boolean indicating whether the user is currently typing. Initialized as `false`.
-- `description`: A string representing the description of the collection. Initialized with the description of the collection passed as a prop.
+The above block of code imports necessary dependencies for the `CollectionItem` component. These include UI components, types, constants, and icons.
 
-## Functions
+### CollectionItemProps
 
-- `handleFileSelect`: A function that updates the list of selected files for the collection. It takes two parameters:
-  - `file`: An object of type `CollectionFile` representing the file to be added or removed from the selection.
-  - `setSelectedCollectionFiles`: A state setter function for updating the list of selected files.
+```ts
+interface CollectionItemProps {
+  collection: Tables<"collections">
+}
+```
 
-## Render
+This interface defines the props that the `CollectionItem` component expects. It expects a `collection` prop which is of type `Tables<"collections">`.
 
-The component renders a `SidebarItem` component with the following props:
+### CollectionItem Component
 
-- `item`: The collection object.
-- `isTyping`: The `isTyping` state.
-- `contentType`: A string `"collections"`.
-- `icon`: An `IconBooks` component with a size of `30`.
-- `updateState`: An object containing the `name` and `description` states.
-- `renderInputs`: A function that returns a JSX element containing the inputs for selecting files and editing the collection's name and description. It takes a `renderState` object as a parameter, which contains the following properties:
-  - `startingCollectionFiles`: An array of `CollectionFile` objects representing the initial selection of files.
-  - `setStartingCollectionFiles`: A state setter function for updating the initial selection of files.
-  - `selectedCollectionFiles`: An array of `CollectionFile` objects representing the current selection of files.
-  - `setSelectedCollectionFiles`: A state setter function for updating the current selection of files.
+```ts
+export const CollectionItem: FC<CollectionItemProps> = ({ collection }) => {
+  //...
+}
+```
+
+The `CollectionItem` component is a functional component that takes `CollectionItemProps` as its props. It uses the `collection` prop to initialize its state.
+
+### State Initialization
+
+```ts
+const [name, setName] = useState(collection.name)
+const [isTyping, setIsTyping] = useState(false)
+const [description, setDescription] = useState(collection.description)
+```
+
+The component initializes its state using the `useState` hook. It initializes the `name` and `description` states with the `name` and `description` properties of the `collection` prop respectively. It also initializes `isTyping` state to `false`.
+
+### handleFileSelect Function
+
+```ts
+const handleFileSelect = (
+  file: CollectionFile,
+  setSelectedCollectionFiles: React.Dispatch<
+    React.SetStateAction<CollectionFile[]>
+  >
+) => {
+  //...
+}
+```
+
+The `handleFileSelect` function is used to handle the selection of files in the collection. It takes a `file` and a `setSelectedCollectionFiles` function as arguments.
+
+### Component Return
+
+```ts
+return (
+  <SidebarItem
+    //...
+  />
+)
+```
+
+The component returns a `SidebarItem` component with various props and children.
+
+## Detailed Code Comments
+
+```ts
+// Import necessary dependencies
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { COLLECTION_DESCRIPTION_MAX, COLLECTION_NAME_MAX } from "@/db/limits"
+import { Tables } from "@/supabase/types"
+import { CollectionFile } from "@/types"
+import { IconBooks } from "@tabler/icons-react"
+import { FC, useState } from "react"
+import { SidebarItem } from "../all/sidebar-display-item"
+import { CollectionFileSelect } from "./collection-file-select"
+
+// Define the props for the CollectionItem component
+interface CollectionItemProps {
+  collection: Tables<"collections">
+}
+
+// Define the CollectionItem component
+export const CollectionItem: FC<CollectionItemProps> = ({ collection }) => {
+  // Initialize state
+  const [name, setName] = useState(collection.name)
+  const [isTyping, setIsTyping] = useState(false)
+  const [description, setDescription] = useState(collection.description)
+
+  // Define the handleFileSelect function
+  const handleFileSelect = (
+    file: CollectionFile,
+    setSelectedCollectionFiles: React.Dispatch<
+      React.SetStateAction<CollectionFile[]>
+    >
+  ) => {
+    //...
+  }
+
+  // Return the SidebarItem component
+  return (
+    <SidebarItem
+      //...
+    />
+  )
+}
+```
+
+This code defines a `CollectionItem` component that displays a single collection item in the sidebar of the application. It handles the selection of files in the collection and allows the user to edit the name and description of the collection.

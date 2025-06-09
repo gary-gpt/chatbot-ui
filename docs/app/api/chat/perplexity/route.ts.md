@@ -1,50 +1,118 @@
 ---
 source: app/api/chat/perplexity/route.ts
-generated: '2025-06-08T13:21:01.660Z'
+generated: 2025-06-08T21:22:07.789Z
 tags: []
-hash: b80faf98f0197d7198b699e7b9fdbfa8f6ca5898c72353058c457331749aa366
+hash: 2b9dff16c75b88a51e640a8d5f0685067190606a973fb1abfc2a952de8d16ab8
 ---
-# POST Function Documentation
 
-The `POST` function is an asynchronous function that handles HTTP POST requests. It is responsible for creating a new chat completion using the OpenAI SDK and the Perplexity API.
+# Chatbot UI - Perplexity Route
+
+This document provides an overview of the `route.ts` file located at `/Users/garymason/chatbot-ui/app/api/chat/perplexity/`. This file contains a single function `POST` that handles POST requests for the Perplexity API.
 
 ## Import Statements
 
-The function imports several helper functions, types, and classes from various modules:
+The file begins by importing necessary modules and types:
 
-- `checkApiKey` and `getServerProfile` from the `server-chat-helpers` module.
-- `ChatSettings` type from the `types` module.
-- `OpenAIStream` and `StreamingTextResponse` from the `ai` module.
-- `OpenAI` from the `openai` module.
+```ts
+import { checkApiKey, getServerProfile } from "@/lib/server/server-chat-helpers"
+import { ChatSettings } from "@/types"
+import { OpenAIStream, StreamingTextResponse } from "ai"
+import OpenAI from "openai"
+```
 
-## Constants
+## Runtime
 
-The `runtime` constant is set to `"edge"`.
+The `runtime` is set to "edge".
 
-## Parameters
+```ts
+export const runtime = "edge"
+```
 
-The function takes one parameter:
+## POST Function
 
-- `request`: An instance of the `Request` class.
+The `POST` function is an asynchronous function that takes a `request` as input.
 
-## Functionality
+```ts
+export async function POST(request: Request) {
+```
 
-The function starts by parsing the JSON body of the request. It expects the JSON to have two properties: `chatSettings` (of type `ChatSettings`) and `messages` (an array of any type).
+### Request Parsing
 
-Next, it retrieves the server profile and checks the Perplexity API key from the profile. If the API key is not found or incorrect, it throws an error.
+The function begins by parsing the request into JSON and destructuring `chatSettings` and `messages` from the JSON object.
 
-Then, it creates a new instance of the `OpenAI` class with the Perplexity API key and the base URL of the Perplexity API.
+```ts
+  const json = await request.json()
+  const { chatSettings, messages } = json as {
+    chatSettings: ChatSettings
+    messages: any[]
+  }
+```
 
-After that, it creates a new chat completion using the `chat.completions.create` method of the `OpenAI` instance. It passes the model from the chat settings, the messages, and sets the `stream` property to `true`.
+### Try-Catch Block
 
-It then creates a new instance of the `OpenAIStream` class with the response from the chat completion creation.
+The main logic of the function is wrapped in a try-catch block to handle any errors that may occur.
 
-Finally, it returns a new instance of the `StreamingTextResponse` class with the `OpenAIStream` instance.
+```ts
+  try {
+    // ...
+  } catch (error: any) {
+    // ...
+  }
+```
 
-## Error Handling
+#### Try Block
 
-If an error occurs during the execution of the function, it catches the error and returns a new instance of the `Response` class with a JSON stringified object containing the error message and the status code of the error.
+In the try block, the function:
 
-If the error message includes "api key not found", it sets the error message to "Perplexity API Key not found. Please set it in your profile settings." If the status code of the error is 401, it sets the error message to "Perplexity API Key is incorrect. Please fix it in your profile settings."
+1. Retrieves the server profile
+2. Checks the API key
+3. Creates a new instance of `OpenAI` with the API key and base URL
+4. Creates a new chat completion with the model, messages, and stream
+5. Returns a new `StreamingTextResponse` with the stream
 
-If the error does not have a message or a status code, it defaults the error message to "An unexpected error occurred" and the status code to 500.
+```ts
+    const profile = await getServerProfile()
+
+    checkApiKey(profile.perplexity_api_key, "Perplexity")
+
+    const perplexity = new OpenAI({
+      apiKey: profile.perplexity_api_key || "",
+      baseURL: "https://api.perplexity.ai/"
+    })
+
+    const response = await perplexity.chat.completions.create({
+      model: chatSettings.model,
+      messages,
+      stream: true
+    })
+
+    const stream = OpenAIStream(response)
+
+    return new StreamingTextResponse(stream)
+```
+
+#### Catch Block
+
+In the catch block, the function:
+
+1. Sets a default error message and error code
+2. Checks if the error message includes "api key not found" and updates the error message if true
+3. Checks if the error code is 401 and updates the error message if true
+4. Returns a new `Response` with the error message and error code
+
+```ts
+    let errorMessage = error.message || "An unexpected error occurred"
+    const errorCode = error.status || 500
+
+    if (errorMessage.toLowerCase().includes("api key not found")) {
+      errorMessage =
+        "Perplexity API Key not found. Please set it in your profile settings."
+    } else if (errorCode === 401) {
+      errorMessage =
+        "Perplexity API Key is incorrect. Please fix it in your profile settings."
+    }
+
+    return new Response(JSON.stringify({ message: errorMessage }), {
+      status: errorCode
+    })
+```

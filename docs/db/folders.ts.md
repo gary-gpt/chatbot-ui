@@ -1,76 +1,98 @@
 ---
 source: db/folders.ts
-generated: '2025-06-08T13:21:01.629Z'
+generated: 2025-06-08T22:23:00.364Z
 tags: []
-hash: ac51fdd61e73da95d956d3376c9d568f9f12a8ded40e87d59a307cabf0c8228b
+hash: e3c83662507d41cfbe11e97d4d5d80330ebda36fef4991d7adda69eef0aafffd
 ---
-# Folders API
 
-This source code file provides an API for managing folders in a workspace. It includes functions for getting, creating, updating, and deleting folders.
+# Folders.ts Documentation
 
-## Functions
+This is a TypeScript file that provides CRUD (Create, Read, Update, Delete) operations for the 'folders' table in a Supabase database. The file is located at `/Users/garymason/chatbot-ui/db/folders.ts`.
 
-### `getFoldersByWorkspaceId(workspaceId: string)`
+## Import Statements
 
-This function retrieves all folders associated with a given workspace ID. 
+```ts
+import { supabase } from "@/lib/supabase/browser-client"
+import { TablesInsert, TablesUpdate } from "@/supabase/types"
+```
 
-#### Parameters
+The file imports the `supabase` object from the `browser-client` file in the `supabase` directory. This object is used to interact with the Supabase database. It also imports `TablesInsert` and `TablesUpdate` types from the `types` file in the `supabase` directory. These types are used to ensure the correct data types are passed to the database operations.
 
-- `workspaceId`: The ID of the workspace.
+## getFoldersByWorkspaceId Function
 
-#### Returns
+```ts
+export const getFoldersByWorkspaceId = async (workspaceId: string) => {
+  const { data: folders, error } = await supabase
+    .from("folders")
+    .select("*")
+    .eq("workspace_id", workspaceId)
 
-- An array of folders associated with the given workspace ID.
+  if (!folders) {
+    throw new Error(error.message)
+  }
 
-#### Errors
+  return folders
+}
+```
 
-- Throws an error if no folders are found for the given workspace ID.
+This function retrieves all folders that belong to a specific workspace. It takes a `workspaceId` as a parameter and returns a promise that resolves to an array of folders. If no folders are found or an error occurs, it throws an error.
 
-### `createFolder(folder: TablesInsert<"folders">)`
+## createFolder Function
 
-This function creates a new folder.
+```ts
+export const createFolder = async (folder: TablesInsert<"folders">) => {
+  const { data: createdFolder, error } = await supabase
+    .from("folders")
+    .insert([folder])
+    .select("*")
+    .single()
 
-#### Parameters
+  if (error) {
+    throw new Error(error.message)
+  }
 
-- `folder`: An object representing the folder to be created. It should match the `TablesInsert<"folders">` type.
+  return createdFolder
+}
+```
 
-#### Returns
+This function creates a new folder in the database. It takes a `folder` object as a parameter and returns a promise that resolves to the created folder. If an error occurs during the creation process, it throws an error.
 
-- The created folder object.
+## updateFolder Function
 
-#### Errors
+```ts
+export const updateFolder = async (
+  folderId: string,
+  folder: TablesUpdate<"folders">
+) => {
+  const { data: updatedFolder, error } = await supabase
+    .from("folders")
+    .update(folder)
+    .eq("id", folderId)
+    .select("*")
+    .single()
 
-- Throws an error if the folder could not be created.
+  if (error) {
+    throw new Error(error.message)
+  }
 
-### `updateFolder(folderId: string, folder: TablesUpdate<"folders">)`
+  return updatedFolder
+}
+```
 
-This function updates a specified folder.
+This function updates a specific folder in the database. It takes a `folderId` and a `folder` object as parameters and returns a promise that resolves to the updated folder. If an error occurs during the update process, it throws an error.
 
-#### Parameters
+## deleteFolder Function
 
-- `folderId`: The ID of the folder to be updated.
-- `folder`: An object representing the new state of the folder. It should match the `TablesUpdate<"folders">` type.
+```ts
+export const deleteFolder = async (folderId: string) => {
+  const { error } = await supabase.from("folders").delete().eq("id", folderId)
 
-#### Returns
+  if (error) {
+    throw new Error(error.message)
+  }
 
-- The updated folder object.
+  return true
+}
+```
 
-#### Errors
-
-- Throws an error if the folder could not be updated.
-
-### `deleteFolder(folderId: string)`
-
-This function deletes a specified folder.
-
-#### Parameters
-
-- `folderId`: The ID of the folder to be deleted.
-
-#### Returns
-
-- `true` if the folder was successfully deleted.
-
-#### Errors
-
-- Throws an error if the folder could not be deleted.
+This function deletes a specific folder from the database. It takes a `folderId` as a parameter and returns a promise that resolves to `true` if the deletion was successful. If an error occurs during the deletion process, it throws an error.

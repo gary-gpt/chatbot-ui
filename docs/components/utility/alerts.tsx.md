@@ -1,36 +1,76 @@
 ---
 source: components/utility/alerts.tsx
-generated: '2025-06-08T13:21:01.637Z'
+generated: 2025-06-08T22:13:31.501Z
 tags: []
-hash: 39667e7aa9790bf2b671f30ccb3cb8e827e6ae92d6fedaaf06b95dcc24abf6ac
+hash: 1ffd6e15d34741f2cc47724f29d3218ca0d174a027c7025f5c8d49880e1ffc5c
 ---
+
 # Alerts Component Documentation
 
-The `Alerts` component is a functional component written in React. It uses the `Popover`, `PopoverContent`, and `PopoverTrigger` components from the custom UI library, and the `IconBell` component from the `@tabler/icons-react` package.
+This documentation provides an overview of the `Alerts` component in the file `/Users/garymason/chatbot-ui/components/utility/alerts.tsx`. This component is used to display alert notifications in the application's user interface.
+
+## Table of Contents
+
+1. [Imports](#imports)
+2. [AlertsProps Interface](#alertsprops-interface)
+3. [Alerts Component](#alerts-component)
 
 ## Imports
 
-- The `Popover`, `PopoverContent`, and `PopoverTrigger` components are imported from the custom UI library.
-- The `IconBell` component is imported from the `@tabler/icons-react` package.
-- The `FC` (Functional Component) type is imported from `react`.
-- The `SIDEBAR_ICON_SIZE` constant is imported from the `sidebar-switcher` module.
+```ts
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger
+} from "@/components/ui/popover"
+import { IconBell } from "@tabler/icons-react"
+import { FC } from "react"
+import { SIDEBAR_ICON_SIZE } from "../sidebar/sidebar-switcher"
+```
 
-## Props
+The above section imports the necessary modules and components required for the `Alerts` component:
 
-The `Alerts` component does not take any props.
+- `Popover`, `PopoverContent`, `PopoverTrigger` from the `popover` component for creating a popover UI element.
+- `IconBell` from `@tabler/icons-react` for displaying the bell icon.
+- `FC` (FunctionComponent) from `react` for typing the functional component.
+- `SIDEBAR_ICON_SIZE` from `sidebar-switcher` to set the size of the bell icon.
 
-## Functionality
+## AlertsProps Interface
 
-The `Alerts` component renders a `Popover` component. 
+```ts
+interface AlertsProps {}
+```
 
-Inside the `Popover` component, a `PopoverTrigger` is defined. The trigger is a `div` element that contains an `IconBell` component, which is styled to change opacity on hover. If the number of alerts is greater than 0, a `span` element is also rendered inside the `div`, which acts as a notification indicator.
+The `AlertsProps` interface is currently empty, meaning the `Alerts` component does not accept any props at this time. This can be extended in the future if the component needs to accept props.
 
-The `PopoverContent` is defined to show a placeholder text when the popover is triggered.
+## Alerts Component
 
-## Styling
+```ts
+export const Alerts: FC<AlertsProps> = () => {
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <div className="relative cursor-pointer hover:opacity-50">
+          <IconBell size={SIDEBAR_ICON_SIZE} />
+          {1 > 0 && (
+            <span className="notification-indicator absolute right-[-4px] top-[-4px] flex size-4 items-center justify-center rounded-full bg-red-600 text-[10px] text-white">
+              1
+            </span>
+          )}
+        </div>
+      </PopoverTrigger>
+      <PopoverContent className="mb-2 w-80">
+        <div>placeholder</div>
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
 
-The `PopoverContent` has a margin-bottom of 2 units and a width of 80 units. The notification indicator is styled with absolute positioning, a size of 4 units, a red background, and white text. It is positioned at the top right corner of the `IconBell` component.
+The `Alerts` component is a functional component that returns a `Popover` component. This `Popover` contains a `PopoverTrigger` and `PopoverContent`.
 
-## Usage
+- The `PopoverTrigger` is a bell icon (`IconBell`), which when hovered over, reduces its opacity to 50%. If there are any notifications (currently hardcoded to 1), a red notification indicator with the number of notifications is displayed on the top right of the bell icon.
 
-The `Alerts` component can be used anywhere in the application where a notification bell with a popover is needed. The popover is triggered when the bell icon is clicked. The content of the popover is currently a placeholder and can be replaced with actual content as needed.
+- The `PopoverContent` is the content that will be displayed when the `PopoverTrigger` is clicked. Currently, it only contains a placeholder div.
+
+This component can be used to display alert notifications in a popover when the user clicks on the bell icon. The number of notifications is displayed on the bell icon itself.

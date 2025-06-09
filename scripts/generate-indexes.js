@@ -1,93 +1,251 @@
-// scripts/generate-indexes.js
-const fs = require("fs");
-const path = require("path");
+// @ts-check
 
-const rootDir = "./docs/dev-notes";
-const outputJson = path.join(rootDir, "index.json");
-const globalIndexMd = path.join(rootDir, "index.md");
+/**
+ * @typedef {Object} FileMeta
+ * @property {string} folder - Folder path relative to docs root (e.g. "components/ui")
+ * @property {string} filename - Markdown filename (e.g. "button.tsx.md")
+ * @property {string} fullPath - Full file path on disk
+ * @property {string|null} summary - Description of the file’s purpose
+ * @property {string|null} hash - Content hash from frontmatter
+ */
 
-function walkFolders(dir) {
-  let folders = [];
-  const items = fs.readdirSync(dir, { withFileTypes: true });
-  for (const item of items) {
-    const fullPath = path.join(dir, item.name);
-    if (item.isDirectory()) {
-      folders.push(fullPath);
-      folders = folders.concat(walkFolders(fullPath));
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+
+const docsRoot = 'docs';
+
+
+// STEP 1: SCAN MARKDOWN DOCS
+
+/**
+ * Recursively scans the docs/ directory and extracts metadata from each .md file.
+ * Skips any `index.md` file to avoid circular references.
+ *
+ * @param {string} docsRoot
+ * @returns {Array<FileMeta>}
+ */
+function scanMarkdownDocs(docsRoot = 'docs') {
+  const results = [];
+
+  function walk(dir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+
+      if (entry.isDirectory()) {
+        walk(fullPath); // Recurse into subdirectory
+      } else if (
+        entry.name.endsWith('.md') &&
+        entry.name.toLowerCase() !== 'index.md'
+      ) {
+        const raw = fs.readFileSync(fullPath, 'utf8');
+        const parsed = matter(raw);
+        const relativePath = path.relative(docsRoot, fullPath);
+        const folder = path.dirname(relativePath);
+        const filename = path.basename(relativePath);
+
+        results.push({
+          folder,
+          filename,
+          fullPath,
+          summary: parsed.data.summary || null,
+          hash: parsed.data.hash || null,
+        });
+      }
     }
   }
-  return folders;
+
+  walk(docsRoot);
+  return results;
 }
 
-function getMarkdownFiles(dir) {
-  return fs.readdirSync(dir)
-    .filter((file) => file.endsWith(".md") && !["index.md", "index.json"].includes(file));
+
+// STEP 2: GROUP BY FOLDER & DETECT CHANGES
+
+/**
+ * Loads the existing index.json file from the docs root (if available).
+ *
+ * @param {string} docsRoot
+ * @returns {Object}
+ */
+function loadIndexTrackingFile(docsRoot = 'docs') {
+  const indexPath = path.join(docsRoot, 'index.json');
+  if (fs.existsSync(indexPath)) {
+    return JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+  }
+  return {};
 }
 
-function getTitleAndDescription(content) {
-  const lines = content.split("\n");
-  const title = lines[0]?.replace(/^#\s*/, "").trim() || "Untitled";
-  const desc = lines.find((line, i) => i > 0 && line.trim())?.trim() || "";
-  return { title, desc };
+/**
+ * Groups docs by folder, tracks which folders changed (based on hash), and which are missing summaries.
+ *
+ * @param {Array<FileMeta>} files
+ * @param {Object} indexData
+ * @returns {{
+ *   groupedDocs: Map<string, Array<FileMeta>>,
+ *   changedFolders: Set<string>,
+ *   missingSummaries: Array<FileMeta>
+ * }}
+ */
+function groupDocsAndDetectChanges(files, indexData) {
+  const groupedDocs = new Map();
+  const changedFolders = new Set();
+  const missingSummaries = [];
+
+  for (const file of files) {
+    const { folder, filename, summary, hash } = file;
+
+    if (!groupedDocs.has(folder)) {
+      groupedDocs.set(folder, []);
+    }
+    groupedDocs.get(folder).push(file);
+
+    if (!summary) {
+      missingSummaries.push(file);
+    }
+
+    const prevHash = indexData[folder]?.hashes?.[filename];
+    if (!prevHash || prevHash !== hash) {
+      changedFolders.add(folder);
+    }
+  }
+
+  return { groupedDocs, changedFolders, missingSummaries };
 }
 
-function wordCount(content) {
-  return content
-    .replace(/[\#>*_`-]/g, "")
-    .replace(/\s+/g, " ")
-    .trim()
-    .split(" ")
-    .filter(Boolean).length;
+
+// STEP 3: WRITE FOLDER-LEVEL INDEX.MD FILES
+
+/**
+ * Writes an index.md file into each folder that has changed.
+ *
+ * @param {Map<string, Array<FileMeta>>} groupedDocs
+ * @param {Set<string>} changedFolders
+ * @param {string} docsRoot
+ */
+function writeFolderIndexes(groupedDocs, changedFolders, docsRoot = 'docs') {
+  for (const [folder, files] of groupedDocs.entries()) {
+    if (!changedFolders.has(folder)) continue;
+
+    const heading = `# ${folder} Index\n\n`;
+    const description = `Auto-generated index for **${folder}**.\n\n`;
+
+    const body = files.map(file => {
+      const link = `./${file.filename}`;
+      const summary = file.summary || '⚠️ No summary available.';
+      return `- [\`${file.filename.replace(/`/g, '')}\`](${link}) — ${summary}`;
+    }).join('\n');
+
+    const outputPath = path.join(docsRoot, folder, 'index.md');
+    fs.writeFileSync(outputPath, heading + description + body + '\n');
+  }
 }
 
-function generateIndexes() {
-  const allFolders = [rootDir].concat(walkFolders(rootDir));
-  const globalLines = [
-    "# Project Documentation Index\n",
-    "This index provides an overview of all documented components grouped by folder.\n"
+
+// STEP 4: WRITE GLOBAL INDEX.MD
+
+/**
+ * Writes the global docs/index.md file with all folders and entries.
+ *
+ * @param {Map<string, Array<FileMeta>>} groupedDocs
+ * @param {string} docsRoot
+ */
+function writeGlobalIndex(groupedDocs, docsRoot = 'docs') {
+  let content = `# Project Documentation Index\n\n`;
+  content += `This is an auto-generated overview of all markdown documentation in the project.\n\n`;
+
+  const sortedFolders = [...groupedDocs.keys()].sort();
+
+  for (const folder of sortedFolders) {
+    const files = groupedDocs.get(folder);
+
+    const folderHeading = `## ${folder}\n\n`;
+    const folderDescription = `Overview of docs in \`${folder}\`.\n\n`;
+
+    const entries = files.map(file => {
+      const relativePath = path.join(folder, file.filename).replace(/\\/g, '/');
+      const summary = file.summary || '⚠️ No summary available.';
+      return `- [\`${relativePath}\`](${relativePath}) — ${summary}`;
+    }).join('\n');
+
+    content += folderHeading + folderDescription + entries + '\n\n';
+  }
+
+  const globalIndexPath = path.join(docsRoot, 'index.md');
+  fs.writeFileSync(globalIndexPath, content.trim() + '\n');
+}
+
+
+// STEP 5: WRITE MISSING-SUMMARIES.MD
+
+/**
+ * Outputs a list of .md files missing summaries.
+ *
+ * @param {Array<FileMeta>} missingSummaries
+ * @param {string} docsRoot
+ */
+function writeMissingSummariesFile(missingSummaries, docsRoot = 'docs') {
+  if (!missingSummaries.length) return;
+
+  const lines = [
+    '# Missing Descriptions in Docs\n',
+    'The following markdown files are missing summaries and should be reviewed manually.\n'
   ];
-  const indexJson = [];
 
-  for (const folder of allFolders) {
-    const relFolder = path.relative(rootDir, folder) || ".";
-    const files = getMarkdownFiles(folder);
-    if (files.length === 0) continue;
+  for (const file of missingSummaries) {
+    lines.push(`- \`${path.join(file.folder, file.filename).replace(/\\/g, '/')}\``);
+  }
 
-    const folderLines = [
-      `# ${relFolder.replace(/\\|\//g, " / ").replace(/^\./, "Root")} Folder\n`,
-      "No description available.\n"
-    ];
+  const outputPath = path.join(docsRoot, 'missing-summaries.md');
+  fs.writeFileSync(outputPath, lines.join('\n') + '\n');
+}
 
-    globalLines.push(`\n## ${relFolder.replace(/\\|\//g, " / ")}`);
-    globalLines.push("No description available.\n");
+
+// STEP 6: WRITE INDEX.JSON TRACKING FILE
+
+/**
+ * Writes an updated index.json file with folder hashes and missing summary data.
+ *
+ * @param {Map<string, Array<FileMeta>>} groupedDocs
+ * @param {string} docsRoot
+ * @param {Array<FileMeta>} missingSummaries
+ */
+function writeIndexTrackingFile(groupedDocs, docsRoot = 'docs', missingSummaries = []) {
+  const output = {};
+
+  for (const [folder, files] of groupedDocs.entries()) {
+    output[folder] = {
+      lastIndexed: new Date().toISOString(),
+      hashes: {}
+    };
 
     for (const file of files) {
-      const filePath = path.join(folder, file);
-      const relPath = path.relative(rootDir, filePath).replace(/\\/g, "/");
-      const content = fs.readFileSync(filePath, "utf8");
-      const { title, desc } = getTitleAndDescription(content);
-      const words = wordCount(content);
-      const modified = Math.floor(fs.statSync(filePath).mtimeMs / 1000);
-
-      folderLines.push(`- **[${title}](${file})** – ${desc}`);
-      globalLines.push(`- **[${title}](${relPath})** – ${desc}`);
-
-      indexJson.push({
-        file,
-        path: relPath,
-        title,
-        words,
-        modified
-      });
+      output[folder].hashes[file.filename] = file.hash || null;
     }
-
-    fs.writeFileSync(path.join(folder, "index.md"), folderLines.join("\n"));
   }
 
-  fs.writeFileSync(globalIndexMd, globalLines.join("\n"));
-  fs.writeFileSync(outputJson, JSON.stringify(indexJson, null, 2));
+  if (missingSummaries.length > 0) {
+    output.missingSummaries = {};
+    for (const file of missingSummaries) {
+      const relPath = path.join(file.folder, file.filename).replace(/\\/g, '/');
+      output.missingSummaries[relPath] = 'No summary found';
+    }
+  }
 
-  console.log("✅ Recursive indexes generated.");
+  const outputPath = path.join(docsRoot, 'index.json');
+  fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
 }
 
-generateIndexes();
+
+// MAIN EXECUTION
+
+const files = scanMarkdownDocs(docsRoot);
+const indexData = loadIndexTrackingFile(docsRoot);
+const { groupedDocs, changedFolders, missingSummaries } = groupDocsAndDetectChanges(files, indexData);
+
+writeFolderIndexes(groupedDocs, changedFolders, docsRoot);
+writeGlobalIndex(groupedDocs, docsRoot);
+writeMissingSummariesFile(missingSummaries, docsRoot);
+writeIndexTrackingFile(groupedDocs, docsRoot, missingSummaries);

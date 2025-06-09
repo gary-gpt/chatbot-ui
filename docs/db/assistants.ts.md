@@ -1,55 +1,145 @@
 ---
 source: db/assistants.ts
-generated: '2025-06-08T13:21:01.628Z'
+generated: 2025-06-08T22:20:14.247Z
 tags: []
-hash: f0197d8b302bda9d3a8605273228fe22b5026311c7bf8278dad5f71ee0704627
+hash: ae6281d5eca054d85c5222d8e98deab3ad36c598bba451d965c0739fe282e482
 ---
-# Assistant Module
 
-This module provides functions to interact with `assistants` and `assistant_workspaces` tables in the database using Supabase client.
+# Chatbot UI Database Operations
 
-## Functions
+This document describes the database operations for the chatbot user interface (UI) located in the file `/Users/garymason/chatbot-ui/db/assistants.ts`. The operations are performed using Supabase, a full-stack development platform.
 
-### `getAssistantById(assistantId: string)`
+## Table of Contents
 
-Fetches a single assistant by ID from the `assistants` table.
+- [Get Assistant by ID](#get-assistant-by-id)
+- [Get Assistant Workspaces by Workspace ID](#get-assistant-workspaces-by-workspace-id)
+- [Get Assistant Workspaces by Assistant ID](#get-assistant-workspaces-by-assistant-id)
+- [Create Assistant](#create-assistant)
+- [Create Assistants](#create-assistants)
+- [Create Assistant Workspace](#create-assistant-workspace)
+- [Create Assistant Workspaces](#create-assistant-workspaces)
+- [Update Assistant](#update-assistant)
+- [Delete Assistant](#delete-assistant)
+- [Delete Assistant Workspace](#delete-assistant-workspace)
 
-### `getAssistantWorkspacesByWorkspaceId(workspaceId: string)`
+## Get Assistant by ID
 
-Fetches a single workspace along with its associated assistants by workspace ID from the `workspaces` table.
+This function retrieves an assistant from the database using the assistant's ID.
 
-### `getAssistantWorkspacesByAssistantId(assistantId: string)`
+```ts
+export const getAssistantById = async (assistantId: string) => {
+  //...
+}
+```
 
-Fetches a single assistant along with its associated workspaces by assistant ID from the `assistants` table.
+## Get Assistant Workspaces by Workspace ID
 
-### `createAssistant(assistant: TablesInsert<"assistants">, workspace_id: string)`
+This function retrieves all assistant workspaces associated with a specific workspace ID.
 
-Creates a new assistant in the `assistants` table and associates it with a workspace in the `assistant_workspaces` table.
+```ts
+export const getAssistantWorkspacesByWorkspaceId = async (
+  workspaceId: string
+) => {
+  //...
+}
+```
 
-### `createAssistants(assistants: TablesInsert<"assistants">[], workspace_id: string)`
+## Get Assistant Workspaces by Assistant ID
 
-Creates multiple new assistants in the `assistants` table and associates them with a workspace in the `assistant_workspaces` table.
+This function retrieves all assistant workspaces associated with a specific assistant ID.
 
-### `createAssistantWorkspace(item: { user_id: string, assistant_id: string, workspace_id: string })`
+```ts
+export const getAssistantWorkspacesByAssistantId = async (
+  assistantId: string
+) => {
+  //...
+}
+```
 
-Creates a new association between an assistant and a workspace in the `assistant_workspaces` table.
+## Create Assistant
 
-### `createAssistantWorkspaces(items: { user_id: string; assistant_id: string; workspace_id: string }[])`
+This function creates a new assistant in the database and associates it with a workspace.
 
-Creates multiple new associations between assistants and a workspace in the `assistant_workspaces` table.
+```ts
+export const createAssistant = async (
+  assistant: TablesInsert<"assistants">,
+  workspace_id: string
+) => {
+  //...
+}
+```
 
-### `updateAssistant(assistantId: string, assistant: TablesUpdate<"assistants">)`
+## Create Assistants
 
-Updates an existing assistant in the `assistants` table.
+This function creates multiple new assistants in the database and associates them with a workspace.
 
-### `deleteAssistant(assistantId: string)`
+```ts
+export const createAssistants = async (
+  assistants: TablesInsert<"assistants">[],
+  workspace_id: string
+) => {
+  //...
+}
+```
 
-Deletes an assistant from the `assistants` table.
+## Create Assistant Workspace
 
-### `deleteAssistantWorkspace(assistantId: string, workspaceId: string)`
+This function creates a new assistant workspace in the database.
 
-Deletes an association between an assistant and a workspace from the `assistant_workspaces` table.
+```ts
+export const createAssistantWorkspace = async (item: {
+  user_id: string
+  assistant_id: string
+  workspace_id: string
+}) => {
+  //...
+}
+```
 
-## Errors
+## Create Assistant Workspaces
 
-All functions in this module throw an `Error` if the Supabase client returns an error. The error message will be the one returned by the Supabase client.
+This function creates multiple new assistant workspaces in the database.
+
+```ts
+export const createAssistantWorkspaces = async (
+  items: { user_id: string; assistant_id: string; workspace_id: string }[]
+) => {
+  //...
+}
+```
+
+## Update Assistant
+
+This function updates an existing assistant in the database using the assistant's ID.
+
+```ts
+export const updateAssistant = async (
+  assistantId: string,
+  assistant: TablesUpdate<"assistants">
+) => {
+  //...
+}
+```
+
+## Delete Assistant
+
+This function deletes an assistant from the database using the assistant's ID.
+
+```ts
+export const deleteAssistant = async (assistantId: string) => {
+  //...
+}
+```
+
+## Delete Assistant Workspace
+
+This function deletes an assistant workspace from the database using the assistant's ID and workspace ID.
+
+```ts
+export const deleteAssistantWorkspace = async (
+  assistantId: string,
+  workspaceId: string
+) => {
+  //...
+}
+```

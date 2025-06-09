@@ -1,45 +1,57 @@
 ---
 source: components/workspace/assign-workspaces.tsx
-generated: '2025-06-08T13:21:01.644Z'
+generated: 2025-06-08T22:17:39.308Z
 tags: []
-hash: 4d702c90f70f0352b5790a521996396b58edea4209467e0bd6c3f9e42d13d933
+hash: 0c30fe30a7b48b3c3f18a4b497cff2bb6705f8fef6d498933d4b3717af554d9b
 ---
-# AssignWorkspaces Component
 
-This component allows users to assign workspaces. It uses a dropdown menu to display available workspaces and allows users to select one or more workspaces.
+# Assign Workspaces Component Documentation
 
-## Props
+This document describes the `AssignWorkspaces` component found in the file `/Users/garymason/chatbot-ui/components/workspace/assign-workspaces.tsx`. This component is used to assign workspaces in a chatbot UI.
 
-- `selectedWorkspaces`: An array of selected workspaces. Each workspace is an object of type `Tables<"workspaces">`.
-- `onSelectWorkspace`: A function that is called when a workspace is selected. It receives the selected workspace as an argument.
+## Imports
 
-## Dependencies
+The component imports several hooks and components from React, as well as some custom components and types. It also imports the `ChatbotUIContext` from the application's context.
 
-- `ChatbotUIContext`: This context provides the list of available workspaces.
-- `Button`, `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuTrigger`, `Input`: UI components used in the component.
-- `IconChevronDown`, `IconCircleCheckFilled`: Icons used in the component.
-- `toast`: A function used to display notifications.
+## Interfaces
 
-## State
+Two interfaces are defined in this file:
 
-- `isOpen`: A boolean indicating whether the dropdown menu is open.
-- `search`: A string used to filter the list of workspaces.
+- `AssignWorkspaces`: This interface defines the props for the `AssignWorkspaces` component. It includes an array of selected workspaces and a function to handle workspace selection.
 
-## Methods
+- `WorkspaceItemProps`: This interface defines the props for the `WorkspaceItem` component. It includes an array of selected workspaces, a workspace object, a boolean indicating whether the workspace is selected, and a function to handle workspace selection.
 
-- `handleWorkspaceSelect`: This method is called when a workspace is selected. It calls the `onSelectWorkspace` prop with the selected workspace as an argument.
+## Components
 
-# WorkspaceItem Component
+### AssignWorkspaces
 
-This component represents a single workspace in the dropdown menu.
+The `AssignWorkspaces` component is a functional component that uses the `ChatbotUIContext` to get the available workspaces. It uses a `useRef` hook to get references to the input and button elements, and `useState` hooks to manage the state of the dropdown menu and the search input.
 
-## Props
+The `useEffect` hook is used to focus on the input field when the dropdown menu is opened.
 
-- `selectedWorkspaces`: An array of selected workspaces. Each workspace is an object of type `Tables<"workspaces">`.
-- `workspace`: The workspace represented by this component. It is an object of type `Tables<"workspaces">`.
-- `selected`: A boolean indicating whether the workspace is selected.
-- `onSelect`: A function that is called when the workspace is selected. It receives the selected workspace as an argument.
+The component returns a `DropdownMenu` component that includes a `DropdownMenuTrigger` and a `DropdownMenuContent`. The content includes an input field for searching workspaces and a list of `WorkspaceItem` components for each workspace.
 
-## Methods
+### WorkspaceItem
 
-- `handleSelect`: This method is called when the workspace is selected. If the workspace is already selected and it is the only selected workspace, it displays a notification and does nothing. Otherwise, it calls the `onSelect` prop with the workspace as an argument.
+The `WorkspaceItem` component is a functional component that displays a workspace. It uses a `handleSelect` function to handle the selection of a workspace. If the workspace is already selected and it's the only one selected, it shows a toast message and doesn't allow the selection to be removed.
+
+The component returns a div that includes the workspace name and a check icon if the workspace is selected.
+
+## Functions
+
+### handleWorkspaceSelect
+
+This function is passed to the `WorkspaceItem` component and is used to handle the selection of a workspace. It simply calls the `onSelectWorkspace` function passed as a prop to the `AssignWorkspaces` component with the selected workspace.
+
+## Usage
+
+The `AssignWorkspaces` component can be used in a parent component as follows:
+
+```tsx
+<AssignWorkspaces
+  selectedWorkspaces={selectedWorkspaces}
+  onSelectWorkspace={handleSelectWorkspace}
+/>
+```
+
+Where `selectedWorkspaces` is an array of selected workspaces and `handleSelectWorkspace` is a function to handle the selection of a workspace.
