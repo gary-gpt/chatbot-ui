@@ -1,0 +1,2468 @@
+[
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/[workspaceid]/chat/[chatid]/page.tsx",
+    "docPath": "docs/app/[locale]/[workspaceid]/chat/[chatid]/page.tsx.md",
+    "exists": true,
+    "contentHash": "8bba8dd9f36a1f0bc6cc9237d7ea2d46d515b63fd4b252d50049e7f69bd67eb9",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/[workspaceid]/chat/page.tsx",
+    "docPath": "docs/app/[locale]/[workspaceid]/chat/page.tsx.md",
+    "exists": true,
+    "contentHash": "0ead299c90b6677bee8cddf70db819dc5f83566d95f27cd0c03ea937afe9109a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/[workspaceid]/layout.tsx",
+    "docPath": "docs/app/[locale]/[workspaceid]/layout.tsx.md",
+    "exists": true,
+    "contentHash": "6f909b763839f0481a164c9f0bc5bfee93e959f169e4e698c4397f41aa18b731",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/[workspaceid]/page.tsx",
+    "docPath": "docs/app/[locale]/[workspaceid]/page.tsx.md",
+    "exists": true,
+    "contentHash": "1346afd56c46dcd10ab7af5a87f2a37d81bf8b31d73b463d20ab512dfc9384df",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/globals.css",
+    "docPath": "docs/app/[locale]/globals.css.md",
+    "exists": true,
+    "contentHash": "e2b65193029bdc95ca163ae9f94c5aa8096efebf8b4d844088cac84be1d5a29d",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/help/page.tsx",
+    "docPath": "docs/app/[locale]/help/page.tsx.md",
+    "exists": true,
+    "contentHash": "a5859890b4acbfd8a12e34925dbf93c6eb3b23c8ad0156b82880f303e28211ad",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/layout.tsx",
+    "docPath": "docs/app/[locale]/layout.tsx.md",
+    "exists": true,
+    "contentHash": "351d8e442fde228713040be3f1b539b42cc3d8408733d957811e55be17867f95",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/loading.tsx",
+    "docPath": "docs/app/[locale]/loading.tsx.md",
+    "exists": true,
+    "contentHash": "a0b20a46e419656ac50f2c6a17a80c8a0c6dcd3685a367693d13553d811c8454",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/login/page.tsx",
+    "docPath": "docs/app/[locale]/login/page.tsx.md",
+    "exists": true,
+    "contentHash": "611dd7b859d7f1365fffcfbf94aa537fdc63f3d5acb825af332c61fed4bfbda0",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/login/password/page.tsx",
+    "docPath": "docs/app/[locale]/login/password/page.tsx.md",
+    "exists": true,
+    "contentHash": "bad77b82dc03a0eb50f6321a5ca34422dc9079dfa9b500524d6e2ddf4b4fb31e",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/memory-test/page.tsx",
+    "docPath": "docs/app/[locale]/memory-test/page.tsx.md",
+    "exists": true,
+    "contentHash": "638155aa5ba815609a879168aac038a3ff66852008e3eb08a57a78444ecf6ac4",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/page.tsx",
+    "docPath": "docs/app/[locale]/page.tsx.md",
+    "exists": true,
+    "contentHash": "c77efa8e6cf92ccc67bc1f0f82a8104fec8a91148ea05219cda98115bb429d6e",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/[locale]/setup/page.tsx",
+    "docPath": "docs/app/[locale]/setup/page.tsx.md",
+    "exists": true,
+    "contentHash": "734fb63d72e09a9002e5290ed9280ca597bedb8fcd91fa0e85f3583ef799e48d",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/assistants/openai/route.ts",
+    "docPath": "docs/app/api/assistants/openai/route.ts.md",
+    "exists": true,
+    "contentHash": "f99b5b7d40b2d90debb10f6a0b0011b815275801813865f37d564e0e5dae0d33",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/anthropic/route.ts",
+    "docPath": "docs/app/api/chat/anthropic/route.ts.md",
+    "exists": true,
+    "contentHash": "71abb5f5eff20294b1d45bd74475db7a7b4e2127747b89bfacc7fff177b06eaf",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/azure/route.ts",
+    "docPath": "docs/app/api/chat/azure/route.ts.md",
+    "exists": true,
+    "contentHash": "0f9ceba03ea4faa7448f4eb5c7a2dce6eed08d12416bf4e7ff1de8a8bdc02faa",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/custom/route.ts",
+    "docPath": "docs/app/api/chat/custom/route.ts.md",
+    "exists": true,
+    "contentHash": "ffe9bb2b8e9bdaa029b8dbdd2819affef708dd280a645ea2bff1d72bcd74076a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/google/route.ts",
+    "docPath": "docs/app/api/chat/google/route.ts.md",
+    "exists": true,
+    "contentHash": "6752e3ed4a57f53ea2dd467cadaba3983d49b65f087077f512ebd407e426e502",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/groq/route.ts",
+    "docPath": "docs/app/api/chat/groq/route.ts.md",
+    "exists": true,
+    "contentHash": "72d4c1f4f325c27dc9487d78767def03aa46c95b603d7aa8c6a5d2bd0045021c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/mistral/route.ts",
+    "docPath": "docs/app/api/chat/mistral/route.ts.md",
+    "exists": true,
+    "contentHash": "f5e12e12ce1d9aa4aad0e9b94b09918ad0646363c7571553f48e9e15439da2f2",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/openai/route.ts",
+    "docPath": "docs/app/api/chat/openai/route.ts.md",
+    "exists": true,
+    "contentHash": "14a8409191a35e31291ab47c6372d5a93e502082406cf8d2c354c927fa32be58",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/openrouter/route.ts",
+    "docPath": "docs/app/api/chat/openrouter/route.ts.md",
+    "exists": true,
+    "contentHash": "cb40d19cd00f07894de101a0b80e75aa76b2c852243c604b9188790148ea6f3d",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/perplexity/route.ts",
+    "docPath": "docs/app/api/chat/perplexity/route.ts.md",
+    "exists": true,
+    "contentHash": "2b9dff16c75b88a51e640a8d5f0685067190606a973fb1abfc2a952de8d16ab8",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/chat/tools/route.ts",
+    "docPath": "docs/app/api/chat/tools/route.ts.md",
+    "exists": true,
+    "contentHash": "8a40a837790210746b87524d7cece62251d4b8ac779737ddf360f48bb6b812ce",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/command/route.ts",
+    "docPath": "docs/app/api/command/route.ts.md",
+    "exists": true,
+    "contentHash": "efb33c64c4a334ee678df893522905b3ee02a6d650fc8d2dc1bde1abd1f8900d",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/keys/route.ts",
+    "docPath": "docs/app/api/keys/route.ts.md",
+    "exists": true,
+    "contentHash": "2f79c8f701242e83f5c4bc5c49f31b3ee5dfec558fdc88c5f97b75ac2c4e6783",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/retrieval/process/docx/route.ts",
+    "docPath": "docs/app/api/retrieval/process/docx/route.ts.md",
+    "exists": true,
+    "contentHash": "0bb58f2bd28f13da388a5f51ed487e3f01a897e2d5ccfdd1e7d3e233a4c7f358",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/retrieval/process/route.ts",
+    "docPath": "docs/app/api/retrieval/process/route.ts.md",
+    "exists": true,
+    "contentHash": "25f9360d73bcc936e80a874dd25027681c4ccb5e8cec8a27398265bfa8065708",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/retrieval/retrieve/route.ts",
+    "docPath": "docs/app/api/retrieval/retrieve/route.ts.md",
+    "exists": true,
+    "contentHash": "f9978342ee97923e7226bc559d21eff0a0e9965c7f332ab3c1556ff6ba1dcbad",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/username/available/route.ts",
+    "docPath": "docs/app/api/username/available/route.ts.md",
+    "exists": true,
+    "contentHash": "b333f6f46c867f9d1fd1501eed6a91cd9e30a6ebdded5279ea69e537e2545750",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/api/username/get/route.ts",
+    "docPath": "docs/app/api/username/get/route.ts.md",
+    "exists": true,
+    "contentHash": "9bc20aeb4d41da4af37acc5fce300832fbc4328ed96ac012a9ce266e59ac52e7",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/app/auth/callback/route.ts",
+    "docPath": "docs/app/auth/callback/route.ts.md",
+    "exists": true,
+    "contentHash": "938f76892c569af9ca0025fbb81862396083c9dcb5479777b8591e0824242e78",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components.json",
+    "docPath": "docs/components.json.md",
+    "exists": true,
+    "contentHash": "1382d61d1bef5861ad7df4efd16b9a071fb2968725b388adee646ecdf8558b9c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/assistant-picker.tsx",
+    "docPath": "docs/components/chat/assistant-picker.tsx.md",
+    "exists": true,
+    "contentHash": "c1d1b4d9b8691be6df474785257fac8fd62b052c2675423caf976411994a4895",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-command-input.tsx",
+    "docPath": "docs/components/chat/chat-command-input.tsx.md",
+    "exists": true,
+    "contentHash": "57896e09b080bdf2f333aa75067f3800ced87c357bd636f6ed20a6ec33b3c3be",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-files-display.tsx",
+    "docPath": "docs/components/chat/chat-files-display.tsx.md",
+    "exists": true,
+    "contentHash": "5a0fd5af018b0a2f06ebdafeb2a135e9ede130e92318686128e4fba38e411e51",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-help.tsx",
+    "docPath": "docs/components/chat/chat-help.tsx.md",
+    "exists": true,
+    "contentHash": "b8830172c88d8878901f7c0483ff353bd34fd39849a2d9a851e529c10f81d086",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-helpers/index.ts",
+    "docPath": "docs/components/chat/chat-helpers/index.ts.md",
+    "exists": true,
+    "contentHash": "138d4bd4f2dfffa0a89da345356689aabe875d084ba4be6862cdfe2b148b8cfc",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-hooks/use-chat-handler.tsx",
+    "docPath": "docs/components/chat/chat-hooks/use-chat-handler.tsx.md",
+    "exists": true,
+    "contentHash": "ad55607fae440acbf2f97bab3f63df36f8dd31aa81fd6211175bf59465602a91",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-hooks/use-chat-history.tsx",
+    "docPath": "docs/components/chat/chat-hooks/use-chat-history.tsx.md",
+    "exists": true,
+    "contentHash": "cb091d4d3855cc2242cbbe91f78821a3bac4299f247f01ee2707977e333e45ed",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-hooks/use-prompt-and-command.tsx",
+    "docPath": "docs/components/chat/chat-hooks/use-prompt-and-command.tsx.md",
+    "exists": true,
+    "contentHash": "5143d83c8831d14b6455c9469c28c97a0c4c9fb92e9d58a3df76945a2a4cac28",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-hooks/use-scroll.tsx",
+    "docPath": "docs/components/chat/chat-hooks/use-scroll.tsx.md",
+    "exists": true,
+    "contentHash": "4348f874cf16f2e87c10fd876abdb9207063de668225459bddc0fe03c19cd788",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-hooks/use-select-file-handler.tsx",
+    "docPath": "docs/components/chat/chat-hooks/use-select-file-handler.tsx.md",
+    "exists": true,
+    "contentHash": "72bd54ec5868cb98774ae7044f9c90ef6edd7fc343149481ba0e4be059dbcb81",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-input.tsx",
+    "docPath": "docs/components/chat/chat-input.tsx.md",
+    "exists": true,
+    "contentHash": "75d625fcef4f682a8e8e99077dfec8543d4bfd5623bbafc46893bab6e18cf64b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-messages.tsx",
+    "docPath": "docs/components/chat/chat-messages.tsx.md",
+    "exists": true,
+    "contentHash": "cb6540dacb3bc90907d283c6e8e55a03809f77d0eaedd2998ecf2bded4a00d40",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-retrieval-settings.tsx",
+    "docPath": "docs/components/chat/chat-retrieval-settings.tsx.md",
+    "exists": true,
+    "contentHash": "ccdcb3339dbba6d4cb219f3b5eb3d9f5e2a61b0aa3e16dbcaaa3d7b472f9a5b6",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-scroll-buttons.tsx",
+    "docPath": "docs/components/chat/chat-scroll-buttons.tsx.md",
+    "exists": true,
+    "contentHash": "e8af6cdfcd8e809c40685cdca801bff0c068caca933fecadf233e78943751338",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-secondary-buttons.tsx",
+    "docPath": "docs/components/chat/chat-secondary-buttons.tsx.md",
+    "exists": true,
+    "contentHash": "5f4628a07b3771f72ac1d2f149a14fb7795867f97d2145d7ad75284216d5480f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-settings.tsx",
+    "docPath": "docs/components/chat/chat-settings.tsx.md",
+    "exists": true,
+    "contentHash": "4dda6c5a5be1054f3758865257addcb22d481921303511fdd61d145b382d0135",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/chat-ui.tsx",
+    "docPath": "docs/components/chat/chat-ui.tsx.md",
+    "exists": true,
+    "contentHash": "906605e43026918584557fc550415cf22cb4aa1f8e451e0d3dd0b02df4002fc1",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/file-picker.tsx",
+    "docPath": "docs/components/chat/file-picker.tsx.md",
+    "exists": true,
+    "contentHash": "b356685c3c03beff7cffc452cb53550f5e3ab1fa59024fc382d2c8cfc3c11789",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/prompt-picker.tsx",
+    "docPath": "docs/components/chat/prompt-picker.tsx.md",
+    "exists": true,
+    "contentHash": "ffa7dad2a452e62240e64377d42f80fb662d58641cd17ea9395e64cb1cb0a095",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/quick-setting-option.tsx",
+    "docPath": "docs/components/chat/quick-setting-option.tsx.md",
+    "exists": true,
+    "contentHash": "fef3f1108dad04eb3974dd2344ebb17223a029066535cacd0909661cc3534e36",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/quick-settings.tsx",
+    "docPath": "docs/components/chat/quick-settings.tsx.md",
+    "exists": true,
+    "contentHash": "ca33a32c9d14ef7de31b3e10052e84e4ec5c5f37cce829a7e7a29331305c91e1",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/chat/tool-picker.tsx",
+    "docPath": "docs/components/chat/tool-picker.tsx.md",
+    "exists": true,
+    "contentHash": "69454c9953c18c5a76c5d9203f72ae49f61a9c8cf20a427a9a327b9e1fa641f3",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/icons/anthropic-svg.tsx",
+    "docPath": "docs/components/icons/anthropic-svg.tsx.md",
+    "exists": true,
+    "contentHash": "4e305ebbf5fd1fbb4c1de355408211639a6aeac19ea70d311a354968b2852c54",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/icons/chatbotui-svg.tsx",
+    "docPath": "docs/components/icons/chatbotui-svg.tsx.md",
+    "exists": true,
+    "contentHash": "5bee0a1eaf6738964fb195e49fe66989b6e577c3d32b1559097a4ec1be9496ea",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/icons/google-svg.tsx",
+    "docPath": "docs/components/icons/google-svg.tsx.md",
+    "exists": true,
+    "contentHash": "edf455e079503fae7cbea19ddb96a9942299c96e7c2658615c21c2163d5d2561",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/icons/openai-svg.tsx",
+    "docPath": "docs/components/icons/openai-svg.tsx.md",
+    "exists": true,
+    "contentHash": "dca2cb7c05ecba93b7d9b5e8a931b964c997bf648a124f1c4ce1134254846ca9",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/messages/message-actions.tsx",
+    "docPath": "docs/components/messages/message-actions.tsx.md",
+    "exists": true,
+    "contentHash": "3f3fb194348d00366097d30ad735007a45627c35cf0a89f5fa59332d0f44d2a0",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/messages/message-codeblock.tsx",
+    "docPath": "docs/components/messages/message-codeblock.tsx.md",
+    "exists": true,
+    "contentHash": "49a081d875ceb017268c433b08a6646bf29b5897bad960242c20de37ea508547",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/messages/message-markdown-memoized.tsx",
+    "docPath": "docs/components/messages/message-markdown-memoized.tsx.md",
+    "exists": true,
+    "contentHash": "e978f6b864b0346beaa0ca41709b6a2fc433ea6485ad0350b622663430a9b68c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/messages/message-markdown.tsx",
+    "docPath": "docs/components/messages/message-markdown.tsx.md",
+    "exists": true,
+    "contentHash": "e19065da4f80cd4c3a3e312161f290b5805e2de2ef52bc28d0e5a2217a3f45ab",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/messages/message-replies.tsx",
+    "docPath": "docs/components/messages/message-replies.tsx.md",
+    "exists": true,
+    "contentHash": "a3fb09e6e0e46b4748abd3a5eac2733fe5e187d44d44e9d3ecc08f6f1bea4b2f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/messages/message.tsx",
+    "docPath": "docs/components/messages/message.tsx.md",
+    "exists": true,
+    "contentHash": "64813ab8322efc62016f31a6a5393520943ab5f30cecd6cc06d1d76d0fd24ea7",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/models/model-icon.tsx",
+    "docPath": "docs/components/models/model-icon.tsx.md",
+    "exists": true,
+    "contentHash": "b74da4da4136e6bd2be25062708003469b6b97238cfb5ea7ba8dfeb1e429b1f2",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/models/model-option.tsx",
+    "docPath": "docs/components/models/model-option.tsx.md",
+    "exists": true,
+    "contentHash": "55cdfec9c364bb6c38e5c95958f94dc47e8feae911a595dff2f98ea45caa5853",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/models/model-select.tsx",
+    "docPath": "docs/components/models/model-select.tsx.md",
+    "exists": true,
+    "contentHash": "2953c503bd384b40918f3ad0f108f1f9a0f95131631da2bbd25e2d2d6735f41b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/setup/api-step.tsx",
+    "docPath": "docs/components/setup/api-step.tsx.md",
+    "exists": true,
+    "contentHash": "4f6aa0366176abb2daa81f006169cbce317a6f1b8f00386194126ae2118d1edf",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/setup/finish-step.tsx",
+    "docPath": "docs/components/setup/finish-step.tsx.md",
+    "exists": true,
+    "contentHash": "66eb46b7ffcf908ccb6f35630d807e255e7d128104f3075ff9af4421cf19e0ef",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/setup/profile-step.tsx",
+    "docPath": "docs/components/setup/profile-step.tsx.md",
+    "exists": true,
+    "contentHash": "3f0f5cd4b9000d16ad782d4c97d63534bce0dac3a498590f6d3ba44ccd24c691",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/setup/step-container.tsx",
+    "docPath": "docs/components/setup/step-container.tsx.md",
+    "exists": true,
+    "contentHash": "19064992a91325c0f5be7d27eb87e739d488bd71055944bc2210b2166814dd85",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/all/sidebar-create-item.tsx",
+    "docPath": "docs/components/sidebar/items/all/sidebar-create-item.tsx.md",
+    "exists": true,
+    "contentHash": "bcea0d47c2dab08622fac0726d387b01254bff6812746a95f5e59b77b826124e",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/all/sidebar-delete-item.tsx",
+    "docPath": "docs/components/sidebar/items/all/sidebar-delete-item.tsx.md",
+    "exists": true,
+    "contentHash": "1bbd50a4009269cd5aebb29a74c6b6f493e6617c8a82d4ad0a1545ce42272e7a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/all/sidebar-display-item.tsx",
+    "docPath": "docs/components/sidebar/items/all/sidebar-display-item.tsx.md",
+    "exists": true,
+    "contentHash": "e3e679f1eb424e191becfc903d262115fab52a6306d080a9166d1704ef7f9c7c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/all/sidebar-update-item.tsx",
+    "docPath": "docs/components/sidebar/items/all/sidebar-update-item.tsx.md",
+    "exists": true,
+    "contentHash": "65ba887897b4f018a8b738c26d140961e4f634aa7f9e14557599e6d3d3d28240",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/assistants/assistant-item.tsx",
+    "docPath": "docs/components/sidebar/items/assistants/assistant-item.tsx.md",
+    "exists": true,
+    "contentHash": "6952ad0f808f7dc6c1155a25495ac17bee7d86436db2243c724dd59e4593cd53",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/assistants/assistant-retrieval-select.tsx",
+    "docPath": "docs/components/sidebar/items/assistants/assistant-retrieval-select.tsx.md",
+    "exists": true,
+    "contentHash": "2846d70d34e909a8d7bc728c809db65205ba3ddfb7760a20507e39252b260859",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/assistants/assistant-tool-select.tsx",
+    "docPath": "docs/components/sidebar/items/assistants/assistant-tool-select.tsx.md",
+    "exists": true,
+    "contentHash": "a095e96d6ae014c772f1cf0236e5308b7917e78217bc0f2351e5634233034b56",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/assistants/create-assistant.tsx",
+    "docPath": "docs/components/sidebar/items/assistants/create-assistant.tsx.md",
+    "exists": true,
+    "contentHash": "0631352135f0198f4e563d34fdc24901516ed819075d5a8acb2c932cbda94dd6",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/chat/chat-item.tsx",
+    "docPath": "docs/components/sidebar/items/chat/chat-item.tsx.md",
+    "exists": true,
+    "contentHash": "eb53d9b637ed16bfdd214e5e40f3d249e6c6f31da5e94b05f7d0d05b42ec6ff0",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/chat/delete-chat.tsx",
+    "docPath": "docs/components/sidebar/items/chat/delete-chat.tsx.md",
+    "exists": true,
+    "contentHash": "f4e4efacc97aed30834bfd42543865885db1bb93db264c8ce3e9180fa0a9e60e",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/chat/update-chat.tsx",
+    "docPath": "docs/components/sidebar/items/chat/update-chat.tsx.md",
+    "exists": true,
+    "contentHash": "aa972f2d586a5105fbc8696c4726b5f8aa53c1b285c14f7f7f226842e374facb",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/collections/collection-file-select.tsx",
+    "docPath": "docs/components/sidebar/items/collections/collection-file-select.tsx.md",
+    "exists": true,
+    "contentHash": "edde3784223a34ffe922921d8d0d01dd40df2cbfa29f72ac44884b758198fb93",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/collections/collection-item.tsx",
+    "docPath": "docs/components/sidebar/items/collections/collection-item.tsx.md",
+    "exists": true,
+    "contentHash": "4e5ff2d8f1e417b1d2624b48d909337ed5b10ec50049e9a74219277d1ee20a2b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/collections/create-collection.tsx",
+    "docPath": "docs/components/sidebar/items/collections/create-collection.tsx.md",
+    "exists": true,
+    "contentHash": "827e82be72816fdd4154f3a7ffb2b990de01a0b50b8a4f96885cf3af76c00cbd",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/files/create-file.tsx",
+    "docPath": "docs/components/sidebar/items/files/create-file.tsx.md",
+    "exists": true,
+    "contentHash": "f60687b1029a8b2781474393ec9adbe3f31482174cb931f838adfcc70b24e72f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/files/file-item.tsx",
+    "docPath": "docs/components/sidebar/items/files/file-item.tsx.md",
+    "exists": true,
+    "contentHash": "78e21cc6ce31aa3625bd62da1a74f46091c91a291d8c56ba1162b454ea9fcc09",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/folders/delete-folder.tsx",
+    "docPath": "docs/components/sidebar/items/folders/delete-folder.tsx.md",
+    "exists": true,
+    "contentHash": "1bf01cb1a5b8aefab76dbcca23f51adf5bcfa776678f0af47f9f410325e36e93",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/folders/folder-item.tsx",
+    "docPath": "docs/components/sidebar/items/folders/folder-item.tsx.md",
+    "exists": true,
+    "contentHash": "e8d1b7433e0cdec20ca067e99f7b59a75834a2f38b9e4ed70401b74b8e683406",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/folders/update-folder.tsx",
+    "docPath": "docs/components/sidebar/items/folders/update-folder.tsx.md",
+    "exists": true,
+    "contentHash": "1c9b85956b13376c441b29e24c36a558e17bed31073fb38b93f06771f1c29c49",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/models/create-model.tsx",
+    "docPath": "docs/components/sidebar/items/models/create-model.tsx.md",
+    "exists": true,
+    "contentHash": "7ccb13cdcbfcb0d37203e434c7b01e880b3ea0928d35d1faaf7a0fb001f0f25b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/models/model-item.tsx",
+    "docPath": "docs/components/sidebar/items/models/model-item.tsx.md",
+    "exists": true,
+    "contentHash": "0c4d8313a4a266babe830e7d12b58872bb9e54a45a767f50db91eedcd31538c8",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/presets/create-preset.tsx",
+    "docPath": "docs/components/sidebar/items/presets/create-preset.tsx.md",
+    "exists": true,
+    "contentHash": "f8b1aeda70e84ff282524ec02dd46a4606e5073e37316d844b38501a35468089",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/presets/preset-item.tsx",
+    "docPath": "docs/components/sidebar/items/presets/preset-item.tsx.md",
+    "exists": true,
+    "contentHash": "eec4f5dd1a6ac8e66396065ad8fe41031f6f425bb86e658ec2119aacd3d0cdc8",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/prompts/create-prompt.tsx",
+    "docPath": "docs/components/sidebar/items/prompts/create-prompt.tsx.md",
+    "exists": true,
+    "contentHash": "62add8b72f6c7135bd766f531592e93add25317f1ee26a095a11bbd1919e44b7",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/prompts/prompt-item.tsx",
+    "docPath": "docs/components/sidebar/items/prompts/prompt-item.tsx.md",
+    "exists": true,
+    "contentHash": "10d587cc46d81ad86342b0a40712039cb30451391cbf361ef3bb823e3c215371",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/tools/create-tool.tsx",
+    "docPath": "docs/components/sidebar/items/tools/create-tool.tsx.md",
+    "exists": true,
+    "contentHash": "4723f6710aaf0dadffd7c9be44f81cf9fcc889707908b9a53d04a835395b630e",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/items/tools/tool-item.tsx",
+    "docPath": "docs/components/sidebar/items/tools/tool-item.tsx.md",
+    "exists": true,
+    "contentHash": "b974c3a3bbb840ce377acc19c9ce6aedbd1162cbec2cb31878f4f81ee5eb37f1",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/sidebar-content.tsx",
+    "docPath": "docs/components/sidebar/sidebar-content.tsx.md",
+    "exists": true,
+    "contentHash": "3312c8b5bbcddd2599bd3df81439ef6d612a522a9ba817977d2921eabbe53143",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/sidebar-create-buttons.tsx",
+    "docPath": "docs/components/sidebar/sidebar-create-buttons.tsx.md",
+    "exists": true,
+    "contentHash": "9f6b7d033d699778035f2cd7484ddc0786bb0eac529b95fedc3e8ece8521b5d2",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/sidebar-data-list.tsx",
+    "docPath": "docs/components/sidebar/sidebar-data-list.tsx.md",
+    "exists": true,
+    "contentHash": "958bd306a29257211b84794afbbf9350344bfd3f2319db9911bdf777495046f1",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/sidebar-search.tsx",
+    "docPath": "docs/components/sidebar/sidebar-search.tsx.md",
+    "exists": true,
+    "contentHash": "8978b3e2420594f4a03b8cc47f2603a9b303b3150f8c510a671e8ec68f3079ef",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/sidebar-switch-item.tsx",
+    "docPath": "docs/components/sidebar/sidebar-switch-item.tsx.md",
+    "exists": true,
+    "contentHash": "6f8efd3ad1719fd7d40902e95a8ac6db09a5a19cbabc50e7c92852601d74fdb4",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/sidebar-switcher.tsx",
+    "docPath": "docs/components/sidebar/sidebar-switcher.tsx.md",
+    "exists": true,
+    "contentHash": "0e7b03bacea00fc0f8b1eddab73d62d59df94ae636baae6d59c4abd7f031f7a6",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/sidebar/sidebar.tsx",
+    "docPath": "docs/components/sidebar/sidebar.tsx.md",
+    "exists": true,
+    "contentHash": "fb3dae4011fa3b3807c0df24892ae88e6ff8d505307bd2a7d8d34634e3d1d06a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/accordion.tsx",
+    "docPath": "docs/components/ui/accordion.tsx.md",
+    "exists": true,
+    "contentHash": "ce30bcc5e14914975439405359ace6559790bbeb8354e2f75d067fe60c8fbe31",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/advanced-settings.tsx",
+    "docPath": "docs/components/ui/advanced-settings.tsx.md",
+    "exists": true,
+    "contentHash": "e682f8ea1c8a552e4cd21d3007e26093825b75a5abbdc0fdf08ee45b344b803f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/alert-dialog.tsx",
+    "docPath": "docs/components/ui/alert-dialog.tsx.md",
+    "exists": true,
+    "contentHash": "895965528d43d9bf26c5fc1c99ccd6954bdf750dd2d813e401eb88c068e179c0",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/alert.tsx",
+    "docPath": "docs/components/ui/alert.tsx.md",
+    "exists": true,
+    "contentHash": "de83b531a546659b9f07a8706e614c12a5db4aa7789e8bb62d056f8625843c26",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/aspect-ratio.tsx",
+    "docPath": "docs/components/ui/aspect-ratio.tsx.md",
+    "exists": true,
+    "contentHash": "589c299c27e2ad99c2e96c9a90e6ad49051cf99fc88f0c42a13465177379186f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/avatar.tsx",
+    "docPath": "docs/components/ui/avatar.tsx.md",
+    "exists": true,
+    "contentHash": "a9c988e11bd608bb853c9b2d2b56d1db0124febf0619c591b1d9c4def112d1ea",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/badge.tsx",
+    "docPath": "docs/components/ui/badge.tsx.md",
+    "exists": true,
+    "contentHash": "3f2af0bd8ada09bccc9c328759968f72a6e00a953e7b00714d55147f4aede026",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/brand.tsx",
+    "docPath": "docs/components/ui/brand.tsx.md",
+    "exists": true,
+    "contentHash": "840b05236cd6273c70f498dfe4ca98060376cbd67eb489472a0d7626c6df9aa3",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/button.tsx",
+    "docPath": "docs/components/ui/button.tsx.md",
+    "exists": true,
+    "contentHash": "3ea5931703ccbb75cef63df05f662fadec543701d6ff333bc3d886698e788ba0",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/calendar.tsx",
+    "docPath": "docs/components/ui/calendar.tsx.md",
+    "exists": true,
+    "contentHash": "f2b45e7b252273f0ecf0c0857804d299a06ceffc8730929615479d2ba1eb34c5",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/card.tsx",
+    "docPath": "docs/components/ui/card.tsx.md",
+    "exists": true,
+    "contentHash": "80c4aeb21a2adc4853610018d0ebb9d9d9062c8c3a9e2e90849a5e3d59c995a1",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/chat-settings-form.tsx",
+    "docPath": "docs/components/ui/chat-settings-form.tsx.md",
+    "exists": true,
+    "contentHash": "9ca375c9367f40fcc05d4f49b490d71db8bdd5243a382e8962ee54dc22f66f28",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/checkbox.tsx",
+    "docPath": "docs/components/ui/checkbox.tsx.md",
+    "exists": true,
+    "contentHash": "d142290e3d236b8407d3bf708585d3efbba68787ff343f496dfbdcda37cdd2b5",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/collapsible.tsx",
+    "docPath": "docs/components/ui/collapsible.tsx.md",
+    "exists": true,
+    "contentHash": "f4cdd104de29928bfcd40b865c7d08eed9157a537fbb8b5e6d0921f02b63cc04",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/command.tsx",
+    "docPath": "docs/components/ui/command.tsx.md",
+    "exists": true,
+    "contentHash": "295967b12b9afc9b8188f45523f628e940c3a1218a3ddc797e35c13fed994bb6",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/context-menu.tsx",
+    "docPath": "docs/components/ui/context-menu.tsx.md",
+    "exists": true,
+    "contentHash": "e70068b637dff6698f031f3538b0a4baeec57f9ba97e86a86e1e4eaf17da197f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/dashboard.tsx",
+    "docPath": "docs/components/ui/dashboard.tsx.md",
+    "exists": true,
+    "contentHash": "423f14f7400a0b200f7f56e820dcc143f9a43ce2c1554f37336b3c2b7ef7cd60",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/dialog.tsx",
+    "docPath": "docs/components/ui/dialog.tsx.md",
+    "exists": true,
+    "contentHash": "b5b0b89574e9dd216424526d68bc29309473b6b42b94bd13f5ecac1ca0924e35",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/dropdown-menu.tsx",
+    "docPath": "docs/components/ui/dropdown-menu.tsx.md",
+    "exists": true,
+    "contentHash": "631072a7c107a0b38204e3d8dadbe47a6b733eda350810fba2a30197fe7f1328",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/file-icon.tsx",
+    "docPath": "docs/components/ui/file-icon.tsx.md",
+    "exists": true,
+    "contentHash": "7b062fa339b949caf23428d2de93d18fce9ecb96155d8356b5d5d893256d7359",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/file-preview.tsx",
+    "docPath": "docs/components/ui/file-preview.tsx.md",
+    "exists": true,
+    "contentHash": "9f6ffd6420409cd3169e7e109fdc6003309e6b32e484766e08aa094abdf23b13",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/form.tsx",
+    "docPath": "docs/components/ui/form.tsx.md",
+    "exists": true,
+    "contentHash": "f6f8e44b38dcd43350add2bfadf565165d857698fc8ddf85e8643e4cefa29c58",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/hover-card.tsx",
+    "docPath": "docs/components/ui/hover-card.tsx.md",
+    "exists": true,
+    "contentHash": "96725c20242fe81a5b9d01d84eebc4bd39d4794a0fd560cd8708f030b5ad7f0d",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/image-picker.tsx",
+    "docPath": "docs/components/ui/image-picker.tsx.md",
+    "exists": true,
+    "contentHash": "5c39fcbebe35ac2525500d95f62d0cedaecc699c2ff3a65100e7a1a408f4b52c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/input.tsx",
+    "docPath": "docs/components/ui/input.tsx.md",
+    "exists": true,
+    "contentHash": "667de3330ea2cbe0f8284cf890e3169b3c679250114d629a5ad4d4007bd7c3cf",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/label.tsx",
+    "docPath": "docs/components/ui/label.tsx.md",
+    "exists": true,
+    "contentHash": "4ae61df45e276a24ddb638cfe20dd0d917269241f5683abe535bf5314d3aaffa",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/limit-display.tsx",
+    "docPath": "docs/components/ui/limit-display.tsx.md",
+    "exists": true,
+    "contentHash": "ec85fcdf6674304660cfe17baa951b726a45688d2e5abdbe418e9ebddbced895",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/menubar.tsx",
+    "docPath": "docs/components/ui/menubar.tsx.md",
+    "exists": true,
+    "contentHash": "6e465fa4b2569efb65ce1f2c17af6058ad1cef069531fd0c656f8e9c16d02b0c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/navigation-menu.tsx",
+    "docPath": "docs/components/ui/navigation-menu.tsx.md",
+    "exists": true,
+    "contentHash": "553fea0fda8fa397b73f129d479f0e8421a8d939b08a121cc80c872477cfb36a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/popover.tsx",
+    "docPath": "docs/components/ui/popover.tsx.md",
+    "exists": true,
+    "contentHash": "91d27461d5e6aceea08b82914c520e7208332ca4c3a2f426adf4d5b202e76f04",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/progress.tsx",
+    "docPath": "docs/components/ui/progress.tsx.md",
+    "exists": true,
+    "contentHash": "9b5b69cd7a00b52aba2aec64e3332c91ca04f44c9c62ae6973ef282ecbcb3a69",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/radio-group.tsx",
+    "docPath": "docs/components/ui/radio-group.tsx.md",
+    "exists": true,
+    "contentHash": "d19ffc7eb749e039776ca6c4fdbd0d1611074ab2c051d433f726d2d5e77db47f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/screen-loader.tsx",
+    "docPath": "docs/components/ui/screen-loader.tsx.md",
+    "exists": true,
+    "contentHash": "3f4d046e0891cc5b616790bc3468d85fe12fba67c39c8d83e3b3cf5957fc6cdd",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/scroll-area.tsx",
+    "docPath": "docs/components/ui/scroll-area.tsx.md",
+    "exists": true,
+    "contentHash": "6e8924f2ad7871287c6176bb4bb50a95b1bb96a657d5b8c4a8e6f4467359ef0a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/select.tsx",
+    "docPath": "docs/components/ui/select.tsx.md",
+    "exists": true,
+    "contentHash": "4acd7ae03621ff7bb2dece550c20c6a1642d2389f0a42b1879f903d7014c56a2",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/separator.tsx",
+    "docPath": "docs/components/ui/separator.tsx.md",
+    "exists": true,
+    "contentHash": "87a41e747b3a427c77ce1aee211f89fd3ece781334fe8d27fc0c67b025bf61f5",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/sheet.tsx",
+    "docPath": "docs/components/ui/sheet.tsx.md",
+    "exists": true,
+    "contentHash": "7f2bd4c7b28d5def3f8a8d5692782481f20aaa54e7821f07ffbe8e13ca03bfaf",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/skeleton.tsx",
+    "docPath": "docs/components/ui/skeleton.tsx.md",
+    "exists": true,
+    "contentHash": "d0d3ac95bb76ce3b90bf1e5f142e704ed086dd47d3c3597cdd5ce998488d1991",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/slider.tsx",
+    "docPath": "docs/components/ui/slider.tsx.md",
+    "exists": true,
+    "contentHash": "e0cbfc8830cbde4eefc755a742456dfeeadb2d116e65d87d3aa9fffc0936c686",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/sonner.tsx",
+    "docPath": "docs/components/ui/sonner.tsx.md",
+    "exists": true,
+    "contentHash": "c4ab4323d41e26f5796d34f923f463a7268ee942cb4c8ddf71420df68bf3a393",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/submit-button.tsx",
+    "docPath": "docs/components/ui/submit-button.tsx.md",
+    "exists": true,
+    "contentHash": "dd2a5685546e5bcffd1b90560a8e0d699c324e4163f285f34e73857967204121",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/switch.tsx",
+    "docPath": "docs/components/ui/switch.tsx.md",
+    "exists": true,
+    "contentHash": "ca86dce3e30e3033847abdb3283bf4e4268815d874d25ce3e8e18db7c8171663",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/table.tsx",
+    "docPath": "docs/components/ui/table.tsx.md",
+    "exists": true,
+    "contentHash": "49729e096c6ba34a1cdf7043f0f506b43e67788958bb636e295a93524b11dd70",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/tabs.tsx",
+    "docPath": "docs/components/ui/tabs.tsx.md",
+    "exists": true,
+    "contentHash": "92ed0b596c58ca3476f5612208ad5f3b11dcb154a8ec6807e4f0aaff0a6be3dc",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/textarea-autosize.tsx",
+    "docPath": "docs/components/ui/textarea-autosize.tsx.md",
+    "exists": true,
+    "contentHash": "956ef8d41dbfe937fe58c1516d18c41ebafa4b99b462e737574a29bf5bc75deb",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/textarea.tsx",
+    "docPath": "docs/components/ui/textarea.tsx.md",
+    "exists": true,
+    "contentHash": "732f9576fad657b1c27c381895211535c50cfe271762219bd941c18a5c160334",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/toast.tsx",
+    "docPath": "docs/components/ui/toast.tsx.md",
+    "exists": true,
+    "contentHash": "96812d68077e225e1a40a0300deed515522760d919ab8bfabb036859c77a5735",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/toaster.tsx",
+    "docPath": "docs/components/ui/toaster.tsx.md",
+    "exists": true,
+    "contentHash": "6a261e8f3f6c8107abbef8891881dcaafac3472dfa7b4797bb239c697adfeb5c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/toggle-group.tsx",
+    "docPath": "docs/components/ui/toggle-group.tsx.md",
+    "exists": true,
+    "contentHash": "f2c9b9f3dade80c6ded413b969e4690690eaa1670c69821250106c8f681ad6ea",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/toggle.tsx",
+    "docPath": "docs/components/ui/toggle.tsx.md",
+    "exists": true,
+    "contentHash": "e6c87ff0ad3484f286682898c68d326b651c1cf647f53ccdb37ae51ff59bf48a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/tooltip.tsx",
+    "docPath": "docs/components/ui/tooltip.tsx.md",
+    "exists": true,
+    "contentHash": "79183b79db63376ff6087887d55191690c6be6b3aaf396fa7f000737566aedc6",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/use-toast.ts",
+    "docPath": "docs/components/ui/use-toast.ts.md",
+    "exists": true,
+    "contentHash": "604be2f659994b62825a54b918f2fd5be996fcc6f55b55bc99071cc6b82aac47",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/ui/with-tooltip.tsx",
+    "docPath": "docs/components/ui/with-tooltip.tsx.md",
+    "exists": true,
+    "contentHash": "595025b4f874c926f9ba4fcfbfeee6e6ea586531c865aaf56de72ef4938c17cc",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/alerts.tsx",
+    "docPath": "docs/components/utility/alerts.tsx.md",
+    "exists": true,
+    "contentHash": "1ffd6e15d34741f2cc47724f29d3218ca0d174a027c7025f5c8d49880e1ffc5c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/announcements.tsx",
+    "docPath": "docs/components/utility/announcements.tsx.md",
+    "exists": true,
+    "contentHash": "b2b3b1c902e846427e8940644a4517b3577b242fa65c4f6c0b49bcc721ce4e81",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/change-password.tsx",
+    "docPath": "docs/components/utility/change-password.tsx.md",
+    "exists": true,
+    "contentHash": "46c6ff0bd70eab202ad734e6147a4a9dd971787e4fc05b0addc6410925ecf583",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/command-k.tsx",
+    "docPath": "docs/components/utility/command-k.tsx.md",
+    "exists": true,
+    "contentHash": "7567d354fe16f6c6d15bdcd140b2daa2ed877ecadd19e1f3982b919712ab774a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/drawing-canvas.tsx",
+    "docPath": "docs/components/utility/drawing-canvas.tsx.md",
+    "exists": true,
+    "contentHash": "ecb87fe98e7857fee54a9760a3fe526629ce73c9120d3b2179c8b7b49dd93539",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/global-state.tsx",
+    "docPath": "docs/components/utility/global-state.tsx.md",
+    "exists": true,
+    "contentHash": "fd913a489faab8dc2a77892c69b99e5e8bd61392d65cde4c11e3fb6c8b542532",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/import.tsx",
+    "docPath": "docs/components/utility/import.tsx.md",
+    "exists": true,
+    "contentHash": "ee2495d6b1e95ce07f2cb768dc09bdfc3b8c8a9dc7541c75e1a5f787a6ab4c31",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/profile-settings.tsx",
+    "docPath": "docs/components/utility/profile-settings.tsx.md",
+    "exists": true,
+    "contentHash": "b5fe68f0cda7f63ec3798a8699ff0b2f95abdcfa10e19b4395289e9820513ffa",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/providers.tsx",
+    "docPath": "docs/components/utility/providers.tsx.md",
+    "exists": true,
+    "contentHash": "a42b8ac3bdccaad86f0d88e0309458558f9386ac1c6f86a5b77e28393eb50ec1",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/theme-switcher.tsx",
+    "docPath": "docs/components/utility/theme-switcher.tsx.md",
+    "exists": true,
+    "contentHash": "1613f57170ec56a47bfa96bc35c1105478c0f15c0d73a39e77ade4db6c281ee9",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/translations-provider.tsx",
+    "docPath": "docs/components/utility/translations-provider.tsx.md",
+    "exists": true,
+    "contentHash": "6ab66e3985b3712ba9b98388cacb131102bea66eb922f9030dd0af280b01555d",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/utility/workspace-switcher.tsx",
+    "docPath": "docs/components/utility/workspace-switcher.tsx.md",
+    "exists": true,
+    "contentHash": "8fa610726dd0961e2fc5cf8c3379be880066b727c341d91a6da1461dc1b8a442",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/workspace/assign-workspaces.tsx",
+    "docPath": "docs/components/workspace/assign-workspaces.tsx.md",
+    "exists": true,
+    "contentHash": "0c30fe30a7b48b3c3f18a4b497cff2bb6705f8fef6d498933d4b3717af554d9b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/workspace/delete-workspace.tsx",
+    "docPath": "docs/components/workspace/delete-workspace.tsx.md",
+    "exists": true,
+    "contentHash": "97e3456cea6b076ee30fa6255027157f92776116b4faa823302886c6b3dcca95",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/components/workspace/workspace-settings.tsx",
+    "docPath": "docs/components/workspace/workspace-settings.tsx.md",
+    "exists": true,
+    "contentHash": "1e16f4719bf1fe4832b6808519af684d77874f4a15d267c617ab93e0814599e3",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/context/context.tsx",
+    "docPath": "docs/context/context.tsx.md",
+    "exists": true,
+    "contentHash": "457e22826a8db0421e54d4c88e5ecd0e8166ea737752afe49d4d222931f4ddff",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/assistant-collections.ts",
+    "docPath": "docs/db/assistant-collections.ts.md",
+    "exists": true,
+    "contentHash": "ab6942d401c3995f2ee5ef212b549e2b6e3fde7f15a263f0ad36f35dc18a581b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/assistant-files.ts",
+    "docPath": "docs/db/assistant-files.ts.md",
+    "exists": true,
+    "contentHash": "ba4b051a4c044388e3b736d3ddab8136026133f0518c46ce93824c04d731833a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/assistant-tools.ts",
+    "docPath": "docs/db/assistant-tools.ts.md",
+    "exists": true,
+    "contentHash": "9ed7350db56b642fb7cc925f95688ff2f8e7965d1b4d960d12ec5b481cfd300a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/assistants.ts",
+    "docPath": "docs/db/assistants.ts.md",
+    "exists": true,
+    "contentHash": "ae6281d5eca054d85c5222d8e98deab3ad36c598bba451d965c0739fe282e482",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/chat-files.ts",
+    "docPath": "docs/db/chat-files.ts.md",
+    "exists": true,
+    "contentHash": "235cd54eff0d74811a9b5789c03e2fcfe8168c14290fb18d33e0560779753f80",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/chats.ts",
+    "docPath": "docs/db/chats.ts.md",
+    "exists": true,
+    "contentHash": "760b60135a5815a612873e35a049f38fec6fd0214cf815f76a687728a84c704b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/collection-files.ts",
+    "docPath": "docs/db/collection-files.ts.md",
+    "exists": true,
+    "contentHash": "55fdccff384ff9d18b1654231dcbe7ac51006182b988de3d8e50dd9239bb3674",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/collections.ts",
+    "docPath": "docs/db/collections.ts.md",
+    "exists": true,
+    "contentHash": "02d2a98d5c6524141997b4989eae2d851a5ad8bab40bd121f9984d54c37e667f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/files.ts",
+    "docPath": "docs/db/files.ts.md",
+    "exists": true,
+    "contentHash": "481f7c1a1a68dc8356bfd96209d491bdbc31c9daa33773a1c5b9d25806764813",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/folders.ts",
+    "docPath": "docs/db/folders.ts.md",
+    "exists": true,
+    "contentHash": "e3c83662507d41cfbe11e97d4d5d80330ebda36fef4991d7adda69eef0aafffd",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/index.ts",
+    "docPath": "docs/db/index.ts.md",
+    "exists": true,
+    "contentHash": "257d02c728d6942622805a007b1da839e14959b1f026341909fcb7e42cf6fdbd",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/limits.ts",
+    "docPath": "docs/db/limits.ts.md",
+    "exists": true,
+    "contentHash": "2facf98717f4cf91b0c953eccdcd09a2babdbd9cdbc94eb81a35a5cf98d6a9bd",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/message-file-items.ts",
+    "docPath": "docs/db/message-file-items.ts.md",
+    "exists": true,
+    "contentHash": "d8044318060910e566b73ea042de88e3f0b36489428037c141d4ddc26acaed43",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/messages.ts",
+    "docPath": "docs/db/messages.ts.md",
+    "exists": true,
+    "contentHash": "65da722bcdd5fb8badd0590459996d198577c3d35bc5515ddca8e532e27c8640",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/models.ts",
+    "docPath": "docs/db/models.ts.md",
+    "exists": true,
+    "contentHash": "c015b9d1d6d77da119fddcbd916e0d1534d6b861a7032627aa481d43fdf1a93e",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/presets.ts",
+    "docPath": "docs/db/presets.ts.md",
+    "exists": true,
+    "contentHash": "69480fb8e0e3c46d9bb839e04dc80680672acb7e3267d66c7d2cf5d04277f296",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/profile.ts",
+    "docPath": "docs/db/profile.ts.md",
+    "exists": true,
+    "contentHash": "f25838cf2ec10bcc20a9863c60e9697390c0df5a819f537616a9b24365b6e08b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/prompts.ts",
+    "docPath": "docs/db/prompts.ts.md",
+    "exists": true,
+    "contentHash": "d03f84274e8aeb07cc0bc3429d73edfc6d0c422486c7fc3889475adcc8f9e1cf",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/storage/assistant-images.ts",
+    "docPath": "docs/db/storage/assistant-images.ts.md",
+    "exists": true,
+    "contentHash": "7d2348f3e80bf608b9d686ded5f766b1a2db6a8d15d4e551eb7d74070901d8c7",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/storage/files.ts",
+    "docPath": "docs/db/storage/files.ts.md",
+    "exists": true,
+    "contentHash": "1651b94c2d306f8f9b560cd14353c7ddc13d40d13d52b6ba661c36ca7450384f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/storage/message-images.ts",
+    "docPath": "docs/db/storage/message-images.ts.md",
+    "exists": true,
+    "contentHash": "d86ecc0b2b4821673ca04e216c61b0d7520b06ac839d71479f563510a7c1731d",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/storage/profile-images.ts",
+    "docPath": "docs/db/storage/profile-images.ts.md",
+    "exists": true,
+    "contentHash": "cef3b8e7acf440ecb111583e617f9946240868543cd9de1169db462b12bbfdeb",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/storage/workspace-images.ts",
+    "docPath": "docs/db/storage/workspace-images.ts.md",
+    "exists": true,
+    "contentHash": "2aa40a9acfa6b9675c881e81b803712d5e656c9d9b6ccc7063bd4cee721b53aa",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/tools.ts",
+    "docPath": "docs/db/tools.ts.md",
+    "exists": true,
+    "contentHash": "3309d96c4c8fb6609e86e1b253282995a2ae5e516358283dde6c13d6ec076507",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/db/workspaces.ts",
+    "docPath": "docs/db/workspaces.ts.md",
+    "exists": true,
+    "contentHash": "267e05741188deed5af9df3352f69ff14ea2077cb07d31e056dc073485af676c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/deps.json",
+    "docPath": "docs/deps.json.md",
+    "exists": true,
+    "contentHash": "83cd1d5ec05330079ab4cb753b00bf32a4079ed71dfeff244d9d5d316a519489",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/handler-old.tsx",
+    "docPath": "docs/handler-old.tsx.md",
+    "exists": true,
+    "contentHash": "40f6655135c70d8536da8c1b83ee4dee01d9af97fec33a8fa74aa8a704ecfbc7",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/i18nConfig.js",
+    "docPath": "docs/i18nConfig.js.md",
+    "exists": true,
+    "contentHash": "ffe536f53fda6bb562001605eaee648abe2156fe5afaf48dc9b0b53e07943240",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/jest.config.ts",
+    "docPath": "docs/jest.config.ts.md",
+    "exists": true,
+    "contentHash": "2dac57e52a38f4324fc6b3017cba89f6cc72f93fdd11d08d1181883b4ffd3ac6",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/blob-to-b64.ts",
+    "docPath": "docs/lib/blob-to-b64.ts.md",
+    "exists": true,
+    "contentHash": "50ac610f2ae7bb7c9e5026544af05cfb732fcb75a4301307def23decd140c4f0",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/build-prompt.ts",
+    "docPath": "docs/lib/build-prompt.ts.md",
+    "exists": true,
+    "contentHash": "e6abe862c85aa74d652826ae063d3e36b3aa6a6624e49cffecba0621ce56bf9f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/chat-setting-limits.ts",
+    "docPath": "docs/lib/chat-setting-limits.ts.md",
+    "exists": true,
+    "contentHash": "1571a25aaec6a45fe85bedcca7b320f199e1daae70ba9b4a265847b830d0c048",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/consume-stream.ts",
+    "docPath": "docs/lib/consume-stream.ts.md",
+    "exists": true,
+    "contentHash": "3f8b97864b5f2507785477aa4ae70daf11390b8ac8044af9d8541616e16a90af",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/envs.ts",
+    "docPath": "docs/lib/envs.ts.md",
+    "exists": true,
+    "contentHash": "273136acc150c472f5cb1982feef4b33c3d2132521003f2b94b992967085006e",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/export-old-data.ts",
+    "docPath": "docs/lib/export-old-data.ts.md",
+    "exists": true,
+    "contentHash": "a7e6fea773c1b1796efc8823264660b8f9c7834fd76e76d3bb706ca21bd743bb",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/generate-local-embedding.ts",
+    "docPath": "docs/lib/generate-local-embedding.ts.md",
+    "exists": true,
+    "contentHash": "d20ce0fac0df0b05ac42986de2c7afeeab7b60259b7facfbe9d170bacc3cc31f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/hooks/use-copy-to-clipboard.tsx",
+    "docPath": "docs/lib/hooks/use-copy-to-clipboard.tsx.md",
+    "exists": true,
+    "contentHash": "6fa3fd386a03bb6cbbb84e989b4fcad8ee52ffc6acca98a816d1de1a45ca74b1",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/hooks/use-hotkey.tsx",
+    "docPath": "docs/lib/hooks/use-hotkey.tsx.md",
+    "exists": true,
+    "contentHash": "8cd78b8be8f6d89203e9ac5de0c70b3c121ab355a27abf5ab40c122c018ecd55",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/i18n.ts",
+    "docPath": "docs/lib/i18n.ts.md",
+    "exists": true,
+    "contentHash": "4959d233d9fbde2f3f94c28c5770ab47b44145bdb319645c886945bcea793fd7",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/memory/insertMemory.ts",
+    "docPath": "docs/lib/memory/insertMemory.ts.md",
+    "exists": true,
+    "contentHash": "7dd66729e293352e5ec25cc50160a301fbb669a143560b876e53e8b82bb43853",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/memory/parseMemoryTrigger.ts",
+    "docPath": "docs/lib/memory/parseMemoryTrigger.ts.md",
+    "exists": true,
+    "contentHash": "9fd7c02ec208ace1836dae4acb6a5f628aa3345f6669de064192d96b9eea4e8b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/models/fetch-models.ts",
+    "docPath": "docs/lib/models/fetch-models.ts.md",
+    "exists": true,
+    "contentHash": "7c8f664b591d4a97238692928fd7647df7170921832a444cd7726e8460cb9788",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/models/llm/anthropic-llm-list.ts",
+    "docPath": "docs/lib/models/llm/anthropic-llm-list.ts.md",
+    "exists": true,
+    "contentHash": "a5e672ebeaa72d226f5b813ab528d8a2e7d13fc91935ab1d9ee558543281c8b3",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/models/llm/google-llm-list.ts",
+    "docPath": "docs/lib/models/llm/google-llm-list.ts.md",
+    "exists": true,
+    "contentHash": "2a8652a1286e6ec8cacf0b59d34f75a276217c8f5759a4984cf386112b218fcd",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/models/llm/groq-llm-list.ts",
+    "docPath": "docs/lib/models/llm/groq-llm-list.ts.md",
+    "exists": true,
+    "contentHash": "dc1411071f026b9ba23cc76a701b4f02ed5657c8869510814ed893df6a387689",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/models/llm/llm-list.ts",
+    "docPath": "docs/lib/models/llm/llm-list.ts.md",
+    "exists": true,
+    "contentHash": "a0b040062e23d6bad3f37bcf82c374e50f959a07214d9a0a1b783bf92ce8c3d3",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/models/llm/mistral-llm-list.ts",
+    "docPath": "docs/lib/models/llm/mistral-llm-list.ts.md",
+    "exists": true,
+    "contentHash": "6bb6b08762c1a74e23f1ad5fb6b17b70988aec557af856452bf609f17e1da3ab",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/models/llm/openai-llm-list.ts",
+    "docPath": "docs/lib/models/llm/openai-llm-list.ts.md",
+    "exists": true,
+    "contentHash": "c74e1b9d7eed5304f023da4d63f6d1a98993cad9d8361a98d474a87c45bdf3bb",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/models/llm/perplexity-llm-list.ts",
+    "docPath": "docs/lib/models/llm/perplexity-llm-list.ts.md",
+    "exists": true,
+    "contentHash": "8d7682371152a7dfe9974122c1ef3a233a7319ee8201e77c370bf2dac15ec094",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/openapi-conversion.ts",
+    "docPath": "docs/lib/openapi-conversion.ts.md",
+    "exists": true,
+    "contentHash": "9293ec8003f1f3bef32c5c6c698a39ffd41baf6bb1dcaad47567c8de3248590b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/retrieval/processing/csv.ts",
+    "docPath": "docs/lib/retrieval/processing/csv.ts.md",
+    "exists": true,
+    "contentHash": "82fe93ba43d5041bda75f599ece5784c625f58990b2297e07aa1795a69ba34b1",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/retrieval/processing/docx.ts",
+    "docPath": "docs/lib/retrieval/processing/docx.ts.md",
+    "exists": true,
+    "contentHash": "2d534f9e29d330dd77403bf3147820e33899a149b33e683293e1efb496d8eb8c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/retrieval/processing/index.ts",
+    "docPath": "docs/lib/retrieval/processing/index.ts.md",
+    "exists": true,
+    "contentHash": "5cf593e01fba5d5e7fca910e3d0d1461cb8e10fcaa1881e55dfd196a29558ac0",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/retrieval/processing/json.ts",
+    "docPath": "docs/lib/retrieval/processing/json.ts.md",
+    "exists": true,
+    "contentHash": "d2b1cc92f21f7998677cbf7e16e7fb83c1c37087393208c3db3e7c4f39af3a1c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/retrieval/processing/md.ts",
+    "docPath": "docs/lib/retrieval/processing/md.ts.md",
+    "exists": true,
+    "contentHash": "8911777d461a5545bd503696284621556a6f2cc67ce9ff9739c78e9a18bcd926",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/retrieval/processing/pdf.ts",
+    "docPath": "docs/lib/retrieval/processing/pdf.ts.md",
+    "exists": true,
+    "contentHash": "22063e63615d5e70a54e23739b4ce63cf0aef8df66e8a73090c438e6055266e3",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/retrieval/processing/txt.ts",
+    "docPath": "docs/lib/retrieval/processing/txt.ts.md",
+    "exists": true,
+    "contentHash": "682464ab7d75aa12520be84d8808813d89022b35518ca26428aa8705ec68de79",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/server/server-chat-helpers.ts",
+    "docPath": "docs/lib/server/server-chat-helpers.ts.md",
+    "exists": true,
+    "contentHash": "7b6db765252cd034f0c0d6e27c099fe009db303d9ff75968f1e759b3d3e927b5",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/server/server-utils.ts",
+    "docPath": "docs/lib/server/server-utils.ts.md",
+    "exists": true,
+    "contentHash": "b8286cb655f8b46478ebc486c8e6a3fe55811baadb2065a27647c3960f3bdc05",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/supabase/browser-client.ts",
+    "docPath": "docs/lib/supabase/browser-client.ts.md",
+    "exists": true,
+    "contentHash": "617c2a041b7e7a5c874cc643dcd61c3e0ff4416916ff6b63b5c135aa8f9a75c4",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/supabase/client.ts",
+    "docPath": "docs/lib/supabase/client.ts.md",
+    "exists": true,
+    "contentHash": "4d2c4376dde9d79efbb56c7e002a3a288fd949ad81170546875add41f176ccba",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/supabase/middleware.ts",
+    "docPath": "docs/lib/supabase/middleware.ts.md",
+    "exists": true,
+    "contentHash": "ef3c8e6dab282b9eaa0ac8cfd90d3e91a2a9161da757e19a164f8163df6541b5",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/supabase/server.ts",
+    "docPath": "docs/lib/supabase/server.ts.md",
+    "exists": true,
+    "contentHash": "464604608a87f80326b45224f462541e203b0f9ebe03e22d3f4a73d598ba3e40",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/lib/utils.ts",
+    "docPath": "docs/lib/utils.ts.md",
+    "exists": true,
+    "contentHash": "4fcfeb677189c07cd93be66f8ea73e49202fc3c6dc076ab0ba6d211b862dc71d",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/middleware.ts",
+    "docPath": "docs/middleware.ts.md",
+    "exists": true,
+    "contentHash": "5a4dab934c1679668c8ff0382a1e50a1b1dac144fbff228f5ddac1a18f6de896",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/missing-docs-report.json",
+    "docPath": "docs/missing-docs-report.json.md",
+    "exists": true,
+    "contentHash": "2540fb92d0ae02997aaf93ec147dfbfea1d42985c122f2c2f7d2a7bb8354fe20",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/package-lock.json",
+    "docPath": "docs/package-lock.json.md",
+    "exists": true,
+    "contentHash": "7cd41b7530c3ca892e56766adfd9153a54c704d9a2e7501723b5c0e02d510b00",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/package.json",
+    "docPath": "docs/package.json.md",
+    "exists": true,
+    "contentHash": "e76ed080fddd072c7b0f71e17bfd7ea77fb19e7e2a35ed984194a0f5a0bfd15d",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/postcss.config.js",
+    "docPath": "docs/postcss.config.js.md",
+    "exists": true,
+    "contentHash": "251ecddd4672c9cf467547e3dc535de00ad2129df26e7e7ae728fa4e5ac45fc5",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/scripts/generate-indexes.js",
+    "docPath": "docs/scripts/generate-indexes.js.md",
+    "exists": true,
+    "contentHash": "5fcc961d16f33f0da96b742c5c6208820a13a75b41698ea243f1484391e8eda0",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/scripts/normalize-docs.js",
+    "docPath": "docs/scripts/normalize-docs.js.md",
+    "exists": true,
+    "contentHash": "f331cd002dee0b723bf6b6b3040bc08ec8bfc89ccfa12ed87b04029efc4f128c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/scripts/patch-docs.js",
+    "docPath": "docs/scripts/patch-docs.js.md",
+    "exists": true,
+    "contentHash": "760579a2a3d50ced80efa3f8f5fc525a952a934aa107653e4130580957a2e68e",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/scripts/repair-docs-hash.js",
+    "docPath": "docs/scripts/repair-docs-hash.js.md",
+    "exists": true,
+    "contentHash": "cec1df8fb6d4970006d89da9f35581d33f12442e3a49b70d54a4427921b030ce",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/scripts/retrofit-metadata.js",
+    "docPath": "docs/scripts/retrofit-metadata.js.md",
+    "exists": true,
+    "contentHash": "18b1a680f1ab3ed9395d3a9fd1ce466be1c31ae2f33cd67ebdd419b6743e55f4",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/scripts/source-index.json",
+    "docPath": "docs/scripts/source-index.json.md",
+    "exists": true,
+    "contentHash": "b49633d220d04408ee74eda2c15f9a75f52086546bdd6b77a94b8576ef2eae29",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/scripts/validate-docs-metadata.js",
+    "docPath": "docs/scripts/validate-docs-metadata.js.md",
+    "exists": true,
+    "contentHash": "363d18aba61e9a116edd975f1cf2c1e7b01db9fbb91849c5a21fe266600f762b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/supabase/types.ts",
+    "docPath": "docs/supabase/types.ts.md",
+    "exists": true,
+    "contentHash": "00f2a00e3ed868cae68dbe290d043876c8280fe75610439e2416dc44cf46b613",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/tailwind.config.ts",
+    "docPath": "docs/tailwind.config.ts.md",
+    "exists": true,
+    "contentHash": "8831bbd212c22dd658bef29b8bbd5e0ff2d91e16e782ab4a274871c6fa2e2962",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/tsconfig.json",
+    "docPath": "docs/tsconfig.json.md",
+    "exists": true,
+    "contentHash": "2f245448b2a72861e37dcd51c06454eda1abe54baf65236a17bc4e47c9705c68",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/announcement.ts",
+    "docPath": "docs/types/announcement.ts.md",
+    "exists": true,
+    "contentHash": "ddd097540f7def56c8a2d58b8fba80a8247a73d90aa1e5671e66009ebb3d0675",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/assistant-retrieval-item.ts",
+    "docPath": "docs/types/assistant-retrieval-item.ts.md",
+    "exists": true,
+    "contentHash": "4268502362bac4e08a7d0b1209d6ad973eb180f67d644b353f0ad280997d0403",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/chat-file.tsx",
+    "docPath": "docs/types/chat-file.tsx.md",
+    "exists": true,
+    "contentHash": "c19d5d50f02dc598b001b850664ffc8e7ef9c0371a4c34dbe07c79be30602e1f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/chat-message.ts",
+    "docPath": "docs/types/chat-message.ts.md",
+    "exists": true,
+    "contentHash": "777e6f1b2dcbfddf3b077b0ff8452f65d2633c0e620e65b91b189f40f3b47ae9",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/chat.ts",
+    "docPath": "docs/types/chat.ts.md",
+    "exists": true,
+    "contentHash": "ac22e39e9d8533a046a08003b33bbcf9db7e88dcf6e003115a2625275b1072e1",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/collection-file.ts",
+    "docPath": "docs/types/collection-file.ts.md",
+    "exists": true,
+    "contentHash": "2101318f83aae8f760b63208603c8b9fb1a73a83aa05478fe9c245a12f450cde",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/content-type.ts",
+    "docPath": "docs/types/content-type.ts.md",
+    "exists": true,
+    "contentHash": "95537dd38928b73920ad9bd4b1855d6ddb66f1fec1d7dfb39de63135fb21289b",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/error-response.ts",
+    "docPath": "docs/types/error-response.ts.md",
+    "exists": true,
+    "contentHash": "af0829c7174d2d3802fd58c263fc7f85f09a44c6d34961b24ff16c13f05ca4ca",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/file-item-chunk.ts",
+    "docPath": "docs/types/file-item-chunk.ts.md",
+    "exists": true,
+    "contentHash": "4b452c2e98bfada2065d264eb1b51002d62ddd4c1e9631d20481693c34239862",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/images/assistant-image.ts",
+    "docPath": "docs/types/images/assistant-image.ts.md",
+    "exists": true,
+    "contentHash": "9652bc1c8b4e455669411d2cc03191e345f1b3b0234c3056f48dcf92ccb75653",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/images/message-image.ts",
+    "docPath": "docs/types/images/message-image.ts.md",
+    "exists": true,
+    "contentHash": "a5df505932afe5ced5e21ff64ef1ba5fbfecc3c136d59a52b3011da528ccdf8a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/images/workspace-image.ts",
+    "docPath": "docs/types/images/workspace-image.ts.md",
+    "exists": true,
+    "contentHash": "5e5f85a9db800699efb760a745af816b720fb247446bab71dd42abe49206b022",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/index.ts",
+    "docPath": "docs/types/index.ts.md",
+    "exists": true,
+    "contentHash": "ef4b725a813295938839b413fc43a3e3cd88fd48100a6966848a7a24bfbd429f",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/key-type.ts",
+    "docPath": "docs/types/key-type.ts.md",
+    "exists": true,
+    "contentHash": "fb770e83257415761d9da8444a73a015b9e21709aaf9ce3c0e07d5e4bcd32a1c",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/llms.ts",
+    "docPath": "docs/types/llms.ts.md",
+    "exists": true,
+    "contentHash": "7ac18a0a96424c0dc333b11b600fe905177f1d78a86b96854d756d883d162c01",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/models.ts",
+    "docPath": "docs/types/models.ts.md",
+    "exists": true,
+    "contentHash": "e9a356fcd680f2ebaf7b27f8886ca30c8863d8ef7af615d6db204b52ba711dfa",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/sharing.ts",
+    "docPath": "docs/types/sharing.ts.md",
+    "exists": true,
+    "contentHash": "a4532525111f538c5620ceb3df1fbdb360258f756fa54878d554feab26bccf17",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/sidebar-data.ts",
+    "docPath": "docs/types/sidebar-data.ts.md",
+    "exists": true,
+    "contentHash": "d2bee69e03767451af4675b7f852a686a08fdcfb4d18feea5f79f63a0c0e5e3a",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/types/valid-keys.ts",
+    "docPath": "docs/types/valid-keys.ts.md",
+    "exists": true,
+    "contentHash": "4b683c5a5c6c7308cc81043f522c7d2de49128650e7954e34053874b7f6991f0",
+    "tags": [
+      "build"
+    ]
+  },
+  {
+    "path": "/Users/garymason/chatbot-ui/worker/index.js",
+    "docPath": "docs/worker/index.js.md",
+    "exists": true,
+    "contentHash": "b1383d96e791208d9ff4cffebb2611ecdc9525bb857eb73148e1ac321e833e06",
+    "tags": [
+      "build"
+    ]
+  }
+]
